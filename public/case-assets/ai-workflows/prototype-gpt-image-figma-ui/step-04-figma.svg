@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Figma 结构承接</title>
+  <desc id="desc">展示 AI 视觉方向图如何在 Figma 中还原成图层、组件、自动布局和可编辑字段。</desc>
+  <rect width="1200" height="750" fill="#eef8f6"/>
+  <text x="64" y="82" fill="#172033" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700">Step 04 回到 Figma 承接结构</text>
+  <text x="64" y="122" fill="#667085" font-family="Arial, 'PingFang SC', sans-serif" font-size="18">AI 图负责视觉方向，Figma 负责可编辑、可维护、可交付。</text>
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <rect x="64" y="172" width="260" height="470" rx="18" fill="#172033"/>
+    <text x="96" y="222" fill="#fff" font-size="22" font-weight="700">图层结构</text>
+    <g fill="#d7f0ea" font-size="17">
+      <text x="96" y="276">Frame / 工作台首页</text>
+      <text x="116" y="320">Nav / 左侧导航</text>
+      <text x="116" y="364">Banner / 顶部区域</text>
+      <text x="116" y="408">Metrics / 指标卡</text>
+      <text x="116" y="452">Tasks / 任务列表</text>
+      <text x="116" y="496">Chart / 图表区</text>
+    </g>
+    <rect x="366" y="172" width="770" height="470" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <rect x="402" y="212" width="698" height="82" rx="18" fill="#f1f6ff"/>
+    <text x="430" y="262" fill="#315ea8" font-size="22" font-weight="700">可编辑 Banner 区域</text>
+    <rect x="402" y="330" width="206" height="104" rx="16" fill="#f7f8fa" stroke="#e4e7ec"/>
+    <rect x="640" y="330" width="206" height="104" rx="16" fill="#f7f8fa" stroke="#e4e7ec"/>
+    <rect x="878" y="330" width="222" height="104" rx="16" fill="#f7f8fa" stroke="#e4e7ec"/>
+    <rect x="402" y="472" width="434" height="116" rx="16" fill="#eef8f6" stroke="#d7f0ea"/>
+    <rect x="870" y="472" width="230" height="116" rx="16" fill="#f7f8fa" stroke="#e4e7ec"/>
+    <g fill="#667085" font-size="16">
+      <text x="430" y="378">可编辑指标字段</text>
+      <text x="668" y="378">组件化卡片</text>
+      <text x="906" y="378">自动布局</text>
+      <text x="430" y="526">列表和图表按真实字段重建</text>
+    </g>
+  </g>
+</svg>

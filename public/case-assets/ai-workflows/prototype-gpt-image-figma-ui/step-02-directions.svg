@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">四种 UI 视觉方向对比</title>
+  <desc id="desc">同一个后台首页原型生成清爽专业、品牌强化、高信息密度和暗色科技四种视觉方向。</desc>
+  <rect width="1200" height="750" fill="#f7f8fa"/>
+  <text x="64" y="82" fill="#172033" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700">Step 02 生成多版视觉方向</text>
+  <text x="64" y="122" fill="#667085" font-family="Arial, 'PingFang SC', sans-serif" font-size="18">同一个结构，不同视觉策略；先比较方向，再决定细节。</text>
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <g transform="translate(64 174)">
+      <rect width="500" height="210" rx="18" fill="#fff" stroke="#e4e7ec"/>
+      <rect x="24" y="24" width="452" height="46" rx="12" fill="#eef8f6"/>
+      <text x="42" y="54" fill="#12665e" font-size="18" font-weight="700">A 清爽专业版</text>
+      <rect x="24" y="94" width="128" height="72" rx="12" fill="#f7f8fa"/>
+      <rect x="176" y="94" width="128" height="72" rx="12" fill="#f7f8fa"/>
+      <rect x="328" y="94" width="128" height="72" rx="12" fill="#f7f8fa"/>
+    </g>
+    <g transform="translate(636 174)">
+      <rect width="500" height="210" rx="18" fill="#fff" stroke="#e4e7ec"/>
+      <rect x="24" y="24" width="452" height="46" rx="12" fill="#f1f6ff"/>
+      <text x="42" y="54" fill="#315ea8" font-size="18" font-weight="700">B 品牌强化版</text>
+      <rect x="24" y="94" width="128" height="72" rx="12" fill="#e7efff"/>
+      <rect x="176" y="94" width="128" height="72" rx="12" fill="#f7f8fa"/>
+      <rect x="328" y="94" width="128" height="72" rx="12" fill="#e7efff"/>
+    </g>
+    <g transform="translate(64 438)">
+      <rect width="500" height="210" rx="18" fill="#fff" stroke="#e4e7ec"/>
+      <rect x="24" y="24" width="452" height="46" rx="12" fill="#fff7ed"/>
+      <text x="42" y="54" fill="#c2410c" font-size="18" font-weight="700">C 高信息密度版</text>
+      <rect x="24" y="94" width="96" height="72" rx="10" fill="#f7f8fa"/>
+      <rect x="136" y="94" width="96" height="72" rx="10" fill="#f7f8fa"/>
+      <rect x="248" y="94" width="96" height="72" rx="10" fill="#f7f8fa"/>
+      <rect x="360" y="94" width="96" height="72" rx="10" fill="#f7f8fa"/>
+    </g>
+    <g transform="translate(636 438)">
+      <rect width="500" height="210" rx="18" fill="#172033"/>
+      <rect x="24" y="24" width="452" height="46" rx="12" fill="#24304a"/>
+      <text x="42" y="54" fill="#d7f0ea" font-size="18" font-weight="700">D 暗色科技版</text>
+      <rect x="24" y="94" width="128" height="72" rx="12" fill="#223047"/>
+      <rect x="176" y="94" width="128" height="72" rx="12" fill="#223047"/>
+      <rect x="328" y="94" width="128" height="72" rx="12" fill="#223047"/>
+    </g>
+  </g>
+</svg>

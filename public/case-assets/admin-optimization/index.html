@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>后台优化</title>
+    <link rel="stylesheet" href="./style.css?v=20260601-16" />
+  </head>
+  <body>
+    <div class="prototype-shell" data-version="current">
+      <header class="compare-bar">
+        <div>
+          <strong>后台优化</strong>
+        </div>
+        <div class="compare-actions">
+          <select class="page-select" id="pageSelect" aria-label="选择后台页面"></select>
+          <div class="version-switch" role="tablist" aria-label="版本切换">
+            <button class="version-btn active" data-version="current" type="button">原版</button>
+            <button class="version-btn" data-version="optimized" type="button">新版</button>
+          </div>
+          <button class="explain-btn" id="explainBtn" type="button">说明</button>
+        </div>
+      </header>
+
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" role="img">
+              <defs>
+                <linearGradient id="brandLogoGradient" x1="12" y1="8" x2="52" y2="58" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#2563eb" />
+                  <stop offset="0.58" stop-color="#06b6d4" />
+                  <stop offset="1" stop-color="#22c55e" />
+                </linearGradient>
+              </defs>
+              <path d="M32 7c9 0 17 4 22 10v14c0 11-8 20-22 26C18 51 10 42 10 31V17C15 11 23 7 32 7Z" fill="none" stroke="url(#brandLogoGradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M32 21 44 26v8c0 8-5 13-12 17-7-4-12-9-12-17v-8l12-5Z" fill="url(#brandLogoGradient)" opacity="0.95" />
+              <circle cx="32" cy="8" r="6" fill="#2563eb" />
+              <circle cx="11" cy="39" r="6" fill="#10b981" />
+              <circle cx="53" cy="39" r="6" fill="#10b981" />
+            </svg>
+          </span>
+          <div>
+            <b>包网</b>
+            <small>包网 Admin</small>
+          </div>
+        </div>
+        <nav class="side-nav">
+          <a href="#">首页</a>
+          <a href="#">会员</a>
+          <a href="#">代理</a>
+          <a href="#">优惠</a>
+          <a href="#">运营</a>
+          <a href="#">游戏</a>
+          <a class="active" href="#">财务</a>
+          <a href="#">报表</a>
+          <a href="#">风控</a>
+          <a href="#">系统</a>
+          <a href="#">TGBot管理</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="breadcrumbs" id="breadcrumbs">财务管理 / 资金派发 / 提款派发</div>
+          <div class="top-actions">
+            <button class="icon-btn" type="button" title="刷新">↻</button>
+            <button class="icon-btn" type="button" title="全屏">□</button>
+            <span class="user-pill">总管理员</span>
+          </div>
+        </header>
+
+        <section class="page-head">
+          <div>
+            <h1 id="pageTitle">提款派发</h1>
+            <p class="current-only">当前版直接使用测试后台原页面链接，避免重复手工复刻造成偏差。</p>
+            <p class="optimized-only" id="pageDesc">围绕锁单、派发状态、三方单号和双审记录组织处理队列。</p>
+          </div>
+          <div class="head-actions optimized-only">
+            <button class="btn ghost" data-global-action="导出当前筛选" type="button">导出当前筛选</button>
+            <button class="btn primary" data-global-action="领取未锁单" type="button">领取未锁单</button>
+          </div>
+        </section>
+
+        <section class="live-backend current-only">
+          <iframe
+            id="backendFrame"
+            title="原版后台页面"
+            src="https://admin.aurora.test/#/finance/fundsDistribution/withdrawalDisbursement"
+          ></iframe>
+          <a class="live-open-link" id="liveOpenLink" href="https://admin.aurora.test/#/finance/fundsDistribution/withdrawalDisbursement" target="_blank" rel="noreferrer">打开原后台</a>
+        </section>
+
+        <section class="insight-strip optimized-only" id="insightStrip" aria-label="优化数据概览">
+          <article>
+            <span>未锁单</span>
+            <strong>12</strong>
+            <small>需先领取再派发</small>
+          </article>
+          <article>
+            <span>派发中</span>
+            <strong>9</strong>
+            <small>待三方回调确认</small>
+          </article>
+          <article>
+            <span>待派发金额</span>
+            <strong>479 USDT</strong>
+            <small>含 BRL 122.68</small>
+          </article>
+          <article>
+            <span>异常备注</span>
+            <strong>5</strong>
+            <small>缺三方单号 / 超时</small>
+          </article>
+        </section>
+
+        <section class="filter-panel optimized-surface">
+          <div class="filter-grid current-only">
+            <label>会员账号<input id="currentOrderNo" placeholder="请输入内容" /></label>
+            <label>会员标签<input placeholder="请选择会员标签" /></label>
+            <label>币种<select><option value="">全部币种</option><option>USDT</option><option>BRL</option></select></label>
+            <label>状态<select id="currentStatus"><option value="">全部</option><option>派发中</option><option>已锁单</option><option>未锁单</option></select></label>
+            <label>提款申请时间<input value="开始时间 - 结束时间" /></label>
+          </div>
+          <div class="filter-grid optimized-only" id="optimizedFilters">
+            <label>快速搜索<input id="optimizedKeyword" placeholder="会员 / 订单号 / 三方单号 / 提款账号" /></label>
+            <label>派发状态<select id="optimizedStatus"><option value="">全部状态</option><option>派发中</option><option>已锁单</option><option>未锁单</option></select></label>
+            <label>币种<select id="riskLevel"><option value="">全部币种</option><option>USDT</option><option>BRL</option></select></label>
+            <label>时间范围<input value="最近 7 天" /></label>
+          </div>
+          <div class="filter-actions">
+            <button class="btn primary" id="searchBtn" type="button">查询</button>
+            <button class="btn" id="resetBtn" type="button">重置</button>
+            <button class="btn danger current-only" type="button">锁单</button>
+            <button class="btn ghost optimized-only" data-global-action="保存筛选" type="button">保存筛选</button>
+          </div>
+        </section>
+
+        <section class="status-tabs optimized-only" id="statusTabs">
+          <button class="tab active" data-tab="">全部 28</button>
+          <button class="tab" data-tab="未锁单">未锁单 12</button>
+          <button class="tab" data-tab="已锁单">已锁单 7</button>
+          <button class="tab" data-tab="派发中">派发中 9</button>
+        </section>
+
+        <section class="dashboard-view optimized-only optimized-surface" id="dashboardView" hidden></section>
+
+        <section class="table-card optimized-surface">
+          <div class="table-toolbar">
+            <div>
+              <strong id="tableTitle">提款派发列表</strong>
+              <span id="resultCount">共 6 条</span>
+            </div>
+            <div class="optimized-only toolbar-right">
+              <span class="hint-tag" id="toolbarHint">优化点：关键字段与下一步动作前置</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead id="tableHead"></thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+          <div class="empty-state" id="emptyState" hidden>
+            <strong>暂无匹配订单</strong>
+            <span>调整筛选条件后重试</span>
+          </div>
+          <div class="pagination">
+            <button type="button">上一页</button>
+            <span>1 / 7</span>
+            <button type="button">下一页</button>
+          </div>
+        </section>
+      </main>
+
+      <div class="drawer-mask" id="drawerMask" hidden></div>
+      <aside class="drawer" id="detailDrawer" aria-hidden="true">
+        <header>
+          <div>
+            <small>提款派发详情</small>
+            <h2 id="drawerTitle">-</h2>
+          </div>
+          <button class="icon-btn" id="closeDrawer" type="button">×</button>
+        </header>
+        <div class="drawer-body" id="drawerBody"></div>
+      </aside>
+
+      <div class="explain-mask" id="explainMask" hidden></div>
+      <aside class="explain-modal" id="explainModal" aria-hidden="true" aria-labelledby="explainTitle">
+        <header>
+          <div>
+            <small>版本差异说明</small>
+            <h2 id="explainTitle">原版问题与新版优化</h2>
+          </div>
+          <button class="icon-btn" id="closeExplain" type="button">×</button>
+        </header>
+        <div class="explain-body">
+          <div class="compare-table" id="compareTable">
+            <div class="compare-head">原版问题</div>
+            <div class="compare-head">新版优化</div>
+
+            <div class="compare-cell">字段横向过多，锁单、派发状态、三方订单号、风控备注分散在长表格里。</div>
+            <div class="compare-cell">按处理队列重组表格，把状态、锁单、金额、审核链路、三方单号和建议动作前置。</div>
+
+            <div class="compare-cell">操作列只有“派发”，未区分未锁单、已锁单、派发中的不同处理路径。</div>
+            <div class="compare-cell">根据订单状态给出“领取、跟进、记录处理进展”等下一步动作，减少判断成本。</div>
+
+            <div class="compare-cell">一审、二审人员与时间拆成多列，占空间但不利于快速理解审核进度。</div>
+            <div class="compare-cell">合并为“审核链路”，用一列展示关键审核人和最后审核时间。</div>
+
+            <div class="compare-cell">异常订单需要人工横向滚动查找，缺三方单号、超时、备注异常不够显眼。</div>
+            <div class="compare-cell">增加顶部异常概览，并把三方单号、风控备注、建议动作提前展示。</div>
+
+            <div class="compare-cell">筛选项偏基础，不能快速聚焦派发中的订单或未领取的订单。</div>
+            <div class="compare-cell">增加状态快捷筛选和“领取未锁单”入口，直接进入处理队列。</div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="toast" id="toast" hidden>已更新筛选结果</div>
+    </div>
+    <script src="./pages-data.js?v=20260601-16"></script>
+    <script src="./script.js?v=20260601-16"></script>
+  </body>
+</html>

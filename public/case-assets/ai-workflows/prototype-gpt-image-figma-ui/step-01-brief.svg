@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">原型和参考图约束任务书</title>
+  <desc id="desc">展示原型截图、视觉参考图和不可变约束清单如何组成 AI UI 视觉探索任务书。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#eef8f6"/>
+      <stop offset="0.58" stop-color="#f7f8fa"/>
+      <stop offset="1" stop-color="#f1f6ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#172033" flood-opacity=".12"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <text x="64" y="82" fill="#172033" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700">Step 01 准备原型和参考图</text>
+  <text x="64" y="122" fill="#667085" font-family="Arial, 'PingFang SC', sans-serif" font-size="18">原型负责结构，参考图负责风格，约束清单决定 AI 哪些不能动。</text>
+  <g filter="url(#shadow)">
+    <rect x="64" y="170" width="520" height="470" rx="18" fill="#fff"/>
+    <rect x="96" y="204" width="456" height="58" rx="12" fill="#d7f0ea"/>
+    <text x="120" y="240" fill="#12665e" font-family="Arial, 'PingFang SC', sans-serif" font-size="20" font-weight="700">产品原型截图</text>
+    <rect x="96" y="294" width="92" height="276" rx="14" fill="#172033"/>
+    <rect x="216" y="294" width="304" height="70" rx="12" fill="#f1f6ff"/>
+    <rect x="216" y="388" width="92" height="92" rx="12" fill="#f7f8fa" stroke="#e4e7ec"/>
+    <rect x="324" y="388" width="92" height="92" rx="12" fill="#f7f8fa" stroke="#e4e7ec"/>
+    <rect x="432" y="388" width="88" height="92" rx="12" fill="#f7f8fa" stroke="#e4e7ec"/>
+    <rect x="216" y="506" width="304" height="64" rx="12" fill="#eef8f6" stroke="#d7f0ea"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="616" y="170" width="232" height="220" rx="18" fill="#fff"/>
+    <text x="646" y="216" fill="#172033" font-family="Arial, 'PingFang SC', sans-serif" font-size="20" font-weight="700">参考图 A</text>
+    <rect x="646" y="242" width="172" height="86" rx="14" fill="#315ea8" opacity=".16"/>
+    <rect x="646" y="348" width="120" height="14" rx="7" fill="#e4e7ec"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="880" y="170" width="232" height="220" rx="18" fill="#fff"/>
+    <text x="910" y="216" fill="#172033" font-family="Arial, 'PingFang SC', sans-serif" font-size="20" font-weight="700">参考图 B</text>
+    <rect x="910" y="242" width="172" height="86" rx="14" fill="#f97316" opacity=".16"/>
+    <rect x="910" y="348" width="120" height="14" rx="7" fill="#e4e7ec"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="616" y="430" width="496" height="210" rx="18" fill="#fff"/>
+    <text x="646" y="476" fill="#172033" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700">不可变约束</text>
+    <g font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#667085">
+      <circle cx="652" cy="520" r="7" fill="#167c72"/><text x="674" y="526">保留左侧导航和顶部操作区</text>
+      <circle cx="652" cy="562" r="7" fill="#167c72"/><text x="674" y="568">保留指标卡、任务列表和图表区</text>
+      <circle cx="652" cy="604" r="7" fill="#167c72"/><text x="674" y="610">只升级 Banner、卡片、图标和层次</text>
+    </g>
+  </g>
+</svg>

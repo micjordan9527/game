@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600" role="img" aria-labelledby="title desc">
+  <title id="title">控件按钮与其它规范</title>
+  <desc id="desc">U.Game 按钮、表单、选择控件、反馈、数据展示和其它组件规范。</desc>
+  <rect width="1200" height="1600" fill="#fff"/>
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <text x="60" y="80" fill="#1677ff" font-size="30" font-weight="700">U.Game</text>
+    <text x="60" y="158" fill="#0f172a" font-size="58" font-weight="700">控件、按钮与其它规范</text>
+    <text x="60" y="210" fill="#667085" font-size="24">交互控件 / 表单元素 / 状态反馈 / 图标</text>
+    <rect x="50" y="270" width="1100" height="260" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="80" y="320" fill="#172033" font-size="24" font-weight="700">1. 按钮系统</text>
+    <rect x="90" y="360" width="120" height="42" rx="10" fill="#1677ff"/>
+    <rect x="250" y="360" width="120" height="42" rx="10" fill="#fff" stroke="#1677ff"/>
+    <rect x="410" y="360" width="120" height="42" rx="10" fill="#fff" stroke="#d7e6ff"/>
+    <rect x="570" y="360" width="120" height="42" rx="10" fill="#fff" stroke="#ef4444"/>
+    <rect x="730" y="360" width="150" height="42" rx="10" fill="#1677ff"/>
+    <circle cx="1000" cy="380" r="34" fill="#1677ff"/>
+    <rect x="50" y="570" width="520" height="330" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="80" y="620" fill="#172033" font-size="24" font-weight="700">2. 表单控件</text>
+    <rect x="90" y="660" width="240" height="40" rx="8" fill="#fff" stroke="#d7e6ff"/>
+    <rect x="90" y="724" width="240" height="40" rx="8" fill="#fff" stroke="#d7e6ff"/>
+    <rect x="90" y="788" width="240" height="40" rx="8" fill="#fff" stroke="#d7e6ff"/>
+    <rect x="360" y="660" width="170" height="104" rx="8" fill="#fff" stroke="#d7e6ff"/>
+    <rect x="360" y="800" width="170" height="40" rx="8" fill="#fff" stroke="#1677ff"/>
+    <rect x="630" y="570" width="520" height="330" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="660" y="620" fill="#172033" font-size="24" font-weight="700">3. 选择控件</text>
+    <circle cx="680" cy="672" r="10" fill="#1677ff"/>
+    <circle cx="680" cy="720" r="10" fill="#fff" stroke="#98a2b3"/>
+    <rect x="760" y="660" width="60" height="28" rx="14" fill="#1677ff"/>
+    <rect x="760" y="712" width="60" height="28" rx="14" fill="#e4e7ec"/>
+    <rect x="860" y="660" width="58" height="30" rx="15" fill="#eaf2ff"/>
+    <rect x="932" y="660" width="58" height="30" rx="15" fill="#f7fbff" stroke="#d7e6ff"/>
+    <rect x="50" y="940" width="520" height="330" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="80" y="990" fill="#172033" font-size="24" font-weight="700">4. 状态反馈</text>
+    <rect x="90" y="1030" width="160" height="48" rx="10" fill="#eef8f6"/>
+    <rect x="90" y="1100" width="160" height="48" rx="10" fill="#fff1f2"/>
+    <rect x="90" y="1170" width="160" height="48" rx="10" fill="#fff7ed"/>
+    <rect x="300" y="1030" width="180" height="120" rx="14" fill="#fff" stroke="#e4e7ec"/>
+    <rect x="630" y="940" width="520" height="330" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="660" y="990" fill="#172033" font-size="24" font-weight="700">5. 数据展示</text>
+    <rect x="660" y="1030" width="230" height="80" rx="12" fill="#f7fbff"/>
+    <rect x="660" y="1130" width="230" height="80" rx="12" fill="#f7fbff"/>
+    <rect x="930" y="1030" width="170" height="180" rx="12" fill="#fff" stroke="#e4e7ec"/>
+    <rect x="50" y="1310" width="1100" height="190" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="80" y="1360" fill="#172033" font-size="24" font-weight="700">6. 其它组件</text>
+    <circle cx="110" cy="1425" r="30" fill="#1677ff"/>
+    <circle cx="210" cy="1425" r="30" fill="#eaf2ff"/>
+    <rect x="300" y="1394" width="160" height="64" rx="16" fill="#f7f8fa"/>
+    <rect x="520" y="1394" width="160" height="64" rx="16" fill="#eef8f6"/>
+    <rect x="740" y="1394" width="160" height="64" rx="16" fill="#fff7ed"/>
+  </g>
+</svg>

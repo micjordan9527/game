@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">U.Game UI 设计系统案例截图</title>
+  <desc id="desc">参考截图、聊天提示词和生成结果缩略图组成的案例截图。</desc>
+  <rect width="1400" height="900" fill="#fff"/>
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <g transform="translate(840 58)">
+      <rect x="0" y="0" width="168" height="136" rx="18" fill="#f7f8fa"/>
+      <rect x="22" y="22" width="124" height="30" rx="8" fill="#eaf2ff"/>
+      <rect x="22" y="66" width="124" height="16" rx="8" fill="#d7e6ff"/>
+      <rect x="22" y="96" width="124" height="20" rx="10" fill="#1677ff"/>
+      <rect x="188" y="0" width="168" height="136" rx="18" fill="#f7f8fa"/>
+      <text x="226" y="76" fill="#d0d5dd" font-size="42" font-weight="700">G</text>
+      <rect x="376" y="0" width="150" height="330" rx="20" fill="#f7f8fa"/>
+      <rect x="390" y="22" width="122" height="72" rx="12" fill="#eaf2ff"/>
+      <rect x="390" y="112" width="122" height="52" rx="12" fill="#fff"/>
+      <rect x="390" y="178" width="122" height="38" rx="10" fill="#fff"/>
+      <rect x="390" y="234" width="54" height="72" rx="8" fill="#172033" opacity=".2"/>
+      <rect x="458" y="234" width="54" height="72" rx="8" fill="#172033" opacity=".2"/>
+    </g>
+    <rect x="420" y="388" width="902" height="118" rx="28" fill="#f4f4f5"/>
+    <text x="452" y="438" fill="#172033" font-size="28">用这种风格帮我生成一套UI设计系统的图，包含网页、移动端、卡片、</text>
+    <text x="452" y="482" fill="#172033" font-size="28">控件、按钮以及其它</text>
+    <text x="32" y="620" fill="#8c8c8c" font-size="28">Thought for 3m 54s &gt;</text>
+    <g transform="translate(36 676)">
+      <rect width="700" height="200" rx="22" fill="#f7fbff" stroke="#e4e7ec"/>
+      <text x="34" y="58" fill="#1677ff" font-size="26" font-weight="700">U.Game UI 设计系统</text>
+      <text x="34" y="92" fill="#667085" font-size="16">网页端 / 移动端 / 组件规范</text>
+      <rect x="34" y="120" width="130" height="42" rx="10" fill="#1677ff"/>
+      <rect x="188" y="120" width="130" height="42" rx="10" fill="#5ba7ff"/>
+      <rect x="342" y="120" width="130" height="42" rx="10" fill="#eaf2ff"/>
+      <rect x="496" y="120" width="130" height="42" rx="10" fill="#0f172a"/>
+    </g>
+    <g transform="translate(770 680)">
+      <rect width="90" height="120" rx="14" fill="#f7fbff" stroke="#e4e7ec"/>
+      <rect x="18" y="18" width="54" height="84" rx="8" fill="#eaf2ff"/>
+      <rect x="108" width="90" height="120" rx="14" fill="#f7fbff" stroke="#e4e7ec"/>
+      <rect x="126" y="18" width="54" height="84" rx="8" fill="#fff7ed"/>
+      <rect x="216" width="90" height="120" rx="14" fill="#f7fbff" stroke="#e4e7ec"/>
+      <rect x="234" y="18" width="54" height="84" rx="8" fill="#eef8f6"/>
+      <rect x="324" width="90" height="120" rx="14" fill="#f7fbff" stroke="#e4e7ec"/>
+      <rect x="342" y="18" width="54" height="84" rx="8" fill="#f1f6ff"/>
+    </g>
+  </g>
+</svg>

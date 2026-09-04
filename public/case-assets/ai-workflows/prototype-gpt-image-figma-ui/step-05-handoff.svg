@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">交付前整理和检查</title>
+  <desc id="desc">展示最终交付前要检查字段完整、组件复用、响应式适配和素材提示词归档。</desc>
+  <rect width="1200" height="750" fill="#f7f8fa"/>
+  <text x="64" y="82" fill="#172033" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700">Step 05 人工整理和交付</text>
+  <text x="64" y="122" fill="#667085" font-family="Arial, 'PingFang SC', sans-serif" font-size="18">把好看的方向收敛成可评审、可维护、可继续复用的资产。</text>
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <rect x="64" y="172" width="612" height="470" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <rect x="100" y="212" width="540" height="72" rx="16" fill="#eef8f6"/>
+    <rect x="100" y="320" width="154" height="92" rx="14" fill="#f7f8fa" stroke="#e4e7ec"/>
+    <rect x="294" y="320" width="154" height="92" rx="14" fill="#f7f8fa" stroke="#e4e7ec"/>
+    <rect x="486" y="320" width="154" height="92" rx="14" fill="#f7f8fa" stroke="#e4e7ec"/>
+    <rect x="100" y="452" width="332" height="116" rx="14" fill="#f1f6ff"/>
+    <rect x="470" y="452" width="170" height="116" rx="14" fill="#f7f8fa" stroke="#e4e7ec"/>
+    <text x="118" y="256" fill="#12665e" font-size="21" font-weight="700">最终页面预览</text>
+    <rect x="724" y="172" width="412" height="470" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="760" y="224" fill="#172033" font-size="24" font-weight="700">交付检查清单</text>
+    <g font-size="19" fill="#667085">
+      <circle cx="772" cy="286" r="11" fill="#167c72"/><path d="M766 286 l5 5 l11 -14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="800" y="293">真实字段已替换</text>
+      <circle cx="772" cy="344" r="11" fill="#167c72"/><path d="M766 344 l5 5 l11 -14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="800" y="351">组件和自动布局可复用</text>
+      <circle cx="772" cy="402" r="11" fill="#167c72"/><path d="M766 402 l5 5 l11 -14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="800" y="409">桌面和移动端无溢出</text>
+      <circle cx="772" cy="460" r="11" fill="#167c72"/><path d="M766 460 l5 5 l11 -14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="800" y="467">素材路径已归档</text>
+      <circle cx="772" cy="518" r="11" fill="#167c72"/><path d="M766 518 l5 5 l11 -14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="800" y="525">提示词可复制复用</text>
+    </g>
+  </g>
+</svg>

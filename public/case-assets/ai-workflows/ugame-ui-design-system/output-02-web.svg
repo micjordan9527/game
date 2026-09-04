@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600" role="img" aria-labelledby="title desc">
+  <title id="title">网页端设计系统</title>
+  <desc id="desc">U.Game 网页端页面结构、模块规范和布局示例。</desc>
+  <rect width="1200" height="1600" fill="#fff"/>
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <text x="60" y="80" fill="#1677ff" font-size="30" font-weight="700">U.Game</text>
+    <text x="60" y="158" fill="#0f172a" font-size="58" font-weight="700">网页端设计系统</text>
+    <text x="60" y="210" fill="#667085" font-size="24">桌面端页面结构 / 模块规范 / 布局示例</text>
+    <rect x="50" y="260" width="1100" height="180" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="80" y="312" fill="#172033" font-size="24" font-weight="700">1. 顶部导航</text>
+    <rect x="90" y="340" width="1020" height="64" rx="12" fill="#fff" stroke="#d7e6ff"/>
+    <rect x="120" y="360" width="120" height="24" rx="12" fill="#1677ff"/>
+    <rect x="320" y="360" width="60" height="24" rx="12" fill="#eaf2ff"/>
+    <rect x="410" y="360" width="60" height="24" rx="12" fill="#eaf2ff"/>
+    <rect x="500" y="360" width="60" height="24" rx="12" fill="#eaf2ff"/>
+    <rect x="880" y="354" width="92" height="36" rx="18" fill="#1677ff"/>
+    <rect x="990" y="354" width="92" height="36" rx="18" fill="#eaf2ff"/>
+    <rect x="50" y="470" width="220" height="500" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="80" y="520" fill="#172033" font-size="24" font-weight="700">2. 侧边导航</text>
+    <rect x="82" y="560" width="156" height="42" rx="10" fill="#1677ff"/>
+    <rect x="82" y="622" width="156" height="42" rx="10" fill="#f7fbff"/>
+    <rect x="82" y="684" width="156" height="42" rx="10" fill="#f7fbff"/>
+    <rect x="82" y="746" width="156" height="42" rx="10" fill="#f7fbff"/>
+    <rect x="300" y="470" width="850" height="500" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="330" y="520" fill="#172033" font-size="24" font-weight="700">3. 桌面端首页示例</text>
+    <rect x="340" y="560" width="560" height="120" rx="18" fill="#eaf2ff"/>
+    <rect x="930" y="560" width="170" height="170" rx="18" fill="#f7fbff"/>
+    <rect x="340" y="720" width="560" height="200" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <rect x="930" y="760" width="170" height="160" rx="18" fill="#f7fbff"/>
+    <rect x="50" y="1000" width="530" height="260" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="80" y="1050" fill="#172033" font-size="24" font-weight="700">4. 赛事列表页</text>
+    <rect x="80" y="1088" width="470" height="132" rx="14" fill="#f7fbff"/>
+    <rect x="620" y="1000" width="530" height="260" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="650" y="1050" fill="#172033" font-size="24" font-weight="700">5. 账户中心</text>
+    <rect x="650" y="1088" width="470" height="132" rx="14" fill="#f7fbff"/>
+    <rect x="50" y="1290" width="1100" height="190" rx="18" fill="#fff" stroke="#e4e7ec"/>
+    <text x="80" y="1340" fill="#172033" font-size="24" font-weight="700">6. 布局规范</text>
+    <rect x="90" y="1380" width="980" height="30" rx="15" fill="#eaf2ff"/>
+    <rect x="90" y="1430" width="980" height="20" rx="10" fill="#1677ff" opacity=".38"/>
+  </g>
+</svg>
