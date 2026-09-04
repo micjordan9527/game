@@ -3,6 +3,7 @@
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react"
 import { useEffect, useId, useRef, useState } from "react"
 import type { AiWorkflowOutput } from "@/data/aiWorkflowLibrary"
+import { assetPath } from "@/lib/assets"
 
 export function AiWorkflowOutputGallery({ outputs }: { outputs: AiWorkflowOutput[] }) {
   const titleId = useId()
@@ -142,7 +143,7 @@ export function AiWorkflowOutputGallery({ outputs }: { outputs: AiWorkflowOutput
           className="group relative block w-full cursor-zoom-in bg-paper p-3 text-left"
           onClick={() => setLightboxIndex(selectedIndex)}
         >
-          <img src={selectedOutput.image} alt={selectedOutput.alt} className="mx-auto h-auto w-full max-w-5xl rounded-md bg-white shadow-sm" loading="lazy" />
+          <img src={assetPath(selectedOutput.image)} alt={selectedOutput.alt} className="mx-auto h-auto w-full max-w-5xl rounded-md bg-white shadow-sm" loading="lazy" />
           <span className="absolute right-5 top-5 inline-flex h-9 w-9 items-center justify-center rounded-md border border-line bg-white/90 text-ink opacity-0 shadow-sm backdrop-blur transition group-hover:opacity-100 group-focus-visible:opacity-100">
             <Maximize2 className="h-4 w-4" aria-hidden="true" />
             <span className="sr-only">查看大图</span>
@@ -163,7 +164,7 @@ export function AiWorkflowOutputGallery({ outputs }: { outputs: AiWorkflowOutput
                   ].join(" ")}
                   aria-label={`查看${output.title}`}
                 >
-                  <img src={output.image} alt="" className="h-full w-full rounded-sm object-cover" loading="lazy" />
+                  <img src={assetPath(output.image)} alt="" className="h-full w-full rounded-sm object-cover" loading="lazy" />
                   <span className={["absolute left-1 top-1 inline-flex h-4 w-4 items-center justify-center rounded-full text-[10px] text-white", selectedIndex === index ? "bg-brand-700" : "bg-ink/60"].join(" ")}>
                     {index + 1}
                   </span>
@@ -201,7 +202,7 @@ export function AiWorkflowOutputGallery({ outputs }: { outputs: AiWorkflowOutput
               </div>
             </div>
             <div className="min-h-0 flex-1 overflow-auto bg-paper p-3 sm:p-5">
-              <img src={activeOutput.image} alt={activeOutput.alt} className="mx-auto h-auto w-full max-w-5xl rounded-md bg-white shadow-sm" />
+              <img src={assetPath(activeOutput.image)} alt={activeOutput.alt} className="mx-auto h-auto w-full max-w-5xl rounded-md bg-white shadow-sm" />
             </div>
             {canNavigate ? (
               <div className="border-t border-line bg-white p-3">
@@ -217,7 +218,7 @@ export function AiWorkflowOutputGallery({ outputs }: { outputs: AiWorkflowOutput
                       ].join(" ")}
                       aria-label={`切换到${output.title}`}
                     >
-                      <img src={output.image} alt="" className="h-full w-full rounded-sm object-cover" loading="lazy" />
+                      <img src={assetPath(output.image)} alt="" className="h-full w-full rounded-sm object-cover" loading="lazy" />
                       <span className={["absolute left-1 top-1 inline-flex h-4 w-4 items-center justify-center rounded-full text-[10px] text-white", lightboxIndex === index ? "bg-brand-700" : "bg-ink/60"].join(" ")}>
                         {index + 1}
                       </span>

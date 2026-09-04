@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react"
 import { useEffect, useId, useState } from "react"
+import { assetPath } from "@/lib/assets"
 
 type LongImageItem = {
   id: string
@@ -81,10 +82,10 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
               type="button"
             >
               <picture className="block">
-                {item.srcAvif ? <source srcSet={item.srcAvif} type="image/avif" /> : null}
-                {item.srcWebp ? <source srcSet={item.srcWebp} type="image/webp" /> : null}
+                {item.srcAvif ? <source srcSet={assetPath(item.srcAvif)} type="image/avif" /> : null}
+                {item.srcWebp ? <source srcSet={assetPath(item.srcWebp)} type="image/webp" /> : null}
                 <Image
-                  src={item.src}
+                  src={assetPath(item.src)}
                   alt={item.title}
                   width={item.width}
                   height={item.height}
@@ -157,10 +158,10 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
             </div>
             <div className="min-h-0 flex-1 overflow-auto bg-paper p-3 sm:p-5">
               <picture className="block">
-                {activeItem.srcAvif ? <source srcSet={activeItem.srcAvif} type="image/avif" /> : null}
-                {activeItem.srcWebp ? <source srcSet={activeItem.srcWebp} type="image/webp" /> : null}
+                {activeItem.srcAvif ? <source srcSet={assetPath(activeItem.srcAvif)} type="image/avif" /> : null}
+                {activeItem.srcWebp ? <source srcSet={assetPath(activeItem.srcWebp)} type="image/webp" /> : null}
                 <Image
-                  src={activeItem.src}
+                  src={assetPath(activeItem.src)}
                   alt={activeItem.title}
                   width={activeItem.width}
                   height={activeItem.height}
@@ -187,10 +188,10 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
                       ].join(" ")}
                     >
                       <picture className="block h-full w-full">
-                        {item.srcAvif ? <source srcSet={item.srcAvif} type="image/avif" /> : null}
-                        {item.srcWebp ? <source srcSet={item.srcWebp} type="image/webp" /> : null}
+                        {item.srcAvif ? <source srcSet={assetPath(item.srcAvif)} type="image/avif" /> : null}
+                        {item.srcWebp ? <source srcSet={assetPath(item.srcWebp)} type="image/webp" /> : null}
                         <Image
-                          src={item.src}
+                          src={assetPath(item.src)}
                           alt={item.title}
                           width={item.width}
                           height={item.height}

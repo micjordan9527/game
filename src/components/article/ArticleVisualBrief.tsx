@@ -4,6 +4,7 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight, Images, Maximize2, X } from "lucide-react"
 import { useEffect, useId, useState } from "react"
 import type { ImagePrompt } from "@/data/imagePrompts"
+import { assetPath } from "@/lib/assets"
 
 export function ArticleVisualBrief({ imagePrompts }: { imagePrompts?: ImagePrompt[] }) {
   const titleId = useId()
@@ -75,10 +76,10 @@ export function ArticleVisualBrief({ imagePrompts }: { imagePrompts?: ImagePromp
             <figure className={["overflow-hidden rounded-lg border border-line bg-white", isLongInfographic ? "shadow-sm" : ""].join(" ")} key={imagePrompt.slug}>
               <button className="group relative block w-full cursor-zoom-in bg-white text-left" onClick={() => setActiveIndex(index)} type="button">
                 <picture className="block">
-                  {imagePrompt.imageSrcAvif ? <source srcSet={imagePrompt.imageSrcAvif} type="image/avif" /> : null}
-                  {imagePrompt.imageSrcWebp ? <source srcSet={imagePrompt.imageSrcWebp} type="image/webp" /> : null}
+                  {imagePrompt.imageSrcAvif ? <source srcSet={assetPath(imagePrompt.imageSrcAvif)} type="image/avif" /> : null}
+                  {imagePrompt.imageSrcWebp ? <source srcSet={assetPath(imagePrompt.imageSrcWebp)} type="image/webp" /> : null}
                       <Image
-                        src={imagePrompt.imageSrc}
+                        src={assetPath(imagePrompt.imageSrc)}
                         alt={imagePrompt.title}
                         width={imagePrompt.width ?? 1600}
                         height={imagePrompt.height ?? 900}
@@ -130,10 +131,10 @@ export function ArticleVisualBrief({ imagePrompts }: { imagePrompts?: ImagePromp
             </div>
             <div className="min-h-0 flex-1 overflow-auto bg-paper p-3 sm:p-5">
               <picture className="block">
-                {activeImage.imageSrcAvif ? <source srcSet={activeImage.imageSrcAvif} type="image/avif" /> : null}
-                {activeImage.imageSrcWebp ? <source srcSet={activeImage.imageSrcWebp} type="image/webp" /> : null}
+                {activeImage.imageSrcAvif ? <source srcSet={assetPath(activeImage.imageSrcAvif)} type="image/avif" /> : null}
+                {activeImage.imageSrcWebp ? <source srcSet={assetPath(activeImage.imageSrcWebp)} type="image/webp" /> : null}
                 <Image
-                  src={activeImage.imageSrc}
+                  src={assetPath(activeImage.imageSrc)}
                   alt={activeImage.title}
                   width={activeImage.width ?? 1600}
                   height={activeImage.height ?? 900}

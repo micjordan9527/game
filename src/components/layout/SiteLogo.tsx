@@ -1,10 +1,11 @@
 import Image from "next/image"
 import { siteName } from "@/lib/site"
+import { assetPath } from "@/lib/assets"
 
 export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
   return (
     <span className={`relative block shrink-0 overflow-hidden rounded-xl bg-white ring-1 ring-line ${className}`}>
-      <Image src="/images/brand/baowang-knowledge-logo.png" alt="包网知识库标志" width={72} height={72} className="h-full w-full object-cover" priority />
+      <Image src={assetPath("/images/brand/baowang-knowledge-logo.png")} alt="包网知识库标志" width={72} height={72} className="h-full w-full object-cover" priority />
     </span>
   )
 }

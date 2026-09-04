@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
   basePath: isGitHubPages ? "/game" : "",
   assetPrefix: isGitHubPages ? "/game/" : "",
+  env: {
+    NEXT_PUBLIC_SITE_BASE_PATH: isGitHubPages ? "/game" : "",
+  },
   images: {
     unoptimized: true,
   },

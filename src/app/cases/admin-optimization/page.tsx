@@ -8,11 +8,13 @@ import { getCaseItem } from "@/data/cases"
 import { caseLearningChecks } from "@/data/learningChecks"
 import { absoluteUrl } from "@/lib/seo"
 import { appendAssetVersion, getAssetVersionMeta } from "@/lib/assetVersion"
+import { assetPath } from "@/lib/assets"
 
 const caseItem = getCaseItem("admin-optimization")
 const previewSrc = caseItem?.previewSrc
   ? `${appendAssetVersion(caseItem.previewSrc)}#version=optimized&page=dataCenter-overview`
   : undefined
+const publicPreviewSrc = previewSrc ? assetPath(previewSrc) : undefined
 const previewVersionMeta = previewSrc ? getAssetVersionMeta(previewSrc) : { version: null, updatedAt: null }
 
 export const metadata = {
@@ -52,8 +54,8 @@ export default function AdminOptimizationCasePage() {
               audience={caseItem.audience}
             />
           </div>
-          {previewSrc ? (
-            <Link href={previewSrc} target="_blank" className="inline-flex w-fit items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+          {publicPreviewSrc ? (
+            <Link href={publicPreviewSrc} target="_blank" className="inline-flex w-fit items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
               新窗口打开
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </Link>

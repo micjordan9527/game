@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Images } from "lucide-react"
 import { getImagePromptsForArticle, imagePrompts } from "@/data/imagePrompts"
 import { SectionHeader } from "@/components/common/SectionHeader"
+import { assetPath } from "@/lib/assets"
 
 export function VisualGallery() {
   const standardImages = imagePrompts.filter((image) => image.kind !== "long-infographic").slice(0, 4)
@@ -17,10 +18,10 @@ export function VisualGallery() {
           <Link key={image.slug} href={`/articles/${image.articleSlug}`} className="overflow-hidden rounded-lg border border-line bg-white shadow-sm hover:border-brand-100 hover:shadow-soft">
             <div className="relative aspect-video bg-paper">
               <picture className="contents">
-                {image.imageSrcAvif ? <source srcSet={image.imageSrcAvif} type="image/avif" /> : null}
-                {image.imageSrcWebp ? <source srcSet={image.imageSrcWebp} type="image/webp" /> : null}
+                {image.imageSrcAvif ? <source srcSet={assetPath(image.imageSrcAvif)} type="image/avif" /> : null}
+                {image.imageSrcWebp ? <source srcSet={assetPath(image.imageSrcWebp)} type="image/webp" /> : null}
                 <Image
-                  src={image.imageSrc}
+                  src={assetPath(image.imageSrc)}
                   alt={image.title}
                   fill
                   sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, calc(100vw - 2rem)"
@@ -56,10 +57,10 @@ export function VisualGallery() {
                 {adminModuleImages.slice(0, 3).map((image) => (
                   <div className="relative overflow-hidden rounded-md bg-white" key={image.slug}>
                     <picture className="contents">
-                      {image.imageSrcAvif ? <source srcSet={image.imageSrcAvif} type="image/avif" /> : null}
-                      {image.imageSrcWebp ? <source srcSet={image.imageSrcWebp} type="image/webp" /> : null}
+                      {image.imageSrcAvif ? <source srcSet={assetPath(image.imageSrcAvif)} type="image/avif" /> : null}
+                      {image.imageSrcWebp ? <source srcSet={assetPath(image.imageSrcWebp)} type="image/webp" /> : null}
                       <Image
-                        src={image.imageSrc}
+                        src={assetPath(image.imageSrc)}
                         alt={image.title}
                         fill
                         sizes="(min-width: 1024px) 220px, 30vw"

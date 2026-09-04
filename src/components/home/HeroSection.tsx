@@ -20,6 +20,7 @@ import { imagePrompts } from "@/data/imagePrompts"
 import { templates } from "@/data/templates"
 import { learningPaths } from "@/data/topicGuides"
 import { Badge } from "@/components/common/Badge"
+import { assetPath } from "@/lib/assets"
 
 const resourceEntries = [
   {
@@ -225,10 +226,10 @@ export function HeroSection() {
                 <Link href={`/articles/${heroVisual.articleSlug}`} className="group block bg-paper">
                   <div className="flex h-64 items-center justify-center md:h-full md:min-h-72">
                     <picture className="block h-full w-full">
-                      {heroVisual.imageSrcAvif ? <source srcSet={heroVisual.imageSrcAvif} type="image/avif" /> : null}
-                      {heroVisual.imageSrcWebp ? <source srcSet={heroVisual.imageSrcWebp} type="image/webp" /> : null}
+                      {heroVisual.imageSrcAvif ? <source srcSet={assetPath(heroVisual.imageSrcAvif)} type="image/avif" /> : null}
+                      {heroVisual.imageSrcWebp ? <source srcSet={assetPath(heroVisual.imageSrcWebp)} type="image/webp" /> : null}
                     <Image
-                        src={heroVisual.imageSrc}
+                        src={assetPath(heroVisual.imageSrc)}
                         alt={heroVisual.title}
                         width={heroVisual.width ?? 1672}
                         height={heroVisual.height ?? 941}
@@ -252,10 +253,10 @@ export function HeroSection() {
                   {visualThumbnails.map((image) => (
                     <Link key={image.slug} href={`/articles/${image.articleSlug}`} className="relative aspect-[3/4] overflow-hidden rounded-md bg-paper ring-1 ring-line">
                       <picture className="block h-full w-full">
-                        {image.imageSrcAvif ? <source srcSet={image.imageSrcAvif} type="image/avif" /> : null}
-                        {image.imageSrcWebp ? <source srcSet={image.imageSrcWebp} type="image/webp" /> : null}
+                        {image.imageSrcAvif ? <source srcSet={assetPath(image.imageSrcAvif)} type="image/avif" /> : null}
+                        {image.imageSrcWebp ? <source srcSet={assetPath(image.imageSrcWebp)} type="image/webp" /> : null}
                         <Image
-                          src={image.imageSrc}
+                          src={assetPath(image.imageSrc)}
                           alt={image.title}
                           width={image.width ?? 864}
                           height={image.height ?? 1821}

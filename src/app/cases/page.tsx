@@ -5,6 +5,7 @@ import { caseItems } from "@/data/cases"
 import { Badge } from "@/components/common/Badge"
 import { absoluteUrl } from "@/lib/seo"
 import { appendAssetVersion } from "@/lib/assetVersion"
+import { assetPath } from "@/lib/assets"
 
 const versionedCases = caseItems.map((item) => ({
   ...item,
@@ -36,10 +37,10 @@ export default function CasesPage() {
             {item.coverSrc ? (
               <div className="aspect-[16/9] overflow-hidden bg-paper">
                 <picture className="block h-full w-full">
-                  {item.coverSrcAvif ? <source srcSet={item.coverSrcAvif} type="image/avif" /> : null}
-                  {item.coverSrcWebp ? <source srcSet={item.coverSrcWebp} type="image/webp" /> : null}
+                  {item.coverSrcAvif ? <source srcSet={assetPath(item.coverSrcAvif)} type="image/avif" /> : null}
+                  {item.coverSrcWebp ? <source srcSet={assetPath(item.coverSrcWebp)} type="image/webp" /> : null}
                   <Image
-                    src={item.coverSrc}
+                    src={assetPath(item.coverSrc)}
                     alt={item.coverAlt ?? item.title}
                     width={item.coverWidth ?? 1600}
                     height={item.coverHeight ?? 900}

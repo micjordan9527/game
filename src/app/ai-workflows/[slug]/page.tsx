@@ -7,6 +7,7 @@ import { CopyPromptButton } from "@/components/ai-workflows/CopyPromptButton"
 import { Badge } from "@/components/common/Badge"
 import { SectionHeader } from "@/components/common/SectionHeader"
 import { aiWorkflows, getAiWorkflow } from "@/data/aiWorkflowLibrary"
+import { assetPath } from "@/lib/assets"
 import { absoluteUrl } from "@/lib/seo"
 
 export function generateStaticParams() {
@@ -81,7 +82,7 @@ export default async function AiWorkflowDetailPage({ params }: { params: Promise
       <section className="py-12">
         <SectionHeader eyebrow="Case" title="案例截图" description="这里放用户提供的参考截图，帮助理解这条提示词是从什么画面出发。" />
         <div className="mt-8 overflow-hidden rounded-lg border border-line bg-white shadow-sm">
-          <img src={workflow.caseImage} alt={workflow.caseAlt} className="h-auto w-full" />
+          <img src={assetPath(workflow.caseImage)} alt={workflow.caseAlt} className="h-auto w-full" />
         </div>
       </section>
 

@@ -18,6 +18,7 @@ import { categoryLearningChecks } from "@/data/learningChecks"
 import { getTopicGuide } from "@/data/topicGuides"
 import { getArticle, getArticlesByCategory, getCategory } from "@/lib/site"
 import { absoluteUrl } from "@/lib/seo"
+import { assetPath } from "@/lib/assets"
 
 export function generateStaticParams() {
   return categories.map((category) => ({ category: category.slug }))
@@ -266,10 +267,10 @@ function CategoryVisualSection({ visual }: { visual: CategoryVisual }) {
         <figure className="overflow-hidden rounded-lg border border-line bg-white shadow-sm">
           <div className="max-h-[820px] overflow-y-auto bg-paper">
             <picture className="block">
-              {visual.imageSrcAvif ? <source srcSet={visual.imageSrcAvif} type="image/avif" /> : null}
-              {visual.imageSrcWebp ? <source srcSet={visual.imageSrcWebp} type="image/webp" /> : null}
+              {visual.imageSrcAvif ? <source srcSet={assetPath(visual.imageSrcAvif)} type="image/avif" /> : null}
+              {visual.imageSrcWebp ? <source srcSet={assetPath(visual.imageSrcWebp)} type="image/webp" /> : null}
                 <Image
-                  src={visual.imageSrc}
+                  src={assetPath(visual.imageSrc)}
                   alt={visual.title}
                   width={visual.width}
                   height={visual.height}

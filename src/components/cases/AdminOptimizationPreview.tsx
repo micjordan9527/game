@@ -3,6 +3,7 @@
 import { RefreshCw } from "lucide-react"
 import { useCallback, useMemo, useState } from "react"
 import { CaseIframeVersionPanel } from "@/components/cases/CaseIframeVersionPanel"
+import { assetPath } from "@/lib/assets"
 
 type AdminOptimizationPreviewProps = {
   src: string
@@ -15,17 +16,18 @@ export function AdminOptimizationPreview({
   version = null,
   updatedAt = null,
 }: AdminOptimizationPreviewProps) {
-  const [previewSrc, setPreviewSrc] = useState(src)
+  const initialPreviewSrc = assetPath(src)
+  const [previewSrc, setPreviewSrc] = useState(initialPreviewSrc)
   const [refreshVersion, setRefreshVersion] = useState<string | null>(null)
 
   const refreshSrc = useCallback(() => {
-    const [basePath, anchor] = src.split("#", 2)
+    const [basePath, anchor] = initialPreviewSrc.split("#", 2)
     const separator = basePath.includes("?") ? "&" : "?"
     const nextVersion = `rev-${Date.now()}`
     const rebuilt = `${basePath}${separator}cache=${encodeURIComponent(nextVersion)}${anchor ? `#${anchor}` : ""}`
     setPreviewSrc(rebuilt)
     setRefreshVersion(nextVersion)
-  }, [src])
+  }, [initialPreviewSrc])
 
   const displayedVersion = useMemo(() => refreshVersion ?? "初始加载", [refreshVersion])
 

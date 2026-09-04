@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useMemo, useState } from "react"
 import { ArrowRight, RotateCcw, Search, SlidersHorizontal, X } from "lucide-react"
 import type { AiWorkflow } from "@/data/aiWorkflowLibrary"
+import { assetPath } from "@/lib/assets"
 
 type FilterOption = {
   value: string
@@ -244,7 +245,7 @@ function WorkflowCaseCard({ workflow }: { workflow: AiWorkflow }) {
       className="group flex h-full flex-col rounded-lg border border-line bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2"
     >
       <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-line bg-paper">
-        <img src={workflow.caseImage} alt={workflow.caseAlt} className="h-full w-full object-cover transition group-hover:scale-[1.02]" loading="lazy" />
+        <img src={assetPath(workflow.caseImage)} alt={workflow.caseAlt} className="h-full w-full object-cover transition group-hover:scale-[1.02]" loading="lazy" />
         <div className="absolute right-2 top-2 flex max-w-[calc(100%-1rem)] items-center gap-1.5">
           <span className="truncate rounded-full bg-brand-50/95 px-2 py-1 text-xs font-medium text-brand-700 shadow-sm ring-1 ring-brand-100 backdrop-blur">
             {workflow.scenario}

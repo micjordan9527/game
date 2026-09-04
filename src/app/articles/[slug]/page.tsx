@@ -18,6 +18,7 @@ import { articles } from "@/data/articles"
 import { imagePrompts } from "@/data/imagePrompts"
 import { articleLearningChecks } from "@/data/learningChecks"
 import { getMarkdownArticle, slugifyHeading } from "@/lib/articles"
+import { assetPath } from "@/lib/assets"
 import { getTermsForArticle } from "@/lib/relations"
 import { absoluteUrl } from "@/lib/seo"
 
@@ -30,14 +31,15 @@ function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
 
   const imagePrompt = imagePrompts.find((item) => item.imageSrc === src || item.imageSrcWebp === src || item.imageSrcAvif === src)
   const caption = alt || imagePrompt?.title
+  const imageSrc = assetPath(src)
 
   return (
     <figure className="not-prose my-8 overflow-hidden rounded-lg border border-line bg-white shadow-sm">
       <picture className="block">
-        {imagePrompt?.imageSrcAvif ? <source srcSet={imagePrompt.imageSrcAvif} type="image/avif" /> : null}
-        {imagePrompt?.imageSrcWebp ? <source srcSet={imagePrompt.imageSrcWebp} type="image/webp" /> : null}
+        {imagePrompt?.imageSrcAvif ? <source srcSet={assetPath(imagePrompt.imageSrcAvif)} type="image/avif" /> : null}
+        {imagePrompt?.imageSrcWebp ? <source srcSet={assetPath(imagePrompt.imageSrcWebp)} type="image/webp" /> : null}
         <Image
-          src={src}
+          src={imageSrc}
           alt={caption ?? ""}
           width={imagePrompt?.width ?? 1600}
           height={imagePrompt?.height ?? 900}

@@ -7,9 +7,11 @@ import { getCaseItem } from "@/data/cases"
 import { caseLearningChecks } from "@/data/learningChecks"
 import { absoluteUrl } from "@/lib/seo"
 import { appendAssetVersion, getAssetVersionMeta } from "@/lib/assetVersion"
+import { assetPath } from "@/lib/assets"
 
 const caseItem = getCaseItem("white-label-official")
 const previewSrc = caseItem?.previewSrc ? appendAssetVersion(caseItem.previewSrc) : undefined
+const publicPreviewSrc = previewSrc ? assetPath(previewSrc) : undefined
 const previewVersionMeta = previewSrc ? getAssetVersionMeta(previewSrc) : { version: null, updatedAt: null }
 
 export const metadata = {
@@ -43,14 +45,14 @@ export default function WhiteLabelOfficialCasePage() {
               audience={caseItem.audience}
             />
           </div>
-          {previewSrc ? (
-            <Link href={previewSrc} target="_blank" className="inline-flex w-fit items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+          {publicPreviewSrc ? (
+            <Link href={publicPreviewSrc} target="_blank" className="inline-flex w-fit items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
               新窗口打开
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </Link>
           ) : null}
         </div>
-        {previewSrc ? <CaseIframeVersionPanel version={previewVersionMeta.version} updatedAt={previewVersionMeta.updatedAt} /> : null}
+        {publicPreviewSrc ? <CaseIframeVersionPanel version={previewVersionMeta.version} updatedAt={previewVersionMeta.updatedAt} /> : null}
       </section>
 
       <div className="mt-8">
@@ -58,9 +60,9 @@ export default function WhiteLabelOfficialCasePage() {
       </div>
 
       <section className="mt-8 overflow-hidden rounded-lg border border-line bg-white shadow-sm">
-        {previewSrc ? (
+        {publicPreviewSrc ? (
           <iframe
-            src={previewSrc}
+            src={publicPreviewSrc}
             title="包网官网案例预览"
             className="h-[78vh] w-full bg-white"
             loading="lazy"
