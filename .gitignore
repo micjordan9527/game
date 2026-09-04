@@ -1,6 +1,7 @@
 # Dependency/build caches
 node_modules/
 .next/
+out/
 dist/
 build/
 coverage/
