@@ -4,6 +4,8 @@ export type AiWorkflowOutput = {
   alt: string
 }
 
+export type AiWorkflowVisualKind = "brief" | "directions" | "assets" | "figma" | "handoff"
+
 export type AiWorkflow = {
   slug: string
   title: string
