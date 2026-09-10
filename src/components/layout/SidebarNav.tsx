@@ -127,12 +127,11 @@ export function SidebarNav() {
                             className={[
                               "flex items-center gap-2 rounded-md px-2 py-1.5 text-xs leading-5 transition",
                               active ? "bg-brand-50 font-medium text-brand-700" : "text-muted hover:bg-paper hover:text-ink",
-                              module.status === "待开放" ? "pointer-events-none opacity-60" : "",
                             ].join(" ")}
                           >
                             <Trophy className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                             <span className="min-w-0 flex-1 truncate">{module.title}</span>
-                            <span className="text-[10px] text-muted/70">{module.status}</span>
+                            <span className="text-[10px] text-muted/70">{module.contentType}</span>
                           </Link>
                         )
                       })}

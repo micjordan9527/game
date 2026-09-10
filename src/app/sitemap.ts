@@ -42,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     ...sportsModules
-      .filter((item) => item.status === "已开放")
+      .filter((item) => item.href.startsWith("/sports/"))
       .map((item) => ({
         url: absoluteUrl(item.href),
         lastModified: now,

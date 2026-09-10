@@ -88,17 +88,17 @@ export function SportsbookKnowledgeHub() {
                 href={module.href}
                 className={[
                   "group rounded-lg border border-line bg-white p-5 shadow-sm transition hover:border-brand-100 hover:shadow-soft",
-                  module.status === "待开放" ? "pointer-events-none opacity-75" : "",
                 ].join(" ")}
               >
                 <div className="flex items-start justify-between gap-3">
                   <span className="rounded-md bg-paper px-2.5 py-1 text-xs font-medium text-muted">{module.category}</span>
-                  <span className={["rounded-md px-2.5 py-1 text-xs font-medium", module.status === "已开放" ? "bg-brand-50 text-brand-700" : "bg-paper text-muted"].join(" ")}>
-                    {module.status}
+                  <span className={"rounded-md bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700"}>
+                    {module.contentType}
                   </span>
                 </div>
                 <h3 className="mt-4 text-base font-semibold text-ink">{module.title}</h3>
                 <p className="mt-2 line-clamp-3 text-sm leading-7 text-muted">{module.description}</p>
+                {module.readingTitle ? <p className="mt-3 text-xs leading-6 text-brand-700">基础阅读：{module.readingTitle}</p> : null}
                 <div className="mt-4 flex flex-wrap gap-2">
                   {module.tags.slice(0, 3).map((tag) => (
                     <span key={tag} className="rounded-md bg-paper px-2.5 py-1 text-xs font-medium text-muted">
@@ -107,7 +107,7 @@ export function SportsbookKnowledgeHub() {
                   ))}
                 </div>
                 <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 group-hover:underline">
-                  {module.status === "已开放" ? "查看模块" : "待开放"}
+                  {module.contentType === "基础导读" ? "阅读基础文章" : "查看专题"}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </span>
               </Link>

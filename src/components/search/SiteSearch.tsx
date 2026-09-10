@@ -8,6 +8,8 @@ import type { Article } from "@/data/articles"
 import type { GlossaryTerm } from "@/data/glossary"
 import type { TemplateItem } from "@/data/templates"
 import { Badge } from "@/components/common/Badge"
+import { sportsModules } from "@/data/sports"
+import { sportsGuides } from "@/data/sportsGuides"
 
 type SiteSearchProps = {
   articles: Article[]
@@ -66,7 +68,13 @@ export function SiteSearch({ articles, terms, templates, initialQuery = "" }: Si
     }
   }, [articles, normalizedQuery, templates, terms])
 
-  const resultCount = results.articles.length + results.terms.length + results.templates.length
+  const sportsResults = sportsModules.filter((module) => {
+    if (module.contentType === "基础导读") return false
+    const guide = sportsGuides.find((item) => item.slug === module.slug)
+    return [module.title, module.description, ...module.tags, ...(guide?.sections.flatMap((section) => [section.title, ...section.paragraphs, ...section.checks]) ?? [])]
+      .join(" ").toLowerCase().includes(normalizedQuery)
+  })
+  const resultCount = results.articles.length + results.terms.length + results.templates.length + sportsResults.length
 
   return (
     <div>
@@ -80,7 +88,7 @@ export function SiteSearch({ articles, terms, templates, initialQuery = "" }: Si
             id="site-search"
             value={query}
             onChange={(event) => updateQuery(event.target.value)}
-            placeholder="搜索文章、术语、模板..."
+            placeholder="搜索文章、术语、模板、体育专题..."
             className="w-full bg-transparent py-3 text-sm outline-none"
           />
         </div>
@@ -106,6 +114,15 @@ export function SiteSearch({ articles, terms, templates, initialQuery = "" }: Si
         </div>
       ) : (
         <div className="mt-8 grid gap-8">
+          <SearchGroup title="体育专题" count={sportsResults.length}>
+            {sportsResults.map((module) => (
+              <Link key={module.slug} href={module.href} className="block rounded-lg border border-line bg-white p-5 hover:border-brand-100 hover:shadow-soft">
+                <Badge tone="brand">{module.contentType}</Badge>
+                <h3 className="mt-3 text-lg font-semibold text-ink"><Highlight text={module.title} query={query} /></h3>
+                <p className="mt-2 text-sm leading-7 text-muted"><Highlight text={module.description} query={query} /></p>
+              </Link>
+            ))}
+          </SearchGroup>
           <SearchGroup title="文章" count={results.articles.length}>
             {results.articles.map((article) => (
               <Link key={article.slug} href={`/articles/${article.slug}`} className="block rounded-lg border border-line bg-white p-5 hover:border-brand-100 hover:shadow-soft">

@@ -46,23 +46,23 @@ export default function SportsPage() {
             href={item.href}
             className={[
               "group rounded-lg border border-line bg-white p-5 shadow-sm transition hover:border-brand-100 hover:shadow-soft",
-              item.status === "待开放" ? "pointer-events-none opacity-75" : "",
             ].join(" ")}
           >
             <div className="flex items-start justify-between gap-4">
               <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
                 <Trophy className="h-5 w-5" aria-hidden="true" />
               </div>
-              <span className={["rounded-md px-2.5 py-1 text-xs font-medium", item.status === "已开放" ? "bg-brand-50 text-brand-700" : "bg-paper text-muted"].join(" ")}>
-                {item.status}
+              <span className={"rounded-md bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700"}>
+                {item.contentType}
               </span>
             </div>
             <div className="mt-5 flex items-center gap-2">
               <span className="rounded-md bg-paper px-2.5 py-1 text-xs font-medium text-muted">{item.category}</span>
-              <span className="text-xs text-muted">建议 {item.estimatedMinutes} 分钟</span>
+              <span className="text-xs text-muted">{item.contentType === "基础导读" ? "相关文章" : `建议 ${item.estimatedMinutes} 分钟`}</span>
             </div>
             <h2 className="mt-3 text-lg font-semibold text-ink">{item.title}</h2>
             <p className="mt-2 text-sm leading-7 text-muted">{item.description}</p>
+                {item.readingTitle ? <p className="mt-3 text-xs leading-6 text-brand-700">基础阅读：{item.readingTitle}</p> : null}
             <div className="mt-4 flex flex-wrap gap-2">
               {item.tags.map((tag) => (
                 <span key={tag} className="rounded-md bg-paper px-2.5 py-1 text-xs font-medium text-muted">
@@ -71,7 +71,7 @@ export default function SportsPage() {
               ))}
             </div>
             <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 group-hover:underline">
-              {item.status === "已开放" ? "查看模块" : "待开放"}
+              {item.contentType === "基础导读" ? "阅读基础文章" : "查看专题"}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </span>
           </Link>
