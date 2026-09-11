@@ -60,6 +60,16 @@ function getReadingMinutes(content: string) {
   return Math.max(1, Math.ceil(words.length / 500))
 }
 
+function normalizeArticleDate(value: unknown, fallback?: string) {
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    return value.toISOString().slice(0, 10)
+  }
+
+  if (typeof value === "string" && value) return value
+
+  return fallback
+}
+
 export function getMarkdownArticle(slug: string): MarkdownArticle | null {
   const filePath = path.join(articlesDirectory, `${slug}.md`)
 
@@ -83,8 +93,8 @@ export function getMarkdownArticle(slug: string): MarkdownArticle | null {
       tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
       audience: Array.isArray(data.audience) ? data.audience.map(String) : [],
       difficulty: String(data.difficulty ?? ""),
-      date: data.date ? String(data.date) : getArticle(slug)?.date,
-      updatedAt: data.updatedAt ? String(data.updatedAt) : getArticle(slug)?.updatedAt,
+      date: normalizeArticleDate(data.date, getArticle(slug)?.date),
+      updatedAt: normalizeArticleDate(data.updatedAt, getArticle(slug)?.updatedAt),
     },
   }
 }

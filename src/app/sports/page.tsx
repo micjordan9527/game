@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, ChartNoAxesCombined, ShieldCheck, Trophy } from "lucide-react"
-import { sportsModules } from "@/data/sports"
+import { sportsModules, sportsRolePaths } from "@/data/sports"
 import { absoluteUrl } from "@/lib/seo"
 
 export const metadata = {
@@ -36,6 +36,30 @@ export default function SportsPage() {
             <p className="mt-2 text-sm font-semibold text-ink">风控操盘</p>
             <p className="mt-1 text-xs leading-5 text-muted">理解限额、审核、异常识别和盘口变化。</p>
           </div>
+        </div>
+      </section>
+
+      <section className="mt-8 rounded-lg border border-line bg-paper p-6 md:p-8">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold text-brand-700">按角色开始</p>
+          <h2 className="mt-2 text-xl font-semibold text-ink">不知道先看哪篇？按你的工作目标进入</h2>
+          <p className="mt-3 text-sm leading-7 text-muted">每条路径从最需要理解的主题开始，再连接到相关的产品、运营、风控或技术专题。</p>
+        </div>
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {sportsRolePaths.map((path) => {
+            const firstModule = sportsModules.find((module) => module.roleIds.includes(path.id))
+            if (!firstModule) return null
+            return (
+              <Link key={path.id} href={firstModule.href} className="group rounded-lg border border-line bg-white p-4 transition hover:border-brand-100 hover:shadow-soft">
+                <p className="text-sm font-semibold text-ink">{path.title}</p>
+                <p className="mt-2 text-sm leading-6 text-muted">{path.description}</p>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {path.steps.slice(0, 3).map((step) => <span key={step} className="rounded-md bg-paper px-2 py-1 text-xs text-muted">{step}</span>)}
+                </div>
+                <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 group-hover:underline">从「{firstModule.title}」开始<ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
+              </Link>
+            )
+          })}
         </div>
       </section>
 

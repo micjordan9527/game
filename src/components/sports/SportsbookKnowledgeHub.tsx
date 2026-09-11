@@ -67,6 +67,26 @@ export function SportsbookKnowledgeHub() {
             counts={roleCounts}
           />
         </div>
+
+        <div className="mt-5">
+          <p className="text-sm font-semibold text-brand-700">角色路径</p>
+          <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            {sportsRolePaths.map((path) => {
+              const firstModule = sportsModules.find((module) => module.roleIds.includes(path.id))
+              if (!firstModule) return null
+              return (
+                <Link key={path.id} href={firstModule.href} className="group rounded-lg border border-line bg-white p-4 shadow-sm transition hover:border-brand-100 hover:shadow-soft">
+                  <p className="text-sm font-semibold text-ink">{path.title}</p>
+                  <p className="mt-2 text-sm leading-6 text-muted">{path.description}</p>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {path.steps.slice(0, 3).map((step) => <span key={step} className="rounded-md bg-paper px-2 py-1 text-[11px] text-muted">{step}</span>)}
+                  </div>
+                  <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 group-hover:underline">从「{firstModule.title}」开始<ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
+                </Link>
+              )
+            })}
+          </div>
+        </div>
       </div>
 
       <div>

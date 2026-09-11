@@ -156,6 +156,17 @@ export const articles: Article[] = [
     updatedAt: "2026-05-30",
   },
   {
+    slug: "admin-information-hierarchy",
+    title: "复杂后台页面怎样安排信息层级？",
+    description: "用列表、详情、状态反馈和危险操作四个角度，建立可判断、可处理的后台页面。",
+    category: "design",
+    tags: ["后台设计", "信息层级", "状态反馈", "体验评审"],
+    audience: ["设计师", "产品", "前端", "运营"],
+    difficulty: "进阶",
+    date: "2026-09-10",
+    updatedAt: "2026-09-10",
+  },
+  {
     slug: "risk-rule-basic",
     title: "风控规则基础怎么理解？",
     description: "用科普方式说明风控规则、异常识别、人工复核和操作边界。",

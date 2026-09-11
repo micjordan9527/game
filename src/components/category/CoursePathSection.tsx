@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useEffect, useMemo, useState } from "react"
-import { CircleCheck, Circle } from "lucide-react"
+import { Award, CircleCheck, Circle } from "lucide-react"
 import { SectionHeader } from "@/components/common/SectionHeader"
 import { Badge } from "@/components/common/Badge"
 import type { Article } from "@/data/articles"
@@ -27,6 +27,7 @@ type CoursePathSectionProps = {
 }
 
 const STORAGE_KEY_PREFIX = "wg-learning-module-progress"
+const COURSE_PROGRESS_EVENT = "wg-course-module-progress"
 
 export function CoursePathSection({ categorySlug, modules, guideAudience, guideDifficulty = "入门" }: CoursePathSectionProps) {
   const storageKey = `${STORAGE_KEY_PREFIX}:${categorySlug}`
@@ -35,6 +36,7 @@ export function CoursePathSection({ categorySlug, modules, guideAudience, guideD
   const [completedIds, setCompletedIds] = useState<Record<string, boolean>>({})
   const completedCount = Object.values(completedIds).filter(Boolean).length
   const progressPercent = modules.length > 0 ? Math.round((completedCount / modules.length) * 100) : 0
+  const isAllCompleted = modules.length > 0 && completedCount === modules.length
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -55,6 +57,22 @@ export function CoursePathSection({ categorySlug, modules, guideAudience, guideD
       setCompletedIds(fallback)
     }
   }, [moduleIds, storageKey])
+
+  useEffect(() => {
+    function handleCourseProgress(event: Event) {
+      const detail = (event as CustomEvent<{ categorySlug?: string; moduleId?: string; completed?: boolean }>).detail
+      if (detail?.categorySlug !== categorySlug || !detail.moduleId || !moduleIds.includes(detail.moduleId)) return
+
+      setCompletedIds((prev) => {
+        const next = { ...prev, [detail.moduleId as string]: Boolean(detail.completed) }
+        window.localStorage.setItem(storageKey, JSON.stringify(next))
+        return next
+      })
+    }
+
+    window.addEventListener(COURSE_PROGRESS_EVENT, handleCourseProgress)
+    return () => window.removeEventListener(COURSE_PROGRESS_EVENT, handleCourseProgress)
+  }, [categorySlug, moduleIds, storageKey])
 
   function handleToggle(moduleId: string) {
     setCompletedIds((prev) => {
@@ -85,6 +103,7 @@ export function CoursePathSection({ categorySlug, modules, guideAudience, guideD
         <Badge tone="brand">栏目难度：{guideDifficulty}</Badge>
         <Badge>{guideAudience.length > 0 ? guideAudience.slice(0, 3).join("、") : "通用人群"}</Badge>
         <Badge tone="blue">已完成：{completedCount}/{modules.length}</Badge>
+        {isAllCompleted ? <Badge tone="brand"><Award className="mr-1 inline h-3.5 w-3.5" />已完成本栏目</Badge> : null}
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-2">
         <button
@@ -117,6 +136,7 @@ export function CoursePathSection({ categorySlug, modules, guideAudience, guideD
                     <div className="mt-2 flex flex-wrap gap-2">
                       <Badge tone="brand">{module.difficulty}</Badge>
                       <Badge>{module.audienceHints.slice(0, 2).join("、")}</Badge>
+                      {isCompleted ? <Badge tone="blue"><Award className="mr-1 inline h-3.5 w-3.5" />模块完成</Badge> : null}
                     </div>
                   </div>
                 </div>

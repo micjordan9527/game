@@ -34,12 +34,10 @@ export type AssetVersionMeta = {
   updatedAt: string | null
 }
 
-export function getAssetVersionMeta(src: string, locale = "zh-CN", timeZone = "Asia/Kuala_Lumpur"): AssetVersionMeta {
+export function getAssetVersionMeta(src: string, locale = "zh-CN"): AssetVersionMeta {
   const version = getAssetVersion(src)
   const updatedAt = version
-    ? new Date(Number(version)).toLocaleString(locale, {
-        timeZone,
-      })
+    ? new Date(Number(version)).toLocaleString(locale, { dateStyle: "medium", timeStyle: "short" })
     : null
 
   return {
