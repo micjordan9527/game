@@ -55,6 +55,7 @@ const tones = {
 
 export function StatusFeedbackTool() {
   const [index, setIndex] = useState(0)
+  const [feedback, setFeedback] = useState("")
   const status = statuses[index]
   const Icon = status.icon
 
@@ -67,7 +68,7 @@ export function StatusFeedbackTool() {
 
         <div className="mt-5 flex flex-wrap gap-2" role="tablist" aria-label="选择状态">
           {statuses.map((item, itemIndex) => (
-            <button key={item.name} type="button" role="tab" aria-selected={index === itemIndex} onClick={() => setIndex(itemIndex)} className={`rounded-md border px-3 py-2 text-sm font-medium ${index === itemIndex ? "border-brand-600 bg-brand-50 text-brand-700" : "border-line text-muted hover:bg-paper"}`}>{item.name}</button>
+            <button key={item.name} type="button" role="tab" aria-selected={index === itemIndex} onClick={() => { setIndex(itemIndex); setFeedback("") }} className={`rounded-md border px-3 py-2 text-sm font-medium ${index === itemIndex ? "border-brand-600 bg-brand-50 text-brand-700" : "border-line text-muted hover:bg-paper"}`}>{item.name}</button>
           ))}
         </div>
 
@@ -75,7 +76,7 @@ export function StatusFeedbackTool() {
           <div className={`rounded-xl border p-5 ${tones[status.tone as keyof typeof tones]}`}>
             <div className="flex items-start gap-3"><Icon className="mt-0.5 h-5 w-5 shrink-0" /><div><p className="text-base font-semibold">{status.label}</p><p className="mt-2 text-sm leading-7">{status.description}</p></div></div>
             <p className="mt-4 rounded-md bg-white/70 p-3 text-sm leading-6">{status.detail}</p>
-            <button type="button" className="mt-5 rounded-md bg-ink px-3 py-2 text-sm font-semibold text-white">{status.action}</button>
+            <button type="button" onClick={() => setFeedback(`${status.action}：演示已触发，实际产品应进入对应处理路径。`)} className="mt-5 rounded-md bg-ink px-3 py-2 text-sm font-semibold text-white">{status.action}</button>{feedback ? <p className="mt-3 text-sm" role="status">{feedback}</p> : null}
           </div>
 
           <div className="rounded-lg bg-paper p-5">
