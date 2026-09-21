@@ -1,43 +1,28 @@
-# betting-knowledge-site-handoff
+# 包网知识库
 
-这是给 Codex 使用的交接包，用于搭建“博彩 / 体育 / 包网行业科普知识站”。
+面向产品、运营、设计、技术与项目协作的中文行业知识库。内容聚焦系统结构、业务流程、体验设计、风险治理与交付协作，不提供推广或规避合规的操作指引。
 
-## 建议使用方式
+## 日常 AI 开发入口
 
-把整个文件夹放到项目根目录，或者把 ZIP 解压后上传到 Codex 工作区。
+日常任务从以下文件开始：
 
-然后在 Codex 输入：
+1. `AGENTS.md`
+2. `docs/exec-plans/active/current.md`
+3. `docs/00-project.md`
+4. `docs/content-model.md`
+5. `docs/workflows/gpt-to-codex.md`
 
-```txt
-请先阅读 codex-handoff.md、prompts/05-first-codex-task.md、src/data/*.ts 和 content/articles/what-is-white-label.md，然后按第一阶段任务搭建网站基础版本。
+旧交接资料、启动提示和恢复资料保存在 `docs/archive/`，日常任务无需读取。
+
+## 运行与验证
+
+```bash
+npm install
+npm run dev
+npm run check:content
+npm run build
 ```
 
-## 文件说明
+## 部署规则
 
-- `codex-handoff.md`：完整项目交接说明
-- `prompts/`：分阶段给 Codex 的指令
-- `src/data/`：可直接用于项目的 mock 数据
-- `content/articles/`：首篇文章内容
-- `docs/`：文章模板、Mermaid 图库、GPT Image 提示词库
-
-## 注意
-
-该项目定位是行业科普和专业知识库，不是赌博推广站。
-
-## 部署策略（手动触发）
-
-本仓库 Netlify CI 采用“验证与发布分离”策略：
-
-- `push` 到 `main` 会触发 `verify` 流程：内容检查 + 构建（不会发布）。
-- `pull_request` 会触发 `verify` 流程：内容检查 + 构建（不会发布）。
-- 只有通过 GitHub Actions 的 `workflow_dispatch`（手动触发）且分支为 `main`，才会执行 `deploy` 步骤，向 Netlify 发布。
-
-对应文件：`.github/workflows/netlify-deploy.yml`
-
-为了避免误操作，默认规则是：**只有用户明确说“部署”才发起上线发布**。
-
-发布前建议顺序：
-
-1. `npm run check:content`
-2. `npm run build`
-3. 本地通过 `npm run dev` 做关键页核验
+GitHub Actions 对 `main` 推送和 Pull Request 只运行验证。仅在用户明确要求部署时，才手动触发 `workflow_dispatch` 的 Netlify 发布流程。默认不部署。

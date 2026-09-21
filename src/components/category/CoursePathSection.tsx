@@ -24,12 +24,14 @@ type CoursePathSectionProps = {
   modules: CourseModule[]
   guideAudience: string[]
   guideDifficulty?: "入门" | "进阶" | "提高"
+  sectionTitle?: string
+  sectionDescription?: string
 }
 
 const STORAGE_KEY_PREFIX = "wg-learning-module-progress"
 const COURSE_PROGRESS_EVENT = "wg-course-module-progress"
 
-export function CoursePathSection({ categorySlug, modules, guideAudience, guideDifficulty = "入门" }: CoursePathSectionProps) {
+export function CoursePathSection({ categorySlug, modules, guideAudience, guideDifficulty = "入门", sectionTitle, sectionDescription }: CoursePathSectionProps) {
   const storageKey = `${STORAGE_KEY_PREFIX}:${categorySlug}`
   const moduleIds = useMemo(() => modules.map((module) => module.id), [modules])
 
@@ -94,10 +96,10 @@ export function CoursePathSection({ categorySlug, modules, guideAudience, guideD
   }
 
   return (
-    <section className="py-12">
+    <section id={categorySlug === "design" ? "design-learning-path" : undefined} className={sectionTitle ? "py-8" : "py-12"}>
       <SectionHeader
-        title="课程式学习路径"
-        description="按阶段推进，从概念、结构到交付闭环，适合快速把知识转成可执行经验。"
+        title={sectionTitle ?? "课程式学习路径"}
+        description={sectionDescription ?? "按阶段推进，从概念、结构到交付闭环，适合快速把知识转成可执行经验。"}
       />
       <div className="mt-3 flex flex-wrap gap-2">
         <Badge tone="brand">栏目难度：{guideDifficulty}</Badge>

@@ -1,12 +1,39 @@
-Prioritize concise, surgical coding changes.
-Before coding, clarify only when ambiguity would likely cause wrong implementation.
-Prefer the simplest solution that satisfies the request.
-Do not refactor unrelated code or add speculative features.
-Match existing project style.
-Verify changes with the fastest relevant check, but skip heavy tests unless risk is high.
-Summarize assumptions, changes, and verification briefly.
+# AGENTS.md
 
-Public-page copy rule:
-- Do not show internal planning, information-architecture, maintenance, or roadmap wording on public pages.
-- Avoid phrases like "后续新增", "后续扩展", "挂到清楚的位置", "已接入", "等待接入", "规划中", "沉淀到资料库", or any text that explains how the site will be maintained.
-- Public copy should describe the reader-facing value, current content, and what the user can learn or do now.
+## 项目
+
+这是一个使用 Next.js、React、TypeScript 与 Tailwind 构建的中文行业知识库。公开页面用于解释产品、运营、设计、技术与风险治理知识，不是推广页面。
+
+## 默认工作流
+
+1. 阅读 `AGENTS.md`。
+2. 阅读 `docs/exec-plans/active/current.md`。
+3. 只按任务引用的 Scope 文件加载补充上下文。
+4. 完成最小必要修改。
+5. 运行 `npm run check:content` 和 `npm run build`。
+6. 只在 `current.md` 的 `Execution Result` 填写结果；不得改写已批准的任务定义。
+
+## Context 加载
+
+上下文按三级加载：
+
+1. 常驻：`AGENTS.md` 与当前执行计划。
+2. 任务级：当前计划明确列出的 Scope 文件。
+3. 按需：仅在任务受阻时读取相关模块、数据或历史资料。
+
+不要默认扫描整个仓库。`docs/archive/` 是旧交接、启动提示和恢复资料，默认禁止作为日常上下文；只有当前任务明确要求或排障确有必要时才读取。
+
+## 修改边界
+
+- 修改保持小而准，不重构无关代码。
+- 优先复用现有模式与数据模型，不随意新增依赖。
+- 保持 slug、id 和跨内容引用稳定；修改关联数据前先检查引用。
+- 不在公开页面展示内部规划、维护、路线图、提示词或交接措辞。
+- 不做部署、发布或部署策略改动，除非用户明确要求。
+
+## 验证与交接
+
+- 内容、数据、图片或文档关联变更后，默认运行 `npm run check:content`。
+- 任何实现改动默认运行 `npm run build`。
+- 涉及渲染时，使用本地开发服务器核对受影响路由。
+- 完成后只更新当前执行计划的 `Execution Result`，不修改已批准的任务定义。

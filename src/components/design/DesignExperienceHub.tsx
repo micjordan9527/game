@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { SectionHeader } from "@/components/common/SectionHeader"
+import { DesignEntryActions } from "@/components/design/DesignEntryActions"
 
 export const designTopics = [
   {
@@ -35,25 +36,28 @@ export const designTopics = [
 
 export function DesignExperienceHub() {
   return (
-    <section className="py-12">
-      <SectionHeader eyebrow="设计体验导航" title="选择你要解决的页面问题" description="围绕信息判断、关键页面、移动端反馈与评审协作整理练习和原型。" />
-      <div className="mt-8 grid gap-4 md:grid-cols-2">
-        {designTopics.map((topic) => (
-          <Link
-            key={topic.slug}
-            href={`/design/${topic.slug}`}
-            className="group rounded-xl border border-line bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-soft"
-          >
-            <div className="text-sm font-semibold text-brand-700">{topic.eyebrow}</div>
-            <h3 className="mt-3 text-xl font-semibold text-ink">{topic.title}</h3>
-            <p className="mt-3 text-sm leading-7 text-muted">{topic.description}</p>
-            <p className="mt-5 border-t border-line pt-4 text-sm leading-6 text-muted">包含：{topic.includes}</p>
-            <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-700">
-              进入专题 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-            </span>
-          </Link>
-        ))}
-      </div>
-    </section>
+    <>
+      <DesignEntryActions />
+      <section className="py-10">
+        <SectionHeader eyebrow="知识地图" title="核心设计能力" description="四个专题覆盖从看懂信息、完成操作到移动反馈和交付协作的完整设计判断。它们是能力地图，不是另一套课程。" />
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {designTopics.map((topic) => (
+            <Link
+              key={topic.slug}
+              href={`/design/${topic.slug}`}
+              className="group rounded-xl border border-line bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-soft"
+            >
+              <div className="text-sm font-semibold text-brand-700">{topic.eyebrow}</div>
+              <h3 className="mt-3 text-xl font-semibold text-ink">{topic.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-muted">{topic.description}</p>
+              <p className="mt-5 border-t border-line pt-4 text-sm leading-6 text-muted">包含：{topic.includes}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-700">
+                进入专题 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </>
   )
 }

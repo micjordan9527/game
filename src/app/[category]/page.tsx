@@ -54,6 +54,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   const categoryArticles = getArticlesByCategory(categorySlug)
   const guide = getTopicGuide(categorySlug)
+  const guideOutcomes = categorySlug === "design" ? ["如何判断复杂页面的问题", "如何选择合适的信息与组件", "如何把设计判断转成可交付方案"] : guide?.outcomes ?? []
   const orderedArticles = guide?.readingOrder.map((slug) => getArticle(slug)).filter(Boolean) ?? []
   const terms = guide?.termIds.map((id) => glossary.find((term) => term.id === id)).filter(Boolean) ?? []
   const relatedTemplates = guide?.templateSlugs.map((slug) => templates.find((template) => template.slug === slug)).filter(Boolean) ?? []
@@ -92,7 +93,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           <div className="rounded-lg bg-paper p-5">
             <div className="text-sm font-semibold text-ink">读完你会理解</div>
             <ul className="mt-3 space-y-3 text-sm leading-7 text-muted">
-              {guide.outcomes.map((outcome) => (
+              {guideOutcomes.map((outcome) => (
                 <li key={outcome} className="flex gap-3">
                   <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-brand-600" />
                   <span>{outcome}</span>
@@ -103,9 +104,11 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         ) : null}
       </section>
 
-      <div className="mt-8">
-        <LearningCheck check={categoryLearningChecks[categorySlug]} />
-      </div>
+      {categorySlug !== "design" ? (
+        <div className="mt-8">
+          <LearningCheck check={categoryLearningChecks[categorySlug]} />
+        </div>
+      ) : null}
 
       {categorySlug === "operation" ? <OperationModelSection /> : null}
       {categorySlug === "sportsbook" ? <SportsbookKnowledgeHub /> : null}
@@ -119,6 +122,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           modules={courseModules}
           guideAudience={guide?.audience ?? []}
           guideDifficulty={guide?.modules?.length ? guide.modules[0]?.difficulty : "入门"}
+          sectionTitle={categorySlug === "design" ? "推荐学习路径" : undefined}
+          sectionDescription={categorySlug === "design" ? "基础 → 实战 → 交付，按推荐顺序推进，不替代四大核心专题。" : undefined}
         />
       ) : orderedArticles.length > 0 ? (
         <section className="py-12">
@@ -137,8 +142,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         </section>
       ) : null}
 
+      {categorySlug === "design" ? (
+        <div className="mt-2">
+          <LearningCheck check={categoryLearningChecks[categorySlug]} title="检查一下你的理解" />
+        </div>
+      ) : null}
+
       <section className="py-12">
-        <SectionHeader title="栏目文章" description="围绕这个主题整理的文章列表，适合按需查询和补充阅读。" />
+        <SectionHeader title={categorySlug === "design" ? "设计方法文章" : "栏目文章"} description={categorySlug === "design" ? "通过文章理解设计原则、方法和判断方式。" : "围绕这个主题整理的文章列表，适合按需查询和补充阅读。"} />
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {categoryArticles.map((article) => (
             <ArticleCard key={article.slug} article={article} />
@@ -153,6 +164,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
       {(terms.length > 0 || relatedTemplates.length > 0) && (
         <section className="grid gap-8 py-12 lg:grid-cols-[1fr_0.9fr]">
+          {categorySlug === "design" ? <div className="lg:col-span-2"><SectionHeader title="相关资料" description="补充理解设计判断的术语与可复用模板。" /></div> : null}
           {terms.length > 0 ? (
             <div>
               <SectionHeader title="关键术语" description="先看懂这些概念，再读栏目文章会更顺。" />
