@@ -1,7 +1,5 @@
 # betting-knowledge-site-handoff
 
-这是给 Codex 使用的交接包，用于搭建“博彩 / 体育 / 包网行业科普知识站”。
-
 ## 建议使用方式
 
 把整个文件夹放到项目根目录，或者把 ZIP 解压后上传到 Codex 工作区。
