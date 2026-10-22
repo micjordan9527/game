@@ -6,6 +6,8 @@ import { TemplateDetail } from "@/components/templates/TemplateDetail"
 import { templateLearningChecks } from "@/data/learningChecks"
 import { templates } from "@/data/templates"
 import { absoluteUrl } from "@/lib/seo"
+import { articlesForResource } from "@/lib/knowledge-relations"
+import { KnowledgeLinks } from "@/components/common/KnowledgeLinks"
 
 export function generateStaticParams() {
   return templates.map((template) => ({ slug: template.slug }))
@@ -44,6 +46,7 @@ export default async function TemplatePage({ params }: { params: Promise<{ slug:
       <div className="mt-8">
         <LearningCheck check={templateLearningChecks[template.slug]} title="应用练习" />
       </div>
+      <KnowledgeLinks resources={articlesForResource("模板", template.slug)} title="相关知识文章" />
       <section className="mt-8 rounded-lg border border-line bg-white p-6">
         <h2 className="text-xl font-semibold text-ink">使用建议</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-3">

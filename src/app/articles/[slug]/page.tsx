@@ -21,6 +21,8 @@ import { assetPath } from "@/lib/assets"
 import { getTermsForArticle } from "@/lib/relations"
 import { absoluteUrl } from "@/lib/seo"
 import { getArticleReadingNavigation } from "@/lib/reading-order"
+import { resourcesForArticle } from "@/lib/knowledge-relations"
+import { KnowledgeLinks } from "@/components/common/KnowledgeLinks"
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }))
@@ -154,6 +156,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <LearningCheck check={articleLearningChecks[article.slug]} />
       </div>
       <ArticleRelatedTerms terms={relatedTerms} />
+      <div className="container-shell max-w-4xl"><KnowledgeLinks resources={resourcesForArticle(article.slug)} /></div>
       <RelatedArticles category={article.meta.category} currentSlug={article.slug} tags={article.meta.tags} excludeSlugs={[navigation?.previous?.slug, navigation?.next?.slug].filter((slug): slug is string => Boolean(slug))} />
       {navigation ? <ArticlePager navigation={navigation} /> : null}
     </>
