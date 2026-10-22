@@ -3,6 +3,7 @@ import { ArrowRight, BookOpen, BriefcaseBusiness, ClipboardList, Layers3, Librar
 import { CategoryGrid } from "@/components/home/CategoryGrid"
 import { FeaturedArticles } from "@/components/home/FeaturedArticles"
 import { LatestArticles } from "@/components/home/LatestArticles"
+import { ContinueReading } from "@/components/home/ContinueReading"
 import { learningPaths } from "@/data/topicGuides"
 import { articles } from "@/data/articles"
 import { glossary } from "@/data/glossary"
@@ -64,6 +65,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <ContinueReading articles={articles.map(({ slug, title }) => ({ slug, title }))} />
       <section className="container-shell py-8 md:py-10">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div><p className="text-sm font-semibold text-brand-700">推荐阅读顺序</p><h2 className="mt-2 text-2xl font-semibold text-ink">从基础认知到项目交付</h2></div>
