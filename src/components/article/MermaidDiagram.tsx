@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useId, useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 
 type MermaidDiagramProps = {
   chart: string
@@ -8,10 +8,34 @@ type MermaidDiagramProps = {
 
 export function MermaidDiagram({ chart }: MermaidDiagramProps) {
   const id = useId().replace(/:/g, "")
+  const hostRef = useRef<HTMLDivElement>(null)
+  const [nearViewport, setNearViewport] = useState(false)
   const [svg, setSvg] = useState("")
   const [error, setError] = useState(false)
 
+  // Rendering a diagram imports a comparatively large library.
+  // Defer it until the reader approaches this section.
   useEffect(() => {
+    const element = hostRef.current
+    if (!element) return
+    if (typeof IntersectionObserver === "undefined") {
+      setNearViewport(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setNearViewport(true)
+        observer.disconnect()
+      }
+    }, { rootMargin: "320px 0px" })
+
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!nearViewport) return
     let cancelled = false
 
     async function renderDiagram() {
@@ -32,7 +56,7 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
             fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
           },
         })
-        const result = await mermaid.render(`mermaid-${id}`, chart)
+        const result = await mermaid.render("mermaid-" + id, chart)
         if (!cancelled) {
           setSvg(result.svg)
           setError(false)
@@ -43,11 +67,8 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
     }
 
     renderDiagram()
-
-    return () => {
-      cancelled = true
-    }
-  }, [chart, id])
+    return () => { cancelled = true }
+  }, [chart, id, nearViewport])
 
   if (error) {
     return (
@@ -58,8 +79,14 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
   }
 
   return (
-    <div className="not-prose my-8 overflow-x-auto rounded-lg border border-line bg-white p-4">
-      {svg ? <div className="min-w-[640px]" dangerouslySetInnerHTML={{ __html: svg }} /> : <div className="text-sm text-muted">流程图加载中...</div>}
+    <div ref={hostRef} className="not-prose my-8 overflow-x-auto rounded-lg border border-line bg-white p-4">
+      {svg ? (
+        <div className="min-w-[640px]" dangerouslySetInnerHTML={{ __html: svg }} />
+      ) : (
+        <div className="flex min-h-40 items-center text-sm text-muted" role="status">
+          {nearViewport ? "流程图加载中..." : "滚动至此处查看流程图"}
+        </div>
+      )}
     </div>
   )
 }
