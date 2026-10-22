@@ -26,8 +26,8 @@ export function Header() {
           <Link href="/ai-workflows" className="rounded-md px-3 py-2 text-sm font-medium text-muted hover:bg-paper hover:text-ink">
             AI 工作流
           </Link>
-          <Link href="/search" className="rounded-md px-3 py-2 text-sm font-medium text-muted hover:bg-paper hover:text-ink" aria-label="全站搜索">
-            <Search className="h-4 w-4" aria-hidden="true" />
+          <Link href="/search" className="inline-flex items-center gap-2 rounded-md border border-line px-3 py-2 text-sm font-medium text-muted hover:bg-paper hover:text-ink" aria-label="全站搜索">
+            <Search className="h-4 w-4" aria-hidden="true" /><span>搜索</span>
           </Link>
           <Link href="/glossary" className="rounded-md px-3 py-2 text-sm font-medium text-muted hover:bg-paper hover:text-ink">
             术语库
