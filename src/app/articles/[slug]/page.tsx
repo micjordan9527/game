@@ -9,7 +9,6 @@ import { ArticlePager } from "@/components/article/ArticlePager"
 import { ArticleRelatedTerms } from "@/components/article/ArticleRelatedTerms"
 import { ArticleToc } from "@/components/article/ArticleToc"
 import { MermaidDiagram } from "@/components/article/MermaidDiagram"
-import { NextReadSuggestion } from "@/components/article/NextReadSuggestion"
 import { ReadingProgress } from "@/components/article/ReadingProgress"
 import { RelatedArticles } from "@/components/article/RelatedArticles"
 import { TermLinker } from "@/components/article/TermLinker"
@@ -21,6 +20,9 @@ import { getMarkdownArticle, slugifyHeading } from "@/lib/articles"
 import { assetPath } from "@/lib/assets"
 import { getTermsForArticle } from "@/lib/relations"
 import { absoluteUrl } from "@/lib/seo"
+import { getArticleReadingNavigation } from "@/lib/reading-order"
+import { resourcesForArticle } from "@/lib/knowledge-relations"
+import { KnowledgeLinks } from "@/components/common/KnowledgeLinks"
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }))
@@ -89,19 +91,17 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
   if (!article) notFound()
 
-  const articleIndex = articles.findIndex((item) => item.slug === article.slug)
   const articleData = articles.find((item) => item.slug === article.slug)
-  const previousArticle = articleIndex > 0 ? articles[articleIndex - 1] : undefined
-  const nextArticle = articleIndex >= 0 && articleIndex < articles.length - 1 ? articles[articleIndex + 1] : undefined
+  const navigation = articleData ? getArticleReadingNavigation(articleData) : undefined
   const relatedTerms = articleData ? getTermsForArticle(articleData) : []
 
   return (
     <>
       {articleData ? <ArticleJsonLd article={articleData} /> : null}
-      <ReadingProgress />
+      <ReadingProgress slug={article.slug} title={article.meta.title} />
       <ArticleHero {...article.meta} />
       <div className="container-shell grid max-w-6xl gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-start">
-        <article className="article-body prose prose-slate max-w-none prose-headings:scroll-mt-24 prose-headings:tracking-normal prose-p:leading-8 prose-li:leading-8 prose-a:text-brand-700 prose-code:rounded prose-code:bg-paper prose-code:px-1 prose-code:py-0.5 prose-code:text-ink">
+        <article id="article-content" className="article-body prose prose-slate max-w-none prose-headings:scroll-mt-24 prose-headings:tracking-normal prose-p:leading-8 prose-li:leading-8 prose-a:text-brand-700 prose-code:rounded prose-code:bg-paper prose-code:px-1 prose-code:py-0.5 prose-code:text-ink">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
@@ -156,9 +156,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <LearningCheck check={articleLearningChecks[article.slug]} />
       </div>
       <ArticleRelatedTerms terms={relatedTerms} />
-      <NextReadSuggestion article={nextArticle} />
-      <ArticlePager previous={previousArticle} next={nextArticle} />
-      <RelatedArticles category={article.meta.category} currentSlug={article.slug} tags={article.meta.tags} />
+      <div className="container-shell max-w-4xl"><KnowledgeLinks resources={resourcesForArticle(article.slug)} /></div>
+      <RelatedArticles category={article.meta.category} currentSlug={article.slug} tags={article.meta.tags} excludeSlugs={[navigation?.previous?.slug, navigation?.next?.slug].filter((slug): slug is string => Boolean(slug))} />
+      {navigation ? <ArticlePager navigation={navigation} /> : null}
     </>
   )
 }
