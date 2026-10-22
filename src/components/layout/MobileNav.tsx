@@ -178,7 +178,7 @@ export function MobileNav() {
 
 function NavGroup({ title, defaultOpen, children }: { title: string; defaultOpen: boolean; children: React.ReactNode }) {
   return (
-    <details defaultOpen={defaultOpen} className="group rounded-lg border border-line bg-white">
+    <details open={defaultOpen} className="group rounded-lg border border-line bg-white">
       <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 text-sm font-semibold text-ink [&::-webkit-details-marker]:hidden">
         {title}
         <ChevronDown className="h-4 w-4 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
