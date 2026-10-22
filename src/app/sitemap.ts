@@ -33,12 +33,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.65,
     },
     {
-      url: absoluteUrl("/search"),
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.65,
-    },
-    {
       url: absoluteUrl("/ai-workflows/codex-cases"),
       lastModified: now,
       changeFrequency: "weekly",
