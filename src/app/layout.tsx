@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     images: [{ url: absoluteUrl("/opengraph-image"), width: 1200, height: 630 }],
   },
   icons: {
-    icon: "/icon.svg",
+    icon: absoluteUrl("/icon.svg"),
   },
 }
 

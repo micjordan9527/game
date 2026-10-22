@@ -8,6 +8,7 @@ export const metadata = {
   title: "全站搜索",
   description: "统一查找知识文章、术语、模板、案例、AI 工作流和体育专题。",
   alternates: { canonical: absoluteUrl("/search") },
+  robots: { index: false, follow: true },
 }
 
 export default function SearchPage() {
