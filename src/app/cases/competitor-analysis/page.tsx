@@ -5,7 +5,7 @@ import { LearningCheck } from "@/components/common/LearningCheck"
 import { CaseLearningStatePanel } from "@/components/cases/CaseLearningStatePanel"
 import { caseLearningChecks } from "@/data/learningChecks"
 import { absoluteUrl } from "@/lib/seo"
-import { articlesForResource } from "@/lib/knowledge-relations"
+import { resourcesForResource } from "@/lib/knowledge-relations"
 import { KnowledgeLinks } from "@/components/common/KnowledgeLinks"
 import { appendAssetVersion } from "@/lib/assetVersion"
 import { getCaseItem } from "@/data/cases"
@@ -86,7 +86,7 @@ export default function CompetitorAnalysisPage() {
       </div>
 
       <CompetitorGallery items={versionedCompetitorInfographics} />
-      <KnowledgeLinks resources={articlesForResource("案例", "competitor-analysis")} title="关联知识文章" />
+      <KnowledgeLinks resources={resourcesForResource("案例", "competitor-analysis")} title="相关主题与实用资料" />
     </div>
   )
 }

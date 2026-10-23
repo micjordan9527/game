@@ -2,6 +2,7 @@ import { articles } from "@/data/articles"
 import { templates } from "@/data/templates"
 import { caseItems } from "@/data/cases"
 import { aiWorkflows } from "@/data/aiWorkflowLibrary"
+import { knowledgeTopics, type KnowledgeTopic } from "@/data/knowledgeTopics"
 
 export type RelatedResource = {
   kind: "文章" | "案例" | "模板" | "AI 工作流"
@@ -51,12 +52,39 @@ function toWorkflow(slug: string): RelatedResource | null {
 }
 export function resourcesForArticle(slug: string): RelatedResource[] {
   const links = articleRelations[slug]
-  if (!links) return []
-  return [
-    ...(links.cases ?? []).map(toCase),
-    ...(links.templates ?? []).map(toTemplate),
-    ...(links.workflows ?? []).map(toWorkflow),
-  ].filter((item): item is RelatedResource => item !== null)
+  return uniqueResources([
+    ...knowledgeTopics.filter((topic) => topic.articles.includes(slug)).flatMap(resourcesForTopic),
+    ...(links?.cases ?? []).map(toCase),
+    ...(links?.templates ?? []).map(toTemplate),
+    ...(links?.workflows ?? []).map(toWorkflow),
+  ], `/articles/${slug}`)
+}
+
+function uniqueResources(items: (RelatedResource | null)[], excludeHref?: string): RelatedResource[] {
+  const seen = new Set<string>()
+  return items.filter((item): item is RelatedResource => {
+    if (!item || item.href === excludeHref || seen.has(item.href)) return false
+    seen.add(item.href)
+    return true
+  })
+}
+
+export function resourcesForTopic(topic: KnowledgeTopic): RelatedResource[] {
+  return uniqueResources([
+    ...topic.articles.map(toArticle),
+    ...topic.cases.map(toCase),
+    ...topic.templates.map(toTemplate),
+    ...topic.workflows.map(toWorkflow),
+  ])
+}
+
+export function resourcesForResource(kind: "案例" | "模板" | "AI 工作流", slug: string): RelatedResource[] {
+  const field = kind === "案例" ? "cases" : kind === "模板" ? "templates" : "workflows"
+  const current = kind === "案例" ? toCase(slug) : kind === "模板" ? toTemplate(slug) : toWorkflow(slug)
+  return uniqueResources([
+    ...knowledgeTopics.filter((topic) => topic[field].includes(slug)).flatMap(resourcesForTopic),
+    ...articlesForResource(kind, slug),
+  ], current?.href)
 }
 export function articlesForResource(kind: "案例" | "模板" | "AI 工作流", slug: string): RelatedResource[] {
   return Object.entries(articleRelations)

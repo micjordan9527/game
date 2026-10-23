@@ -7,7 +7,7 @@ import { CaseLearningStatePanel } from "@/components/cases/CaseLearningStatePane
 import { getCaseItem } from "@/data/cases"
 import { caseLearningChecks } from "@/data/learningChecks"
 import { absoluteUrl } from "@/lib/seo"
-import { articlesForResource } from "@/lib/knowledge-relations"
+import { resourcesForResource } from "@/lib/knowledge-relations"
 import { KnowledgeLinks } from "@/components/common/KnowledgeLinks"
 import { appendAssetVersion, getAssetVersionMeta } from "@/lib/assetVersion"
 import { assetPath } from "@/lib/assets"
@@ -74,7 +74,7 @@ export default function AdminOptimizationCasePage() {
       ) : (
         <section className="mt-8 overflow-hidden rounded-lg border border-line bg-white shadow-sm"><div className="p-8 text-sm leading-7 text-muted">案例文件暂未接入。</div></section>
       )}
-      <KnowledgeLinks resources={articlesForResource("案例", "admin-optimization")} title="关联知识文章" />
+      <KnowledgeLinks resources={resourcesForResource("案例", "admin-optimization")} title="相关主题与实用资料" />
     </div>
   )
 }

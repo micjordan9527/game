@@ -4,7 +4,7 @@ import { LearningCheck } from "@/components/common/LearningCheck"
 import { CaseLearningStatePanel } from "@/components/cases/CaseLearningStatePanel"
 import { caseLearningChecks } from "@/data/learningChecks"
 import { absoluteUrl } from "@/lib/seo"
-import { articlesForResource } from "@/lib/knowledge-relations"
+import { resourcesForResource } from "@/lib/knowledge-relations"
 import { KnowledgeLinks } from "@/components/common/KnowledgeLinks"
 import { appendAssetVersion } from "@/lib/assetVersion"
 import { getCaseItem } from "@/data/cases"
@@ -91,7 +91,7 @@ export default function BmOptimizationCasePage() {
         }))}
         emptyMessage="BM 信息图暂未接入，后续补充后可继续展示。"
       />
-      <KnowledgeLinks resources={articlesForResource("案例", "bm-optimization")} title="关联知识文章" />
+      <KnowledgeLinks resources={resourcesForResource("案例", "bm-optimization")} title="相关主题与实用资料" />
     </div>
   )
 }

@@ -20,6 +20,7 @@ import { getArticle, getArticlesByCategory, getCategory } from "@/lib/site"
 import { absoluteUrl } from "@/lib/seo"
 import { assetPath } from "@/lib/assets"
 import { DesignExperienceHub } from "@/components/design/DesignExperienceHub"
+import { TopicResourcePaths } from "@/components/common/TopicResourcePaths"
 
 export function generateStaticParams() {
   return categories.map((category) => ({ category: category.slug }))
@@ -110,6 +111,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       {categorySlug === "operation" ? <OperationModelSection /> : null}
       {categorySlug === "sportsbook" ? <SportsbookKnowledgeHub /> : null}
       {categorySlug === "design" ? <DesignExperienceHub /> : null}
+      {categorySlug === "product" ? <TopicResourcePaths /> : null}
 
       {categoryVisual ? <CategoryVisualSection visual={categoryVisual} /> : null}
 
