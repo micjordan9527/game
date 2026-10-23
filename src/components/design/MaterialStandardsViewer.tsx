@@ -21,10 +21,10 @@ export function MaterialStandardsViewer() {
             <p className="mt-3 max-w-3xl text-base leading-8 text-muted">查看品牌标识、首页与运营活动的 PC / H5 素材规格、实际页面预览和 Figma 源稿。全民代理素材可在下方「运营活动」中查看。</p>
             <p className="mt-3 text-sm text-muted">V1.86</p>
           </div>
-          <Link href={previewSrc} target="_blank" rel="noopener" className="inline-flex w-fit shrink-0 items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+          <a href={previewSrc} target="_blank" rel="noopener" className="inline-flex w-fit shrink-0 items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
             新窗口打开
             <ExternalLink className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          </a>
         </div>
       </section>
       <section className="mt-8 overflow-hidden rounded-lg border border-line bg-white shadow-sm">
