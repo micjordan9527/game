@@ -1,20 +1,15 @@
 import Link from "next/link"
-import { ArrowRight, BookOpen, BriefcaseBusiness, ClipboardList, Layers3, Library, Search, Sparkles } from "lucide-react"
+import { ArrowRight, BookOpen, ClipboardList, Search, Sparkles } from "lucide-react"
 import { CategoryGrid } from "@/components/home/CategoryGrid"
 import { FeaturedArticles } from "@/components/home/FeaturedArticles"
 import { LatestArticles } from "@/components/home/LatestArticles"
 import { ContinueReading } from "@/components/home/ContinueReading"
+import { WorkEntryPoints } from "@/components/home/WorkEntryPoints"
 import { learningPaths } from "@/data/topicGuides"
 import { articles } from "@/data/articles"
 import { glossary } from "@/data/glossary"
 import { templates } from "@/data/templates"
 import { caseItems } from "@/data/cases"
-
-const startingPoints = [
-  { href: "/industry", title: "新手入门", description: "先认识平台角色、业务关系与基本术语。", icon: BookOpen },
-  { href: "/product", title: "专题研究", description: "围绕产品、运营、设计和系统结构深入理解。", icon: Layers3 },
-  { href: "/cases", title: "实战复用", description: "从案例、模板和 AI 工作流开始解决具体问题。", icon: BriefcaseBusiness },
-]
 
 const resources = [
   { href: "/articles", label: "文章资料", description: "按主题、难度和读者角色查阅", icon: BookOpen },
@@ -55,14 +50,7 @@ export default function HomePage() {
             </div>)}
           </div>
         </div>
-        <div className="mt-6 grid gap-3 md:grid-cols-3">
-          {startingPoints.map(({ href, title, description, icon: Icon }) => (
-            <Link key={title} href={href} className="group flex gap-4 rounded-lg border border-line bg-white p-5 transition hover:border-brand-200 hover:shadow-soft">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700"><Icon className="h-5 w-5" /></span>
-              <span><strong className="text-base text-ink group-hover:text-brand-700">{title}</strong><span className="mt-2 block text-sm leading-6 text-muted">{description}</span></span>
-            </Link>
-          ))}
-        </div>
+        <WorkEntryPoints />
       </section>
 
       <ContinueReading articles={articles.map(({ slug, title }) => ({ slug, title }))} />
