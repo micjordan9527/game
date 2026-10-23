@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
+import Link from "next/link"
 import { Children, isValidElement, type ReactNode } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
@@ -106,6 +107,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
+              a: ({ href, children }) => href?.startsWith("/")
+                ? <Link href={href}>{children}</Link>
+                : <a href={href}>{children}</a>,
               img: ({ src, alt }) => <MarkdownImage src={typeof src === "string" ? src : undefined} alt={alt} />,
               h2: ({ children }) => {
                 const text = String(children)
