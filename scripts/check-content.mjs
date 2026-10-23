@@ -1,5 +1,6 @@
 import fs from "node:fs"
 import path from "node:path"
+import { checkTopicStandards } from "./check-topic-standards.mjs"
 
 const root = process.cwd()
 const articleData = fs.readFileSync(path.join(root, "src/data/articles.ts"), "utf8")
@@ -114,6 +115,8 @@ for (const dir of publicSourceDirs) {
 if (!templateData.includes("roles:")) errors.push("templates missing roles metadata")
 if (!templateData.includes("useCases:")) errors.push("templates missing useCases metadata")
 if (!templateData.includes("cautions:")) errors.push("templates missing cautions metadata")
+
+checkTopicStandards(root, errors)
 
 if (errors.length > 0) {
   console.error(errors.map((error) => `- ${error}`).join("\n"))

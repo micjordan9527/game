@@ -92,13 +92,13 @@ export const articles: Article[] = [
   {
     slug: "agent-system-design",
     title: "代理系统怎么设计？",
-    description: "拆解代理层级、推广链接、下级管理、佣金报表和风控限制。",
+    description: "从代理层级与会员归属，梳理规则版本、生效时间、佣金结算记录和异常复核。",
     category: "product",
-    tags: ["代理系统", "佣金", "推广"],
-    audience: ["产品", "运营"],
+    tags: ["代理系统", "会员归属", "规则版本", "佣金结算", "审计"],
+    audience: ["产品", "运营", "财务", "技术", "测试"],
     difficulty: "进阶",
     date: "2026-05-29",
-    updatedAt: "2026-05-30",
+    updatedAt: "2026-10-23",
   },
   {
     slug: "operation-product-conversion-model",

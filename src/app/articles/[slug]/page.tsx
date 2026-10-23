@@ -110,6 +110,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               a: ({ href, children }) => href?.startsWith("/")
                 ? <Link href={href}>{children}</Link>
                 : <a href={href}>{children}</a>,
+              table: ({ children }) => (
+                <div className="my-6">
+                  <p className="mb-2 text-xs text-muted sm:hidden">左右滑动查看完整表格</p>
+                  <div className="overflow-x-auto rounded-lg border border-line" role="region" aria-label="文章表格，可横向滚动" tabIndex={0}>
+                    <table>{children}</table>
+                  </div>
+                </div>
+              ),
               img: ({ src, alt }) => <MarkdownImage src={typeof src === "string" ? src : undefined} alt={alt} />,
               h2: ({ children }) => {
                 const text = String(children)

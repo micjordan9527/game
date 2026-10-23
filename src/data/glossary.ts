@@ -11,6 +11,26 @@ export type GlossaryTerm = {
 
 export const glossary: GlossaryTerm[] = [
   {
+    id: "member-attribution",
+    term: "会员归属",
+    category: "代理",
+    shortDescription: "会员归属记录会员与代理的有效业务关系，并保留来源、生效区间、版本和变更依据。",
+    commonScene: "首次绑定、代理变更、业务核算、历史归属争议与报表查询。",
+    relatedFeatures: ["代理系统", "关系变更", "佣金结算"],
+    misunderstanding: "当前归属不能直接替代历史归属；账号恢复也不自动改写关系。",
+    relatedArticles: ["agent-system-design", "member-account-states"],
+  },
+  {
+    id: "rule-version",
+    term: "规则版本",
+    category: "代理",
+    shortDescription: "规则版本保存某一时段适用的条件、核算口径、适用范围、生效时间和审批依据。",
+    commonScene: "规则切换、跨时段核算、结算复核及历史差异追溯。",
+    relatedFeatures: ["代理系统", "佣金结算", "审计"],
+    misunderstanding: "发布新版本不代表可以静默重算或覆盖已确认的历史结果。",
+    relatedArticles: ["agent-system-design"],
+  },
+  {
     id: "account-status",
     term: "账号状态",
     category: "账号",

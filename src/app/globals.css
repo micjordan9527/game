@@ -47,9 +47,17 @@ a {
 }
 
 .article-body table {
-  display: block;
+  display: table;
   width: 100%;
-  overflow-x: auto;
+  min-width: 640px;
+  margin: 0;
+}
+
+.article-body th,
+.article-body td {
+  min-width: 5rem;
+  padding: 0.75rem;
+  vertical-align: top;
 }
 
 /* Visible keyboard focus for links, controls and disclosure headings. */

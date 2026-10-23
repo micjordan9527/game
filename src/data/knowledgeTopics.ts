@@ -31,8 +31,8 @@ export const knowledgeTopics: KnowledgeTopic[] = [
   {
     slug: "agent",
     title: "代理与会员归属",
-    description: "从平台角色关系进入代理层级、归属和需求定义。",
-    articles: ["member-agent-platform", "agent-system-design"],
+    description: "核对代理层级、归属生效区间、规则版本与结算复核，再用 PRD 逐项评审。",
+    articles: ["member-agent-platform", "agent-system-design", "member-account-states"],
     cases: [],
     templates: ["agent-system-prd", "white-label-requirement-form"],
     workflows: [],
