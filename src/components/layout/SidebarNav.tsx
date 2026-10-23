@@ -46,6 +46,7 @@ type NavLinkItem = {
 const resourceLinks: NavLinkItem[] = [
   { href: "/articles", label: "文章资料库", icon: FileText, suffix: String(articles.length) },
   { href: "/ai-workflows", label: "AI 工作流库", icon: Sparkles, suffix: String(aiWorkflows.length) },
+  { href: "/design/material-standards", label: "素材规范", icon: MonitorCog },
   { href: "/search", label: "全站搜索", icon: Search },
   { href: "/glossary", label: "术语库", icon: BookOpen },
   { href: "/templates", label: "模板库", icon: Library },
@@ -58,7 +59,7 @@ export function SidebarNav() {
   const activeCategorySlug = currentArticle?.category ?? (pathname.startsWith("/sports") ? "sportsbook" : categories.find((category) => pathname === `/${category.slug}`)?.slug)
 
   return (
-    <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 border-r border-line/80 bg-white/75 px-4 py-5 backdrop-blur xl:block">
+    <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 border-r border-line/80 bg-white/75 px-4 py-5 backdrop-blur lg:block">
       <nav className="flex h-full flex-col gap-6 overflow-y-auto pr-1" aria-label="知识库导航">
         <section>
           <p className="px-3 text-xs font-semibold uppercase tracking-wide text-muted">资料入口</p>

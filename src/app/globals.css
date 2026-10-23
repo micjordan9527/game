@@ -51,28 +51,3 @@ a {
   width: 100%;
   overflow-x: auto;
 }
-
-/* Visible keyboard focus for links, controls and disclosure headings. */
-:where(a, button, input, textarea, select, summary):focus-visible {
-  outline: 2px solid #12665e;
-  outline-offset: 3px;
-}
-
-/* Keep long code, tables and inline diagrams usable on narrow screens. */
-.article-body {
-  overflow-wrap: break-word;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}

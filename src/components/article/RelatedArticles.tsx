@@ -1,9 +1,9 @@
 import { articles } from "@/data/articles"
 import { ArticleCard } from "@/components/common/ArticleCard"
 
-export function RelatedArticles({ category, currentSlug, tags = [], excludeSlugs = [] }: { category: string; currentSlug: string; tags?: string[]; excludeSlugs?: string[] }) {
+export function RelatedArticles({ category, currentSlug, tags = [] }: { category: string; currentSlug: string; tags?: string[] }) {
   const related = articles
-    .filter((article) => article.slug !== currentSlug && !excludeSlugs.includes(article.slug))
+    .filter((article) => article.slug !== currentSlug)
     .map((article) => ({
       article,
       score: (article.category === category ? 2 : 0) + article.tags.filter((tag) => tags.includes(tag)).length * 3,
