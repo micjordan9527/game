@@ -8,9 +8,10 @@ import { sportsModules } from "@/data/sports"
 import { sportsGuides } from "@/data/sportsGuides"
 import { categories } from "@/data/categories"
 import { materialStandards } from "@/data/materialStandards"
+import { designTopics } from "@/components/design/DesignExperienceHub"
 import { getMarkdownArticle } from "@/lib/articles"
 
-export type SearchKind = "文章" | "术语" | "模板" | "案例" | "AI 工作流" | "体育专题" | "知识栏目" | "素材规范"
+export type SearchKind = "文章" | "术语" | "模板" | "案例" | "AI 工作流" | "体育专题" | "知识栏目" | "设计专题" | "素材规范"
 
 export type SearchRecord = {
   id: string
@@ -99,6 +100,15 @@ export function buildSearchIndex(): SearchRecord[] {
     href: `/${item.slug}`,
     tags: [],
   }))
+
+  designTopics.forEach((item) => add({
+    id: `design:${item.slug}`,
+    kind: "设计专题",
+    title: item.title,
+    description: item.description,
+    href: `/design/${item.slug}`,
+    tags: ["设计", "页面体验"],
+  }, item.includes))
 
   materialStandards.forEach((item) => add({
     id: `material:${item.slug}`,

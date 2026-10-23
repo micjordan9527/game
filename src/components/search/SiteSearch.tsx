@@ -4,9 +4,9 @@ import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useMemo, useState } from "react"
 import { RotateCcw, Search, X } from "lucide-react"
-import type { SearchKind, SearchRecord } from "@/lib/search-index"
+import type { SearchRecord } from "@/lib/search-index"
 
-const filters = ["全部", "文章", "术语", "模板", "案例", "AI 工作流", "体育专题", "知识栏目", "素材规范"] as const
+const filters = ["全部", "文章", "术语", "模板", "案例", "AI 工作流", "体育专题", "知识栏目", "设计专题", "素材规范"] as const
 const suggested = ["钱包", "注单", "风控", "后台", "设计", "工作流", "素材规范"]
 const aliases: Record<string, string[]> = {
   "免转钱包": ["seamless", "钱包"],
@@ -91,7 +91,7 @@ export function SiteSearch({ items }: { items: SearchRecord[] }) {
         <div className="mt-3 flex items-center gap-3 rounded-md border border-line bg-paper px-4 focus-within:border-brand-600 focus-within:bg-white">
           <Search className="h-5 w-5 shrink-0 text-muted" aria-hidden="true" />
           <input id="site-search" name="q" value={query} onChange={(event) => { setQuery(event.target.value); setKind("全部") }}
-            placeholder="搜索文章、术语、案例、工作流、模板和素材规范" autoComplete="off"
+            placeholder="搜索文章、术语、案例、模板、工作流和设计专题" autoComplete="off"
             className="w-full bg-transparent py-3 text-sm outline-none" />
           {query ? <button type="button" aria-label="清空搜索" onClick={() => { setQuery(""); setKind("全部") }} className="rounded-md p-1 text-muted hover:text-ink"><X className="h-4 w-4" /></button> : null}
         </div>
