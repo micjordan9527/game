@@ -59,7 +59,7 @@ export function SidebarNav() {
   const activeCategorySlug = currentArticle?.category ?? (pathname.startsWith("/sports") ? "sportsbook" : categories.find((category) => pathname === `/${category.slug}`)?.slug)
 
   return (
-    <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 border-r border-line/80 bg-white/75 px-4 py-5 backdrop-blur lg:block">
+    <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 border-r border-line/80 bg-white/75 px-4 py-5 backdrop-blur xl:block">
       <nav className="flex h-full flex-col gap-6 overflow-y-auto pr-1" aria-label="知识库导航">
         <section>
           <p className="px-3 text-xs font-semibold uppercase tracking-wide text-muted">资料入口</p>

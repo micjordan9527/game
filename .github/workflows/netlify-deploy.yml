@@ -1,4 +1,4 @@
-name: Netlify CI + Manual Deploy
+name: Verify CI + Manual Netlify Deploy
 
 on:
   push:
@@ -39,7 +39,7 @@ jobs:
     needs: verify
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && secrets.NETLIFY_AUTH_TOKEN != '' && secrets.NETLIFY_SITE_ID != ''
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -60,5 +60,10 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          DEPLOY_MESSAGE: ${{ github.event.inputs.deploy_message }}
         run: |
-          npx netlify-cli deploy --auth "$NETLIFY_AUTH_TOKEN" --site "$NETLIFY_SITE_ID" --dir=out --prod --message "${{ github.event.inputs.deploy_message }}"
+          if [ -z "$NETLIFY_AUTH_TOKEN" ] || [ -z "$NETLIFY_SITE_ID" ]; then
+            echo "::error::Missing NETLIFY_AUTH_TOKEN or NETLIFY_SITE_ID"
+            exit 1
+          fi
+          npx netlify-cli deploy --auth "$NETLIFY_AUTH_TOKEN" --site "$NETLIFY_SITE_ID" --dir=out --prod --message "$DEPLOY_MESSAGE"

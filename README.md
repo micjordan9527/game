@@ -18,20 +18,22 @@
 - `content/articles/`：首篇文章内容
 - `docs/`：文章模板、Mermaid 图库、GPT Image 提示词库
 
-## 部署策略（手动触发）
+## 验证与部署策略
 
-本仓库 Netlify CI 采用“验证与发布分离”策略：
+**提交主分支后自动检查并发布 GitHub Pages。** 用户于 2026-10-23 要求将提交与发布绑定。
 
-- `push` 到 `main` 会触发 `verify` 流程：内容检查 + 构建（不会发布）。
-- `pull_request` 会触发 `verify` 流程：内容检查 + 构建（不会发布）。
-- 只有通过 GitHub Actions 的 `workflow_dispatch`（手动触发）且分支为 `main`，才会执行 `deploy` 步骤，向 Netlify 发布。
+- 推送到 `main`：`.github/workflows/github-pages.yml` 自动检查内容、构建静态站，通过后发布到 `https://micjordan9527.github.io/game/`。检查或构建失败时不会发布。
+- 备份和开发分支不发布；Pull Request 只验证。
+- `.github/workflows/netlify-deploy.yml` 的 `verify` 继续对 `main` 和 Pull Request 做验证。
+- GitHub Pages 同时保留 `workflow_dispatch`，用于必要时手动重新发布。
+- Netlify：`.github/workflows/netlify-deploy.yml` 只在手动运行且分支是 `main` 时执行 `deploy`，缺少凭据会安全失败。
+- GitHub Pages 与 Netlify 的 canonical、sitemap 分别使用对应站点域名，不要混用。
 
-对应文件：`.github/workflows/netlify-deploy.yml`
+发布前建议：
 
-为了避免误操作，默认规则是：**只有用户明确说“部署”才发起上线发布**。
+1. `npm ci`
+2. `npm run check:content`
+3. `npm run build`
+4. `npm run dev` 预览关键页面
 
-发布前建议顺序：
-
-1. `npm run check:content`
-2. `npm run build`
-3. 本地通过 `npm run dev` 做关键页核验
+每项可独立交付的改动先在本地完成相关验证，再提交并推送 `main`，检查 GitHub Actions 的发布结果；区分“已提交”和“已上线”。Netlify 仍需用户单独指定发布。

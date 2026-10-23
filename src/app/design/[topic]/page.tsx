@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { absoluteUrl } from "@/lib/seo"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { SectionHeader } from "@/components/common/SectionHeader"
 import { designTopics } from "@/components/design/DesignExperienceHub"
@@ -52,7 +53,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ topic: string }> }) {
   const { topic } = await params
   const item = topicContent[topic as TopicSlug]
-  return item ? { title: `${item.title} | 设计体验`, description: item.description } : {}
+  return item
+    ? {
+        title: `${item.title} | 设计体验`,
+        description: item.description,
+        alternates: { canonical: absoluteUrl(`/design/${topic}`) },
+      }
+    : {}
 }
 
 export default async function DesignTopicPage({ params }: { params: Promise<{ topic: string }> }) {

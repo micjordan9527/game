@@ -2,220 +2,202 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
-  BookOpen,
-  Braces,
-  ChartNoAxesCombined,
-  Compass,
-  FileSearch,
-  FileText,
-  FolderKanban,
-  Home,
-  Library,
-  Menu,
-  MonitorCog,
-  Package,
-  Search,
-  ShieldCheck,
-  Sparkles,
-  Trophy,
-  X,
+  BookOpen, BriefcaseBusiness, ChevronDown, Compass, FileText,
+  FolderKanban, Home, Library, Menu, MonitorCog, Search,
+  ShieldCheck, Sparkles, Trophy, X,
 } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import { articles } from "@/data/articles"
 import { categories } from "@/data/categories"
-import { sportsModules } from "@/data/sports"
 import { caseNavItems } from "@/lib/site"
 
-const categoryIcons: Record<string, LucideIcon> = {
-  industry: Compass,
-  sportsbook: ChartNoAxesCombined,
-  "white-label": Package,
-  product: FolderKanban,
-  operation: Sparkles,
-  design: MonitorCog,
-  development: Braces,
-  "devops-risk": ShieldCheck,
-}
-
-type NavLinkItem = {
-  href: string
-  label: string
-  icon: LucideIcon
-  suffix?: string
-}
+type NavLinkItem = { href: string; label: string; icon: LucideIcon }
 
 const resourceLinks: NavLinkItem[] = [
   { href: "/", label: "首页", icon: Home },
-  { href: "/articles", label: "文章资料库", icon: FileText },
-  { href: "/ai-workflows", label: "AI 工作流库", icon: Sparkles },
-  { href: "/design/material-standards", label: "素材规范", icon: MonitorCog },
-  { href: "/search", label: "全站搜索", icon: Search },
+  { href: "/articles", label: "文章资料", icon: FileText },
   { href: "/glossary", label: "术语库", icon: BookOpen },
-  { href: "/templates", label: "模板库", icon: Library },
+  { href: "/templates", label: "工作模板", icon: Library },
+  { href: "/ai-workflows", label: "AI 工作流", icon: Sparkles },
+  { href: "/design/material-standards", label: "素材规范", icon: MonitorCog },
+  { href: "/cases", label: "案例模块", icon: BriefcaseBusiness },
 ]
 
-const learningPathLinks = [
+const learningPathLinks: NavLinkItem[] = [
   { href: "/industry", label: "新手起步", icon: Compass },
   { href: "/product", label: "结构展开", icon: FolderKanban },
   { href: "/devops-risk", label: "交付复盘", icon: ShieldCheck },
 ]
 
-export function MobileNav() {
-  const [open, setOpen] = useState(false)
-  const pathname = usePathname()
-  const currentArticleSlug = pathname.startsWith("/articles/") ? pathname.split("/").filter(Boolean)[1] : undefined
-  const currentArticle = currentArticleSlug ? articles.find((article) => article.slug === currentArticleSlug) : undefined
-  const activeCategorySlug = currentArticle?.category ?? (pathname.startsWith("/sports") ? "sportsbook" : categories.find((category) => pathname === `/${category.slug}`)?.slug)
+const categoryIcons: Record<string, LucideIcon> = {
+  industry: Compass,
+  sportsbook: Trophy,
+  "white-label": BriefcaseBusiness,
+  product: FolderKanban,
+  operation: Sparkles,
+  design: MonitorCog,
+  development: FileText,
+  "devops-risk": ShieldCheck,
+}
 
-  function closeMenu() {
+export function MobileNav() {
+  const pathname = usePathname()
+  const [open, setOpen] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+
+  const currentArticleSlug = pathname.startsWith("/articles/") ? pathname.split("/")[2] : undefined
+  const currentArticle = articles.find((article) => article.slug === currentArticleSlug)
+  const activeCategorySlug = currentArticle?.category ??
+    (pathname.startsWith("/sports") ? "sportsbook" : categories.find((category) => pathname === "/" + category.slug)?.slug)
+
+  // Close the menu if navigation happened outside this component.
+  useEffect(() => setOpen(false), [pathname])
+
+  function closeMenu(restoreFocus = false) {
     setOpen(false)
+    if (restoreFocus) toggleRef.current?.focus()
   }
 
+  useEffect(() => {
+    if (!open) return
+
+    const oldOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+
+    const dialog = dialogRef.current
+    const firstLink = dialog?.querySelector<HTMLElement>("a[href]")
+    firstLink?.focus()
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        event.preventDefault()
+        closeMenu(true)
+        return
+      }
+      if (event.key !== "Tab" || !dialog) return
+      const focusable = Array.from(dialog.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), summary, [tabindex]:not([tabindex="-1"])'
+      )).filter((element) => element.getClientRects().length > 0)
+      if (!focusable.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && (document.activeElement === last || !dialog.contains(document.activeElement))) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown)
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown)
+      document.body.style.overflow = oldOverflow
+    }
+  }, [open])
+
   return (
-    <div className="lg:hidden">
-      <button
-        type="button"
+    <div className="flex items-center gap-2 xl:hidden">
+      <Link href="/search" aria-label="全站搜索"
+        className="flex h-11 w-11 items-center justify-center rounded-md border border-line bg-white text-ink hover:border-brand-200">
+        <Search className="h-5 w-5" aria-hidden="true" />
+      </Link>
+      <button ref={toggleRef} type="button"
         aria-label={open ? "关闭导航" : "打开导航"}
         aria-expanded={open}
-        onClick={() => setOpen((value) => !value)}
-        className="flex h-10 w-10 items-center justify-center rounded-md border border-line bg-white text-ink"
-      >
+        aria-controls="mobile-site-menu"
+        onClick={() => setOpen((current) => !current)}
+        className="flex h-11 w-11 items-center justify-center rounded-md border border-line bg-white text-ink hover:border-brand-200">
         {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
       </button>
+
       {open ? (
-        <div className="absolute left-0 right-0 top-16 max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-line bg-white shadow-soft">
-          <nav className="container-shell space-y-5 py-4" aria-label="移动端知识库导航">
-            <section>
-              <p className="px-1 text-xs font-semibold uppercase tracking-wide text-muted">资料入口</p>
-              <div className="mt-2 grid grid-cols-2 gap-2">
-                {resourceLinks.map((item) => (
-                  <MobileLink key={item.href} href={item.href} label={item.label} icon={item.icon} active={pathname === item.href || pathname.startsWith(`${item.href}/`)} suffix={item.suffix} onClick={closeMenu} />
-                ))}
-              </div>
-            </section>
+        <div className="fixed inset-x-0 bottom-0 top-16 z-50">
+          <button type="button" aria-label="关闭导航遮罩"
+            className="absolute inset-0 cursor-default bg-ink/40"
+            onClick={() => closeMenu(true)} />
+          <div id="mobile-site-menu" ref={dialogRef} role="dialog" aria-modal="true" aria-label="知识库导航"
+            className="absolute bottom-0 right-0 top-0 w-full max-w-md overflow-y-auto border-l border-line bg-white px-4 py-5 shadow-soft">
+            <div className="mb-5 flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-ink">知识库导航</h2>
+              <button type="button" onClick={() => closeMenu(true)}
+                className="flex h-10 w-10 items-center justify-center rounded-md text-muted hover:bg-paper"
+                aria-label="关闭导航">
+                <X className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
 
-            <section>
-              <p className="px-1 text-xs font-semibold uppercase tracking-wide text-muted">学习路径</p>
-              <div className="mt-2 grid gap-2">
+            <nav aria-label="移动端知识库导航" className="space-y-5">
+              <section>
+                <h3 className="text-xs font-semibold tracking-wide text-muted">常用入口</h3>
+                <div className="mt-3 grid grid-cols-2 gap-2">
+                  {resourceLinks.map((item) => (
+                    <MobileLink key={item.href} {...item}
+                      active={pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href + "/"))}
+                      onClick={() => closeMenu()} />
+                  ))}
+                </div>
+              </section>
+
+              <NavGroup title="学习路径" defaultOpen={false}>
                 {learningPathLinks.map((item) => (
-                  <MobileLink key={item.href} href={item.href} label={item.label} icon={item.icon} active={pathname === item.href} onClick={closeMenu} />
+                  <MobileLink key={item.href} {...item} active={pathname === item.href}
+                    onClick={() => closeMenu()} />
                 ))}
-              </div>
-            </section>
+              </NavGroup>
 
-            <section>
-              <p className="px-1 text-xs font-semibold uppercase tracking-wide text-muted">案例模块</p>
-              <div className="mt-2 grid grid-cols-2 gap-2">
+              <NavGroup title="案例资料" defaultOpen={pathname.startsWith("/cases")}>
                 {caseNavItems.map((item) => (
-                  <MobileLink key={item.href} href={item.href} label={item.label} icon={FileSearch} active={pathname === item.href} onClick={closeMenu} />
+                  <MobileLink key={item.href} href={item.href} label={item.label} icon={BriefcaseBusiness}
+                    active={pathname === item.href} onClick={() => closeMenu()} />
                 ))}
-              </div>
-            </section>
+              </NavGroup>
 
-            <section>
-              <p className="px-1 text-xs font-semibold uppercase tracking-wide text-muted">知识栏目</p>
-              <div className="mt-2 space-y-1">
-                {categories.map((category) => {
-                  const Icon = categoryIcons[category.slug] ?? FileText
-                  const categoryArticles = articles.filter((article) => article.category === category.slug)
-                  const categorySportsModules = category.slug === "sportsbook" ? sportsModules : []
-                  const expanded = activeCategorySlug === category.slug
-                  const categoryCount = categoryArticles.length + categorySportsModules.length
+              <NavGroup title="知识栏目" defaultOpen={Boolean(activeCategorySlug)}>
+                {categories.map((category) => (
+                  <MobileLink key={category.slug} href={"/" + category.slug}
+                    label={category.title} icon={categoryIcons[category.slug] ?? FileText}
+                    active={activeCategorySlug === category.slug}
+                    onClick={() => closeMenu()} />
+                ))}
+              </NavGroup>
 
-                  return (
-                    <div key={category.slug}>
-                      <MobileLink
-                        href={`/${category.slug}`}
-                        label={category.title}
-                        icon={Icon}
-                        active={pathname === `/${category.slug}` || (category.slug === "sportsbook" && pathname.startsWith("/sports"))}
-                        suffix={categoryCount > 0 ? String(categoryCount) : undefined}
-                        onClick={closeMenu}
-                      />
-                      {expanded && categoryCount > 0 ? (
-                        <div className="ml-5 mt-1 space-y-1 border-l border-line pl-3">
-                          {categoryArticles.map((article) => {
-                            const active = pathname === `/articles/${article.slug}`
-
-                            return (
-                              <Link
-                                key={article.slug}
-                                href={`/articles/${article.slug}`}
-                                aria-current={active ? "page" : undefined}
-                                onClick={closeMenu}
-                                className={[
-                                  "block rounded-md px-2 py-2 text-xs leading-5 transition",
-                                  active ? "bg-brand-50 font-medium text-brand-700" : "text-muted hover:bg-paper hover:text-ink",
-                                ].join(" ")}
-                              >
-                                <span className="line-clamp-2">{article.title}</span>
-                              </Link>
-                            )
-                          })}
-                          {categorySportsModules.map((module) => {
-                            const active = pathname === module.href
-
-                            return (
-                              <Link
-                                key={module.slug}
-                                href={module.href}
-                                aria-current={active ? "page" : undefined}
-                                onClick={closeMenu}
-                                className={[
-                                  "flex items-center gap-2 rounded-md px-2 py-2 text-xs leading-5 transition",
-                                  active ? "bg-brand-50 font-medium text-brand-700" : "text-muted hover:bg-paper hover:text-ink",
-                                ].join(" ")}
-                              >
-                                <Trophy className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                                <span className="min-w-0 flex-1 truncate">{module.title}</span>
-                                <span className="text-[10px] text-muted/70">{module.contentType}</span>
-                              </Link>
-                            )
-                          })}
-                        </div>
-                      ) : null}
-                    </div>
-                  )
-                })}
-              </div>
-            </section>
-          </nav>
+              <p className="text-xs leading-6 text-muted">
+                进入专题栏目后，可查看该专题的文章目录和学习顺序。
+              </p>
+            </nav>
+          </div>
         </div>
       ) : null}
     </div>
   )
 }
 
-function MobileLink({
-  href,
-  label,
-  icon: Icon,
-  active,
-  onClick,
-  suffix,
-}: {
-  href: string
-  label: string
-  icon: LucideIcon
-  active: boolean
-  onClick: () => void
-  suffix?: string
-}) {
+function NavGroup({ title, defaultOpen, children }: { title: string; defaultOpen: boolean; children: React.ReactNode }) {
   return (
-    <Link
-      href={href}
-      aria-current={active ? "page" : undefined}
-      onClick={onClick}
+    <details open={defaultOpen} className="group rounded-lg border border-line bg-white">
+      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 text-sm font-semibold text-ink [&::-webkit-details-marker]:hidden">
+        {title}
+        <ChevronDown className="h-4 w-4 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
+      </summary>
+      <div className="grid gap-2 border-t border-line p-3">{children}</div>
+    </details>
+  )
+}
+
+function MobileLink({ href, label, icon: Icon, active, onClick }: NavLinkItem & { active: boolean; onClick: () => void }) {
+  return (
+    <Link href={href} aria-current={active ? "page" : undefined} onClick={onClick}
       className={[
-        "flex min-h-11 items-center gap-3 rounded-md px-3 py-2 text-sm transition",
-        active ? "bg-ink text-white shadow-soft" : "bg-white text-muted ring-1 ring-line hover:bg-paper hover:text-ink",
-      ].join(" ")}
-    >
+        "flex min-h-11 min-w-0 items-center gap-2 rounded-md px-3 py-2 text-sm transition",
+        active ? "bg-ink text-white" : "bg-paper text-muted hover:bg-brand-50 hover:text-ink",
+      ].join(" ")}>
       <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
       <span className="min-w-0 flex-1 truncate">{label}</span>
-      {suffix ? <span className={active ? "text-xs text-white/75" : "text-xs text-muted/70"}>{suffix}</span> : null}
     </Link>
   )
 }

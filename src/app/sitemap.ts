@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next"
 import { articles } from "@/data/articles"
+import { caseItems } from "@/data/cases"
+import { templates } from "@/data/templates"
+import { designTopics } from "@/components/design/DesignExperienceHub"
 import { aiWorkflows } from "@/data/aiWorkflowLibrary"
 import { categories } from "@/data/categories"
 import { sportsModules } from "@/data/sports"
@@ -16,6 +19,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1,
+    },
+    {
+      url: absoluteUrl("/articles"),
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.65,
+    },
+    {
+      url: absoluteUrl("/cases"),
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.65,
+    },
+    {
+      url: absoluteUrl("/ai-workflows/codex-cases"),
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.65,
+    },
+    {
+      url: absoluteUrl("/ai-workflows/figma-strategy"),
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.65,
+    },
+    {
+      url: absoluteUrl("/ai-workflows/prompt-library"),
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.65,
     },
     {
       url: absoluteUrl("/glossary"),
@@ -54,6 +87,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.78,
+    })),
+    ...caseItems.map((item) => ({
+      url: absoluteUrl(item.href),
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.72,
+    })),
+    ...templates.map((template) => ({
+      url: absoluteUrl(`/templates/${template.slug}`),
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...designTopics.map((topic) => ({
+      url: absoluteUrl(`/design/${topic.slug}`),
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
     ...categories.map((category) => ({
       url: absoluteUrl(`/${category.slug}`),

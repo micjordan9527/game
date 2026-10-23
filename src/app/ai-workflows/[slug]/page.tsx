@@ -9,6 +9,8 @@ import { SectionHeader } from "@/components/common/SectionHeader"
 import { aiWorkflows, getAiWorkflow } from "@/data/aiWorkflowLibrary"
 import { assetPath } from "@/lib/assets"
 import { absoluteUrl } from "@/lib/seo"
+import { articlesForResource } from "@/lib/knowledge-relations"
+import { KnowledgeLinks } from "@/components/common/KnowledgeLinks"
 
 export function generateStaticParams() {
   return aiWorkflows.map((workflow) => ({ slug: workflow.slug }))
@@ -90,6 +92,7 @@ export default async function AiWorkflowDetailPage({ params }: { params: Promise
         <SectionHeader eyebrow="Output" title="输出结果" description="这里放这条提示词生成出来的结果图，后续每个案例都按这个结构收纳。" />
         <AiWorkflowOutputGallery outputs={workflow.outputs} />
       </section>
+      <KnowledgeLinks resources={articlesForResource("AI 工作流", workflow.slug)} title="相关设计与产品文章" />
     </div>
   )
 }
