@@ -14,9 +14,9 @@ export const knowledgeTopics: KnowledgeTopic[] = [
     slug: "wallet",
     title: "钱包、支付与对账",
     description: "理解余额与支付状态，再用报表模板核对资金记录。",
-    articles: ["wallet-center-vs-seamless", "payment-channel-basic", "data-report-metrics"],
+    articles: ["wallet-payment-reconciliation", "wallet-center-vs-seamless", "payment-channel-basic", "data-report-metrics"],
     cases: ["admin-optimization"],
-    templates: ["data-report-spec", "launch-checklist"],
+    templates: ["wallet-reconciliation-checklist", "data-report-spec", "launch-checklist"],
     workflows: [],
   },
   {

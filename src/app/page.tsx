@@ -51,6 +51,10 @@ export default function HomePage() {
           </div>
         </div>
         <WorkEntryPoints />
+        <Link href="/articles/wallet-payment-reconciliation" className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-brand-100 bg-brand-50 p-5 text-brand-700">
+          <span><span className="text-xs font-semibold">业务专题</span><strong className="mt-1 block text-base">钱包、支付与对账</strong><span className="mt-2 block text-sm leading-6">沿着状态流程、虚构示例和检查表，理解一笔资金怎样核对清楚。</span></span>
+          <span className="inline-flex items-center gap-2 text-sm font-semibold">开始学习 <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
+        </Link>
       </section>
 
       <ContinueReading articles={articles.map(({ slug, title }) => ({ slug, title }))} />

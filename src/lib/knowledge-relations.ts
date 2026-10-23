@@ -13,6 +13,7 @@ export type RelatedResource = {
 
 // Explicit editorial associations avoid speculative recommendations.
 const articleRelations: Record<string, { cases?: string[]; templates?: string[]; workflows?: string[] }> = {
+  "wallet-payment-reconciliation": { cases: ["admin-optimization"], templates: ["wallet-reconciliation-checklist", "data-report-spec", "launch-checklist"] },
   "what-is-white-label": { cases: ["white-label-official"], templates: ["white-label-requirement-form"] },
   "how-gambling-platform-works": { cases: ["white-label-official"], templates: ["white-label-requirement-form"] },
   "member-agent-platform": { templates: ["agent-system-prd", "white-label-requirement-form"] },

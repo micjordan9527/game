@@ -93,7 +93,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
   const articleData = articles.find((item) => item.slug === article.slug)
   const navigation = articleData ? getArticleReadingNavigation(articleData) : undefined
-  const relatedTerms = articleData ? getTermsForArticle(articleData) : []
+  const excludedTermIds = article.slug === "wallet-payment-reconciliation" ? ["turnover"] : []
+  const relatedTerms = articleData ? getTermsForArticle(articleData).filter((term) => !excludedTermIds.includes(term.id)) : []
 
   return (
     <>
@@ -101,7 +102,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <ReadingProgress slug={article.slug} title={article.meta.title} />
       <ArticleHero {...article.meta} />
       <div className="container-shell grid max-w-6xl gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-start">
-        <article id="article-content" className="article-body prose prose-slate max-w-none prose-headings:scroll-mt-24 prose-headings:tracking-normal prose-p:leading-8 prose-li:leading-8 prose-a:text-brand-700 prose-code:rounded prose-code:bg-paper prose-code:px-1 prose-code:py-0.5 prose-code:text-ink">
+        <article id="article-content" className="article-body prose prose-slate min-w-0 max-w-none prose-headings:scroll-mt-24 prose-headings:tracking-normal prose-p:leading-8 prose-li:leading-8 prose-a:text-brand-700 prose-code:rounded prose-code:bg-paper prose-code:px-1 prose-code:py-0.5 prose-code:text-ink">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
@@ -119,18 +120,18 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                   <>{children}</>
                 ) : (
                   <p>
-                    <TermLinker>{children}</TermLinker>
+                    <TermLinker excludeTermIds={excludedTermIds}>{children}</TermLinker>
                   </p>
                 )
               ),
               li: ({ children }) => (
                 <li>
-                  <TermLinker>{children}</TermLinker>
+                  <TermLinker excludeTermIds={excludedTermIds}>{children}</TermLinker>
                 </li>
               ),
               td: ({ children }) => (
                 <td>
-                  <TermLinker>{children}</TermLinker>
+                  <TermLinker excludeTermIds={excludedTermIds}>{children}</TermLinker>
                 </td>
               ),
               code: ({ children, className }) => {

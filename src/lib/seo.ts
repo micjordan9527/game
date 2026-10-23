@@ -3,7 +3,7 @@ const isGitHubPages = process.env.GITHUB_PAGES === "true"
 // GitHub Pages serves this repository under /game; Netlify uses the root path.
 export const siteUrl = isGitHubPages
   ? "https://micjordan9527.github.io/game"
-  : process.env.NEXT_PUBLIC_SITE_URL ?? "https://w-gaming-knowledge.netlify.app"
+  : process.env.NEXT_PUBLIC_SITE_URL ?? "https://knowledge001.netlify.app"
 
 export const siteTitle = "包网知识库"
 

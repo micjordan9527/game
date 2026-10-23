@@ -48,6 +48,11 @@ export const categoryLearningChecks: Record<string, LearningCheck> = {
 }
 
 export const articleLearningChecks: Record<string, LearningCheck> = {
+  "wallet-payment-reconciliation": {
+    scenario: "虚构订单已确认支付成功，但用户未看到入账；随后又收到一条相同业务的成功回调。",
+    questions: ["先查询哪些编号和记录，才能区分展示延迟、缺账与重复通知？", "提现请求超时时，为什么不能立即按失败释放冻结并重新出款？", "同一笔记录跨日出现在不同报表时，要先统一哪些口径？"],
+    referenceIdeas: ["关联平台订单、支付方编号、资金流水和回调日志；先查是否已有有效记账，再决定是否需要授权补偿。同一业务只入账一次。", "超时不代表外部未执行。先查询原出款单，保留未决状态，避免同时发生原出款成功、释放冻结和重复出款。", "统一币种、时区、核对周期、创建/完成/记账时间字段、手续费与毛净额，并保留数据版本。"],
+  },
   "operation-product-conversion-model": {
     scenario: "运营说想做一个新入口，但只描述了想要的结果。",
     questions: ["你会如何把这个需求拆成流量、载体、路径和复盘四层？", "哪些信息应该由运营补充，哪些信息应该由产品转成系统设计？", "如果上线后效果不清楚，说明前期少设计了哪些数据或状态？"],
@@ -104,6 +109,11 @@ export const caseLearningChecks: Record<string, LearningCheck> = {
 }
 
 export const templateLearningChecks: Record<string, LearningCheck> = {
+  "wallet-reconciliation-checklist": {
+    scenario: "准备验收一个包含充值、提现与对账的教学项目。",
+    questions: ["如何记录重复回调测试的输入、期望、实际结果和证据？", "谁能处理差异，谁负责审批与复核关闭？"],
+    referenceIdeas: ["使用同一业务标识模拟重复或并发通知，验证有效流水与余额只变化一次，保存订单、日志与账本证据。", "分别确认查询、审核、调整与导出角色；处理后由复核人重新对照订单、账本与外部结果，保留审批及关闭依据。"],
+  },
   "white-label-requirement-form": {
     scenario: "把这份需求表用于一个真实包网项目启动会。",
     questions: ["哪些字段必须在第一次会议前确认？", "哪些需求不能只写一句话，需要补负责人和验收标准？", "如果客户只讲前台页面，你会追问哪些后台和资金链路问题？"],

@@ -13,6 +13,17 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "wallet-payment-reconciliation",
+    title: "钱包、支付与对账：从余额变化到差异处理",
+    description: "沿着充值、提现、钱包流水和对账差异理解资金状态，用虚构示例与检查表核对需求。",
+    category: "product",
+    tags: ["钱包", "支付", "对账", "资金流水", "状态流转"],
+    audience: ["产品", "技术", "运营", "财务", "测试"],
+    difficulty: "进阶",
+    date: "2026-10-23",
+    updatedAt: "2026-10-23",
+  },
+  {
     slug: "what-is-white-label",
     title: "什么是包网？",
     description: "用普通人能理解的方式解释博彩包网的概念、适用场景、组成模块和常见风险。",
