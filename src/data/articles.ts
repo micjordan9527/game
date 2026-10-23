@@ -13,6 +13,17 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "member-account-states",
+    title: "会员与账号状态：从注册登录到受限恢复",
+    description: "区分账号、验证、会话与权限状态，用状态表、虚构示例和检查表梳理资料变更与异常恢复。",
+    category: "product",
+    tags: ["会员", "账号状态", "注册登录", "权限", "资料变更"],
+    audience: ["产品", "客服", "运营", "技术", "测试"],
+    difficulty: "进阶",
+    date: "2026-10-23",
+    updatedAt: "2026-10-23",
+  },
+  {
     slug: "wallet-payment-reconciliation",
     title: "钱包、支付与对账：从余额变化到差异处理",
     description: "沿着充值、提现、钱包流水和对账差异理解资金状态，用虚构示例与检查表核对需求。",

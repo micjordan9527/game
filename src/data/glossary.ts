@@ -11,6 +11,26 @@ export type GlossaryTerm = {
 
 export const glossary: GlossaryTerm[] = [
   {
+    id: "account-status",
+    term: "账号状态",
+    category: "账号",
+    shortDescription: "账号状态描述账号当前可执行的操作及限制范围，例如正常、受限、停用或已关闭。",
+    commonScene: "注册激活、登录失败排查、限制提示、恢复申请与后台审核。",
+    relatedFeatures: ["会员", "注册登录", "资料变更", "限制与恢复"],
+    misunderstanding: "会话过期或资料审核中不等于账号停用；不同状态应分别记录。",
+    relatedArticles: ["member-account-states"],
+  },
+  {
+    id: "verification-status",
+    term: "验证状态",
+    category: "账号",
+    shortDescription: "验证状态记录一项资料或身份核实的进度，例如未提交、审核中、通过或需补充。",
+    commonScene: "激活账号、联系方式变更、人工核实及资料复核。",
+    relatedFeatures: ["会员", "资料变更", "账号状态"],
+    misunderstanding: "某项资料验证通过不代表所有操作均获授权，也不自动解除其他限制。",
+    relatedArticles: ["member-account-states"],
+  },
+  {
     id: "white-label",
     term: "包网",
     category: "包网",

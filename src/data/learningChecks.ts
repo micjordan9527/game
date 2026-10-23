@@ -48,6 +48,11 @@ export const categoryLearningChecks: Record<string, LearningCheck> = {
 }
 
 export const articleLearningChecks: Record<string, LearningCheck> = {
+  "member-account-states": {
+    scenario: "虚构会员的联系方式变更尚在审核，账号随后受限。客服收到恢复申请。",
+    questions: ["账号状态、验证状态和变更申请分别该记录什么？", "账号恢复后，原资料变更是否可以自动生效？", "如何验证旧会话和并发的新限制不会被恢复操作绕过？"],
+    referenceIdeas: ["分别保留账号限制范围、对应资料的验证进度，以及变更申请的审批状态；原资料在申请通过前继续生效。", "不能自动生效。恢复只解除已批准的限制，资料变更仍需核对当时的验证、权限和审批。", "对提交时状态与权限做服务端校验，测试旧会话、恢复与新增限制并发等情况，并保存脱敏日志与版本证据。"],
+  },
   "wallet-payment-reconciliation": {
     scenario: "虚构订单已确认支付成功，但用户未看到入账；随后又收到一条相同业务的成功回调。",
     questions: ["先查询哪些编号和记录，才能区分展示延迟、缺账与重复通知？", "提现请求超时时，为什么不能立即按失败释放冻结并重新出款？", "同一笔记录跨日出现在不同报表时，要先统一哪些口径？"],
@@ -109,6 +114,11 @@ export const caseLearningChecks: Record<string, LearningCheck> = {
 }
 
 export const templateLearningChecks: Record<string, LearningCheck> = {
+  "member-account-review": {
+    scenario: "准备评审一个包含资料变更和账号恢复的会员系统。",
+    questions: ["谁能查询、谁能审批、谁能执行恢复？", "如何为旧会话继续操作和重复注册设计验收证据？"],
+    referenceIdeas: ["按职责明确查询、审核、解除限制和导出的角色，保存授权依据与审计记录，避免客服直接越权恢复。", "分别记录输入、期望、实际结果和脱敏日志；核对服务端拒绝旧会话的受限动作，以及重复请求不会创建重复身份。"],
+  },
   "wallet-reconciliation-checklist": {
     scenario: "准备验收一个包含充值、提现与对账的教学项目。",
     questions: ["如何记录重复回调测试的输入、期望、实际结果和证据？", "谁能处理差异，谁负责审批与复核关闭？"],

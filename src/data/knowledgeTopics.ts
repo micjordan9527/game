@@ -20,6 +20,15 @@ export const knowledgeTopics: KnowledgeTopic[] = [
     workflows: [],
   },
   {
+    slug: "member",
+    title: "会员与账号状态",
+    description: "区分账号、资料验证与会话权限，再检查受限和恢复路径。",
+    articles: ["member-account-states", "member-agent-platform", "admin-modules"],
+    cases: ["admin-optimization"],
+    templates: ["member-account-review", "risk-rule-review"],
+    workflows: [],
+  },
+  {
     slug: "agent",
     title: "代理与会员归属",
     description: "从平台角色关系进入代理层级、归属和需求定义。",
