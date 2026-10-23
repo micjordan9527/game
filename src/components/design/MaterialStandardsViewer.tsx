@@ -32,7 +32,7 @@ export function MaterialStandardsViewer() {
             <p className="mt-3 text-sm text-muted">V1.86</p>
           </div>
           <a href={previewSrc} target="_blank" rel="noopener" className="inline-flex w-fit shrink-0 items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
-            新窗口打开
+            查看完整素材规范
             <ExternalLink className="h-4 w-4" aria-hidden="true" />
           </a>
         </div>
