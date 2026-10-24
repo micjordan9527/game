@@ -55,7 +55,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       </section>
       <div className="mt-8 flex flex-wrap gap-3 border-t border-line pt-5">
         <Link href="/cases" className="text-sm font-semibold text-brand-700">
-          查看作品案例 →
+          查看案例 →
         </Link>
         <Link href="/templates" className="text-sm font-semibold text-brand-700">
           可用模板 →

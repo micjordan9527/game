@@ -18,7 +18,7 @@ export function Header() {
         <div className="hidden min-w-0 flex-1 xl:block" />
         <div className="hidden items-center gap-1 xl:flex">
           <Link href="/cases" className="rounded-md px-2.5 py-2 text-sm font-medium text-muted hover:bg-paper">
-            作品案例
+            案例
           </Link>
           <Link href="/articles" className="rounded-md px-2.5 py-2 text-sm font-medium text-muted hover:bg-paper">
             功能图解

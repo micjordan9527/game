@@ -12,7 +12,7 @@ export default function WhiteLabelOfficialCasePage() {
   return (
     <div className="container-shell py-6 md:py-8">
       <Link href="/cases" className="text-sm font-semibold text-muted hover:text-brand-700">
-        ← 作品案例
+        ← 案例
       </Link>
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
         <div>

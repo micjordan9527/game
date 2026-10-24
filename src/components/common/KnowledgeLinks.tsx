@@ -4,7 +4,7 @@ import type { RelatedResource } from "@/lib/knowledge-relations"
 
 export function KnowledgeLinks({
   resources,
-  title = "相关作品与资料",
+  title = "相关案例与资料",
 }: {
   resources: RelatedResource[]
   title?: string

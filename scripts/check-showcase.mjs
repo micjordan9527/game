@@ -44,7 +44,8 @@ export async function checkShowcase(page, base, prefix, width, rounds) {
       metrics.push(`${route}=${result.visualTop}px`)
     }
     if (route.startsWith("/articles/")) {
-      await page.locator("#article-details > summary").click()
+      assert.notEqual(await page.locator("#article-details").getAttribute("open"), null, `${route}: article details must start expanded`)
+      assert.equal(await page.locator("#article-content").isVisible(), true, `${route}: article body is hidden`)
       assert.equal(await page.locator("main h1").count(), 1, `${route}: expanded article duplicates title`)
       assert.equal((await page.locator("#article-content h2").count()) > 0, true)
     }

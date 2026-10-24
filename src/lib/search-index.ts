@@ -198,9 +198,9 @@ export function buildSearchIndex(): SearchRecord[] {
         id: `role:${role.slug}`,
         kind: "角色精选",
         title: `${role.title}精选`,
-        description: `从${role.title}视角查看作品、图解与工具。`,
+        description: `从${role.title}视角查看案例、图解与工具。`,
         href: `/roles/${role.slug}`,
-        tags: [role.title, "角色", "作品", "图解"],
+        tags: [role.title, "角色", "案例", "图解"],
       },
       role.steps.flatMap((step) => [step.title, step.description]).join(" ")
     )

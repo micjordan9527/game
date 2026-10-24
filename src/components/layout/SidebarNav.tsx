@@ -68,7 +68,7 @@ export function SidebarNav() {
     <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-64 shrink-0 border-r border-line/80 bg-white/75 px-4 py-5 backdrop-blur xl:block">
       <nav className="flex h-full flex-col gap-6 overflow-y-auto pr-1" aria-label="知识库导航">
         <section>
-          <p className="px-3 text-xs font-semibold uppercase tracking-wide text-muted">作品案例</p>
+          <p className="px-3 text-xs font-semibold uppercase tracking-wide text-muted">案例</p>
           <div className="mt-3 space-y-1">
             {caseNavItems.map((item) => (
               <SidebarLink
@@ -83,7 +83,7 @@ export function SidebarNav() {
         </section>
 
         <section>
-          <p className="px-3 text-xs font-semibold uppercase tracking-wide text-muted">作品与资料</p>
+          <p className="px-3 text-xs font-semibold uppercase tracking-wide text-muted">图解与资料</p>
           <div className="mt-3 space-y-1">
             {resourceLinks.map((item) => (
               <SidebarLink

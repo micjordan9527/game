@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ role: str
   return entry
     ? {
         title: `${entry.title}精选`,
-        description: `从${entry.title}视角查看作品、功能图解与实用资料。`,
+        description: `从${entry.title}视角查看案例、功能图解与实用资料。`,
         alternates: { canonical: absoluteUrl(`/roles/${role}`) },
       }
     : {}
@@ -37,8 +37,8 @@ export default async function RolePage({ params }: { params: Promise<{ role: str
         ← 首页
       </Link>
       <h1 className="mt-4 text-3xl font-semibold text-ink">{entry.title}精选</h1>
-      <p className="mt-3 text-sm leading-7 text-muted">从{entry.title}视角查看作品、功能图解与实用资料。</p>
-      <nav aria-label="角色作品筛选" className="my-5 flex flex-wrap gap-2">
+      <p className="mt-3 text-sm leading-7 text-muted">从{entry.title}视角查看案例、功能图解与实用资料。</p>
+      <nav aria-label="角色资料筛选" className="my-5 flex flex-wrap gap-2">
         {workRoles.map((item) => (
           <Link
             key={item.slug}

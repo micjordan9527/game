@@ -16,7 +16,7 @@ export default function AdminOptimizationCasePage() {
   return (
     <div className="container-shell py-6 md:py-8">
       <Link href="/cases" className="text-sm font-semibold text-muted hover:text-brand-700">
-        ← 作品案例
+        ← 案例
       </Link>
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
         <div>
@@ -36,7 +36,7 @@ export default function AdminOptimizationCasePage() {
         <AdminOptimizationPreview src={src} />
       </section>
       <p className="mt-3 text-xs leading-6 text-muted">交互演示 · 使用示例数据。原版入口需要对应网络与登录条件。</p>
-      <KnowledgeLinks resources={resourcesForResource("案例", "admin-optimization")} title="相关作品与图解" />
+      <KnowledgeLinks resources={resourcesForResource("案例", "admin-optimization")} title="相关案例与图解" />
     </div>
   )
 }

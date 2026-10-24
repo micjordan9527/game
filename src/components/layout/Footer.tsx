@@ -8,7 +8,7 @@ export function Footer() {
           <SiteLogo />
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
             {[
-              ["/cases", "作品案例"],
+              ["/cases", "案例"],
               ["/articles", "功能图解"],
               ["/ai-workflows", "AI成果"],
               ["/design/material-standards", "素材规范"],
@@ -20,7 +20,7 @@ export function Footer() {
             ))}
           </div>
         </div>
-        <p className="mt-3 text-xs leading-6 text-muted">产品、设计与 AI 实践，直接看作品和做法。</p>
+        <p className="mt-3 text-xs leading-6 text-muted">包网产品、运营、设计与技术资料。</p>
       </div>
     </footer>
   )

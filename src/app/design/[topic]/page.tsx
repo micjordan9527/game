@@ -52,7 +52,7 @@ const topicContent = {
   },
   mobile: {
     title: "移动端与状态反馈",
-    description: "切换手机流程与页面状态，直接看反馈怎样变化。",
+    description: "手机操作流程与页面状态反馈。",
     content: (
       <PrototypeTabs
         panels={[
@@ -66,7 +66,7 @@ const topicContent = {
   },
   review: {
     title: "界面优化图解",
-    description: "六组界面对照，直接看信息、操作和反馈怎样调整。",
+    description: "六组界面对照，说明信息层级、操作与状态反馈。",
     content: <DesignDecisionGallery />,
   },
 } as const

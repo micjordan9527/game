@@ -42,7 +42,7 @@ export default function BmOptimizationCasePage() {
   return (
     <div className="container-shell py-6 md:py-8">
       <Link href="/cases" className="text-sm font-semibold text-muted hover:text-brand-700">
-        ← 作品案例
+        ← 案例
       </Link>
       <h1 className="mt-4 text-3xl font-semibold text-ink">BM 手机端优化</h1>
       <p className="mt-2 text-sm leading-7 text-muted">首页与详情页，直接对照分类、信息层级和操作区。点击图片放大。</p>
@@ -52,7 +52,7 @@ export default function BmOptimizationCasePage() {
           emptyMessage="对照图暂时无法显示，请稍后重试。"
         />
       </section>
-      <KnowledgeLinks resources={resourcesForResource("案例", "bm-optimization")} title="相关作品与图解" />
+      <KnowledgeLinks resources={resourcesForResource("案例", "bm-optimization")} title="相关案例与图解" />
     </div>
   )
 }

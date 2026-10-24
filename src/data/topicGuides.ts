@@ -243,7 +243,7 @@ export const topicGuides: TopicGuide[] = [
         id: "design-module-1",
         title: "模块 1：信息层级重组",
         description: "先把复杂列表和状态信息抽象清楚，再做视觉与布局优化。",
-        learningObjectives: ["识别用户最关心的信息优先级", "建立状态优先展示与异常提示规则", "把后台页从“看得见”变成“可决策”"],
+        learningObjectives: ["识别用户最关心的信息优先级", "建立状态优先展示与异常提示规则", "明确后台指标、异常信息与操作入口的对应关系"],
         estimatedMinutes: 17,
         difficulty: "入门",
         audienceHints: ["设计师", "产品经理", "前端"],

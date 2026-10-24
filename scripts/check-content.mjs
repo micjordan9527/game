@@ -39,6 +39,9 @@ const publicSourceForbidden = [
   "Route Static",
   "Try Turbopack",
   "Next.js Dev Tools",
+  "看得见的方案",
+  "点得开的作品",
+  "作品案例",
   "TODO",
   "FIXME",
 ]
@@ -109,6 +112,14 @@ for (const dir of publicSourceDirs) {
     for (const word of publicSourceForbidden) {
       if (source.includes(word)) errors.push(`public-source forbidden text "${word}" in ${relativePath}`)
     }
+  }
+}
+
+// Data modules also supply public titles and descriptions.
+for (const file of walkFiles(path.join(root, "src/data"))) {
+  const source = fs.readFileSync(file, "utf8")
+  for (const phrase of ["看得见的方案", "点得开的作品", "作品案例"]) {
+    if (source.includes(phrase)) errors.push(`public-copy forbidden text "${phrase}" in ${path.relative(root, file)}`)
   }
 }
 

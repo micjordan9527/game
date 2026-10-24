@@ -19,7 +19,7 @@ export async function checkWorkTools(page, base, prefix, width) {
     await page.goto(`${base}/roles/${slug}`, { waitUntil: "networkidle" })
     await page.getByRole("heading", { level: 1, name: `${title}精选` }).waitFor()
     assert.equal(
-      await page.getByRole("navigation", { name: "角色作品筛选" }).locator('[aria-current="page"]').count(),
+      await page.getByRole("navigation", { name: "角色资料筛选" }).locator('[aria-current="page"]').count(),
       1
     )
     assert.equal(await page.locator("main ol").count(), 0)

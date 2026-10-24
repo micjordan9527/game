@@ -48,7 +48,7 @@ export default function CodexCasesPage() {
         </section>
       ))}
       <Link href="/cases" className="mt-6 inline-block font-semibold text-brand-700">
-        查看站内作品 →
+        查看站内案例 →
       </Link>
     </div>
   )

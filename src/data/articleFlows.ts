@@ -18,7 +18,7 @@ export const articleFlows: Record<string, { title: string; steps: FlowStep[] }> 
     ],
   },
   "first-deposit-retention-vip": {
-    title: "四类活动，一眼区分",
+    title: "四类活动对照",
     steps: [
       { title: "首存", text: "首次充值对应的参与条件。" },
       { title: "复存", text: "再次充值对应的活动规则。" },

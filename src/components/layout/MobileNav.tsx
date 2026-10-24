@@ -29,7 +29,7 @@ type NavLinkItem = { href: string; label: string; icon: LucideIcon }
 
 const resourceLinks: NavLinkItem[] = [
   { href: "/", label: "首页", icon: Home },
-  { href: "/cases", label: "作品案例", icon: BriefcaseBusiness },
+  { href: "/cases", label: "案例", icon: BriefcaseBusiness },
   { href: "/ai-workflows", label: "AI 成果", icon: Sparkles },
   { href: "/articles", label: "功能图解", icon: FileText },
   { href: "/design/material-standards", label: "素材规范", icon: MonitorCog },
@@ -201,7 +201,7 @@ export function MobileNav() {
                 ))}
               </NavGroup>
 
-              <p className="text-xs leading-6 text-muted">选择作品、图解或素材，直接查看具体内容。</p>
+              <p className="text-xs leading-6 text-muted">选择案例、图解或素材，直接查看具体内容。</p>
             </nav>
           </div>
         </div>

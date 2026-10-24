@@ -73,7 +73,7 @@ export default async function AiWorkflowDetailPage({ params }: { params: Promise
           className="mt-5 h-auto w-full rounded-lg border border-line"
         />
       </details>
-      <KnowledgeLinks resources={resourcesForResource("AI 工作流", slug)} title="相关作品与图解" />
+      <KnowledgeLinks resources={resourcesForResource("AI 工作流", slug)} title="相关案例与图解" />
     </div>
   )
 }
