@@ -4,6 +4,7 @@ import http from "node:http"
 import path from "node:path"
 import { setTimeout as delay } from "node:timers/promises"
 import { chromium } from "playwright-core"
+import { checkUnavailableStorage, checkWorkTools } from "./check-work-tools.mjs"
 
 const root = path.resolve("out")
 const prefix = process.env.TEST_BASE_PATH ?? ""
@@ -23,8 +24,8 @@ try {
         if (prefix && pathname !== prefix && !pathname.startsWith(prefix + "/")) { response.writeHead(404).end(); return }
         let filename = path.resolve(root, "." + (pathname.slice(prefix.length) || "/"))
         if (filename !== root && !filename.startsWith(root + path.sep)) { response.writeHead(404).end(); return }
-        if (fs.existsSync(filename) && fs.statSync(filename).isDirectory()) filename = path.join(filename, "index.html")
-        if (!fs.existsSync(filename) && fs.existsSync(filename + ".html")) filename += ".html"
+        if (fs.existsSync(filename) && fs.statSync(filename).isDirectory() && fs.existsSync(path.join(filename, "index.html"))) filename = path.join(filename, "index.html")
+        if ((!fs.existsSync(filename) || fs.statSync(filename).isDirectory()) && fs.existsSync(filename + ".html")) filename += ".html"
         if (!fs.existsSync(filename) || !fs.statSync(filename).isFile()) { response.writeHead(404).end(); return }
         const data = fs.readFileSync(filename)
         const ext = path.extname(filename)
@@ -52,7 +53,7 @@ try {
   browser = await chromium.launch({ executablePath, headless: true, args: ["--no-sandbox"], proxy })
   const errors = []
   for (const width of [1440, 390]) {
-    const context = await browser.newContext({ viewport: { width, height: 900 }, proxy })
+    const context = await browser.newContext({ viewport: { width, height: 900 }, proxy, permissions: ["clipboard-read", "clipboard-write"], acceptDownloads: true })
     // Private legacy backends are outside the static-site checks. Local CI stays offline;
     // deployed checks retain the site's ordinary public embeds and their loading order.
     await context.route("**/*", (route) => {
@@ -93,6 +94,8 @@ try {
       }
       console.log(`PASS ${slug}: ${rounds} state changes/reloads and return navigation at ${width}px`)
     }
+    await checkWorkTools(page, base, prefix, width)
+    if (width === 390) await checkUnavailableStorage(context, base)
     await context.close()
   }
   assert.deepEqual(errors, [], "Browser initialization or script failures:\n" + JSON.stringify(errors, null, 2))

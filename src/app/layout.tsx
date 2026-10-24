@@ -32,6 +32,7 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  // The streamed route slot can suspend before its own loading boundary resolves.
   return (
     <html lang="zh-CN">
       <body>

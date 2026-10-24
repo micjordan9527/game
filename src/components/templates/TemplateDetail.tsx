@@ -3,6 +3,7 @@ import type { TemplateItem } from "@/data/templates"
 import { formatTemplateAsMarkdown } from "@/lib/relations"
 import { CopyTemplateButton } from "@/components/templates/CopyTemplateButton"
 import { DownloadTemplateButton } from "@/components/templates/DownloadTemplateButton"
+import { resourceAudiences } from "@/lib/work-audiences"
 
 const templateIcons: Record<string, LucideIcon> = {
   "white-label-requirement-form": FileText,
@@ -24,7 +25,7 @@ export function TemplateDetail({ template }: { template: TemplateItem }) {
           <Icon className="h-5 w-5" aria-hidden="true" strokeWidth={2} />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-ink">{template.title}</h3>
+          <h2 className="text-lg font-semibold text-ink">{template.title}</h2>
           <p className="mt-2 text-sm leading-7 text-muted">{template.description}</p>
         </div>
         </div>
@@ -37,7 +38,7 @@ export function TemplateDetail({ template }: { template: TemplateItem }) {
         <div className="rounded-md border border-line bg-white p-4">
           <div className="text-sm font-semibold text-ink">适用角色</div>
           <div className="mt-3 flex flex-wrap gap-2">
-            {template.roles.map((role) => (
+            {resourceAudiences(`/templates/${template.slug}`, template.roles).map((role) => (
               <span key={role} className="rounded-full bg-paper px-2.5 py-1 text-xs text-muted">
                 {role}
               </span>

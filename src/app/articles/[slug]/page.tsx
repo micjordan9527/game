@@ -5,6 +5,7 @@ import { Children, isValidElement, type ReactNode } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { ArticleHero } from "@/components/article/ArticleHero"
+import { resourceAudiences } from "@/lib/work-audiences"
 import { ArticleJsonLd } from "@/components/article/ArticleJsonLd"
 import { ArticlePager } from "@/components/article/ArticlePager"
 import { ArticleRelatedTerms } from "@/components/article/ArticleRelatedTerms"
@@ -101,7 +102,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <>
       {articleData ? <ArticleJsonLd article={articleData} /> : null}
       <ReadingProgress slug={article.slug} title={article.meta.title} />
-      <ArticleHero {...article.meta} />
+      <ArticleHero {...article.meta} audience={resourceAudiences(`/articles/${slug}`, article.meta.audience)} />
       <div className="container-shell grid max-w-6xl gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-start">
         <article id="article-content" className="article-body prose prose-slate min-w-0 max-w-none prose-headings:scroll-mt-24 prose-headings:tracking-normal prose-p:leading-8 prose-li:leading-8 prose-a:text-brand-700 prose-code:rounded prose-code:bg-paper prose-code:px-1 prose-code:py-0.5 prose-code:text-ink">
           <ReactMarkdown

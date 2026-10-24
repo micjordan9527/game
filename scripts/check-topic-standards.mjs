@@ -21,8 +21,10 @@ function readRecords(root, file, name) {
   for (const statement of source.statements) {
     if (!ts.isVariableStatement(statement)) continue
     const declaration = statement.declarationList.declarations.find((item) => item.name.getText(source) === name)
-    if (!declaration?.initializer || !ts.isArrayLiteralExpression(declaration.initializer)) continue
-    return declaration.initializer.elements.filter(ts.isObjectLiteralExpression).map(readLiteral)
+    let initializer = declaration?.initializer
+    if (initializer && (ts.isAsExpression(initializer) || ts.isSatisfiesExpression(initializer))) initializer = initializer.expression
+    if (!initializer || !ts.isArrayLiteralExpression(initializer)) continue
+    return initializer.elements.filter(ts.isObjectLiteralExpression).map(readLiteral)
   }
   throw new Error(`Cannot read literal metadata ${file}:${name}`)
 }
@@ -39,6 +41,8 @@ export function checkTopicStandards(root, errors) {
   const glossary = readRecords(root, "src/data/glossary.ts", "glossary")
   const topics = readRecords(root, "src/data/knowledgeTopics.ts", "knowledgeTopics")
   const categories = readRecords(root, "src/data/categories.ts", "categories")
+  const roles = readRecords(root, "src/data/workRoles.ts", "workRoles")
+  const designTopics = readRecords(root, "src/components/design/DesignExperienceHub.tsx", "designTopics")
   const ids = {
     articles: new Set(articles.map((item) => item.slug)),
     templates: new Set(templates.map((item) => item.slug)),
@@ -89,7 +93,21 @@ export function checkTopicStandards(root, errors) {
     ...templates.map((item) => `/templates/${item.slug}`),
     ...cases.map((item) => item.href),
     ...categories.map((item) => `/${item.slug}`),
+    ...roles.map((item) => `/roles/${item.slug}`),
+    ...designTopics.map((item) => `/design/${item.slug}`),
+    ...fs.readdirSync(path.join(root, "src/app/design"), { withFileTypes: true }).filter((item) => item.isDirectory() && fs.existsSync(path.join(root, "src/app/design", item.name, "page.tsx"))).map((item) => `/design/${item.name}`),
+    ...workflows.map((item) => `/ai-workflows/${item.slug}`),
   ])
+  if (new Set(roles.map((role) => role.slug)).size !== 5 || roles.length !== 5) errors.push("role paths: expected five unique roles")
+  for (const role of roles) {
+    for (const key of ["title", "summary", "goal", "handoff"]) if (!role[key]?.trim()) errors.push(`role ${role.slug}: missing ${key}`)
+    if (!roles.some((item) => item.slug === role.nextRole)) errors.push(`role ${role.slug}: unknown next role`)
+    if (!role.steps?.length || !role.outputs?.length) errors.push(`role ${role.slug}: missing steps or outputs`)
+    for (const step of role.steps ?? []) {
+      if (!routes.has(step.href)) errors.push(`role ${role.slug}: unknown destination ${step.href}`)
+      if (![step.title, step.description, step.kind].every((value) => typeof value === "string" && value.trim())) errors.push(`role ${role.slug}: incomplete step`)
+    }
+  }
   const glossaryIds = new Set(glossary.map((item) => item.id))
   const requiredHeadings = ["一句话解释", "适合谁看", "学习路径", "概念与边界", "状态与处理", "流程图", "虚构示例", "异常场景", "评审检查清单", "相关资料", "风险与注意事项"]
   for (const slug of ["member-account-states", "agent-system-design"]) {

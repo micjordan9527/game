@@ -4,6 +4,7 @@ import { useMemo, useState } from "react"
 import { Filter, RotateCcw } from "lucide-react"
 import type { Article } from "@/data/articles"
 import { ArticleCard } from "@/components/common/ArticleCard"
+import { resourceAudiences } from "@/lib/work-audiences"
 
 const allOption = "全部"
 const allOptionLabel = "全部"
@@ -28,7 +29,7 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
   const tags = useMemo(() => collectOptions(articles.flatMap((article) => article.tags)), [articles])
   const difficulties = useMemo(() => collectOptions(articles.map((article) => article.difficulty)), [articles])
   const audiences = useMemo(
-    () => collectOptions(articles.flatMap((article) => article.audience)),
+    () => collectOptions(articles.flatMap((article) => resourceAudiences(`/articles/${article.slug}`, article.audience))),
     [articles]
   )
   const [tag, setTag] = useState(allOption)
@@ -40,7 +41,7 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
       articles.filter((article) => {
         const matchTag = tag === allOption || article.tags.includes(tag)
         const matchDifficulty = difficulty === allOption || article.difficulty === difficulty
-        const matchAudience = audience === allOption || article.audience.includes(audience)
+        const matchAudience = audience === allOption || resourceAudiences(`/articles/${article.slug}`, article.audience).includes(audience)
         return matchTag && matchDifficulty && matchAudience
       }),
     [articles, audience, difficulty, tag]
@@ -99,6 +100,7 @@ function FilterGroup({ label, options, active, onChange }: { label: string; opti
             key={option.value}
             type="button"
             onClick={() => onChange(option.value)}
+            aria-pressed={active === option.value}
             className={[
               "group min-h-8 rounded-full px-3 py-1.5 text-xs font-medium ring-1 transition",
               active === option.value ? "bg-ink text-white ring-ink" : "bg-white text-muted ring-line hover:bg-paper hover:text-ink",

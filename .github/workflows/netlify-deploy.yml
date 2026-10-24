@@ -36,6 +36,8 @@ jobs:
         run: npm run build
 
       - name: Check production navigation
+        env:
+          HTML_CHUNK_DELAY_MS: "15"
         run: npm run check:browser
 
   deploy:

@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react"
 import { RotateCcw, Search, X } from "lucide-react"
 import type { SearchRecord } from "@/lib/search-index"
 
-const filters = ["全部", "文章", "术语", "模板", "案例", "AI 工作流", "体育专题", "知识栏目", "设计专题", "素材规范"] as const
+const filters = ["全部", "文章", "术语", "模板", "案例", "AI 工作流", "体育专题", "知识栏目", "设计专题", "素材规范", "角色路径"] as const
 const suggested = ["钱包", "注单", "风控", "后台", "设计", "工作流", "素材规范"]
 const aliases: Record<string, string[]> = {
   "免转钱包": ["seamless", "钱包"],

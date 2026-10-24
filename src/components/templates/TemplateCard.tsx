@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight, ClipboardList } from "lucide-react"
 import type { TemplateItem } from "@/data/templates"
+import { resourceAudiences } from "@/lib/work-audiences"
 
 export function TemplateCard({ template }: { template: TemplateItem }) {
   return (
@@ -14,7 +15,7 @@ export function TemplateCard({ template }: { template: TemplateItem }) {
       </h3>
       <p className="mt-2 line-clamp-3 text-sm leading-7 text-muted">{template.description}</p>
       <div className="mt-4 flex flex-wrap gap-2">
-        {template.roles.slice(0, 3).map((role) => (
+        {resourceAudiences(`/templates/${template.slug}`, template.roles).map((role) => (
           <span key={role} className="rounded-full border border-line bg-paper px-2.5 py-1 text-xs text-muted">{role}</span>
         ))}
       </div>

@@ -11,8 +11,10 @@ import { materialStandards } from "@/data/materialStandards"
 import { designTopics } from "@/components/design/DesignExperienceHub"
 import { getMarkdownArticle } from "@/lib/articles"
 import { getCaseStudy } from "@/data/caseStudies"
+import { workRoles } from "@/data/workRoles"
+import { resourceAudiences } from "@/lib/work-audiences"
 
-export type SearchKind = "文章" | "术语" | "模板" | "案例" | "AI 工作流" | "体育专题" | "知识栏目" | "设计专题" | "素材规范"
+export type SearchKind = "文章" | "术语" | "模板" | "案例" | "AI 工作流" | "体育专题" | "知识栏目" | "设计专题" | "素材规范" | "角色路径"
 
 export type SearchRecord = {
   id: string
@@ -41,7 +43,7 @@ export function buildSearchIndex(): SearchRecord[] {
       title: article.title,
       description: article.description,
       href: `/articles/${article.slug}`,
-      tags: [...article.tags, ...article.audience, article.category],
+      tags: Array.from(new Set([...article.tags, ...article.audience, ...resourceAudiences(`/articles/${article.slug}`, article.audience), article.category])),
     }, markdown?.content ?? "")
   })
 
@@ -60,7 +62,7 @@ export function buildSearchIndex(): SearchRecord[] {
     title: template.title,
     description: template.description,
     href: `/templates/${template.slug}`,
-    tags: [template.category, ...template.roles, ...template.useCases],
+    tags: Array.from(new Set([template.category, ...template.roles, ...resourceAudiences(`/templates/${template.slug}`, template.roles), ...template.useCases])),
   }, template.sections.map((section) => [section.title, ...section.items].join(" ")).join(" ")))
 
   caseItems.forEach((item) => {
@@ -122,6 +124,11 @@ export function buildSearchIndex(): SearchRecord[] {
     href: `/design/material-standards?module=${item.slug}`,
     tags: ["素材规范", item.category],
   }, item.keywords))
+
+  workRoles.forEach((role) => add({
+    id: `role:${role.slug}`, kind: "角色路径", title: `${role.title}工作路径`, description: role.goal,
+    href: `/roles/${role.slug}`, tags: [role.title, "角色", "任务", "交付"],
+  }, [...role.steps.flatMap((step) => [step.title, step.description]), ...role.outputs, role.handoff].join(" ")))
 
   return records
 }

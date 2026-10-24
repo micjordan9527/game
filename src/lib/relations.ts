@@ -3,6 +3,7 @@ import { articles } from "@/data/articles"
 import type { GlossaryTerm } from "@/data/glossary"
 import { glossary } from "@/data/glossary"
 import type { TemplateItem } from "@/data/templates"
+import { resourceAudiences } from "@/lib/work-audiences"
 
 function normalize(value: string) {
   return value.toLowerCase()
@@ -38,7 +39,7 @@ export function formatTemplateAsMarkdown(template: TemplateItem) {
     "",
     "## 适用角色",
     "",
-    ...template.roles.map((role) => `- ${role}`),
+    ...resourceAudiences(`/templates/${template.slug}`, template.roles).map((role) => `- ${role}`),
     "",
     "## 使用场景",
     "",

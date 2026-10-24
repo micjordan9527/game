@@ -2,7 +2,7 @@
 
 import { Download } from "lucide-react"
 
-export function DownloadTemplateButton({ content, filename }: { content: string; filename: string }) {
+export function DownloadTemplateButton({ content, filename, label = "导出 Markdown" }: { content: string; filename: string; label?: string }) {
   function handleDownload() {
     const blob = new Blob([content], { type: "text/markdown;charset=utf-8" })
     const url = URL.createObjectURL(blob)
@@ -22,7 +22,7 @@ export function DownloadTemplateButton({ content, filename }: { content: string;
       className="inline-flex items-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-sm font-medium text-ink hover:border-brand-100 hover:text-brand-700"
     >
       <Download className="h-4 w-4" aria-hidden="true" />
-      导出 Markdown
+      {label}
     </button>
   )
 }

@@ -3,17 +3,18 @@
 import { useMemo, useState } from "react"
 import type { TemplateItem } from "@/data/templates"
 import { TemplateCard } from "@/components/templates/TemplateCard"
+import { resourceAudiences } from "@/lib/work-audiences"
 
 export function TemplateLibrary({ templates }: { templates: TemplateItem[] }) {
   const categories = ["全部", ...Array.from(new Set(templates.map((template) => template.category)))]
-  const roles = ["全部", ...Array.from(new Set(templates.flatMap((template) => template.roles)))]
+  const roles = ["全部", ...Array.from(new Set(templates.flatMap((template) => resourceAudiences(`/templates/${template.slug}`, template.roles))))]
   const [category, setCategory] = useState("全部")
   const [role, setRole] = useState("全部")
 
   const filteredTemplates = useMemo(
     () => templates.filter((template) => {
       const matchCategory = category === "全部" || template.category === category
-      const matchRole = role === "全部" || template.roles.includes(role)
+      const matchRole = role === "全部" || resourceAudiences(`/templates/${template.slug}`, template.roles).includes(role)
       return matchCategory && matchRole
     }),
     [category, role, templates]

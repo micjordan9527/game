@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Check, Copy } from "lucide-react"
 
-export function CopyTemplateButton({ content }: { content: string }) {
+export function CopyTemplateButton({ content, label = "复制模板" }: { content: string; label?: string }) {
   const [copied, setCopied] = useState(false)
 
   async function handleCopy() {
@@ -32,7 +32,7 @@ export function CopyTemplateButton({ content }: { content: string }) {
       className="inline-flex items-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-sm font-medium text-ink hover:border-brand-100 hover:text-brand-700"
     >
       {copied ? <Check className="h-4 w-4" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
-      {copied ? "已复制" : "复制模板"}
+      {copied ? "已复制" : label}
     </button>
   )
 }

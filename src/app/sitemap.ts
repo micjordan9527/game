@@ -7,6 +7,7 @@ import { aiWorkflows } from "@/data/aiWorkflowLibrary"
 import { categories } from "@/data/categories"
 import { sportsModules } from "@/data/sports"
 import { absoluteUrl } from "@/lib/seo"
+import { workRoles } from "@/data/workRoles"
 
 export const dynamic = "force-static"
 
@@ -111,6 +112,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.7,
+    })),
+    ...workRoles.map((role) => ({
+      url: absoluteUrl(`/roles/${role.slug}`),
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
     })),
     ...articles.map((article) => ({
       url: absoluteUrl(`/articles/${article.slug}`),

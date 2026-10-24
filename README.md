@@ -34,7 +34,7 @@
 1. `npm ci`
 2. `npm run check:content`
 3. `npm run build`
-4. `npm run check:browser` 验证生产导出文件的刷新、学习标记、返回导航和手机布局。
+4. `npm run check:browser` 验证生产导出文件的刷新、学习标记、角色路径、筛选搜索、模板草稿与复制导出，以及手机布局。
 5. `npm run dev` 预览关键页面。开发与生产构建共用 `.next`，构建前先停止自己启动的开发服务。
 
 浏览器检查使用已安装的 Chromium 或 Chrome，路径可通过 `CHROMIUM_EXECUTABLE` 指定。脚本自动启动本地静态服务，不需要另开预览进程。`TEST_BASE_PATH=/game` 用于验证 Pages 构建；`HTML_CHUNK_DELAY_MS=30` 可模拟分段到达的 HTML。设置 `BASE_URL` 可验证已部署版本，`REFRESH_ROUNDS` 控制每页每种宽度的刷新次数。需要环境 HTTP 代理时显式提供 `BROWSER_PROXY`，保持系统 CA 信任与 TLS 验证。
