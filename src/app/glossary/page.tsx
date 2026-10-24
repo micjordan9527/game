@@ -15,6 +15,7 @@ export default function GlossaryPage() {
   return (
     <div className="container-shell py-12">
       <SectionHeader
+        as="h1"
         eyebrow="Glossary"
         title="术语库"
         description="用一句话解释常见行业术语，并补充它们通常出现在哪些功能、运营或风控场景中。"

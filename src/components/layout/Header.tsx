@@ -17,22 +17,39 @@ export function Header() {
         </Link>
         <div className="hidden min-w-0 flex-1 xl:block" />
         <div className="hidden items-center gap-1 xl:flex">
-          <Link href="/articles" className="rounded-md px-2.5 py-2 text-sm font-medium text-muted hover:bg-paper hover:text-ink">
-            文章资料
+          <Link href="/cases" className="rounded-md px-2.5 py-2 text-sm font-medium text-muted hover:bg-paper">
+            作品案例
           </Link>
-          <Link href="/cases" className="rounded-md px-2.5 py-2 text-sm font-medium text-muted hover:bg-paper hover:text-ink">
-            案例模块
+          <Link href="/articles" className="rounded-md px-2.5 py-2 text-sm font-medium text-muted hover:bg-paper">
+            功能图解
           </Link>
-          <Link href="/ai-workflows" className="rounded-md px-2.5 py-2 text-sm font-medium text-muted hover:bg-paper hover:text-ink">
-            AI 工作流
+          <Link href="/ai-workflows" className="rounded-md px-2.5 py-2 text-sm font-medium text-muted hover:bg-paper">
+            AI 成果
           </Link>
-          <Link href="/search" className="inline-flex items-center gap-2 rounded-md border border-line px-3 py-2 text-sm font-medium text-muted hover:bg-paper hover:text-ink" aria-label="全站搜索">
-            <Search className="h-4 w-4" aria-hidden="true" /><span>搜索</span>
+          <Link
+            href="/design/material-standards"
+            className="rounded-md px-2.5 py-2 text-sm font-medium text-muted hover:bg-paper"
+          >
+            素材规范
           </Link>
-          <Link href="/glossary" className="rounded-md px-2.5 py-2 text-sm font-medium text-muted hover:bg-paper hover:text-ink">
+          <Link
+            href="/search"
+            className="inline-flex items-center gap-2 rounded-md border border-line px-3 py-2 text-sm font-medium text-muted hover:bg-paper hover:text-ink"
+            aria-label="全站搜索"
+          >
+            <Search className="h-4 w-4" aria-hidden="true" />
+            <span>搜索</span>
+          </Link>
+          <Link
+            href="/glossary"
+            className="rounded-md px-2.5 py-2 text-sm font-medium text-muted hover:bg-paper hover:text-ink"
+          >
             术语库
           </Link>
-          <Link href="/templates" className="rounded-md bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-brand-700">
+          <Link
+            href="/templates"
+            className="rounded-md px-3 py-2 text-sm font-medium text-muted hover:bg-paper hover:text-ink"
+          >
             模板库
           </Link>
         </div>

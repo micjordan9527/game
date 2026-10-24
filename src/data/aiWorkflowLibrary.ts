@@ -2,6 +2,8 @@ export type AiWorkflowOutput = {
   title: string
   image: string
   alt: string
+  width: number
+  height: number
 }
 
 export type AiWorkflowVisualKind = "brief" | "directions" | "assets" | "figma" | "handoff"
@@ -36,26 +38,36 @@ export const aiWorkflows: AiWorkflow[] = [
       {
         title: "输出 1：品牌基础规范",
         image: "/case-assets/ai-workflows/brand-visual-system/output-01-brand-overview.webp",
+        width: 1055,
+        height: 1491,
         alt: "品牌视觉系统的基础规范图，包含主色、辅助色、字体和排版结构",
       },
       {
         title: "输出 2：图形语言与品牌海报",
         image: "/case-assets/ai-workflows/brand-visual-system/output-02-brand-poster.webp",
+        width: 1055,
+        height: 1491,
         alt: "品牌图形语言延展与品牌海报样式应用",
       },
       {
         title: "输出 3：网页视觉设计",
         image: "/case-assets/ai-workflows/brand-visual-system/output-03-web-visual.webp",
+        width: 1055,
+        height: 1491,
         alt: "品牌网页视觉设计输出图，展示首页与核心页面风格",
       },
       {
         title: "输出 4：移动端界面",
         image: "/case-assets/ai-workflows/brand-visual-system/output-04-mobile-visual.webp",
+        width: 1055,
+        height: 1491,
         alt: "品牌移动端界面输出图，展示移动端信息排版与视觉延展",
       },
       {
         title: "输出 5：应用物料",
         image: "/case-assets/ai-workflows/brand-visual-system/output-05-materials-and-application.webp",
+        width: 1055,
+        height: 1491,
         alt: "品牌物料与名片、社交媒体等应用场景的延展输出",
       },
     ],
@@ -67,7 +79,8 @@ export const aiWorkflows: AiWorkflow[] = [
     scenario: "UI 设计",
     tags: ["参考图", "设计系统", "网页端", "移动端界面", "组件规范"],
     prompt: "用这种风格帮我生成一套UI设计系统的图，包含网页、移动端、卡片、控件、按钮以及其它",
-    referenceNote: "提供几个主页面图片。一般做一个新的项目，先尝试几个主页面，确认整体风格和页面结构后，再提取组件、控件和设计系统规范。",
+    referenceNote:
+      "提供几个主页面图片。一般做一个新的项目，先尝试几个主页面，确认整体风格和页面结构后，再提取组件、控件和设计系统规范。",
     extensionNote: "使用 Figma MCP 可以把图片还原成可编辑设计图，并进一步整理自动布局、组件库和可复用规范。",
     caseImage: "/case-assets/ai-workflows/ui-design-system/case-screenshot.webp",
     caseAlt: "UI 设计系统案例截图",
@@ -75,21 +88,29 @@ export const aiWorkflows: AiWorkflow[] = [
       {
         title: "输出 1：UI 设计系统总览",
         image: "/case-assets/ai-workflows/ui-design-system/output-01-overview.webp",
+        width: 1055,
+        height: 1491,
         alt: "UI 设计系统总览，包含色彩、字体、页面示例和核心组件",
       },
       {
         title: "输出 2：网页端设计系统",
         image: "/case-assets/ai-workflows/ui-design-system/output-02-web.webp",
+        width: 1055,
+        height: 1491,
         alt: "网页端设计系统，包含导航、首页、列表、账户中心和布局规范",
       },
       {
         title: "输出 3：卡片与内容组件",
         image: "/case-assets/ai-workflows/ui-design-system/output-03-cards.webp",
+        width: 1055,
+        height: 1491,
         alt: "卡片与内容组件规范，包含赛事卡、钱包卡、公告卡和状态变化",
       },
       {
         title: "输出 4：控件、按钮与其它规范",
         image: "/case-assets/ai-workflows/ui-design-system/output-04-controls.webp",
+        width: 1055,
+        height: 1491,
         alt: "控件、按钮、表单、反馈和其它组件规范",
       },
     ],

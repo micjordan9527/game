@@ -22,7 +22,7 @@ export const caseItems: CaseItem[] = [
   {
     slug: "white-label-official",
     title: "包网官网",
-    description: "你上传的官网静态页，作为包网官网案例预览入口。",
+    description: "完整官网页面的服务展示与布局预览。",
     status: "已接入",
     href: "/cases/white-label-official",
     previewSrc: "/case-assets/white-label-official/index.html",
@@ -35,7 +35,7 @@ export const caseItems: CaseItem[] = [
   {
     slug: "admin-optimization",
     title: "后台优化",
-    description: "依据本地原型分析角色看板、统计口径与异常入口，区分可见交互和待验证能力，并附评审清单。",
+    description: "直接体验角色看板、经营概览与异常入口。",
     status: "已接入",
     href: "/cases/admin-optimization",
     previewSrc: "/case-assets/admin-optimization/index.html",
@@ -48,7 +48,7 @@ export const caseItems: CaseItem[] = [
   {
     slug: "bm-optimization",
     title: "BM优化",
-    description: "对照 BM 首页与详情页图片，分析手机端状态、分类与固定操作栏；右侧为生成式视觉提案，附评审清单。",
+    description: "查看手机端首页与详情页的分类、状态和操作区对照。",
     status: "已接入",
     href: "/cases/bm-optimization",
     coverSrc: "/case-assets/bm-optimization/bm-home-optimization.png",
@@ -66,7 +66,7 @@ export const caseItems: CaseItem[] = [
   {
     slug: "competitor-analysis",
     title: "竞品分析",
-    description: "沉淀竞品页面拆解、优化方案和信息图，当前已接入 U8 首页与个人中心优化图。",
+    description: "查看 U8 首页与个人中心的改版对照图。",
     status: "已接入",
     href: "/cases/competitor-analysis",
     coverSrc: "/case-assets/competitor-analysis/u8/u8-homepage-optimization.jpg",

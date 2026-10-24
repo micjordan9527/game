@@ -21,13 +21,13 @@ export function TemplateDetail({ template }: { template: TemplateItem }) {
     <div className="rounded-lg border border-line bg-white p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
-          <Icon className="h-5 w-5" aria-hidden="true" strokeWidth={2} />
-        </div>
-        <div>
-          <h2 className="text-lg font-semibold text-ink">{template.title}</h2>
-          <p className="mt-2 text-sm leading-7 text-muted">{template.description}</p>
-        </div>
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
+            <Icon className="h-5 w-5" aria-hidden="true" strokeWidth={2} />
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold text-ink">{template.title}</h2>
+            <p className="mt-2 text-sm leading-7 text-muted">{template.description}</p>
+          </div>
         </div>
         <div className="flex flex-wrap gap-2">
           <CopyTemplateButton content={copyContent} />
@@ -54,29 +54,34 @@ export function TemplateDetail({ template }: { template: TemplateItem }) {
           </ul>
         </div>
       </div>
-      <div className="mt-5 grid gap-3 md:grid-cols-3">
-        {template.sections.map((section) => (
-          <div key={section.title} className="rounded-md bg-paper p-4">
-            <div className="flex items-center justify-between gap-3">
-              <div className="text-sm font-semibold text-ink">{section.title}</div>
-              <CopyTemplateButton content={[`## ${section.title}`, "", ...section.items.map((item) => `- [ ] ${item}`)].join("\n")} />
+      <details className="mt-5">
+        <summary className="cursor-pointer text-sm font-semibold text-brand-700">查看空白模板字段与说明</summary>
+        <div className="mt-4 grid gap-3 md:grid-cols-3">
+          {template.sections.map((section) => (
+            <div key={section.title} className="rounded-md bg-paper p-4">
+              <div className="flex items-center justify-between gap-3">
+                <div className="text-sm font-semibold text-ink">{section.title}</div>
+                <CopyTemplateButton
+                  content={[`## ${section.title}`, "", ...section.items.map((item) => `- [ ] ${item}`)].join("\n")}
+                />
+              </div>
+              <ul className="mt-3 space-y-2 text-sm text-muted">
+                {section.items.map((item) => (
+                  <li key={item}>• {item}</li>
+                ))}
+              </ul>
             </div>
-            <ul className="mt-3 space-y-2 text-sm text-muted">
-              {section.items.map((item) => (
-                <li key={item}>• {item}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <div className="mt-5 rounded-md border border-amber-200 bg-amber-50 p-4">
-        <div className="text-sm font-semibold text-amber-950">注意事项</div>
-        <ul className="mt-3 space-y-2 text-sm leading-6 text-amber-900">
-          {template.cautions.map((item) => (
-            <li key={item}>• {item}</li>
           ))}
-        </ul>
-      </div>
+        </div>
+        <div className="mt-5 rounded-md border border-amber-200 bg-amber-50 p-4">
+          <div className="text-sm font-semibold text-amber-950">注意事项</div>
+          <ul className="mt-3 space-y-2 text-sm leading-6 text-amber-900">
+            {template.cautions.map((item) => (
+              <li key={item}>• {item}</li>
+            ))}
+          </ul>
+        </div>
+      </details>
     </div>
   )
 }

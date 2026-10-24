@@ -1,106 +1,54 @@
 import Link from "next/link"
-import { ArrowRight, ChartNoAxesCombined, ShieldCheck, Trophy } from "lucide-react"
-import { sportsModules, sportsRolePaths } from "@/data/sports"
+import { sportsModules } from "@/data/sports"
+import { assetPath } from "@/lib/assets"
 import { absoluteUrl } from "@/lib/seo"
-
+import { FeatureFlow } from "@/components/common/FeatureFlow"
 export const metadata = {
-  title: "体育博彩模块",
-  description: "系统整理体育博彩玩法、产品结构、风控场景和操盘基础资料。",
-  alternates: {
-    canonical: absoluteUrl("/sports"),
-  },
+  title: "体育功能演示",
+  description: "直接查看赛事、盘口、注单、结算与后台功能。",
+  alternates: { canonical: absoluteUrl("/sports") },
 }
-
 export default function SportsPage() {
   return (
-    <div className="container-shell py-10 md:py-12">
-      <section className="rounded-lg border border-line bg-white p-6 shadow-sm md:p-8">
-        <p className="mb-2 text-sm font-semibold text-brand-700">Sports</p>
-        <h1 className="text-2xl font-semibold tracking-normal text-ink md:text-3xl">体育博彩模块</h1>
-        <p className="mt-3 max-w-3xl text-base leading-8 text-muted">
-          这里系统整理体育博彩的玩法规则、产品结构、风控场景、操盘语言、盘口赔率和后台配置等资料。
-        </p>
-        <div className="mt-5 grid gap-3 sm:grid-cols-3">
-          <div className="rounded-lg bg-paper p-4">
-            <Trophy className="h-5 w-5 text-brand-700" aria-hidden="true" />
-            <p className="mt-2 text-sm font-semibold text-ink">玩法基础</p>
-            <p className="mt-1 text-xs leading-5 text-muted">先把用户能看到、客服要解释的玩法讲清楚。</p>
-          </div>
-          <div className="rounded-lg bg-paper p-4">
-            <ChartNoAxesCombined className="h-5 w-5 text-brand-700" aria-hidden="true" />
-            <p className="mt-2 text-sm font-semibold text-ink">产品结构</p>
-            <p className="mt-1 text-xs leading-5 text-muted">理解赛事、盘口、注单、结算和后台配置。</p>
-          </div>
-          <div className="rounded-lg bg-paper p-4">
-            <ShieldCheck className="h-5 w-5 text-brand-700" aria-hidden="true" />
-            <p className="mt-2 text-sm font-semibold text-ink">风控操盘</p>
-            <p className="mt-1 text-xs leading-5 text-muted">理解限额、审核、异常识别和盘口变化。</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="mt-8 rounded-lg border border-line bg-paper p-6 md:p-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold text-brand-700">按角色开始</p>
-          <h2 className="mt-2 text-xl font-semibold text-ink">不知道先看哪篇？按你的工作目标进入</h2>
-          <p className="mt-3 text-sm leading-7 text-muted">每条路径从最需要理解的主题开始，再连接到相关的产品、运营、风控或技术专题。</p>
-        </div>
-        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-          {sportsRolePaths.map((path) => {
-            const firstModule = sportsModules.find((module) => module.roleIds.includes(path.id))
-            if (!firstModule) return null
-            return (
-              <Link key={path.id} href={firstModule.href} className="group rounded-lg border border-line bg-white p-4 transition hover:border-brand-100 hover:shadow-soft">
-                <p className="text-sm font-semibold text-ink">{path.title}</p>
-                <p className="mt-2 text-sm leading-6 text-muted">{path.description}</p>
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {path.steps.slice(0, 3).map((step) => <span key={step} className="rounded-md bg-paper px-2 py-1 text-xs text-muted">{step}</span>)}
-                </div>
-                <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 group-hover:underline">从「{firstModule.title}」开始<ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
-              </Link>
-            )
-          })}
-        </div>
-      </section>
-
-      <section className="mt-8 grid gap-4 md:grid-cols-2">
+    <div className="container-shell py-8">
+      <h1 className="text-3xl font-semibold text-ink">体育功能演示</h1>
+      <p className="mt-3 text-sm leading-7 text-muted">从前台页面到后台链路，选择一个场景直接查看。</p>
+      <FeatureFlow
+        title="体育产品的核心链路"
+        caption="功能关系示意"
+        steps={[
+          { title: "赛事", text: "对阵、时间与比赛状态" },
+          { title: "盘口", text: "玩法、选项与报价" },
+          { title: "注单", text: "确认、受理与记录" },
+          { title: "结算", text: "结果、状态与钱包" },
+        ]}
+      />
+      <div className="mt-6 grid gap-5 md:grid-cols-2">
         {sportsModules.map((item) => (
           <Link
             key={item.slug}
             href={item.href}
-            className={[
-              "group rounded-lg border border-line bg-white p-5 shadow-sm transition hover:border-brand-100 hover:shadow-soft",
-            ].join(" ")}
+            className="min-w-0 overflow-hidden rounded-xl border border-line bg-white hover:border-brand-200"
           >
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
-                <Trophy className="h-5 w-5" aria-hidden="true" />
-              </div>
-              <span className={"rounded-md bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700"}>
-                {item.contentType}
-              </span>
+            <div className="aspect-[16/10] overflow-hidden bg-paper">
+              <img
+                src={assetPath(`/images/showcase/sports/${item.slug}.jpg`)}
+                alt={`${item.title}演示预览`}
+                width={1200}
+                height={750}
+                loading="lazy"
+                className="h-full w-full object-cover object-top"
+              />
             </div>
-            <div className="mt-5 flex items-center gap-2">
-              <span className="rounded-md bg-paper px-2.5 py-1 text-xs font-medium text-muted">{item.category}</span>
-              <span className="text-xs text-muted">{item.contentType === "基础导读" ? "相关文章" : `建议 ${item.estimatedMinutes} 分钟`}</span>
+            <div className="p-5">
+              <span className="text-xs font-semibold text-brand-700">{item.category} · 功能演示</span>
+              <h2 className="mt-2 text-lg font-semibold text-ink">{item.title}</h2>
+              <p className="mt-2 line-clamp-2 text-sm leading-7 text-muted">{item.description}</p>
+              <span className="mt-3 inline-block text-sm font-semibold text-brand-700">直接查看 →</span>
             </div>
-            <h2 className="mt-3 text-lg font-semibold text-ink">{item.title}</h2>
-            <p className="mt-2 text-sm leading-7 text-muted">{item.description}</p>
-                {item.readingTitle ? <p className="mt-3 text-xs leading-6 text-brand-700">基础阅读：{item.readingTitle}</p> : null}
-            <div className="mt-4 flex flex-wrap gap-2">
-              {item.tags.map((tag) => (
-                <span key={tag} className="rounded-md bg-paper px-2.5 py-1 text-xs font-medium text-muted">
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 group-hover:underline">
-              {item.contentType === "基础导读" ? "阅读基础文章" : "查看专题"}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </span>
           </Link>
         ))}
-      </section>
+      </div>
     </div>
   )
 }

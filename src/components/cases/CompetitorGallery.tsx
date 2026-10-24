@@ -32,14 +32,23 @@ export function CompetitorGallery({ items }: { items: CompetitorInfographic[] })
               <button
                 className={[
                   "inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm font-semibold transition",
-                  isActive ? "border-ink bg-ink text-white" : "border-line bg-white text-muted hover:border-brand-100 hover:text-brand-700",
+                  isActive
+                    ? "border-ink bg-ink text-white"
+                    : "border-line bg-white text-muted hover:border-brand-100 hover:text-brand-700",
                 ].join(" ")}
                 key={brand}
                 onClick={() => setActiveBrand(brand)}
                 type="button"
               >
                 {brand}
-                <span className={["rounded bg-white/15 px-1.5 py-0.5 text-xs", isActive ? "text-white" : "bg-paper text-muted"].join(" ")}>{count}</span>
+                <span
+                  className={[
+                    "rounded bg-white/15 px-1.5 py-0.5 text-xs",
+                    isActive ? "text-white" : "bg-paper text-muted",
+                  ].join(" ")}
+                >
+                  {count}
+                </span>
               </button>
             )
           })}
@@ -58,7 +67,7 @@ export function CompetitorGallery({ items }: { items: CompetitorInfographic[] })
           height: item.height,
           sourceHref: item.src,
         }))}
-        emptyMessage={`${activeBrand} 的竞品信息图还没有接入，后续可补充对应页面拆解和优化图。`}
+        emptyMessage={`${activeBrand} 暂无可显示的信息图，请选择其他分类。`}
       />
     </>
   )

@@ -1,89 +1,60 @@
 import Link from "next/link"
-import { ArrowRight, BookOpen, ClipboardList, Search, Sparkles } from "lucide-react"
-import { CategoryGrid } from "@/components/home/CategoryGrid"
-import { FeaturedArticles } from "@/components/home/FeaturedArticles"
-import { LatestArticles } from "@/components/home/LatestArticles"
-import { ContinueReading } from "@/components/home/ContinueReading"
-import { WorkEntryPoints } from "@/components/home/WorkEntryPoints"
-import { learningPaths } from "@/data/topicGuides"
-import { articles } from "@/data/articles"
-import { glossary } from "@/data/glossary"
-import { templates } from "@/data/templates"
-import { caseItems } from "@/data/cases"
-
-const resources = [
-  { href: "/articles", label: "文章资料", description: "按主题、难度和读者角色查阅", icon: BookOpen },
-  { href: "/glossary", label: "术语库", description: "快速理解概念及实际业务场景", icon: Search },
-  { href: "/templates", label: "工作模板", description: "复制需求清单、评审及复盘材料", icon: ClipboardList },
-  { href: "/ai-workflows", label: "AI 工作流", description: "复用设计与内容生产流程", icon: Sparkles },
-]
+import { ArrowRight } from "lucide-react"
+import { ShowcaseGrid } from "@/components/common/ShowcaseGrid"
+import { VisualGallery } from "@/components/home/VisualGallery"
+import { showcaseItems } from "@/data/showcase"
+import { workRoles } from "@/data/workRoles"
 
 export default function HomePage() {
   return (
-    <>
-      <section className="container-shell py-10 md:py-14">
-        <div className="grid gap-6 rounded-xl border border-line bg-white p-6 shadow-sm lg:grid-cols-[1.3fr_0.7fr] lg:p-10">
-          <div>
-            <span className="inline-flex rounded-md bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">专业知识与实战资料</span>
-            <h1 className="mt-5 text-4xl font-semibold tracking-normal text-ink md:text-5xl">包网知识库</h1>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-muted">用产品、运营、设计与技术视角，理解平台系统和真实业务问题。从概念解释到实战案例，再到可以直接复用的工作模板。</p>
-            <Link href="/search" className="mt-6 flex items-center gap-3 rounded-lg border border-line bg-paper px-4 py-4 text-sm text-muted transition hover:border-brand-200 hover:bg-white" aria-label="搜索全站知识库">
-              <Search className="h-5 w-5 shrink-0 text-brand-700" aria-hidden="true" />
-              <span className="flex-1">搜索钱包、注单、风控、后台设计、工作流...</span>
-              <span className="hidden text-xs text-muted sm:inline">全站搜索</span>
-              <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-            </Link>
-            <div className="mt-5 flex flex-wrap items-center gap-3">
-              <Link href="/industry" className="inline-flex items-center gap-2 rounded-md bg-ink px-5 py-3 text-sm font-semibold text-white hover:bg-brand-700">从基础开始 <ArrowRight className="h-4 w-4" /></Link>
-              <Link href="/cases" className="inline-flex items-center gap-2 rounded-md border border-line bg-white px-5 py-3 text-sm font-semibold text-ink hover:border-brand-200">查看实战案例</Link>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3 self-center">
-            {[
-              { label: "知识文章", count: articles.length },
-              { label: "行业术语", count: glossary.length },
-              { label: "工作模板", count: templates.length },
-              { label: "项目案例", count: caseItems.length },
-            ].map((item) => <div key={item.label} className="rounded-lg border border-line bg-paper p-5">
-              <div className="text-3xl font-semibold text-ink">{item.count}</div>
-              <div className="mt-2 text-xs text-muted">{item.label}</div>
-            </div>)}
-          </div>
-        </div>
-        <WorkEntryPoints />
-        <Link href="/articles/wallet-payment-reconciliation" className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-brand-100 bg-brand-50 p-5 text-brand-700">
-          <span><span className="text-xs font-semibold">业务专题</span><strong className="mt-1 block text-base">钱包、支付与对账</strong><span className="mt-2 block text-sm leading-6">沿着状态流程、虚构示例和检查表，理解一笔资金怎样核对清楚。</span></span>
-          <span className="inline-flex items-center gap-2 text-sm font-semibold">开始学习 <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
-        </Link>
-      </section>
-
-      <ContinueReading articles={articles.map(({ slug, title }) => ({ slug, title }))} />
+    <div>
       <section className="container-shell py-8 md:py-10">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div><p className="text-sm font-semibold text-brand-700">推荐阅读顺序</p><h2 className="mt-2 text-2xl font-semibold text-ink">从基础认知到项目交付</h2></div>
-          <Link href="/articles" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-700">全部文章 <ArrowRight className="h-4 w-4" /></Link>
+        <p className="text-sm font-semibold text-brand-700">产品 · 设计 · AI 实践</p>
+        <div className="mt-3 flex flex-wrap items-end justify-between gap-5">
+          <div>
+            <h1 className="text-3xl font-semibold tracking-normal text-ink md:text-4xl">看得见的方案，点得开的作品</h1>
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
+              后台原型、页面改版、AI 视觉与功能图解，直接看成果和做法。
+            </p>
+          </div>
+          <Link href="/cases" className="inline-flex items-center gap-2 text-sm font-semibold text-brand-700">
+            全部案例 <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
-        <div className="mt-5 grid gap-3 md:grid-cols-3">
-          {learningPaths.map((path, index) => <Link key={path.slug} href={path.href} className="rounded-lg border border-line bg-white p-5 hover:border-brand-200">
-            <span className="text-xs font-semibold text-brand-700">阶段 {index + 1} · {path.difficulty}</span>
-            <h3 className="mt-2 text-lg font-semibold text-ink">{path.title}</h3>
-            <p className="mt-2 text-sm leading-7 text-muted">{path.description}</p>
-            <p className="mt-4 text-xs text-muted">推荐阅读 {path.articleSlugs.length} 篇</p>
-          </Link>)}
-        </div>
-      </section>
-
-      <CategoryGrid />
-      <FeaturedArticles />
-      <section className="container-shell py-8 md:py-12">
-        <div className="mb-5 flex items-end justify-between gap-3"><div><p className="text-sm font-semibold text-brand-700">实用工具与资料</p><h2 className="mt-2 text-2xl font-semibold text-ink">把知识转成可复用成果</h2></div><Link href="/cases" className="text-sm font-semibold text-brand-700">查看案例 →</Link></div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {resources.map(({ href, label, description, icon: Icon }) => <Link key={href} href={href} className="rounded-lg border border-line bg-white p-5 transition hover:border-brand-200 hover:shadow-soft">
-            <Icon className="h-5 w-5 text-brand-700" /><h3 className="mt-4 font-semibold text-ink">{label}</h3><p className="mt-2 text-sm leading-6 text-muted">{description}</p>
-          </Link>)}
+        <div className="mt-6">
+          <ShowcaseGrid items={showcaseItems} />
         </div>
       </section>
-      <LatestArticles />
-    </>
+      <section className="container-shell border-t border-line py-8">
+        <h2 className="text-xl font-semibold text-ink">按你的方向看</h2>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {workRoles.map((role) => (
+            <Link
+              key={role.slug}
+              href={`/roles/${role.slug}`}
+              className="rounded-full border border-line bg-white px-4 py-2 text-sm font-semibold text-muted hover:text-brand-700"
+            >
+              {role.title}
+            </Link>
+          ))}
+        </div>
+      </section>
+      <VisualGallery />
+      <section className="container-shell border-t border-line py-8">
+        <h2 className="text-xl font-semibold text-ink">直接使用</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          {[
+            ["/design/material-standards", "素材规范", "查看尺寸、实际页面与源稿"],
+            ["/templates", "工作模板", "预览示例、复制与下载"],
+            ["/glossary", "术语查询", "一句话理解常见概念"],
+          ].map(([href, title, description]) => (
+            <Link key={href} href={href} className="rounded-lg border border-line bg-white p-5">
+              <h3 className="font-semibold text-ink">{title} →</h3>
+              <p className="mt-2 text-sm leading-6 text-muted">{description}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </div>
   )
 }

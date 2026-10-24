@@ -33,9 +33,9 @@ export const designTopics = [
   {
     slug: "review",
     eyebrow: "04 · 能交付",
-    title: "评审与交付",
-    description: "将页面判断沉淀为评审练习、体验清单和可协作的交付信息。",
-    includes: "设计评审练习、体验清单与交付看板。",
+    title: "界面优化图解",
+    description: "用六组改前改后对照，看清页面层级、操作和反馈。",
+    includes: "界面对照、设计标注与协作流程。",
   },
   {
     slug: "material-standards",
@@ -51,8 +51,15 @@ export function DesignExperienceHub() {
     <>
       <section id="common-materials" className="scroll-mt-24 py-12">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeader eyebrow="常用素材" title="直接查看你要制作的素材" description="按使用场景查看尺寸、格式、命名与导出要求。" />
-          <Link href="/design/material-standards" className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-800">
+          <SectionHeader
+            eyebrow="常用素材"
+            title="直接查看你要制作的素材"
+            description="按使用场景查看尺寸、格式、命名与导出要求。"
+          />
+          <Link
+            href="/design/material-standards"
+            className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-800"
+          >
             查看全部素材 <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
@@ -74,7 +81,11 @@ export function DesignExperienceHub() {
         </div>
       </section>
       <section className="py-12">
-        <SectionHeader eyebrow="设计体验导航" title="选择你要解决的页面问题" description="围绕信息判断、关键页面、移动端反馈与评审协作整理练习和原型。" />
+        <SectionHeader
+          eyebrow="设计体验导航"
+          title="选择你要解决的页面问题"
+          description="直接查看组件、关键页面、移动端反馈与设计对照。"
+        />
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {designTopics.map((topic) => (
             <Link

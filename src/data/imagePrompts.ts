@@ -12,6 +12,33 @@ export type ImagePrompt = {
 
 export const imagePrompts: ImagePrompt[] = [
   {
+    slug: "member-account-overview",
+    title: "会员账号状态，一图看懂",
+    articleSlug: "member-account-states",
+    imageSrc: "/images/articles/member-account-overview.png",
+    kind: "standard",
+    width: 1122,
+    height: 1402,
+  },
+  {
+    slug: "wallet-payment-overview",
+    title: "钱包、支付与对账",
+    articleSlug: "wallet-payment-reconciliation",
+    imageSrc: "/images/articles/wallet-payment-overview.png",
+    kind: "standard",
+    width: 1122,
+    height: 1402,
+  },
+  {
+    slug: "agent-system-overview",
+    title: "代理系统，一图看懂",
+    articleSlug: "agent-system-design",
+    imageSrc: "/images/articles/agent-system-overview.png",
+    kind: "standard",
+    width: 1122,
+    height: 1402,
+  },
+  {
     slug: "platform-ecosystem",
     title: "博彩平台生态结构图",
     articleSlug: "how-gambling-platform-works",

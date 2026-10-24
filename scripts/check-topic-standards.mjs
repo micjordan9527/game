@@ -9,9 +9,11 @@ function readLiteral(node) {
   if (ts.isNumericLiteral(node)) return Number(node.text)
   if (ts.isArrayLiteralExpression(node)) return node.elements.map(readLiteral)
   if (ts.isObjectLiteralExpression(node)) {
-    return Object.fromEntries(node.properties.filter(ts.isPropertyAssignment).map((property) => [
-      property.name.getText().replace(/^['"]|['"]$/g, ""), readLiteral(property.initializer),
-    ]))
+    return Object.fromEntries(
+      node.properties
+        .filter(ts.isPropertyAssignment)
+        .map((property) => [property.name.getText().replace(/^['"]|['"]$/g, ""), readLiteral(property.initializer)])
+    )
   }
   return undefined
 }
@@ -22,7 +24,9 @@ function readRecords(root, file, name) {
     if (!ts.isVariableStatement(statement)) continue
     const declaration = statement.declarationList.declarations.find((item) => item.name.getText(source) === name)
     let initializer = declaration?.initializer
-    if (initializer && (ts.isAsExpression(initializer) || ts.isSatisfiesExpression(initializer))) initializer = initializer.expression
+    if (initializer && (ts.isAsExpression(initializer) || ts.isSatisfiesExpression(initializer)))
+      initializer = initializer.expression
+    if (initializer && ts.isObjectLiteralExpression(initializer)) return readLiteral(initializer)
     if (!initializer || !ts.isArrayLiteralExpression(initializer)) continue
     return initializer.elements.filter(ts.isObjectLiteralExpression).map(readLiteral)
   }
@@ -43,6 +47,21 @@ export function checkTopicStandards(root, errors) {
   const categories = readRecords(root, "src/data/categories.ts", "categories")
   const roles = readRecords(root, "src/data/workRoles.ts", "workRoles")
   const designTopics = readRecords(root, "src/components/design/DesignExperienceHub.tsx", "designTopics")
+  const visuals = readRecords(root, "src/data/imagePrompts.ts", "imagePrompts")
+  const flows = readRecords(root, "src/data/articleFlows.ts", "articleFlows")
+  const showcase = readRecords(root, "src/data/showcase.ts", "showcaseItems")
+  const sports = readRecords(root, "src/data/sports.ts", "sportsModules")
+  for (const article of articles) {
+    if (!visuals.some((image) => image.articleSlug === article.slug) && !flows[article.slug]?.steps?.length)
+      errors.push(`article ${article.slug}: missing visual explanation`)
+  }
+  for (const image of [
+    ...showcase.map((item) => item.cover),
+    ...sports.map((item) => `/images/showcase/sports/${item.slug}.jpg`),
+  ]) {
+    if (typeof image !== "string" || !fs.existsSync(path.join(root, "public", image.slice(1))))
+      errors.push(`showcase: missing preview ${image}`)
+  }
   const ids = {
     articles: new Set(articles.map((item) => item.slug)),
     templates: new Set(templates.map((item) => item.slug)),
@@ -69,11 +88,19 @@ export function checkTopicStandards(root, errors) {
       }
     }
     for (const source of study.sources ?? []) {
-      if (typeof source.href !== "string" || !source.href.startsWith("/case-assets/")) { errors.push(`${label}: invalid material source`); continue }
+      if (typeof source.href !== "string" || !source.href.startsWith("/case-assets/")) {
+        errors.push(`${label}: invalid material source`)
+        continue
+      }
       const pathname = new URL(source.href, "https://knowledge001.netlify.app").pathname
-      if (!fs.existsSync(path.join(root, "public", pathname.slice(1)))) errors.push(`${label}: missing material ${source.href}`)
+      if (!fs.existsSync(path.join(root, "public", pathname.slice(1))))
+        errors.push(`${label}: missing material ${source.href}`)
     }
-    for (const [key, known] of [["relatedArticles", ids.articles], ["relatedTemplates", ids.templates], ["relatedWorkflows", ids.workflows]]) {
+    for (const [key, known] of [
+      ["relatedArticles", ids.articles],
+      ["relatedTemplates", ids.templates],
+      ["relatedWorkflows", ids.workflows],
+    ]) {
       for (const slug of study[key] ?? []) {
         if (!known.has(slug)) errors.push(`${label}: unknown ${key} reference ${slug}`)
       }
@@ -88,39 +115,73 @@ export function checkTopicStandards(root, errors) {
   }
 
   const routes = new Set([
-    "/", "/glossary", "/articles", "/templates", "/cases", "/search", "/ai-workflows",
+    "/",
+    "/glossary",
+    "/articles",
+    "/templates",
+    "/cases",
+    "/search",
+    "/ai-workflows",
     ...articles.map((item) => `/articles/${item.slug}`),
     ...templates.map((item) => `/templates/${item.slug}`),
     ...cases.map((item) => item.href),
     ...categories.map((item) => `/${item.slug}`),
     ...roles.map((item) => `/roles/${item.slug}`),
     ...designTopics.map((item) => `/design/${item.slug}`),
-    ...fs.readdirSync(path.join(root, "src/app/design"), { withFileTypes: true }).filter((item) => item.isDirectory() && fs.existsSync(path.join(root, "src/app/design", item.name, "page.tsx"))).map((item) => `/design/${item.name}`),
+    ...fs
+      .readdirSync(path.join(root, "src/app/design"), { withFileTypes: true })
+      .filter((item) => item.isDirectory() && fs.existsSync(path.join(root, "src/app/design", item.name, "page.tsx")))
+      .map((item) => `/design/${item.name}`),
     ...workflows.map((item) => `/ai-workflows/${item.slug}`),
   ])
-  if (new Set(roles.map((role) => role.slug)).size !== 5 || roles.length !== 5) errors.push("role paths: expected five unique roles")
+  if (new Set(roles.map((role) => role.slug)).size !== 5 || roles.length !== 5)
+    errors.push("role paths: expected five unique roles")
   for (const role of roles) {
-    for (const key of ["title", "summary", "goal", "handoff"]) if (!role[key]?.trim()) errors.push(`role ${role.slug}: missing ${key}`)
+    for (const key of ["title", "summary", "goal", "handoff"])
+      if (!role[key]?.trim()) errors.push(`role ${role.slug}: missing ${key}`)
     if (!roles.some((item) => item.slug === role.nextRole)) errors.push(`role ${role.slug}: unknown next role`)
     if (!role.steps?.length || !role.outputs?.length) errors.push(`role ${role.slug}: missing steps or outputs`)
     for (const step of role.steps ?? []) {
       if (!routes.has(step.href)) errors.push(`role ${role.slug}: unknown destination ${step.href}`)
-      if (![step.title, step.description, step.kind].every((value) => typeof value === "string" && value.trim())) errors.push(`role ${role.slug}: incomplete step`)
+      if (![step.title, step.description, step.kind].every((value) => typeof value === "string" && value.trim()))
+        errors.push(`role ${role.slug}: incomplete step`)
     }
   }
   const glossaryIds = new Set(glossary.map((item) => item.id))
-  const requiredHeadings = ["一句话解释", "适合谁看", "学习路径", "概念与边界", "状态与处理", "流程图", "虚构示例", "异常场景", "评审检查清单", "相关资料", "风险与注意事项"]
+  const requiredHeadings = [
+    "一句话解释",
+    "适合谁看",
+    "学习路径",
+    "概念与边界",
+    "状态与处理",
+    "流程图",
+    "虚构示例",
+    "异常场景",
+    "评审检查清单",
+    "相关资料",
+    "风险与注意事项",
+  ]
   for (const slug of ["member-account-states", "agent-system-design"]) {
     const filename = path.join(root, "content/articles", `${slug}.md`)
-    if (!fs.existsSync(filename)) { errors.push(`standard topic missing: ${slug}`); continue }
+    if (!fs.existsSync(filename)) {
+      errors.push(`standard topic missing: ${slug}`)
+      continue
+    }
     const { data, content } = matter(fs.readFileSync(filename, "utf8"))
     const entry = articles.find((item) => item.slug === slug)
     for (const key of ["title", "description", "category", "tags", "audience", "difficulty", "date", "updatedAt"]) {
-      if (data[key] === undefined || !entry || JSON.stringify(normalize(data[key])) !== JSON.stringify(entry[key])) errors.push(`${slug}: frontmatter ${key} differs from article metadata`)
+      if (data[key] === undefined || !entry || JSON.stringify(normalize(data[key])) !== JSON.stringify(entry[key]))
+        errors.push(`${slug}: frontmatter ${key} differs from article metadata`)
     }
     for (const key of ["date", "updatedAt"]) {
       const value = normalize(data[key])
-      if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value) || !Number.isFinite(Date.parse(value)) || new Date(value).toISOString().slice(0, 10) !== value) errors.push(`${slug}: invalid ${key}`)
+      if (
+        typeof value !== "string" ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(value) ||
+        !Number.isFinite(Date.parse(value)) ||
+        new Date(value).toISOString().slice(0, 10) !== value
+      )
+        errors.push(`${slug}: invalid ${key}`)
     }
     if (normalize(data.updatedAt) < normalize(data.date)) errors.push(`${slug}: updatedAt precedes date`)
     let previous = -1
@@ -137,7 +198,8 @@ export function checkTopicStandards(root, errors) {
     for (const [, href] of content.matchAll(/\]\((\/[^\s)]+)\)/g)) {
       const url = new URL(href, "https://knowledge001.netlify.app")
       if (!routes.has(url.pathname)) errors.push(`${slug}: unknown internal link ${href}`)
-      if (url.pathname === "/glossary" && url.hash && !glossaryIds.has(url.hash.slice(1))) errors.push(`${slug}: unknown glossary anchor ${href}`)
+      if (url.pathname === "/glossary" && url.hash && !glossaryIds.has(url.hash.slice(1)))
+        errors.push(`${slug}: unknown glossary anchor ${href}`)
     }
   }
 }
