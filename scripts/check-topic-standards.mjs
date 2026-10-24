@@ -4,23 +4,25 @@ import matter from "gray-matter"
 import ts from "typescript"
 
 // Inspect literal metadata without executing the data modules.
+function readLiteral(node) {
+  if (ts.isStringLiteral(node)) return node.text
+  if (ts.isNumericLiteral(node)) return Number(node.text)
+  if (ts.isArrayLiteralExpression(node)) return node.elements.map(readLiteral)
+  if (ts.isObjectLiteralExpression(node)) {
+    return Object.fromEntries(node.properties.filter(ts.isPropertyAssignment).map((property) => [
+      property.name.getText().replace(/^['"]|['"]$/g, ""), readLiteral(property.initializer),
+    ]))
+  }
+  return undefined
+}
+
 function readRecords(root, file, name) {
   const source = ts.createSourceFile(file, fs.readFileSync(path.join(root, file), "utf8"), ts.ScriptTarget.Latest, true)
   for (const statement of source.statements) {
     if (!ts.isVariableStatement(statement)) continue
     const declaration = statement.declarationList.declarations.find((item) => item.name.getText(source) === name)
     if (!declaration?.initializer || !ts.isArrayLiteralExpression(declaration.initializer)) continue
-    return declaration.initializer.elements.filter(ts.isObjectLiteralExpression).map((object) => {
-      const record = {}
-      for (const property of object.properties) {
-        if (!ts.isPropertyAssignment(property)) continue
-        const key = property.name.getText(source).replace(/^['"]|['"]$/g, "")
-        const value = property.initializer
-        if (ts.isStringLiteral(value)) record[key] = value.text
-        if (ts.isArrayLiteralExpression(value) && value.elements.every(ts.isStringLiteral)) record[key] = value.elements.map((item) => item.text)
-      }
-      return record
-    })
+    return declaration.initializer.elements.filter(ts.isObjectLiteralExpression).map(readLiteral)
   }
   throw new Error(`Cannot read literal metadata ${file}:${name}`)
 }
@@ -42,6 +44,36 @@ export function checkTopicStandards(root, errors) {
     templates: new Set(templates.map((item) => item.slug)),
     cases: new Set(cases.map((item) => item.slug)),
     workflows: new Set(workflows.map((item) => item.slug)),
+  }
+  const studies = readRecords(root, "src/data/caseStudies.ts", "caseStudies")
+  if (new Set(studies.map((study) => study.slug)).size !== studies.length) errors.push("case studies: duplicate slug")
+  for (const slug of ["admin-optimization", "bm-optimization"]) {
+    if (!studies.some((study) => study.slug === slug)) errors.push(`case study missing: ${slug}`)
+  }
+  for (const study of studies) {
+    const label = `case study ${study.slug}`
+    if (!ids.cases.has(study.slug)) errors.push(`${label}: unknown case`)
+    for (const key of ["materialType", "evidenceNote", "context", "exercise"]) {
+      if (typeof study[key] !== "string" || !study[key].trim()) errors.push(`${label}: missing ${key}`)
+    }
+    for (const key of ["originalStructure", "roles", "changes", "checklist", "sources"]) {
+      if (!Array.isArray(study[key]) || study[key].length === 0) errors.push(`${label}: missing ${key}`)
+    }
+    for (const change of study.changes ?? []) {
+      for (const key of ["title", "observation", "evidence", "reasoning", "verification"]) {
+        if (typeof change[key] !== "string" || !change[key].trim()) errors.push(`${label}: change missing ${key}`)
+      }
+    }
+    for (const source of study.sources ?? []) {
+      if (typeof source.href !== "string" || !source.href.startsWith("/case-assets/")) { errors.push(`${label}: invalid material source`); continue }
+      const pathname = new URL(source.href, "https://knowledge001.netlify.app").pathname
+      if (!fs.existsSync(path.join(root, "public", pathname.slice(1)))) errors.push(`${label}: missing material ${source.href}`)
+    }
+    for (const [key, known] of [["relatedArticles", ids.articles], ["relatedTemplates", ids.templates], ["relatedWorkflows", ids.workflows]]) {
+      for (const slug of study[key] ?? []) {
+        if (!known.has(slug)) errors.push(`${label}: unknown ${key} reference ${slug}`)
+      }
+    }
   }
   for (const topic of topics) {
     for (const [kind, known] of Object.entries(ids)) {

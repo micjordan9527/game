@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { ExternalLink } from "lucide-react"
 import { LearningCheck } from "@/components/common/LearningCheck"
 import { CaseIframeVersionPanel } from "@/components/cases/CaseIframeVersionPanel"
@@ -11,8 +10,11 @@ import { resourcesForResource } from "@/lib/knowledge-relations"
 import { KnowledgeLinks } from "@/components/common/KnowledgeLinks"
 import { appendAssetVersion, getAssetVersionMeta } from "@/lib/assetVersion"
 import { assetPath } from "@/lib/assets"
+import { CaseStudyAnalysis } from "@/components/cases/CaseStudyAnalysis"
+import { getCaseStudy } from "@/data/caseStudies"
 
 const caseItem = getCaseItem("admin-optimization")
+const study = getCaseStudy("admin-optimization")
 const previewSrc = caseItem?.previewSrc
   ? `${appendAssetVersion(caseItem.previewSrc)}#version=optimized&page=dataCenter-overview`
   : undefined
@@ -21,7 +23,7 @@ const previewVersionMeta = previewSrc ? getAssetVersionMeta(previewSrc) : { vers
 
 export const metadata = {
   title: "后台优化案例",
-  description: "后台优化目标、特色与原版新版对比预览。",
+  description: "依据本地原型拆解后台角色任务、统计口径与异常入口，附可复制下载的评审清单。",
   alternates: {
     canonical: absoluteUrl("/cases/admin-optimization"),
   },
@@ -42,10 +44,10 @@ export default function AdminOptimizationCasePage() {
           <div>
             <h1 className="text-2xl font-semibold tracking-normal text-ink md:text-3xl">后台优化</h1>
             <p className="mt-3 max-w-3xl text-base leading-8 text-muted">
-              优化目标是把后台从功能堆叠改成角色清晰、数据可读、操作路径更短的工作台。新版以老板、运营、财务、客服等角色视角组织核心看板和常用动作，突出经营概览、资金状态、用户服务和异常处理等高频场景。下方原型支持切换原版与新版对比，也可以点击说明按钮查看新版与旧版的差异说明。
+              对照本地新版原型，分析老板、运营、财务、客服的判断任务，理解角色看板、统计口径和异常入口的组织方式。沿着材料观察、判断依据与建议验收，完成一次有证据的后台评审。
             </p>
             <p className="mt-4 max-w-3xl rounded-md border border-brand-100 bg-brand-50 px-4 py-3 text-sm font-semibold leading-7 text-brand-700">
-              重要说明：原版后台需打开 WARP 并登录后方可使用；新版预览可直接查看。
+              新版可直接预览；原版入口依赖项目提供的网络与登录条件。原型数据和操作仅作演示，实际权限、资金处理与效率改善需单独验证。
             </p>
             <CaseIframeVersionPanel version={previewVersionMeta.version} updatedAt={previewVersionMeta.updatedAt} />
             <CaseLearningStatePanel
@@ -57,23 +59,28 @@ export default function AdminOptimizationCasePage() {
             />
           </div>
           {publicPreviewSrc ? (
-            <Link href={publicPreviewSrc} target="_blank" className="inline-flex w-fit items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+            <a href={publicPreviewSrc} target="_blank" rel="noopener" className="inline-flex w-fit items-center gap-2 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
               新窗口打开
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            </Link>
+            </a>
           ) : null}
         </div>
       </section>
+
+      {study ? <CaseStudyAnalysis study={study} title={caseItem.title} /> : null}
 
       <div className="mt-8">
         <LearningCheck check={caseLearningChecks["admin-optimization"]} />
       </div>
 
-      {previewSrc ? (
-        <AdminOptimizationPreview src={previewSrc} version={previewVersionMeta.version} updatedAt={previewVersionMeta.updatedAt} />
-      ) : (
-        <section className="mt-8 overflow-hidden rounded-lg border border-line bg-white shadow-sm"><div className="p-8 text-sm leading-7 text-muted">案例文件暂未接入。</div></section>
-      )}
+      <section id="case-materials" className="mt-8 scroll-mt-24" aria-labelledby="case-materials-title">
+        <h2 id="case-materials-title" className="mb-4 text-2xl font-semibold text-ink">查看本地交互原型</h2>
+        {previewSrc ? (
+          <AdminOptimizationPreview src={previewSrc} version={previewVersionMeta.version} updatedAt={previewVersionMeta.updatedAt} />
+        ) : (
+          <div className="rounded-lg border border-line bg-white p-8 text-sm leading-7 text-muted">原型暂时无法显示，请使用页面顶部的新窗口入口。</div>
+        )}
+      </section>
       <KnowledgeLinks resources={resourcesForResource("案例", "admin-optimization")} title="相关主题与实用资料" />
     </div>
   )

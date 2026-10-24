@@ -10,6 +10,7 @@ import { categories } from "@/data/categories"
 import { materialStandards } from "@/data/materialStandards"
 import { designTopics } from "@/components/design/DesignExperienceHub"
 import { getMarkdownArticle } from "@/lib/articles"
+import { getCaseStudy } from "@/data/caseStudies"
 
 export type SearchKind = "文章" | "术语" | "模板" | "案例" | "AI 工作流" | "体育专题" | "知识栏目" | "设计专题" | "素材规范"
 
@@ -62,14 +63,17 @@ export function buildSearchIndex(): SearchRecord[] {
     tags: [template.category, ...template.roles, ...template.useCases],
   }, template.sections.map((section) => [section.title, ...section.items].join(" ")).join(" ")))
 
-  caseItems.forEach((item) => add({
-    id: `case:${item.slug}`,
-    kind: "案例",
-    title: item.title,
-    description: item.description,
-    href: item.href,
-    tags: [...item.tags, ...(item.audience ?? [])],
-  }, item.learningGoal ?? ""))
+  caseItems.forEach((item) => {
+    const study = getCaseStudy(item.slug)
+    add({
+      id: `case:${item.slug}`,
+      kind: "案例",
+      title: item.title,
+      description: item.description,
+      href: item.href,
+      tags: [...item.tags, ...(item.audience ?? [])],
+    }, [item.learningGoal ?? "", study?.context ?? "", study?.evidenceNote ?? "", ...(study?.checklist ?? []), ...(study?.changes.flatMap((change) => [change.title, change.observation, change.reasoning, change.verification]) ?? [])].join(" "))
+  })
 
   aiWorkflows.forEach((item) => add({
     id: `workflow:${item.slug}`,

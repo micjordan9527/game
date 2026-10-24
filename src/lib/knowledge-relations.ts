@@ -3,6 +3,7 @@ import { templates } from "@/data/templates"
 import { caseItems } from "@/data/cases"
 import { aiWorkflows } from "@/data/aiWorkflowLibrary"
 import { knowledgeTopics, type KnowledgeTopic } from "@/data/knowledgeTopics"
+import { caseStudies, getCaseStudy } from "@/data/caseStudies"
 
 export type RelatedResource = {
   kind: "文章" | "案例" | "模板" | "AI 工作流"
@@ -59,6 +60,7 @@ export function resourcesForArticle(slug: string): RelatedResource[] {
     ...(links?.cases ?? []).map(toCase),
     ...(links?.templates ?? []).map(toTemplate),
     ...(links?.workflows ?? []).map(toWorkflow),
+    ...caseStudies.filter((study) => study.relatedArticles.includes(slug)).map((study) => toCase(study.slug)),
   ], `/articles/${slug}`)
 }
 
@@ -83,9 +85,14 @@ export function resourcesForTopic(topic: KnowledgeTopic): RelatedResource[] {
 export function resourcesForResource(kind: "案例" | "模板" | "AI 工作流", slug: string): RelatedResource[] {
   const field = kind === "案例" ? "cases" : kind === "模板" ? "templates" : "workflows"
   const current = kind === "案例" ? toCase(slug) : kind === "模板" ? toTemplate(slug) : toWorkflow(slug)
+  const study = kind === "案例" ? getCaseStudy(slug) : undefined
   return uniqueResources([
+    ...(study?.relatedArticles ?? []).map(toArticle),
+    ...(study?.relatedTemplates ?? []).map(toTemplate),
+    ...(study?.relatedWorkflows ?? []).map(toWorkflow),
     ...knowledgeTopics.filter((topic) => topic[field].includes(slug)).flatMap(resourcesForTopic),
     ...articlesForResource(kind, slug),
+    ...caseStudies.filter((item) => (kind === "模板" ? item.relatedTemplates : kind === "AI 工作流" ? item.relatedWorkflows : []).includes(slug)).map((item) => toCase(item.slug)),
   ], current?.href)
 }
 export function articlesForResource(kind: "案例" | "模板" | "AI 工作流", slug: string): RelatedResource[] {
