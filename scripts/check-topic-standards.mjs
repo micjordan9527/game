@@ -51,6 +51,7 @@ export function checkTopicStandards(root, errors) {
   const flows = readRecords(root, "src/data/articleFlows.ts", "articleFlows")
   const showcase = readRecords(root, "src/data/showcase.ts", "showcaseItems")
   const sports = readRecords(root, "src/data/sports.ts", "sportsModules")
+  const home = readRecords(root, "src/data/homeContent.ts", "homeContent")
   for (const article of articles) {
     if (!visuals.some((image) => image.articleSlug === article.slug) && !flows[article.slug]?.steps?.length)
       errors.push(`article ${article.slug}: missing visual explanation`)
@@ -134,6 +135,20 @@ export function checkTopicStandards(root, errors) {
       .map((item) => `/design/${item.name}`),
     ...workflows.map((item) => `/ai-workflows/${item.slug}`),
   ])
+  routes.add("/sports")
+  for (const [name, selected, known] of [
+    ["cases", home.caseSlugs, ids.cases],
+    ["workflows", home.workflowSlugs, ids.workflows],
+    ["diagrams", home.diagrams.map((item) => item.slug), new Set(visuals.map((item) => item.slug))],
+  ]) {
+    if (selected.length !== 2 || new Set(selected).size !== 2)
+      errors.push(`homepage ${name}: expected two unique selections`)
+    for (const slug of selected) if (!known.has(slug)) errors.push(`homepage ${name}: unknown resource ${slug}`)
+  }
+  if (home.topics.length !== 6) errors.push("homepage: expected six business topics")
+  for (const link of [...home.topics, ...home.quickLinks]) {
+    if (!routes.has(link.href)) errors.push(`homepage: unknown destination ${link.href}`)
+  }
   if (new Set(roles.map((role) => role.slug)).size !== 5 || roles.length !== 5)
     errors.push("role paths: expected five unique roles")
   for (const role of roles) {

@@ -34,9 +34,11 @@
 1. `npm ci`
 2. `npm run check:content`
 3. `npm run build`
-4. `npm run check:browser` 验证81个站内页面的标题、无课程界面、首屏作品与手机布局，并检查原型、图片放大、搜索、角色筛选、可选模板草稿和复制导出。
+4. `npm run check:browser` 验证81个站内页面的标题、无课程界面、首屏案例与手机布局，并检查首页搜索和主题入口、原型、图片放大、角色筛选、可选模板草稿和复制导出。
 5. `npm run dev` 预览关键页面。开发与生产构建共用 `.next`，构建前先停止自己启动的开发服务。
 
 浏览器检查使用已安装的 Chromium 或 Chrome，路径可通过 `CHROMIUM_EXECUTABLE` 指定。脚本自动启动本地静态服务，不需要另开预览进程。`TEST_BASE_PATH=/game` 用于验证 Pages 构建；`HTML_CHUNK_DELAY_MS=30` 可模拟分段到达的 HTML。设置 `BASE_URL` 可验证已部署版本（先构建 `out` 作为页面清单），`REFRESH_ROUNDS` 控制每个案例、每种宽度的刷新次数。需要环境 HTTP 代理时显式提供 `BROWSER_PROXY`，保持系统 CA 信任与 TLS 验证。
+
+仅调整首页时，可在构建后运行 `CHECK_SCOPE=home npm run check:browser`，检查1440/390宽度下的推荐内容、六个业务主题、角色与常用资料入口、更新日期、排列顺序和搜索返回。默认检查与 CI 仍覆盖全站。首页推荐在 `src/data/homeContent.ts` 明确配置，新增资料不会自动替换推荐。
 
 每项可独立交付的改动先完成相关验证，再按当前授权推送并核对 Netlify 和 GitHub Actions 发布结果；区分“已提交”和“已上线”。

@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react"
 import type { ShowcaseItem } from "@/data/showcase"
 import { assetPath } from "@/lib/assets"
 
-export function ShowcaseGrid({ items }: { items: ShowcaseItem[] }) {
+export function ShowcaseGrid({ items, titleAs: Heading = "h2" }: { items: ShowcaseItem[]; titleAs?: "h2" | "h3" }) {
   return (
     <div className="grid gap-5 md:grid-cols-2">
       {items.map((item, index) => (
@@ -27,7 +27,7 @@ export function ShowcaseGrid({ items }: { items: ShowcaseItem[] }) {
           </div>
           <div className="p-5">
             <div className="flex items-center justify-between gap-3">
-              <h2 className="text-lg font-semibold text-ink">{item.title}</h2>
+              <Heading className="text-lg font-semibold text-ink">{item.title}</Heading>
               <ArrowUpRight className="h-4 w-4 shrink-0 text-brand-700" aria-hidden="true" />
             </div>
             <p className="mt-2 text-sm leading-7 text-muted">{item.description}</p>

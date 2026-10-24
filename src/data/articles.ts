@@ -21,7 +21,7 @@ export const articles: Article[] = [
     audience: ["产品", "客服", "运营", "技术", "测试"],
     difficulty: "进阶",
     date: "2026-10-23",
-    updatedAt: "2026-10-23",
+    updatedAt: "2026-10-24",
   },
   {
     slug: "wallet-payment-reconciliation",
@@ -32,7 +32,7 @@ export const articles: Article[] = [
     audience: ["产品", "技术", "运营", "财务", "测试"],
     difficulty: "进阶",
     date: "2026-10-23",
-    updatedAt: "2026-10-23",
+    updatedAt: "2026-10-24",
   },
   {
     slug: "what-is-white-label",
@@ -98,7 +98,7 @@ export const articles: Article[] = [
     audience: ["产品", "运营", "财务", "技术", "测试"],
     difficulty: "进阶",
     date: "2026-05-29",
-    updatedAt: "2026-10-23",
+    updatedAt: "2026-10-24",
   },
   {
     slug: "operation-product-conversion-model",
