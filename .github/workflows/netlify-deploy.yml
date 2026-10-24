@@ -35,6 +35,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Check production navigation
+        run: npm run check:browser
+
   deploy:
     needs: verify
     runs-on: ubuntu-latest

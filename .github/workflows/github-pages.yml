@@ -40,6 +40,11 @@ jobs:
           GITHUB_PAGES: "true"
         run: npm run build
 
+      - name: Check production navigation under /game
+        env:
+          TEST_BASE_PATH: "/game"
+        run: npm run check:browser
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
