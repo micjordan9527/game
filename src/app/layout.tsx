@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
+import LoadingPage from "./loading"
 import "./globals.css"
 import { Header } from "@/components/layout/Header"
 import { SidebarNav } from "@/components/layout/SidebarNav"
@@ -37,7 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <div className="mx-auto flex w-full max-w-[1440px]">
           <SidebarNav />
           <div className="min-w-0 flex-1">
-            <main>{children}</main>
+            <main><Suspense fallback={<LoadingPage />}>{children}</Suspense></main>
             <Footer />
           </div>
         </div>
