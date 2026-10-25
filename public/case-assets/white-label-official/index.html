@@ -1580,6 +1580,34 @@
       footer { scroll-snap-align: none; }
     }
   </style>
+  <script>
+    if (new URLSearchParams(location.search).get("case-preview") === "1") {
+      document.documentElement.dataset.casePreview = "true";
+      const positionModule = () => {
+        const target = document.getElementById(location.hash.slice(1));
+        if (!target) return;
+        const root = matchMedia("(max-width: 980px)").matches ? document.scrollingElement : document.body;
+        root?.scrollTo({ top: target.getBoundingClientRect().top + root.scrollTop - 76, behavior: "instant" });
+      };
+      window.addEventListener("load", positionModule);
+      window.addEventListener("hashchange", positionModule);
+    }
+  </script>
+  <style>
+    /* Module previews must land predictably without scroll-snap/reveal transitions. */
+    html[data-case-preview] body { scroll-snap-type: none; scroll-behavior: auto; }
+    html[data-case-preview] .reveal-on-scroll,
+    html[data-case-preview] .zoom-in { opacity: 1; transform: none; transition: none; }
+    .section > .container { width: 100%; min-width: 0; }
+    .hero-grid > *, .grid > * { min-width: 0; }
+    @media (max-width: 640px) {
+      .hero-card .row { flex-wrap: wrap; }
+      .topbar .brand, .topbar .actions { flex-shrink: 0; }
+      .topbar #btnDemoTop { display: none; }
+      .topbar .actions { gap: 6px; }
+      .topbar .actions .btn { font-size: 13px; padding: 10px; }
+    }
+  </style>
 </head>
 
 <body>
@@ -1729,7 +1757,7 @@
           </div>
           <div class="sp"></div>
           <button class="btn btn-primary" id="btnDemoCard" type="button" data-i18n="hero_card_btn">立即获取方案报价</button>
-          <div class="fine" data-i18n="hero_card_fine">提交需求后，我们会在 1 个工作日内联系并提供匹配方案。</div>
+          <div class="fine" data-i18n="hero_card_fine">示例交付范围按前台、后台、支付与数据分组。</div>
         </aside>
       </div>
     </div>
@@ -1742,8 +1770,8 @@
     <div class="container">
       <div class="section-head">
         <div>
-          <h2 data-i18n="solution_title">解决方案</h2>
-          <p data-i18n="solution_desc">面向不同阶段团队：从快速启动到深度定制，提供可落地的交付与运营支持。</p>
+          <h2 data-i18n="solution_title">服务方案</h2>
+          <p data-i18n="solution_desc">对照标准搭建、运营支持与定制开发的服务范围。</p>
         </div>
       </div>
 
@@ -1808,12 +1836,12 @@
           <div class="sol-head">
             <div class="sol-ico">🚀</div>
             <div>
-              <b class="sol-title" data-i18n="sol_card1_title">快速启动包</b>
+              <b class="sol-title" data-i18n="sol_card1_title">标准搭建</b>
               <span class="sol-sub" data-i18n="sol_card1_sub">适合：新团队 / 试水项目 / 极速上线</span>
             </div>
           </div>
           <div class="sol-body">
-            <p data-i18n="sol_card1_desc">标准化模板 + 全品类接入，7-14天极速交付，低成本验证市场。</p>
+            <p data-i18n="sol_card1_desc">以模板与基础功能组成服务范围，查看前台与后台的交付项。</p>
             <ul class="sol-feat">
               <li><span class="dot">✓</span><span data-i18n="sol_card1_feat1">标准 UI 模板（支持换色）</span></li>
               <li><span class="dot">✓</span><span data-i18n="sol_card1_feat2">全品类游戏聚合接入</span></li>
@@ -1831,12 +1859,12 @@
           <div class="sol-head">
             <div class="sol-ico">🧠</div>
             <div>
-              <b class="sol-title" data-i18n="sol_card2_title">运营增长包</b>
+              <b class="sol-title" data-i18n="sol_card2_title">运营支持</b>
               <span class="sol-sub" data-i18n="sol_card2_sub">适合：成熟团队 / 流量变现 / 精细运营</span>
             </div>
           </div>
           <div class="sol-body">
-            <p data-i18n="sol_card2_desc">在标准版基础上，增加强大的运营工具与数据分析能力，提升留存与LTV。</p>
+            <p data-i18n="sol_card2_desc">活动系统、代理体系与数据分析的功能组合。</p>
             <ul class="sol-feat">
               <li><span class="dot">✓</span><span data-i18n="sol_card2_feat1">包含快速启动包所有功能</span></li>
               <li><span class="dot">★</span><span data-i18n="sol_card2_feat2">活动中心/任务/签到/转盘</span></li>
@@ -1853,12 +1881,12 @@
           <div class="sol-head">
             <div class="sol-ico">🛠️</div>
             <div>
-              <b class="sol-title" data-i18n="sol_card3_title">深度定制包</b>
+              <b class="sol-title" data-i18n="sol_card3_title">定制开发</b>
               <span class="sol-sub" data-i18n="sol_card3_sub">适合：集团客户 / 独特模式 / 品牌升级</span>
             </div>
           </div>
           <div class="sol-body">
-            <p data-i18n="sol_card3_desc">按业务模型深度定制，支持私有化部署与源码交付，满足合规与安全需求。</p>
+            <p data-i18n="sol_card3_desc">私有化部署、业务规则定制与系统模块划分。</p>
             <ul class="sol-feat">
               <li><span class="dot">✓</span><span data-i18n="sol_card3_feat1">专属 UI/UX 设计定制</span></li>
               <li><span class="dot">✓</span><span data-i18n="sol_card3_feat2">私有化部署 / 独立数据库</span></li>
@@ -1952,8 +1980,8 @@
     <div class="container">
       <div class="section-head">
         <div>
-          <h2 data-i18n="product_title">产品能力</h2>
-          <p data-i18n="product_desc">覆盖「前台体验 + 后台运营 + 风控财务 + 数据增长」全链路，支持 PC/H5/APP 多端一致。</p>
+          <h2 data-i18n="product_title">产品能力与结构</h2>
+          <p data-i18n="product_desc">用架构图与能力分组，说明前台、后台、钱包、风控和数据服务之间的关系。</p>
         </div>
       </div>
 
@@ -2136,20 +2164,20 @@
         </div>
         <div class="quad" aria-label="能力地图">
           <div class="qcard">
-            <div class="qh"><b data-i18n="product_map_q1_t">前台体验</b><span data-i18n="product_map_q1_b">提转化</span></div>
-            <p data-i18n="product_map_q1_d">更快加载、更顺交互、更一致多端体验，减少流失。</p>
+            <div class="qh"><b data-i18n="product_map_q1_t">前台体验</b><span data-i18n="product_map_q1_b">多端体验</span></div>
+            <p data-i18n="product_map_q1_d">页面加载、交互反馈与多端布局。</p>
           </div>
           <div class="qcard">
-            <div class="qh"><b data-i18n="product_map_q2_t">后台运营</b><span data-i18n="product_map_q2_b">省人力</span></div>
-            <p data-i18n="product_map_q2_d">活动/任务/返水返佣可配置可复用，运营不靠人肉。</p>
+            <div class="qh"><b data-i18n="product_map_q2_t">后台运营</b><span data-i18n="product_map_q2_b">规则配置</span></div>
+            <p data-i18n="product_map_q2_d">活动、任务与返佣规则的配置入口。</p>
           </div>
           <div class="qcard">
-            <div class="qh"><b data-i18n="product_map_q3_t">风控财务</b><span data-i18n="product_map_q3_b">稳现金</span></div>
-            <p data-i18n="product_map_q3_d">黑白名单、限额、异常识别、对账闭环，降低损失。</p>
+            <div class="qh"><b data-i18n="product_map_q3_t">风控财务</b><span data-i18n="product_map_q3_b">资金核对</span></div>
+            <p data-i18n="product_map_q3_d">黑白名单、限额、异常识别与对账。</p>
           </div>
           <div class="qcard">
-            <div class="qh"><b data-i18n="product_map_q4_t">数据增长</b><span data-i18n="product_map_q4_b">放大 LTV</span></div>
-            <p data-i18n="product_map_q4_d">看板、归因、漏斗与分层，让投放与活动可持续优化。</p>
+            <div class="qh"><b data-i18n="product_map_q4_t">数据增长</b><span data-i18n="product_map_q4_b">数据分析</span></div>
+            <p data-i18n="product_map_q4_d">看板、归因、漏斗与数据分层。</p>
           </div>
         </div>
 
@@ -2161,7 +2189,7 @@
               <div class="ico">🧩</div>
               <div>
                 <b data-i18n="product_feat1_title">聚合接入与钱包体系</b>
-                <p data-i18n="product_feat1_desc">统一钱包、统一结算与订单体系，支持多供应商聚合、API 扩展与风控策略挂载。</p>
+                <p data-i18n="product_feat1_desc">查看页面加载、交互反馈与多端一致性的设计。</p>
                 <div class="chips">
                   <span class="chip" data-i18n="product_feat1_chip1">统一钱包</span><span class="chip" data-i18n="product_feat1_chip2">订单/结算</span><span class="chip" data-i18n="product_feat1_chip3">API 扩展</span>
                 </div>
@@ -2174,7 +2202,7 @@
               <div class="ico">📈</div>
               <div>
                 <b data-i18n="product_feat2_title">运营工具与增长组件</b>
-                <p data-i18n="product_feat2_desc">活动中心、任务体系、转盘/红包、返水返佣、VIP、渠道推广与代理管理。</p>
+                <p data-i18n="product_feat2_desc">活动、返佣、规则配置与代理渠道的后台功能。</p>
                 <div class="chips">
                   <span class="chip" data-i18n="product_feat2_chip1">活动系统</span><span class="chip" data-i18n="product_feat2_chip2">返水返佣</span><span class="chip" data-i18n="product_feat2_chip3">渠道/代理</span>
                 </div>
@@ -2187,7 +2215,7 @@
               <div class="ico">🛡️</div>
               <div>
                 <b data-i18n="product_feat3_title">风控与财务能力</b>
-                <p data-i18n="product_feat3_desc">黑白名单、设备指纹、异常行为识别、限额策略、出入金审核与对账报表。</p>
+                <p data-i18n="product_feat3_desc">支付聚合、异常识别、限额策略与对账流程。</p>
                 <div class="chips">
                   <span class="chip" data-i18n="product_feat3_chip1">设备风控</span><span class="chip" data-i18n="product_feat3_chip2">限额策略</span><span class="chip" data-i18n="product_feat3_chip3">财务对账</span>
                 </div>
@@ -2200,7 +2228,7 @@
               <div class="ico">📊</div>
               <div>
                 <b data-i18n="product_feat4_title">数据看板与分析</b>
-                <p data-i18n="product_feat4_desc">实时 GMV/留存/转化、渠道效果、用户分层、活动 ROI，支持埋点与 A/B。</p>
+                <p data-i18n="product_feat4_desc">经营看板、渠道归因、留存漏斗与数据分层。</p>
                 <div class="chips">
                   <span class="chip" data-i18n="product_feat4_chip1">实时看板</span><span class="chip" data-i18n="product_feat4_chip2">渠道归因</span><span class="chip" data-i18n="product_feat4_chip3">A/B 测试</span>
                 </div>
@@ -2870,7 +2898,7 @@
       <div class="section-head">
         <div>
           <h2 data-i18n="contact_title">联系我们</h2>
-          <p data-i18n="contact_desc">提交需求后，我们会尽快与你联系（可以将此表单接到后端 API）。</p>
+          <p data-i18n="contact_desc">查看联系方式与需求表单的布局。此页面为案例演示。</p>
         </div>
       </div>
 
@@ -2882,7 +2910,7 @@
               • <span data-i18n="contact_label_email">邮箱</span>：<span style="color:var(--brand2)">bd@example.com</span><br/>
               • Telegram：<span style="color:var(--brand2)">@baowang_service</span><br/>
               • WhatsApp：<span style="color:var(--brand2)">+00 0000 0000</span><br/>
-              <span style="color:rgba(234,240,255,.55); font-size:12px;" data-i18n="contact_info_note">（以上为占位，替换为你们真实信息）</span>
+              <span style="color:rgba(234,240,255,.55); font-size:12px;" data-i18n="contact_info_note">（示例联系方式，不提供实际咨询）</span>
             </p>
 
             <div class="chips">
@@ -2923,7 +2951,7 @@
 
               <div class="sp"></div>
               <button class="btn btn-primary" type="submit" data-i18n="contact_submit_btn">提交需求（示例）</button>
-              <div class="fine" data-i18n="contact_form_note">提示：当前为前端示例，会在浏览器弹出模拟提交结果；上线时可接入后端。</div>
+              <div class="fine" data-i18n="contact_form_note">表单仅演示填写与反馈，不会发送数据。</div>
             </form>
           </div>
         </div>
@@ -2958,9 +2986,7 @@
         <button class="x" id="close" type="button" aria-label="关闭">✕</button>
       </div>
       <div class="modal-body">
-        <p style="margin:0; color:var(--muted); font-size:13px; line-height:1.7;" data-i18n="modal_desc">
-          请留下联系方式与需求方向，我们将为你匹配适合的交付方案（标准/运营/定制），并提供演示账号或演示视频。
-        </p>
+        <p style="margin:0; color:var(--muted); font-size:13px; line-height:1.7;" data-i18n="modal_desc">查看需求采集表单的字段与分组。填写内容仅用于当前界面演示。</p>
 
         <div class="grid" style="margin-top:12px;">
           <div class="col12">
@@ -2996,7 +3022,7 @@
           </div>
         </div>
 
-        <div class="fine" data-i18n="modal_note">你也可以直接在“联系我们”处填写表单，或替换为你们的在线客服/IM 跳转链接。</div>
+        <div class="fine" data-i18n="modal_note">表单仅演示填写与反馈，不会发送数据。</div>
       </div>
     </div>
   </div>
@@ -3115,12 +3141,12 @@
       hero_btn_demo: "📺 获取可运营版本演示", hero_btn_product: "🧾 查看真实上线方案",
       hero_metric_delivery: "⚡ 标准交付：7-14 天（可定制）", hero_metric_security: "🔒 安全体系：风控/限额/黑白名单", hero_metric_data: "📊 数据：实时报表/渠道/留存", hero_metric_api: "🧩 接入：API/钱包/游戏聚合",
       anchor_arch: "🧭 架构图", anchor_cap: "🧩 能力锚点", anchor_delivery: "🛡️ 交付流程", anchor_compare: "⚖️ 选型对比",
-      hero_card_title: "交付范围（示例）", hero_card_row1_label: "全站前台", hero_card_row1_val: "PC / H5 / 多语言", hero_card_row2_label: "后台系统", hero_card_row2_val: "运营 / 风控 / 财务 / 渠道", hero_card_row3_label: "支付能力", hero_card_row3_val: "多通道 / 代收代付 / 风控策略", hero_card_row4_label: "数据能力", hero_card_row4_val: "看板 / 报表 / 埋点 / A/B", hero_card_row5_label: "可选增值", hero_card_tag_app: "APP 打包", hero_card_tag_ads: "渠道投放", hero_card_tag_cs: "客服系统", hero_card_btn: "立即获取方案报价", hero_card_fine: "提交需求后，我们会在 1 个工作日内联系并提供匹配方案。",
+      hero_card_title: "交付范围（示例）", hero_card_row1_label: "全站前台", hero_card_row1_val: "PC / H5 / 多语言", hero_card_row2_label: "后台系统", hero_card_row2_val: "运营 / 风控 / 财务 / 渠道", hero_card_row3_label: "支付能力", hero_card_row3_val: "多通道 / 代收代付 / 风控策略", hero_card_row4_label: "数据能力", hero_card_row4_val: "看板 / 报表 / 埋点 / A/B", hero_card_row5_label: "可选增值", hero_card_tag_app: "APP 打包", hero_card_tag_ads: "渠道投放", hero_card_tag_cs: "客服系统", hero_card_btn: "立即获取方案报价", hero_card_fine: "示例交付范围按前台、后台、支付与数据分组。",
       global_title: "国际化扩展（为出海留好路）", global_desc: "你的第一站不是终点：多语言/多币种一次规划，本地支付按需启用，合规能力可扩展，业务长大也不用推倒重来。", global_chip_lang: "多语言", global_chip_fiat: "法币/加密", global_chip_local: "本地支付", global_chip_cdn: "CDN/托管", global_matrix_title: "示例覆盖区域",
       country_cn: "中国", country_cn_info: "语言：中文/英文｜币种：CNY/USDT｜支付：通道对接", country_hk: "香港", country_hk_info: "语言：繁中/英文｜币种：HKD/USDT｜支付：FPS/卡", country_tw: "台湾", country_tw_info: "语言：繁中｜币种：TWD/USDT｜支付：本地通道", country_jp: "日本", country_jp_info: "语言：日文｜币种：JPY/USDT｜支付：本地卡", country_kr: "韩国", country_kr_info: "语言：韩文｜币种：KRW/USDT｜支付：本地通道", country_th: "泰国", country_th_info: "语言：泰文｜币种：THB/USDT｜支付：PromptPay", country_vn: "越南", country_vn_info: "语言：越文｜币种：VND/USDT｜支付：本地转账", country_id: "印尼", country_id_info: "语言：印尼文｜币种：IDR/USDT｜支付：E-wallet", country_my: "马来", country_my_info: "语言：马来/英文｜币种：MYR/USDT｜支付：本地通道", country_ph: "菲律宾", country_ph_info: "语言：英文/塔加洛｜币种：PHP/USDT｜支付：本地通道", country_sg: "新加坡", country_sg_info: "语言：英文/中文｜币种：SGD/USDT｜支付：本地卡", country_in: "印度", country_in_info: "语言：英文/印地｜币种：INR/USDT｜支付：本地通道", country_ae: "中东", country_ae_info: "语言：阿文/英文｜币种：AED/USDT｜支付：本地卡", country_br: "巴西", country_br_info: "语言：葡文｜币种：BRL/USDT｜支付：PIX", country_mx: "墨西哥", country_mx_info: "语言：西文｜币种：MXN/USDT｜支付：本地通道", country_us: "北美", country_us_info: "语言：英文｜币种：USD/USDT｜支付：卡/加密",
       global_feat1_title: "多语言/本地化一次规划", global_feat1_desc: "文案、时间与货币格式统一体系，后续新增语言不推倒重做。", global_feat2_title: "多币种与支付按需启用", global_feat2_desc: "法币/加密可组合，按区域启用本地支付与结算。", global_feat3_title: "合规与风控可扩展", global_feat3_desc: "GeoIP、KYC 与反欺诈策略模块化，按市场要求逐步打开。", global_feat4_title: "全球节点加速", global_feat4_desc: "CDN 与托管方案可扩展，保障跨国访问体验与稳定性。",
-      solution_title: "解决方案（按业务阶段匹配）", solution_desc: "不同阶段的团队，问题完全不同；我们按“你现在在哪一步”给方案，帮你先上线、再增长、再差异化。", sol_card1_title: "快速启动型", sol_card1_desc: "目标：低成本上线，验证市场。解决：模板化 + 必要功能，不做冗余。", sol_card1_chip1: "低成本上线", sol_card1_chip2: "模板化交付", sol_card1_chip3: "必要功能", sol_card2_title: "增长运营型", sol_card2_desc: "目标：提高留存、转化、LTV。解决：活动系统、代理体系、数据分析。", sol_card2_chip1: "活动系统", sol_card2_chip2: "代理体系", sol_card2_chip3: "数据分析", sol_card3_title: "深度定制型", sol_card3_desc: "目标：长期品牌与差异化。解决：私有化、规则定制、系统解耦。", sol_card3_chip1: "私有化部署", sol_card3_chip2: "规则定制", sol_card3_chip3: "系统解耦",
-      product_title: "产品能力（不只是功能）", product_desc: "不只是“有什么功能”，而是“能帮你怎么赚钱”：提升转化、降低人力、控风险、放大增长。",
+      solution_title: "服务方案", solution_desc: "对照标准搭建、运营支持与定制开发的服务范围。", sol_card1_title: "标准搭建", sol_card1_desc: "以模板与基础功能组成服务范围，查看前台与后台的交付项。", sol_card1_chip1: "基础配置", sol_card1_chip2: "模板化交付", sol_card1_chip3: "必要功能", sol_card2_title: "运营支持", sol_card2_desc: "活动系统、代理体系与数据分析的功能组合。", sol_card2_chip1: "活动系统", sol_card2_chip2: "代理体系", sol_card2_chip3: "数据分析", sol_card3_title: "定制开发", sol_card3_desc: "私有化部署、业务规则定制与系统模块划分。", sol_card3_chip1: "私有化部署", sol_card3_chip2: "规则定制", sol_card3_chip3: "系统解耦",
+      product_title: "产品能力与结构", product_desc: "用架构图与能力分组，说明前台、后台、钱包、风控和数据服务之间的关系。",
       arch_title: "平台架构（扫图版）", arch_sub: "从前台到风控与数据，一张图看全链路",
       arch_layer1: "应用层", arch_l1_c1: "PC", arch_l1_c2: "H5", arch_l1_c3: "APP（可选）", arch_l1_c4: "代理端",
       arch_layer2: "业务中台", arch_l2_c1: "统一钱包", arch_l2_c2: "游戏聚合", arch_l2_c3: "活动/任务/VIP", arch_l2_c4: "代理/渠道",
@@ -3130,12 +3156,12 @@
       cap_title: "成熟度锚点", cap_sub: "专业人士快速验收的 6 项",
       cap_k1: "交付边界", cap_v1: "清单可对照", cap_k2: "一致性", cap_v2: "账号/钱包/风控统一", cap_k3: "可运营", cap_v3: "活动/代理/数据", cap_k4: "可扩展", cap_v4: "供应商/支付可插拔", cap_k5: "可审计", cap_v5: "权限/日志/对账闭环", cap_k6: "稳定性", cap_v6: "监控/灰度/回滚",
       product_matrix_title: "游戏品类覆盖", product_cat_sports: "体育", product_cat_sports_desc: "赛事/滚球/串关", product_cat_live: "真人", product_cat_live_desc: "百家乐/轮盘", product_cat_esports: "电竞", product_cat_esports_desc: "赛事/盘口", product_cat_chess: "棋牌", product_cat_chess_desc: "德州/红黑大战", product_cat_slots: "电子", product_cat_slots_desc: "老虎机/捕鱼", product_cat_lottery: "彩票", product_cat_lottery_desc: "开奖/走势",
-      product_feat1_title: "前台体验能力", product_feat1_desc: "提升转化率：更快加载、更顺交互、更一致的多端体验。", product_feat1_chip1: "多端一致", product_feat1_chip2: "性能优化", product_feat1_chip3: "体验转化", product_feat2_title: "后台运营能力", product_feat2_desc: "降低人力成本：活动/任务/返水返佣自动化，规则配置可视化。", product_feat2_chip1: "活动自动化", product_feat2_chip2: "规则配置", product_feat2_chip3: "代理渠道", product_feat3_title: "风控与财务能力", product_feat3_desc: "控风险、稳现金流：支付聚合、异常识别、限额策略、对账闭环。", product_feat3_chip1: "支付聚合", product_feat3_chip2: "限额策略", product_feat3_chip3: "自动对账", product_feat4_title: "数据与增长能力", product_feat4_desc: "知道钱从哪赚、怎么继续放大：看板、归因、留存漏斗、LTV。", product_feat4_chip1: "实时看板", product_feat4_chip2: "渠道归因", product_feat4_chip3: "留存/LTV", product_cta_btn1: "📩 获取真实上线方案", product_cta_btn2: "🤝 预约项目评估",
-      product_map_title: "能力地图（扫图版）", product_map_sub: "把“功能点”翻译成“业务结果”",
-      product_map_q1_t: "前台体验", product_map_q1_b: "提转化", product_map_q1_d: "更快加载、更顺交互、更一致多端体验，减少流失。",
-      product_map_q2_t: "后台运营", product_map_q2_b: "省人力", product_map_q2_d: "活动/任务/返水返佣可配置可复用，运营不靠人肉。",
-      product_map_q3_t: "风控财务", product_map_q3_b: "稳现金", product_map_q3_d: "黑白名单、限额、异常识别、对账闭环，降低损失。",
-      product_map_q4_t: "数据增长", product_map_q4_b: "放大 LTV", product_map_q4_d: "看板、归因、漏斗与分层，让投放与活动可持续优化。",
+      product_feat1_title: "前台体验能力", product_feat1_desc: "查看页面加载、交互反馈与多端一致性的设计。", product_feat1_chip1: "多端一致", product_feat1_chip2: "性能优化", product_feat1_chip3: "体验转化", product_feat2_title: "后台运营能力", product_feat2_desc: "活动、返佣、规则配置与代理渠道的后台功能。", product_feat2_chip1: "活动自动化", product_feat2_chip2: "规则配置", product_feat2_chip3: "代理渠道", product_feat3_title: "风控与财务能力", product_feat3_desc: "支付聚合、异常识别、限额策略与对账流程。", product_feat3_chip1: "支付聚合", product_feat3_chip2: "限额策略", product_feat3_chip3: "自动对账", product_feat4_title: "数据与增长能力", product_feat4_desc: "经营看板、渠道归因、留存漏斗与数据分层。", product_feat4_chip1: "实时看板", product_feat4_chip2: "渠道归因", product_feat4_chip3: "留存/LTV", product_cta_btn1: "📩 获取真实上线方案", product_cta_btn2: "🤝 预约项目评估",
+      product_map_title: "能力地图（扫图版）", product_map_sub: "按业务职责分组查看功能",
+      product_map_q1_t: "前台体验", product_map_q1_b: "多端体验", product_map_q1_d: "页面加载、交互反馈与多端布局。",
+      product_map_q2_t: "后台运营", product_map_q2_b: "规则配置", product_map_q2_d: "活动、任务与返佣规则的配置入口。",
+      product_map_q3_t: "风控财务", product_map_q3_b: "资金核对", product_map_q3_d: "黑白名单、限额、异常识别与对账。",
+      product_map_q4_t: "数据增长", product_map_q4_b: "数据分析", product_map_q4_d: "看板、归因、漏斗与数据分层。",
       vendors_title: "供应商与内容（不是多，而是稳）", vendors_desc: "游戏数量不是竞争力，<b style='color:var(--brand2)'>稳定接入与统一体验</b>才是：避免单一依赖、减少对接混乱、随市场热点快速上下新。", vendors_feat1_title: "覆盖主流，避免单一依赖", vendors_feat1_desc: "多家头部供应商可选，降低供给侧风险与业务波动。", vendors_feat2_title: "统一接入，减少对接混乱", vendors_feat2_desc: "统一钱包/风控/结算口径，降低联调与维护成本。", vendors_feat3_title: "快速上新，跟上市场热点", vendors_feat3_desc: "按需启用/下线游戏与厂商，运营节奏更灵活。",
       games_title: "游戏内容展示", games_desc: "这里展示的是体验与样式示例；上线时可按你的市场与节奏配置内容。", game_name_dice: "骰子", game_name_baccarat: "百家乐", game_name_roulette: "轮盘", game_name_blackjack: "21点", game_name_slot1: "宙斯", game_name_slot2: "麻将胡了", game_name_poker: "德州扑克", game_name_sicbo: "色碟", game_badge_new: "新游", game_badge_hot: "热门", game_badge_classic: "经典",
       adv_title: "对比优势（不选会怎样）", adv_desc: "别只看“能不能做”，更要看“会不会失控”。我们把常见坑写在台面上，帮你少走弯路。",
@@ -3164,9 +3190,9 @@
       case_title: "成功案例（结果导向）", case_desc: "上线周期、使用模块、带来变化，一眼看懂。", case_a_title: "案例 A：综合娱乐平台", case_a_desc: "上线周期：12 天｜使用：多端站点 + 运营后台 + 活动系统｜变化：首充转化提升，运营效率提升。", case_a_badge1: "12 天上线", case_a_badge2: "活动增长", case_a_badge3: "渠道归因", case_b_title: "案例 B：体育为主站点", case_b_desc: "上线周期：14 天｜使用：体育/电竞 + 监控告警 + 风控限额｜变化：高峰更稳，异常订单下降。", case_b_badge1: "14 天上线", case_b_badge2: "高并发", case_b_badge3: "风控体系", case_c_title: "案例 C：私有化部署", case_c_desc: "上线周期：20 天｜使用：私有化 + 规则定制 + 数据看板｜变化：结算更可控，扩展新业务更快。", case_c_badge1: "20 天上线", case_c_badge2: "私有化", case_c_badge3: "可扩展",
       partners_title: "合作生态（可替换 Logo）", partners_desc: "支持对接多类游戏供应商、支付通道与第三方服务系统。", partners_chip1: "游戏供应商 A", partners_chip2: "游戏供应商 B", partners_chip3: "游戏供应商 C", partners_chip4: "支付通道 A", partners_chip5: "支付通道 B", partners_chip6: "支付通道 C", partners_chip7: "短信/邮件", partners_chip8: "客服系统", partners_chip9: "风控服务", partners_chip10: "CDN/加速",
       faq_title: "FAQ", faq_desc: "常见问题与解答（可按实际交付范围调整）。", faq_q1: "交付周期一般多久？", faq_a1: "标准模板一般可在 7-14 天完成搭建与联调；如涉及深度定制、私有化部署或复杂对接，会根据需求评估周期。", faq_q2: "支持哪些端？", faq_a2: "默认支持 PC + H5；可选提供 APP 打包与上架咨询（如需）。前后台均可按需定制。", faq_q3: "是否提供运营工具？", faq_a3: "支持活动中心、返水返佣、VIP、任务体系、渠道/代理管理、数据看板等，具体组合可按业务模型选择。", faq_q4: "上线后如何运维？", faq_a4: "提供监控告警、版本迭代与稳定性优化支持；可选提供运营陪跑与增长优化服务。",
-      contact_title: "联系我们", contact_desc: "提交需求后，我们会尽快与你联系（你也可以将此表单接到后端 API）。", contact_business_title: "商务咨询", contact_label_email: "邮箱", contact_info_note: "（以上为占位，替换为你们真实信息）", contact_chip1: "免费评估方案", contact_chip2: "可出报价单", contact_chip3: "可提供演示", contact_demo_btn: "📺 预约在线演示", contact_faq_link: "查看常见问题", contact_form_title: "提交需求", contact_form_company: "公司/团队名称", contact_ph_company: "例如：XX 科技", contact_form_name: "联系人", contact_ph_name: "姓名/称呼", contact_form_contact: "联系方式（Telegram/WhatsApp/邮箱）", contact_ph_contact: "@your_tg / +xx xxxx / you@email.com", contact_form_need: "需求概述", contact_ph_need: "例如：需要体育+真人+电子，PC/H5，支持多语言，计划两周内上线...", contact_submit_btn: "提交需求（示例）", contact_form_note: "提示：当前为前端示例，会在浏览器弹出模拟提交结果；上线时可接入后端。",
+      contact_title: "联系我们", contact_desc: "查看联系方式与需求表单的布局。此页面为案例演示。", contact_business_title: "商务咨询", contact_label_email: "邮箱", contact_info_note: "（示例联系方式，不提供实际咨询）", contact_chip1: "免费评估方案", contact_chip2: "可出报价单", contact_chip3: "可提供演示", contact_demo_btn: "📺 预约在线演示", contact_faq_link: "查看常见问题", contact_form_title: "提交需求", contact_form_company: "公司/团队名称", contact_ph_company: "例如：XX 科技", contact_form_name: "联系人", contact_ph_name: "姓名/称呼", contact_form_contact: "联系方式（Telegram/WhatsApp/邮箱）", contact_ph_contact: "@your_tg / +xx xxxx / you@email.com", contact_form_need: "需求概述", contact_ph_need: "例如：需要体育+真人+电子，PC/H5，支持多语言，计划两周内上线...", contact_submit_btn: "提交需求（示例）", contact_form_note: "表单仅演示填写与反馈，不会发送数据。",
       footer_title: "包网", footer_desc: "PC/H5/APP 多端 · 运营工具 · 风控财务 · 数据增长", footer_quick_links: "快速入口：", footer_link_solution: "解决方案", footer_link_product: "产品能力", footer_link_contact: "联系我们", footer_disclaimer: "* 本页面为官网样式模板示例，可按实际业务范围与合规要求调整展示内容。", fab_chat: "💬 在线客服", footer_rights: "版权所有。",
-      modal_title: "📺 获取产品演示 / 方案报价", modal_desc: "请留下联系方式与需求方向，我们将为你匹配适合的交付方案（标准/运营/定制），并提供演示账号或演示视频。", modal_chip1: "体育", modal_chip2: "真人", modal_chip3: "电竞", modal_chip4: "棋牌", modal_chip5: "电子", modal_chip6: "彩票", modal_chip7: "PC/H5", modal_chip8: "APP", modal_chip9: "私有化", modal_label_name: "联系人", modal_ph_name: "姓名/称呼", modal_label_contact: "联系方式", modal_ph_contact: "@tg / +xx / email", modal_label_need: "需求说明", modal_ph_need: "例如：需要PC+H5，体育+真人，支持多语言，预计上线时间...", modal_btn_submit: "提交并获取演示", modal_btn_later: "稍后再说", modal_note: "你也可以直接在“联系我们”处填写表单，或替换为你们的在线客服/IM 跳转链接。",
+      modal_title: "📺 获取产品演示 / 方案报价", modal_desc: "查看需求采集表单的字段与分组。填写内容仅用于当前界面演示。", modal_chip1: "体育", modal_chip2: "真人", modal_chip3: "电竞", modal_chip4: "棋牌", modal_chip5: "电子", modal_chip6: "彩票", modal_chip7: "PC/H5", modal_chip8: "APP", modal_chip9: "私有化", modal_label_name: "联系人", modal_ph_name: "姓名/称呼", modal_label_contact: "联系方式", modal_ph_contact: "@tg / +xx / email", modal_label_need: "需求说明", modal_ph_need: "例如：需要PC+H5，体育+真人，支持多语言，预计上线时间...", modal_btn_submit: "提交并获取演示", modal_btn_later: "稍后再说", modal_note: "表单仅演示填写与反馈，不会发送数据。",
       alert_fill_info: "请填写联系人与联系方式", alert_submit_success_demo: "提交成功（示例）！\n我们将尽快联系你并提供演示/报价。", alert_submit_success_contact: "提交成功（示例）！\n我们将尽快联系你。",
       viz_export_svg_btn: "导出 SVG 源文件",
       viz_legend_rect_step: "矩形：步骤/方案", viz_legend_diamond_decision: "菱形：决策点", viz_legend_arrow_main: "实线箭头：主路径",

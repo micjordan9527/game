@@ -15,3 +15,8 @@ User wording and presentation preferences (2026-10-24):
 - Use neutral knowledge-base titles that name the subject. Do not write promotional slogans, rhyming promises, or phrases such as “看得见的方案，点得开的作品”.
 - Name the /cases section “案例” consistently in navigation, page headings and breadcrumbs; avoid portfolio-style labels such as “作品案例”.
 - The article “查看详细说明” section must be expanded by default. Do not hide its body to shorten pages unless the user changes this preference.
+
+Sites and GitHub delivery preference (2026-10-25):
+- Continue the existing 包网知识库 Site at https://baowang-knowledge.aurora-5448.chatgpt.site; preserve its current audience.
+- Treat that Site's latest source/version as the editing baseline and retain a recoverable version before changes.
+- After every successful Site update, also commit the delivered changes to the existing GitHub repository https://github.com/micjordan9527/game on its main branch. Preserve unrelated remote changes; report the actual deployment state and GitHub commit link.

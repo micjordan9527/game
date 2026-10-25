@@ -7,12 +7,13 @@ import { chromium } from "playwright-core"
 import { checkUnavailableStorage, checkWorkTools } from "./check-work-tools.mjs"
 import { checkShowcase } from "./check-showcase.mjs"
 import { checkHomepage } from "./check-homepage.mjs"
+import { checkSiteUpdate } from "./check-site-update.mjs"
 
 const root = path.resolve("out")
 const prefix = process.env.TEST_BASE_PATH ?? ""
 const rounds = Number(process.env.REFRESH_ROUNDS ?? 2)
 const scope = process.env.CHECK_SCOPE ?? "all"
-assert(["all", "home"].includes(scope), "CHECK_SCOPE must be all or home")
+assert(["all", "home", "site-update"].includes(scope), "CHECK_SCOPE must be all, home or site-update")
 assert(Number.isInteger(rounds) && rounds > 0 && rounds <= 50, "REFRESH_ROUNDS must be between 1 and 50")
 const contentTypes = {
   ".html": "text/html",
@@ -121,6 +122,7 @@ try {
     })
     const page = await context.newPage()
     await checkHomepage(page, base, prefix, width)
+    if (scope === "site-update" || scope === "all") await checkSiteUpdate(page, base, prefix, width)
     if (scope === "all") {
       await checkShowcase(page, base, prefix, width, rounds)
       await checkWorkTools(page, base, prefix, width)

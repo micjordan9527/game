@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react"
-import { useEffect, useId, useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { assetPath } from "@/lib/assets"
 
 type LongImageItem = {
@@ -28,6 +28,12 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const activeItem = activeIndex === null ? null : items[activeIndex] ?? null
   const canNavigate = items.length > 1
+  const isOpen = activeItem !== null
+  const [viewMode, setViewMode] = useState<"fit" | "actual">("fit")
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const viewportRef = useRef<HTMLDivElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
 
   const showPrevious = () => {
     setActiveIndex((index) => {
@@ -44,23 +50,43 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
   }
 
   useEffect(() => {
-    if (activeIndex === null) return
+    if (!isOpen) return
+
+    const scrollY = window.scrollY
+    const body = document.body
+    const previous = { position: body.style.position, top: body.style.top, width: body.style.width, overflow: body.style.overflow, paddingRight: body.style.paddingRight }
+    const scrollbar = window.innerWidth - document.documentElement.clientWidth
+    body.style.position = "fixed"
+    body.style.top = `-${scrollY}px`
+    body.style.width = "100%"
+    body.style.overflow = "hidden"
+    if (scrollbar) body.style.paddingRight = `${scrollbar}px`
+    closeRef.current?.focus({ preventScroll: true })
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setActiveIndex(null)
-      if (!canNavigate) return
-      if (event.key === "ArrowLeft") showPrevious()
-      if (event.key === "ArrowRight") showNext()
+      if (canNavigate && event.key === "ArrowLeft") { event.preventDefault(); showPrevious() }
+      if (canNavigate && event.key === "ArrowRight") { event.preventDefault(); showNext() }
+      if (event.key === "Tab") {
+        const buttons = dialogRef.current?.querySelectorAll<HTMLElement>("button, [tabindex=\"0\"]")
+        const first = buttons?.[0]
+        const last = buttons?.[buttons.length - 1]
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
+      }
     }
-
-    document.body.style.overflow = "hidden"
     window.addEventListener("keydown", handleKeyDown)
-
     return () => {
-      document.body.style.overflow = ""
+      Object.assign(body.style, previous)
+      window.scrollTo({ top: scrollY, behavior: "instant" })
+      triggerRef.current?.focus({ preventScroll: true })
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [activeIndex, canNavigate])
+  }, [isOpen, canNavigate])
+
+  useEffect(() => {
+    viewportRef.current?.scrollTo({ top: 0, left: 0, behavior: "instant" })
+  }, [activeIndex, viewMode])
 
   if (items.length === 0) {
     return <div className="mt-6 rounded-lg border border-dashed border-line bg-white p-8 text-sm leading-7 text-muted">{emptyMessage}</div>
@@ -78,7 +104,11 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
             </div>
             <button
               className="group relative block w-full cursor-zoom-in bg-paper p-3 text-left"
-              onClick={() => setActiveIndex(index)}
+              onClick={(event) => {
+                triggerRef.current = event.currentTarget
+                setViewMode("fit")
+                setActiveIndex(index)
+              }}
               type="button"
             >
               <picture className="block">
@@ -116,48 +146,43 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
       </section>
 
       {activeItem ? (
-        <div aria-labelledby={titleId} aria-modal="true" className="fixed inset-0 z-[70] bg-ink/80 p-4 backdrop-blur-sm sm:p-6" role="dialog">
+        <div ref={dialogRef} aria-labelledby={titleId} aria-modal="true" className="fixed inset-0 z-[70] bg-ink/80 p-2 backdrop-blur-sm sm:p-6" role="dialog">
           <div className="mx-auto flex h-full max-w-6xl flex-col rounded-lg bg-white shadow-2xl">
-            <div className="flex items-center justify-between gap-4 border-b border-line px-4 py-3 sm:px-5">
-              <h2 className="text-sm font-semibold leading-6 text-ink sm:text-base" id={titleId}>
-                {activeItem.title}
-              </h2>
-              <div className="flex shrink-0 items-center gap-2">
-                {canNavigate ? (
-                  <>
-                    <button
-                      className="flex h-9 w-9 items-center justify-center rounded-md border border-line bg-white text-muted hover:bg-paper hover:text-ink"
-                      onClick={showPrevious}
-                      type="button"
-                      aria-label="上一张"
-                    >
-                      <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                    </button>
-                    <span className="min-w-12 text-center text-xs font-medium text-muted">
-                      {(activeIndex ?? 0) + 1} / {items.length}
-                    </span>
-                    <button
-                      className="flex h-9 w-9 items-center justify-center rounded-md border border-line bg-white text-muted hover:bg-paper hover:text-ink"
-                      onClick={showNext}
-                      type="button"
-                      aria-label="下一张"
-                    >
-                      <ChevronRight className="h-4 w-4" aria-hidden="true" />
-                    </button>
-                  </>
-                ) : null}
-                <button
-                  className="flex h-9 w-9 items-center justify-center rounded-md border border-line bg-white text-muted hover:bg-paper hover:text-ink"
-                  onClick={() => setActiveIndex(null)}
-                  type="button"
-                  aria-label="关闭"
-                >
+            <div className="shrink-0 border-b border-line px-3 py-3 sm:px-5">
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="min-w-0 text-sm font-semibold leading-6 text-ink sm:text-base" id={titleId}>
+                  {activeItem.title}
+                </h2>
+                <button ref={closeRef} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-line text-muted hover:bg-paper hover:text-ink" onClick={() => setActiveIndex(null)} type="button" aria-label="关闭">
                   <X className="h-4 w-4" aria-hidden="true" />
                 </button>
               </div>
+              <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+                <div className="inline-flex gap-1 rounded-md bg-paper p-1" aria-label="图片显示比例">
+                  {([['fit', '适应屏幕'], ['actual', '原尺寸']] as const).map(([mode, label]) => (
+                    <button key={mode} type="button" aria-pressed={viewMode === mode} onClick={() => setViewMode(mode)} className={`rounded px-3 py-2 text-xs font-semibold ${viewMode === mode ? "bg-ink text-white" : "text-muted hover:bg-white"}`}>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                {canNavigate ? (
+                  <div className="flex items-center gap-1">
+                    <button className="flex h-10 w-10 items-center justify-center rounded-md border border-line text-muted hover:bg-paper" onClick={showPrevious} type="button" aria-label="上一张">
+                      <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                    <span className="min-w-10 text-center text-xs text-muted" aria-live="polite">{(activeIndex ?? 0) + 1} / {items.length}</span>
+                    <button className="flex h-10 w-10 items-center justify-center rounded-md border border-line text-muted hover:bg-paper" onClick={showNext} type="button" aria-label="下一张">
+                      <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+              <p className="mt-2 text-xs leading-5 text-muted" id={`${titleId}-hint`}>
+                {viewMode === "actual" ? `原尺寸 ${activeItem.width} × ${activeItem.height}，上下左右滑动查看细节。` : "完整预览；切换原尺寸可查看文字与界面细节。"}
+              </p>
             </div>
-            <div className="min-h-0 flex-1 overflow-auto bg-paper p-3 sm:p-5">
-              <picture className="block">
+            <div ref={viewportRef} role="region" aria-label="图片浏览区域" aria-describedby={`${titleId}-hint`} tabIndex={0} className="min-h-0 flex-1 overflow-auto overscroll-contain bg-paper p-2 sm:p-4">
+              <picture className={viewMode === "fit" ? "flex h-full w-full items-center justify-center" : "block"} style={viewMode === "actual" ? { width: activeItem.width } : undefined}>
                 {activeItem.srcAvif ? <source srcSet={assetPath(activeItem.srcAvif)} type="image/avif" /> : null}
                 {activeItem.srcWebp ? <source srcSet={assetPath(activeItem.srcWebp)} type="image/webp" /> : null}
                 <Image
@@ -166,13 +191,13 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
                   width={activeItem.width}
                   height={activeItem.height}
                   sizes="100vw"
-                  className="mx-auto h-auto w-full max-w-5xl rounded-md bg-white shadow-sm"
-                  loading="lazy"
+                  className={viewMode === "fit" ? "h-auto max-h-full w-auto max-w-full object-contain shadow-sm" : "h-auto max-w-none bg-white shadow-sm"}
+                  style={viewMode === "actual" ? { width: activeItem.width } : undefined}
                 />
               </picture>
             </div>
             {canNavigate ? (
-              <div className="grid gap-2 border-t border-line bg-white p-3">
+              <div className="grid shrink-0 gap-2 border-t border-line bg-white p-3">
                 <p className="px-1 text-xs font-semibold text-muted">
                   点击缩略图可跳转到对应长图
                 </p>
@@ -182,6 +207,8 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
                       key={item.id}
                       type="button"
                       onClick={() => setActiveIndex(index)}
+                      aria-label={`查看${item.title}`}
+                      aria-pressed={activeIndex === index}
                       className={[
                         "group relative h-16 w-12 overflow-hidden rounded-md border p-0.5 ring-1 transition",
                         activeIndex === index ? "border-brand-700 ring-brand-200" : "border-line hover:border-brand-100",

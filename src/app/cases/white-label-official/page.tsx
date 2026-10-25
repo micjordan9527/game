@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { OfficialCasePreview } from "@/components/cases/OfficialCasePreview"
 import { absoluteUrl } from "@/lib/seo"
 import { assetPath } from "@/lib/assets"
 import { appendAssetVersion } from "@/lib/assetVersion"
@@ -17,7 +18,7 @@ export default function WhiteLabelOfficialCasePage() {
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-3xl font-semibold text-ink">包网官网</h1>
-          <p className="mt-2 text-sm leading-7 text-muted">完整页面预览，查看服务展示与内容布局。</p>
+          <p className="mt-2 text-sm leading-7 text-muted">查看服务展示、页面结构与咨询入口，点击下方模块定位。</p>
         </div>
         <a
           href={assetPath(src)}
@@ -28,14 +29,7 @@ export default function WhiteLabelOfficialCasePage() {
           全屏打开 ↗
         </a>
       </div>
-      <div className="mt-5 overflow-hidden rounded-xl border border-line bg-white">
-        <iframe
-          src={assetPath(src)}
-          title="包网官网案例预览"
-          className="h-[78vh] w-full bg-white"
-          sandbox="allow-scripts allow-forms allow-popups"
-        />
-      </div>
+      <OfficialCasePreview src={src} />
     </div>
   )
 }

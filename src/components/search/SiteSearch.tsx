@@ -72,27 +72,49 @@ function Emphasize({ text, query }: { text: string; query: string }) {
 
 export function SiteSearch({ items }: { items: SearchRecord[] }) {
   const searchParams = useSearchParams()
-  const initial = searchParams.get("q") ?? ""
-  const [query, setQuery] = useState(initial)
-  const [kind, setKind] = useState<(typeof filters)[number]>("全部")
+  const urlQuery = searchParams.get("q") ?? ""
+  const [query, setQuery] = useState(urlQuery)
+
+  useEffect(() => setQuery(urlQuery), [urlQuery])
+  const requestedKind = searchParams.get("type") ?? "全部"
+  const kind = filters.find((value) => value === requestedKind) ?? "全部"
   const normalized = query.trim().toLowerCase()
 
-  useEffect(() => {
-    const onPopState = () => setQuery(new URLSearchParams(window.location.search).get("q") ?? "")
-    window.addEventListener("popstate", onPopState)
-    return () => window.removeEventListener("popstate", onPopState)
-  }, [])
+  function updateSearch(nextQuery: string, nextKind: (typeof filters)[number] = "全部") {
+    setQuery(nextQuery)
+    const params = new URLSearchParams(window.location.search)
+    if (nextQuery) params.set("q", nextQuery)
+    else params.delete("q")
+    if (nextKind !== "全部") params.set("type", nextKind)
+    else params.delete("type")
+    // Next copies its router state and updates useSearchParams for native URL edits.
+    window.history.replaceState(null, "", `${window.location.pathname}${params.size ? `?${params}` : ""}`)
+  }
+
+  function rememberPosition() {
+    window.history.replaceState({
+      ...window.history.state,
+      knowledgeSearchReturn: { url: window.location.pathname + window.location.search, top: window.scrollY },
+    }, "")
+  }
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => {
-      const params = new URLSearchParams(window.location.search)
-      if (normalized) params.set("q", query.trim())
-      else params.delete("q")
-      const url = params.size ? `${window.location.pathname}?${params.toString()}` : window.location.pathname
-      window.history.replaceState(window.history.state, "", url)
-    }, 300)
-    return () => window.clearTimeout(timeout)
-  }, [normalized, query])
+    let frame = 0
+    const restore = () => {
+      const saved = window.history.state?.knowledgeSearchReturn
+      if (saved?.url !== window.location.pathname + window.location.search || !Number.isFinite(saved.top)) return
+      window.cancelAnimationFrame(frame)
+      frame = window.requestAnimationFrame(() => {
+        frame = window.requestAnimationFrame(() => window.scrollTo({ top: saved.top, behavior: "instant" }))
+      })
+    }
+    restore()
+    window.addEventListener("popstate", restore)
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener("popstate", restore)
+    }
+  }, [searchParams])
 
   const ranked = useMemo(() => {
     if (!normalized) return []
@@ -109,8 +131,13 @@ export function SiteSearch({ items }: { items: SearchRecord[] }) {
     })
     return result
   }, [ranked])
-  const visible = kind === "全部" ? ranked : ranked.filter((item) => item.kind === kind)
-  const popular = items.filter((item) => ["文章", "术语", "模板", "案例", "AI 工作流"].includes(item.kind)).slice(0, 8)
+  const activeKind = (counts[kind] ?? 0) > 0 ? kind : "全部"
+  const visible = activeKind === "全部" ? ranked : ranked.filter((item) => item.kind === activeKind)
+  const recommendations = [
+    { title: "案例", ids: ["case:admin-optimization", "case:bm-optimization"] },
+    { title: "功能图解", ids: ["article:member-account-states", "article:wallet-payment-reconciliation"] },
+    { title: "AI 工作流", ids: ["workflow:brand-visual-system", "workflow:ui-design-system"] },
+  ]
 
   return (
     <div>
@@ -124,10 +151,7 @@ export function SiteSearch({ items }: { items: SearchRecord[] }) {
             id="site-search"
             name="q"
             value={query}
-            onChange={(event) => {
-              setQuery(event.target.value)
-              setKind("全部")
-            }}
+            onChange={(event) => updateSearch(event.target.value)}
             placeholder="搜索文章、术语、案例、模板、工作流和设计专题"
             autoComplete="off"
             className="w-full bg-transparent py-3 text-sm outline-none"
@@ -136,10 +160,7 @@ export function SiteSearch({ items }: { items: SearchRecord[] }) {
             <button
               type="button"
               aria-label="清空搜索"
-              onClick={() => {
-                setQuery("")
-                setKind("全部")
-              }}
+              onClick={() => updateSearch("")}
               className="rounded-md p-1 text-muted hover:text-ink"
             >
               <X className="h-4 w-4" />
@@ -152,10 +173,7 @@ export function SiteSearch({ items }: { items: SearchRecord[] }) {
             <button
               key={word}
               type="button"
-              onClick={() => {
-                setQuery(word)
-                setKind("全部")
-              }}
+              onClick={() => updateSearch(word)}
               className="rounded-full bg-paper px-3 py-1.5 text-xs text-muted hover:text-brand-700"
             >
               {word}
@@ -169,13 +187,13 @@ export function SiteSearch({ items }: { items: SearchRecord[] }) {
 
       {normalized && ranked.length > 0 ? (
         <div className="mt-6 flex flex-wrap gap-2" aria-label="搜索结果类型">
-          {filters.map((value) => (
+          {filters.filter((value) => (counts[value] ?? 0) > 0).map((value) => (
             <button
               key={value}
               type="button"
-              onClick={() => setKind(value)}
-              aria-pressed={kind === value}
-              className={`rounded-full px-3 py-2 text-sm ring-1 transition ${kind === value ? "bg-ink text-white ring-ink" : "bg-white text-muted ring-line hover:text-ink"}`}
+              onClick={() => updateSearch(query, value)}
+              aria-pressed={activeKind === value}
+              className={`rounded-full px-3 py-2 text-sm ring-1 transition ${activeKind === value ? "bg-ink text-white ring-ink" : "bg-white text-muted ring-line hover:text-ink"}`}
             >
               {value} ({counts[value] ?? 0})
             </button>
@@ -188,6 +206,7 @@ export function SiteSearch({ items }: { items: SearchRecord[] }) {
           {visible.map((record) => (
             <Link
               href={record.href}
+              onClick={rememberPosition}
               key={record.id}
               className="group rounded-lg border border-line bg-white p-5 transition hover:border-brand-200 hover:shadow-soft"
             >
@@ -220,10 +239,7 @@ export function SiteSearch({ items }: { items: SearchRecord[] }) {
           <p className="mt-2 text-sm text-muted">试试更短的关键词，或从常用搜索中选择相关概念。</p>
           <button
             type="button"
-            onClick={() => {
-              setQuery("")
-              setKind("全部")
-            }}
+            onClick={() => updateSearch("")}
             className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-700"
           >
             <RotateCcw className="h-4 w-4" /> 重置搜索
@@ -234,20 +250,27 @@ export function SiteSearch({ items }: { items: SearchRecord[] }) {
           这一类型没有匹配内容，可以切换到“全部”查看其他资料。
         </div>
       ) : (
-        <section className="mt-8">
-          <h2 className="text-lg font-semibold text-ink">常用资料入口</h2>
-          <div className="mt-4 grid gap-3 md:grid-cols-2">
-            {popular.map((record) => (
-              <Link
-                href={record.href}
-                key={record.id}
-                className="rounded-lg border border-line bg-white p-4 hover:border-brand-200"
-              >
-                <span className="text-xs text-brand-700">{record.kind}</span>
-                <h3 className="mt-1 text-sm font-semibold text-ink">{record.title}</h3>
-              </Link>
-            ))}
-          </div>
+        <section className="mt-8" aria-label="精选资料">
+          <h2 className="text-lg font-semibold text-ink">案例、图解与 AI 工作流</h2>
+          <p className="mt-2 text-sm text-muted">从实际界面、功能关系和视觉成果开始浏览。</p>
+          {recommendations.map((group) => (
+            <section key={group.title} className="mt-6" aria-label={`精选${group.title}`}>
+              <h3 className="text-sm font-semibold text-ink">{group.title}</h3>
+              <div className="mt-3 grid gap-3 md:grid-cols-2">
+                {group.ids.map((id) => items.find((record) => record.id === id)).filter((record): record is SearchRecord => Boolean(record)).map((record) => (
+                  <Link href={record.href} onClick={rememberPosition} key={record.id} className="group overflow-hidden rounded-lg border border-line bg-white transition hover:border-brand-200">
+                    {record.previewImage ? (
+                      <img src={assetPath(record.previewImage)} alt={`${record.title}预览`} width={480} height={240} loading="lazy" className="h-36 w-full bg-paper object-cover object-top" />
+                    ) : null}
+                    <div className="p-4">
+                      <h4 className="font-semibold text-ink group-hover:text-brand-700">{record.title}</h4>
+                      <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted">{record.description}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ))}
         </section>
       )}
     </div>
