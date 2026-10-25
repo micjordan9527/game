@@ -1217,6 +1217,7 @@ function renderPage() {
 }
 
 function openDrawer(index) {
+  document.querySelector("#detailDrawer header small").textContent = selectedPage.title + "详情";
   const row = filteredRows()[index] || selectedPage.rows[index] || {};
   drawerTitle.textContent = row[primaryColumns()[0]] || selectedPage.title;
   drawerBody.innerHTML = `

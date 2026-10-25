@@ -1,3 +1,5 @@
+import { ImageFocusExplorer } from "@/components/enrichment/ImageFocusExplorer"
+import { u8Focus } from "@/data/caseEnhancements"
 import Link from "next/link"
 import { CompetitorGallery, type CompetitorInfographic } from "@/components/cases/CompetitorGallery"
 import { absoluteUrl } from "@/lib/seo"
@@ -49,10 +51,12 @@ export default function CompetitorAnalysisPage() {
       <Link href="/cases" className="text-sm font-semibold text-muted hover:text-brand-700">
         ← 案例
       </Link>
+      <nav aria-label="案例位置"><a href="#case-focus" className="text-xs font-semibold text-brand-700">查看局部对照 ↓</a></nav>
       <h1 className="mt-4 text-3xl font-semibold text-ink">U8 页面优化</h1>
       <p className="mt-2 text-sm leading-7 text-muted">首页与个人中心的界面拆解，点击信息图查看细节。</p>
       <CompetitorGallery items={versionedCompetitorInfographics} />
-      <KnowledgeLinks resources={resourcesForResource("案例", "competitor-analysis")} title="相关案例与图解" />
+      <ImageFocusExplorer items={u8Focus} title="U8 重点位置" provenance="现有分析信息图的局部材料，原界面与方案建议以图中标注区分。" />
+      <KnowledgeLinks open resources={resourcesForResource("案例", "competitor-analysis")} title="相关案例与图解" />
     </div>
   )
 }

@@ -5,6 +5,7 @@ category: product
 tags: [注单, 结算, 派彩, 状态流转]
 audience: [产品, 客服, 开发]
 difficulty: 入门
+updatedAt: 2026-10-25
 ---
 
 # 注单状态有哪些？

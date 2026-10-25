@@ -1,3 +1,4 @@
+import { WorkflowProcess } from "@/components/enrichment/WorkflowProcess"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { AiWorkflowOutputGallery } from "@/components/ai-workflows/AiWorkflowOutputGallery"
@@ -34,9 +35,10 @@ export default async function AiWorkflowDetailPage({ params }: { params: Promise
       </Link>
       <h1 className="mt-4 text-3xl font-semibold text-ink">{workflow.title}</h1>
       <p className="mt-2 max-w-3xl text-sm leading-7 text-muted">{workflow.summary}</p>
-      <section aria-label="AI生成成果">
+      <section id="workflow-outputs" className="scroll-mt-24" aria-label="AI生成成果">
         <AiWorkflowOutputGallery outputs={workflow.outputs} />
       </section>
+      <WorkflowProcess workflow={workflow} />
       <FeatureFlow
         title="这些图怎样做出来"
         caption="AI 生成视觉方案"

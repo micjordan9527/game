@@ -1,3 +1,4 @@
+import { caseCardDetails } from "@/data/caseEnhancements"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import type { ShowcaseItem } from "@/data/showcase"
@@ -31,6 +32,7 @@ export function ShowcaseGrid({ items, titleAs: Heading = "h2" }: { items: Showca
               <ArrowUpRight className="h-4 w-4 shrink-0 text-brand-700" aria-hidden="true" />
             </div>
             <p className="mt-2 text-sm leading-7 text-muted">{item.description}</p>
+            {caseCardDetails[item.slug] ? <div className="mt-3 border-t border-line pt-3 text-xs leading-6 text-muted"><p><span className="font-semibold text-ink">查看界面：</span>{caseCardDetails[item.slug].screens}</p><p className="mt-1">{caseCardDetails[item.slug].material}</p></div> : null}
           </div>
         </Link>
       ))}

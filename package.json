@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "check:content": "node scripts/check-content.mjs",
-    "check:browser": "node scripts/check-browser.mjs"
+    "check:browser": "node scripts/check-browser.mjs",
+    "capture:content": "node scripts/capture-content-assets.mjs"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",

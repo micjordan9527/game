@@ -36,7 +36,7 @@ export default function AdminOptimizationCasePage() {
         <AdminOptimizationPreview src={src} />
       </section>
       <p className="mt-3 text-xs leading-6 text-muted">交互演示 · 使用示例数据。原版入口需要对应网络与登录条件。</p>
-      <KnowledgeLinks resources={resourcesForResource("案例", "admin-optimization")} title="相关案例与图解" />
+      <KnowledgeLinks open resources={resourcesForResource("案例", "admin-optimization")} title="相关案例与图解" />
     </div>
   )
 }

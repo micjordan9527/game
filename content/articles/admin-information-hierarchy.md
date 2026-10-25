@@ -14,7 +14,7 @@ audience:
   - 运营
 difficulty: 进阶
 date: 2026-09-10
-updatedAt: 2026-09-10
+updatedAt: 2026-10-25
 ---
 
 # 复杂后台页面怎样安排信息层级？

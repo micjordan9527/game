@@ -6,7 +6,7 @@ tags: [钱包, 支付, 对账, 资金流水, 状态流转]
 audience: [产品, 技术, 运营, 财务, 测试]
 difficulty: 进阶
 date: 2026-10-23
-updatedAt: 2026-10-24
+updatedAt: 2026-10-25
 ---
 
 ## 一句话解释

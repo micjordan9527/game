@@ -258,7 +258,7 @@ export function SiteSearch({ items }: { items: SearchRecord[] }) {
               <h3 className="text-sm font-semibold text-ink">{group.title}</h3>
               <div className="mt-3 grid gap-3 md:grid-cols-2">
                 {group.ids.map((id) => items.find((record) => record.id === id)).filter((record): record is SearchRecord => Boolean(record)).map((record) => (
-                  <Link href={record.href} onClick={rememberPosition} key={record.id} className="group overflow-hidden rounded-lg border border-line bg-white transition hover:border-brand-200">
+                  <Link href={group.title === "功能图解" ? `${record.href}#scenario` : record.href} onClick={rememberPosition} key={record.id} className="group overflow-hidden rounded-lg border border-line bg-white transition hover:border-brand-200">
                     {record.previewImage ? (
                       <img src={assetPath(record.previewImage)} alt={`${record.title}预览`} width={480} height={240} loading="lazy" className="h-36 w-full bg-paper object-cover object-top" />
                     ) : null}

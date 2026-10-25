@@ -1,3 +1,4 @@
+import Link from "next/link"
 import type { TemplateItem } from "@/data/templates"
 import { templateExamples } from "@/data/templateExamples"
 import { CopyTemplateButton } from "./CopyTemplateButton"
@@ -9,6 +10,7 @@ export function TemplateExample({ template }: { template: TemplateItem }) {
     "",
     "虚构填写示例",
     ...example.fields.flatMap(([label, value]) => ["", `## ${label}`, value]),
+    ...(example.related?.flatMap((item) => ["", `[${item.title}](${item.href})：${item.reason}`]) ?? []),
   ].join("\n")
   return (
     <section className="mt-6 overflow-hidden rounded-xl border border-brand-100 bg-white" aria-label="模板成品示例">
@@ -27,6 +29,7 @@ export function TemplateExample({ template }: { template: TemplateItem }) {
             </div>
           ))}
         </div>
+        {example.related ? <nav aria-label="示例关联材料" className="mt-5 grid gap-3 sm:grid-cols-2">{example.related.map((item) => <Link key={item.href} href={item.href} className="rounded-lg border border-line p-4"><h3 className="text-sm font-semibold text-brand-700">{item.title} →</h3><p className="mt-2 text-xs leading-6 text-muted">{item.reason}</p></Link>)}</nav> : null}
       </div>
     </section>
   )

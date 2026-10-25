@@ -21,7 +21,7 @@ export const articles: Article[] = [
     audience: ["产品", "客服", "运营", "技术", "测试"],
     difficulty: "进阶",
     date: "2026-10-23",
-    updatedAt: "2026-10-24",
+    updatedAt: "2026-10-25",
   },
   {
     slug: "wallet-payment-reconciliation",
@@ -32,7 +32,7 @@ export const articles: Article[] = [
     audience: ["产品", "技术", "运营", "财务", "测试"],
     difficulty: "进阶",
     date: "2026-10-23",
-    updatedAt: "2026-10-24",
+    updatedAt: "2026-10-25",
   },
   {
     slug: "what-is-white-label",
@@ -98,7 +98,7 @@ export const articles: Article[] = [
     audience: ["产品", "运营", "财务", "技术", "测试"],
     difficulty: "进阶",
     date: "2026-05-29",
-    updatedAt: "2026-10-24",
+    updatedAt: "2026-10-25",
   },
   {
     slug: "operation-product-conversion-model",
@@ -175,7 +175,7 @@ export const articles: Article[] = [
     audience: ["产品", "客服", "开发"],
     difficulty: "入门",
     date: "2026-05-30",
-    updatedAt: "2026-05-30",
+    updatedAt: "2026-10-25",
   },
   {
     slug: "admin-information-hierarchy",
@@ -186,7 +186,7 @@ export const articles: Article[] = [
     audience: ["设计师", "产品", "前端", "运营"],
     difficulty: "进阶",
     date: "2026-09-10",
-    updatedAt: "2026-09-10",
+    updatedAt: "2026-10-25",
   },
   {
     slug: "risk-rule-basic",
@@ -241,6 +241,6 @@ export const articles: Article[] = [
     audience: ["运营", "产品", "风控"],
     difficulty: "进阶",
     date: "2026-05-30",
-    updatedAt: "2026-05-30",
+    updatedAt: "2026-10-25",
   },
 ]

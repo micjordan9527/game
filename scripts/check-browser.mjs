@@ -8,12 +8,13 @@ import { checkUnavailableStorage, checkWorkTools } from "./check-work-tools.mjs"
 import { checkShowcase } from "./check-showcase.mjs"
 import { checkHomepage } from "./check-homepage.mjs"
 import { checkSiteUpdate } from "./check-site-update.mjs"
+import { checkContentExpansion } from "./check-content-expansion.mjs"
 
 const root = path.resolve("out")
 const prefix = process.env.TEST_BASE_PATH ?? ""
 const rounds = Number(process.env.REFRESH_ROUNDS ?? 2)
 const scope = process.env.CHECK_SCOPE ?? "all"
-assert(["all", "home", "site-update"].includes(scope), "CHECK_SCOPE must be all, home or site-update")
+assert(["all", "home", "site-update", "content"].includes(scope), "CHECK_SCOPE must be all, home, site-update or content")
 assert(Number.isInteger(rounds) && rounds > 0 && rounds <= 50, "REFRESH_ROUNDS must be between 1 and 50")
 const contentTypes = {
   ".html": "text/html",
@@ -22,6 +23,8 @@ const contentTypes = {
   ".txt": "text/x-component",
   ".svg": "image/svg+xml",
   ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
   ".avif": "image/avif",
   ".webp": "image/webp",
   ".woff2": "font/woff2",
@@ -122,6 +125,7 @@ try {
     })
     const page = await context.newPage()
     await checkHomepage(page, base, prefix, width)
+    if (scope === "content" || scope === "all") await checkContentExpansion(page, base, prefix, width)
     if (scope === "site-update" || scope === "all") await checkSiteUpdate(page, base, prefix, width)
     if (scope === "all") {
       await checkShowcase(page, base, prefix, width, rounds)

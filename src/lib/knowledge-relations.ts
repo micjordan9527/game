@@ -1,3 +1,4 @@
+import { caseReadingLinks } from "@/data/caseEnhancements"
 import { articles } from "@/data/articles"
 import { templates } from "@/data/templates"
 import { caseItems } from "@/data/cases"
@@ -83,6 +84,7 @@ export function resourcesForTopic(topic: KnowledgeTopic): RelatedResource[] {
 }
 
 export function resourcesForResource(kind: "案例" | "模板" | "AI 工作流", slug: string): RelatedResource[] {
+  if (kind === "案例" && slug in caseReadingLinks) return caseReadingLinks[slug as keyof typeof caseReadingLinks].map((item) => ({ ...item }))
   const field = kind === "案例" ? "cases" : kind === "模板" ? "templates" : "workflows"
   const current = kind === "案例" ? toCase(slug) : kind === "模板" ? toTemplate(slug) : toWorkflow(slug)
   const study = kind === "案例" ? getCaseStudy(slug) : undefined

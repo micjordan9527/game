@@ -5,13 +5,15 @@ import type { RelatedResource } from "@/lib/knowledge-relations"
 export function KnowledgeLinks({
   resources,
   title = "相关案例与资料",
+  open = false,
 }: {
   resources: RelatedResource[]
   title?: string
+  open?: boolean
 }) {
   if (resources.length === 0) return null
   return (
-    <details className="mt-6 rounded-xl border border-line bg-white p-4 md:p-5" aria-label={title}>
+    <details open={open} className="mt-6 rounded-xl border border-line bg-white p-4 md:p-5" aria-label={title}>
       <summary className="cursor-pointer text-sm font-semibold text-ink">
         {title} · {resources.length}
       </summary>

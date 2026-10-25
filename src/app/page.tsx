@@ -1,3 +1,4 @@
+import { contentUpdates } from "@/data/contentUpdates"
 import Link from "next/link"
 import {
   ArrowRight,
@@ -15,8 +16,6 @@ import { homeContent } from "@/data/homeContent"
 import { showcaseItems } from "@/data/showcase"
 import { imagePrompts } from "@/data/imagePrompts"
 import { aiWorkflows } from "@/data/aiWorkflowLibrary"
-import { articles } from "@/data/articles"
-import { categories } from "@/data/categories"
 import { workRoles } from "@/data/workRoles"
 import { assetPath } from "@/lib/assets"
 
@@ -42,10 +41,7 @@ export default function HomePage() {
     image: selectResource(imagePrompts, selection.slug),
   }))
   const workflows = homeContent.workflowSlugs.map((slug) => selectResource(aiWorkflows, slug))
-  const updates = articles
-    .filter((article) => article.updatedAt)
-    .sort((a, b) => b.updatedAt!.localeCompare(a.updatedAt!))
-    .slice(0, 3)
+  const updates = contentUpdates
 
   return (
     <div className="container-shell py-6 md:py-8">
@@ -153,7 +149,7 @@ export default function HomePage() {
           {diagrams.map((item) => (
             <Link
               key={item.slug}
-              href={`/articles/${item.image.articleSlug}`}
+              href={`/articles/${item.image.articleSlug}#scenario`}
               className="group min-w-0 overflow-hidden rounded-xl border border-line bg-white hover:border-brand-200"
             >
               <div className="aspect-[16/9] overflow-hidden bg-paper">
@@ -220,15 +216,15 @@ export default function HomePage() {
         </h2>
         <ul className="mt-4 divide-y divide-line rounded-xl border border-line bg-white">
           {updates.map((article) => (
-            <li key={article.slug}>
+            <li key={article.href}>
               <Link
-                href={`/articles/${article.slug}`}
+                href={article.href}
                 className="flex flex-col gap-2 px-4 py-3 hover:bg-paper sm:flex-row sm:items-center sm:justify-between"
               >
-                <span className="min-w-0 text-sm font-semibold leading-6 text-ink">{article.title}</span>
+                <span className="min-w-0"><span className="block text-sm font-semibold leading-6 text-ink">{article.title}</span><span className="mt-1 block text-xs leading-6 text-muted">{article.description}</span></span>
                 <span className="flex shrink-0 gap-3 text-xs text-muted">
-                  <span>{categories.find((category) => category.slug === article.category)?.title}</span>
-                  <time dateTime={article.updatedAt}>{article.updatedAt}</time>
+                  <span>{article.kind}</span>
+                  <time dateTime={article.date}>{article.date}</time>
                 </span>
               </Link>
             </li>

@@ -6,7 +6,7 @@ tags: [会员, 账号状态, 注册登录, 权限, 资料变更]
 audience: [产品, 客服, 运营, 技术, 测试]
 difficulty: 进阶
 date: 2026-10-23
-updatedAt: 2026-10-24
+updatedAt: 2026-10-25
 ---
 
 ## 一句话解释

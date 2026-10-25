@@ -1,3 +1,7 @@
+import { topicScenarios } from "@/data/topicScenarios"
+import { templateExamples } from "@/data/templateExamples"
+import { workflowProcesses } from "@/data/workflowProcess"
+import { caseCardDetails, adminTours } from "@/data/caseEnhancements"
 import "server-only"
 import { articles } from "@/data/articles"
 import { glossary } from "@/data/glossary"
@@ -66,7 +70,7 @@ export function buildSearchIndex(): SearchRecord[] {
           ])
         ),
       },
-      markdown?.content ?? ""
+      (markdown?.content ?? "") + " " + JSON.stringify(topicScenarios[article.slug] ?? {})
     )
   })
 
@@ -101,7 +105,7 @@ export function buildSearchIndex(): SearchRecord[] {
           ])
         ),
       },
-      template.sections.map((section) => [section.title, ...section.items].join(" ")).join(" ")
+      template.sections.map((section) => [section.title, ...section.items].join(" ")).join(" ") + " " + JSON.stringify(templateExamples[template.slug] ?? {})
     )
   )
 
@@ -117,8 +121,8 @@ export function buildSearchIndex(): SearchRecord[] {
         tags: [...item.tags, ...(item.audience ?? [])],
       },
       item.slug === "admin-optimization"
-        ? "老板 运营 产品 财务 客服 角色切换 经营看板 异常入口 钱包 充值 提现 资金流水 注单 风险审核"
-        : item.tags.join(" ")
+        ? "老板 运营 产品 财务 客服 角色切换 经营看板 异常入口 钱包 充值 提现 资金流水 注单 风险审核 " + JSON.stringify(adminTours)
+        : item.tags.join(" ") + " " + JSON.stringify(caseCardDetails[item.slug] ?? {})
     )
   })
 
@@ -133,7 +137,7 @@ export function buildSearchIndex(): SearchRecord[] {
         previewImage: item.outputs[0]?.image,
         tags: [item.scenario, ...item.tags],
       },
-      [item.prompt, item.referenceNote, item.extensionNote ?? ""].join(" ")
+      [item.prompt, item.referenceNote, item.extensionNote ?? "", JSON.stringify(workflowProcesses[item.slug as keyof typeof workflowProcesses] ?? {})].join(" ")
     )
   )
 

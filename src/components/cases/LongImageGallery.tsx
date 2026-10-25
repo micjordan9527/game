@@ -21,9 +21,10 @@ type LongImageItem = {
 type LongImageGalleryProps = {
   items: LongImageItem[]
   emptyMessage: string
+  label?: string
 }
 
-export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps) {
+export function LongImageGallery({ items, emptyMessage, label = "案例长图" }: LongImageGalleryProps) {
   const titleId = useId()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const activeItem = activeIndex === null ? null : items[activeIndex] ?? null
@@ -127,7 +128,7 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
         {items.map((item, index) => (
           <article key={item.id} className="overflow-hidden rounded-lg border border-line bg-white shadow-sm">
             <div className="border-b border-line p-5">
-              <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">案例长图</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">{label}</p>
               <h3 className="mt-2 text-xl font-semibold tracking-normal text-ink">{item.title}</h3>
               <p className="mt-2 text-sm leading-6 text-muted">{item.description}</p>
             </div>

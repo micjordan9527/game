@@ -1,0 +1,143 @@
+[
+  {
+    "path": "/images/enrichment/admin-operation-01.jpg",
+    "role": "运营",
+    "pageKey": "dataCenter-overview",
+    "title": "运营角色看板",
+    "materialType": "现有交互演示截图；示例数据",
+    "width": 1440,
+    "height": 900,
+    "source": "/case-assets/admin-optimization/index.html#version=optimized&page=dataCenter-overview",
+    "action": "切换至运营角色，查看核心指标、风险报警和待处理事项。"
+  },
+  {
+    "path": "/images/enrichment/admin-operation-02.jpg",
+    "role": "运营",
+    "pageKey": "promotion-activity-record-activityRecord",
+    "title": "活动记录",
+    "materialType": "现有交互演示截图；示例数据",
+    "width": 1440,
+    "height": 900,
+    "source": "/case-assets/admin-optimization/index.html#version=optimized&page=promotion-activity-record-activityRecord",
+    "action": "在页面选择器选择活动记录，查看记录状态与关联账号。"
+  },
+  {
+    "path": "/images/enrichment/admin-operation-03.jpg",
+    "role": "运营",
+    "pageKey": "promotion-activity-record-activityRecord",
+    "title": "活动记录详情",
+    "materialType": "现有交互演示截图；示例数据",
+    "width": 1440,
+    "height": 900,
+    "source": "/case-assets/admin-optimization/index.html#version=optimized&page=promotion-activity-record-activityRecord",
+    "action": "打开活动记录详情，核对活动ID、当前状态及处理建议；部分示例字段未填。"
+  },
+  {
+    "path": "/images/enrichment/admin-finance-01.jpg",
+    "role": "财务",
+    "pageKey": "dataCenter-overview",
+    "title": "财务角色看板",
+    "materialType": "现有交互演示截图；示例数据",
+    "width": 1440,
+    "height": 900,
+    "source": "/case-assets/admin-optimization/index.html#version=optimized&page=dataCenter-overview",
+    "action": "切换至财务角色，查看核心指标、风险报警和待处理事项。"
+  },
+  {
+    "path": "/images/enrichment/admin-finance-02.jpg",
+    "role": "财务",
+    "pageKey": "finance-fundsRecords-depositRecord",
+    "title": "充值记录",
+    "materialType": "现有交互演示截图；示例数据",
+    "width": 1440,
+    "height": 900,
+    "source": "/case-assets/admin-optimization/index.html#version=optimized&page=finance-fundsRecords-depositRecord",
+    "action": "在页面选择器选择充值记录，核对订单、金额和状态。"
+  },
+  {
+    "path": "/images/enrichment/admin-finance-03.jpg",
+    "role": "财务",
+    "pageKey": "finance-fundsRecords-depositRecord",
+    "title": "充值记录详情",
+    "materialType": "现有交互演示截图；示例数据",
+    "width": 1440,
+    "height": 900,
+    "source": "/case-assets/admin-optimization/index.html#version=optimized&page=finance-fundsRecords-depositRecord",
+    "action": "打开充值记录详情，交叉核对会员编号、平台订单号、渠道订单号及币种。"
+  },
+  {
+    "path": "/images/enrichment/admin-support-01.jpg",
+    "role": "客服",
+    "pageKey": "dataCenter-overview",
+    "title": "客服角色看板",
+    "materialType": "现有交互演示截图；示例数据",
+    "width": 1440,
+    "height": 900,
+    "source": "/case-assets/admin-optimization/index.html#version=optimized&page=dataCenter-overview",
+    "action": "切换至客服角色，查看核心指标、风险报警和待处理事项。"
+  },
+  {
+    "path": "/images/enrichment/admin-support-02.jpg",
+    "role": "客服",
+    "pageKey": "management-index",
+    "title": "会员列表",
+    "materialType": "现有交互演示截图；示例数据",
+    "width": 1440,
+    "height": 900,
+    "source": "/case-assets/admin-optimization/index.html#version=optimized&page=management-index",
+    "action": "在页面选择器选择会员列表，定位账号和当前状态。"
+  },
+  {
+    "path": "/images/enrichment/admin-support-03.jpg",
+    "role": "客服",
+    "pageKey": "management-index",
+    "title": "会员列表详情",
+    "materialType": "现有交互演示截图；示例数据",
+    "width": 1440,
+    "height": 900,
+    "source": "/case-assets/admin-optimization/index.html#version=optimized&page=management-index",
+    "action": "打开会员详情，核对账号字段、钱包余额、上级代理和账号状态。"
+  },
+  {
+    "path": "/images/enrichment/official-services.jpg",
+    "role": null,
+    "pageKey": "solution",
+    "title": "服务方案流程与服务卡片",
+    "materialType": "现有官网页面演示截图",
+    "width": 1320,
+    "height": 800,
+    "source": "/case-assets/white-label-official/index.html?case-preview=1#solution",
+    "action": "定位官网原型 #solution 模块，截取标题与可见内容。"
+  },
+  {
+    "path": "/images/enrichment/official-structure.jpg",
+    "role": null,
+    "pageKey": "product",
+    "title": "产品能力架构图与能力说明",
+    "materialType": "现有官网页面演示截图",
+    "width": 1320,
+    "height": 800,
+    "source": "/case-assets/white-label-official/index.html?case-preview=1#product",
+    "action": "定位官网原型 #product 模块，截取标题与可见内容。"
+  },
+  {
+    "path": "/images/enrichment/official-contact.jpg",
+    "role": null,
+    "pageKey": "contact",
+    "title": "联系方式与需求咨询表单",
+    "materialType": "现有官网页面演示截图",
+    "width": 1320,
+    "height": 800,
+    "source": "/case-assets/white-label-official/index.html?case-preview=1#contact",
+    "action": "定位官网原型 #contact 模块，截取标题与可见内容。"
+  },
+  {
+    "path": "/images/enrichment/wallet-reconciliation-gpt.webp",
+    "title": "钱包对账：三份记录如何核对",
+    "materialType": "GPT 生成流程示意；示例数据；不是实际业务截图",
+    "width": 1536,
+    "height": 1024,
+    "source": "GPT image generation in this editing session",
+    "action": "按三份记录及同一业务编号生成对账流程示意；文字字段以页面状态对照为准"
+  }
+]

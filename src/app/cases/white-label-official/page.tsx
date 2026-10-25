@@ -1,3 +1,7 @@
+import { KnowledgeLinks } from "@/components/common/KnowledgeLinks"
+import { resourcesForResource } from "@/lib/knowledge-relations"
+import { ImageFocusExplorer } from "@/components/enrichment/ImageFocusExplorer"
+import { officialFocus } from "@/data/caseEnhancements"
 import Link from "next/link"
 import { OfficialCasePreview } from "@/components/cases/OfficialCasePreview"
 import { absoluteUrl } from "@/lib/seo"
@@ -29,7 +33,10 @@ export default function WhiteLabelOfficialCasePage() {
           全屏打开 ↗
         </a>
       </div>
-      <OfficialCasePreview src={src} />
+      <div id="case-materials" className="scroll-mt-24"><OfficialCasePreview src={src} /></div>
+      <ImageFocusExplorer items={officialFocus} title="官网界面标注" provenance="来自现有官网演示的实际截图；咨询表单不发送数据。" />
+      <KnowledgeLinks open resources={resourcesForResource("案例", "white-label-official")} title="相关案例与图解" />
+
     </div>
   )
 }

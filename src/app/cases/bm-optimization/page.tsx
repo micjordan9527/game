@@ -1,3 +1,5 @@
+import { ImageFocusExplorer } from "@/components/enrichment/ImageFocusExplorer"
+import { bmFocus } from "@/data/caseEnhancements"
 import Link from "next/link"
 import { LongImageGallery } from "@/components/cases/LongImageGallery"
 import { absoluteUrl } from "@/lib/seo"
@@ -44,6 +46,7 @@ export default function BmOptimizationCasePage() {
       <Link href="/cases" className="text-sm font-semibold text-muted hover:text-brand-700">
         ← 案例
       </Link>
+      <nav aria-label="案例位置"><a href="#case-focus" className="text-xs font-semibold text-brand-700">查看局部对照 ↓</a></nav>
       <h1 className="mt-4 text-3xl font-semibold text-ink">BM 手机端优化</h1>
       <p className="mt-2 text-sm leading-7 text-muted">首页与详情页，直接对照分类、信息层级和操作区。点击图片放大。</p>
       <section id="case-materials" className="scroll-mt-24" aria-label="BM优化对照图">
@@ -52,7 +55,8 @@ export default function BmOptimizationCasePage() {
           emptyMessage="对照图暂时无法显示，请稍后重试。"
         />
       </section>
-      <KnowledgeLinks resources={resourcesForResource("案例", "bm-optimization")} title="相关案例与图解" />
+      <ImageFocusExplorer items={bmFocus} title="BM 局部对照" provenance="原材料局部放大：左侧原版截图，右侧生成式方案；并非上线效果证明。" />
+      <KnowledgeLinks open resources={resourcesForResource("案例", "bm-optimization")} title="相关案例与图解" />
     </div>
   )
 }

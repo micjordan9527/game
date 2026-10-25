@@ -147,7 +147,7 @@ export function checkTopicStandards(root, errors) {
   }
   if (home.topics.length !== 6) errors.push("homepage: expected six business topics")
   for (const link of [...home.topics, ...home.quickLinks]) {
-    if (!routes.has(link.href)) errors.push(`homepage: unknown destination ${link.href}`)
+    if (!routes.has(new URL(link.href, "https://knowledge001.netlify.app").pathname)) errors.push(`homepage: unknown destination ${link.href}`)
   }
   if (new Set(roles.map((role) => role.slug)).size !== 5 || roles.length !== 5)
     errors.push("role paths: expected five unique roles")

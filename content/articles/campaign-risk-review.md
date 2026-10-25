@@ -5,6 +5,7 @@ category: operation
 tags: [活动规则, 风险评审, 数据口径, 运营治理]
 audience: [运营, 产品, 风控]
 difficulty: 进阶
+updatedAt: 2026-10-25
 ---
 
 # 活动规则风险评审怎么做？
