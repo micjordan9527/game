@@ -17,14 +17,16 @@ export type CompetitorInfographic = {
 const filters: Array<CompetitorInfographic["brand"]> = ["U8", "星际体育", "皇冠"]
 
 export function CompetitorGallery({ items }: { items: CompetitorInfographic[] }) {
-  const [activeBrand, setActiveBrand] = useState<CompetitorInfographic["brand"]>(filters[0])
+  const availableBrands = filters.filter((brand) => items.some((item) => item.brand === brand))
+  const [selectedBrand, setActiveBrand] = useState<CompetitorInfographic["brand"]>(items[0]?.brand ?? filters[0])
+  const activeBrand = availableBrands.includes(selectedBrand) ? selectedBrand : availableBrands[0] ?? filters[0]
   const filteredItems = items.filter((item) => item.brand === activeBrand)
 
   return (
     <>
-      <section className="mt-8 rounded-lg border border-line bg-white p-4 shadow-sm md:p-5" aria-label="竞品筛选">
+      {availableBrands.length > 1 ? <section className="mt-8 rounded-lg border border-line bg-white p-4 shadow-sm md:p-5" aria-label="竞品筛选">
         <div className="flex flex-wrap gap-2">
-          {filters.map((brand) => {
+          {availableBrands.map((brand) => {
             const count = items.filter((item) => item.brand === brand).length
             const isActive = activeBrand === brand
 
@@ -37,6 +39,7 @@ export function CompetitorGallery({ items }: { items: CompetitorInfographic[] })
                     : "border-line bg-white text-muted hover:border-brand-100 hover:text-brand-700",
                 ].join(" ")}
                 key={brand}
+                aria-pressed={isActive}
                 onClick={() => setActiveBrand(brand)}
                 type="button"
               >
@@ -53,7 +56,7 @@ export function CompetitorGallery({ items }: { items: CompetitorInfographic[] })
             )
           })}
         </div>
-      </section>
+      </section> : null}
 
       <LongImageGallery
         items={filteredItems.map((item) => ({

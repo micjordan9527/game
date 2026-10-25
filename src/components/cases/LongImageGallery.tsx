@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react"
-import { useEffect, useId, useRef, useState } from "react"
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react"
 import { assetPath } from "@/lib/assets"
 
 type LongImageItem = {
@@ -34,6 +34,35 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
   const viewportRef = useRef<HTMLDivElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
   const triggerRef = useRef<HTMLButtonElement | null>(null)
+  const viewPointRef = useRef<{ top: number; centerX: number } | null>(null)
+
+  const changeViewMode = (mode: typeof viewMode) => {
+    if (mode === viewMode) return
+    const viewport = viewportRef.current
+    const image = viewport?.querySelector("img")
+    if (viewport && image) {
+      const size = image.getBoundingClientRect()
+      viewPointRef.current = {
+        top: viewport.scrollTop / size.height,
+        centerX: (viewport.scrollLeft + viewport.clientWidth / 2) / size.width,
+      }
+    }
+    setViewMode(mode)
+  }
+
+  useLayoutEffect(() => {
+    const viewport = viewportRef.current
+    const image = viewport?.querySelector("img")
+    const point = viewPointRef.current
+    if (!viewport || !image || !point) return
+    const size = image.getBoundingClientRect()
+    viewport.scrollTo({
+      top: point.top * size.height,
+      left: viewMode === "fit" ? 0 : point.centerX * size.width - viewport.clientWidth / 2,
+      behavior: "instant",
+    })
+    viewPointRef.current = null
+  }, [viewMode])
 
   const showPrevious = () => {
     setActiveIndex((index) => {
@@ -86,7 +115,7 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
 
   useEffect(() => {
     viewportRef.current?.scrollTo({ top: 0, left: 0, behavior: "instant" })
-  }, [activeIndex, viewMode])
+  }, [activeIndex])
 
   if (items.length === 0) {
     return <div className="mt-6 rounded-lg border border-dashed border-line bg-white p-8 text-sm leading-7 text-muted">{emptyMessage}</div>
@@ -111,7 +140,7 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
               }}
               type="button"
             >
-              <picture className="block">
+              <picture className="block max-h-80 overflow-hidden rounded-md sm:max-h-[28rem]">
                 {item.srcAvif ? <source srcSet={assetPath(item.srcAvif)} type="image/avif" /> : null}
                 {item.srcWebp ? <source srcSet={assetPath(item.srcWebp)} type="image/webp" /> : null}
                 <Image
@@ -124,9 +153,9 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
                   loading="lazy"
                 />
               </picture>
-              <span className="absolute right-5 top-5 inline-flex h-9 w-9 items-center justify-center rounded-md border border-line bg-white/90 text-ink opacity-0 shadow-sm backdrop-blur transition group-hover:opacity-100 group-focus-visible:opacity-100">
+              <span className="mt-3 flex items-center justify-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-xs font-semibold text-brand-700 group-hover:border-brand-200">
                 <Maximize2 className="h-4 w-4" aria-hidden="true" />
-                <span className="sr-only">查看大图</span>
+                查看完整长图
               </span>
             </button>
             {item.sourceHref ? (
@@ -160,7 +189,7 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
               <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
                 <div className="inline-flex gap-1 rounded-md bg-paper p-1" aria-label="图片显示比例">
                   {([['fit', '适应屏幕'], ['actual', '原尺寸']] as const).map(([mode, label]) => (
-                    <button key={mode} type="button" aria-pressed={viewMode === mode} onClick={() => setViewMode(mode)} className={`rounded px-3 py-2 text-xs font-semibold ${viewMode === mode ? "bg-ink text-white" : "text-muted hover:bg-white"}`}>
+                    <button key={mode} type="button" aria-pressed={viewMode === mode} onClick={() => changeViewMode(mode)} className={`rounded px-3 py-2 text-xs font-semibold ${viewMode === mode ? "bg-ink text-white" : "text-muted hover:bg-white"}`}>
                       {label}
                     </button>
                   ))}
@@ -178,11 +207,11 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
                 ) : null}
               </div>
               <p className="mt-2 text-xs leading-5 text-muted" id={`${titleId}-hint`}>
-                {viewMode === "actual" ? `原尺寸 ${activeItem.width} × ${activeItem.height}，上下左右滑动查看细节。` : "完整预览；切换原尺寸可查看文字与界面细节。"}
+                {viewMode === "actual" ? `原尺寸 ${activeItem.width} × ${activeItem.height}，上下左右滑动查看细节。` : "按窗口宽度显示，上下滑动查看完整长图。"}
               </p>
             </div>
             <div ref={viewportRef} role="region" aria-label="图片浏览区域" aria-describedby={`${titleId}-hint`} tabIndex={0} className="min-h-0 flex-1 overflow-auto overscroll-contain bg-paper p-2 sm:p-4">
-              <picture className={viewMode === "fit" ? "flex h-full w-full items-center justify-center" : "block"} style={viewMode === "actual" ? { width: activeItem.width } : undefined}>
+              <picture className="block w-full" style={viewMode === "actual" ? { width: activeItem.width } : undefined}>
                 {activeItem.srcAvif ? <source srcSet={assetPath(activeItem.srcAvif)} type="image/avif" /> : null}
                 {activeItem.srcWebp ? <source srcSet={assetPath(activeItem.srcWebp)} type="image/webp" /> : null}
                 <Image
@@ -191,7 +220,7 @@ export function LongImageGallery({ items, emptyMessage }: LongImageGalleryProps)
                   width={activeItem.width}
                   height={activeItem.height}
                   sizes="100vw"
-                  className={viewMode === "fit" ? "h-auto max-h-full w-auto max-w-full object-contain shadow-sm" : "h-auto max-w-none bg-white shadow-sm"}
+                  className={viewMode === "fit" ? "h-auto w-full max-w-full shadow-sm" : "h-auto max-w-none bg-white shadow-sm"}
                   style={viewMode === "actual" ? { width: activeItem.width } : undefined}
                 />
               </picture>

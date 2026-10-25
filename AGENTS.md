@@ -20,3 +20,7 @@ Sites and GitHub delivery preference (2026-10-25):
 - Continue the existing 包网知识库 Site at https://baowang-knowledge.aurora-5448.chatgpt.site; preserve its current audience.
 - Treat that Site's latest source/version as the editing baseline and retain a recoverable version before changes.
 - After every successful Site update, also commit the delivered changes to the existing GitHub repository https://github.com/micjordan9527/game on its main branch. Preserve unrelated remote changes; report the actual deployment state and GitHub commit link.
+
+Image viewing preference (2026-10-25):
+- For BM/U8, “适应屏幕” fits the available width and preserves the image aspect ratio; long images scroll vertically without horizontal scrolling. Do not shrink the image to fit the viewport height.
+- Keep reading position when changing display scale and restore the page position when closing the viewer.
