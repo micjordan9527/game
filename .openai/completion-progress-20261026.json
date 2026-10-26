@@ -1,0 +1,38 @@
+{
+  "authorized": "User requested completion of the three-batch plan after the original overnight deadline.",
+  "baseline": {
+    "sites_version": 7,
+    "sites_source": "2aa034d7434b69e21d699d23457c0e22662a1879",
+    "github": "b1b084ac737df54872ea2269be2a67faa3f3a2c6"
+  },
+  "batches": [
+    {
+      "id": 1,
+      "items": [
+        "代理跨期结算",
+        "完整案例集中入口"
+      ],
+      "status": "validated_for_delivery",
+      "validation": "Content check and 1440/390 full 81-page regression passed, including 12 settlement combinations and case-filtered search. Local Chinese font build verification follows."
+    },
+    {
+      "id": 2,
+      "items": [
+        "BM手机交互原型",
+        "U8个人中心原型",
+        "官网移动端对照"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "items": [
+        "提现异常处理案例",
+        "界面状态对照页",
+        "发布验收自动化完善"
+      ],
+      "status": "pending"
+    }
+  ],
+  "delivery_note": "Native Sites deployments and matching GitHub commits establish publication; this source progress file alone does not."
+}

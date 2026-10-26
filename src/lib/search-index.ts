@@ -1,4 +1,5 @@
 import { topicScenarios } from "@/data/topicScenarios"
+import { businessCaseEntries } from "@/data/caseLibrary"
 import { templateExamples } from "@/data/templateExamples"
 import { workflowProcesses } from "@/data/workflowProcess"
 import { caseCardDetails, adminTours } from "@/data/caseEnhancements"
@@ -50,6 +51,7 @@ export function buildSearchIndex(): SearchRecord[] {
       searchableText: [record.title, record.description, ...record.tags, body].join(" ").toLowerCase(),
     })
   }
+  businessCaseEntries.forEach((item) => add({ id: `business-case:${item.id}`, kind: "案例", title: item.title, description: item.description, href: item.href, tags: item.tags }, item.keywords))
 
   articles.forEach((article) => {
     const markdown = getMarkdownArticle(article.slug)

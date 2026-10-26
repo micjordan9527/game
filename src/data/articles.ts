@@ -98,7 +98,7 @@ export const articles: Article[] = [
     audience: ["产品", "运营", "财务", "技术", "测试"],
     difficulty: "进阶",
     date: "2026-05-29",
-    updatedAt: "2026-10-25",
+    updatedAt: "2026-10-26",
   },
   {
     slug: "operation-product-conversion-model",

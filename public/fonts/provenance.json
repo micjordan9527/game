@@ -1,0 +1,16 @@
+{
+  "file": "baowang-knowledge-og-bold.otf",
+  "family": "BaowangKnowledgeOG",
+  "style": "normal",
+  "weight": 700,
+  "format": "OpenType CFF",
+  "bytes": 24780,
+  "source": "Debian fonts-noto-cjk: NotoSansCJK-Bold.ttc, Simplified Chinese face 2",
+  "upstream": "https://github.com/notofonts/noto-cjk",
+  "license": "SIL Open Font License 1.1; see baowang-knowledge-og-LICENSE.txt",
+  "modifications": "Subset to current Open Graph Chinese text, ASCII and a small set of neutral knowledge-base labels; derivative family renamed BaowangKnowledgeOG. No font download.",
+  "characters": "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~·、。与产作例功动包台后品图实对工平库态技文术板构查案模流演照状理用界知示移程章端系结统网能营视角解计设识语运速际面，：",
+  "glyph_count": 156,
+  "missing_characters": [],
+  "verification": "Rendered current Open Graph Chinese/ASCII text through next/og ImageResponse with fetch disabled; no network font calls, glyph coverage complete; proof image visually checked."
+}

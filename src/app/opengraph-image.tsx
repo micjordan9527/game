@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
 
 export const dynamic = "force-static"
 
@@ -9,7 +11,9 @@ export const size = {
 
 export const contentType = "image/png"
 
-export default function Image() {
+export default async function Image() {
+  const font = await readFile(path.join(process.cwd(), "public/fonts/baowang-knowledge-og-bold.otf"))
+  const fontData = Uint8Array.from(font).buffer
   return new ImageResponse(
     (
       <div
@@ -22,7 +26,7 @@ export default function Image() {
           background: "#F7F8FA",
           color: "#172033",
           padding: 72,
-          fontFamily: "sans-serif",
+          fontFamily: "BaowangKnowledgeOG",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
@@ -45,7 +49,7 @@ export default function Image() {
           <div style={{ fontSize: 30, fontWeight: 700 }}>包网知识库</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 58, lineHeight: 1.15, fontWeight: 800, maxWidth: 930 }}>用产品、运营、设计、技术视角，理解包网平台</div>
+          <div style={{ fontSize: 58, lineHeight: 1.15, fontWeight: 800, maxWidth: 930 }}>案例、功能图解与界面示例</div>
           <div style={{ marginTop: 28, fontSize: 28, lineHeight: 1.45, color: "#667085", maxWidth: 940 }}>后台系统 · 结构图解 · 工作模板 · 术语速查</div>
         </div>
         <div style={{ display: "flex", gap: 14, fontSize: 24, color: "#12665E" }}>
@@ -56,6 +60,9 @@ export default function Image() {
         </div>
       </div>
     ),
-    size
+    { ...size, fonts: [
+      { name: "BaowangKnowledgeOG", data: fontData, style: "normal", weight: 700 },
+      { name: "BaowangKnowledgeOG", data: fontData, style: "normal", weight: 800 },
+    ] }
   )
 }
