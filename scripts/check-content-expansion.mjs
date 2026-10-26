@@ -93,6 +93,47 @@ export async function checkContentExpansion(page, base, prefix, width) {
   await page.screenshot({ path: `/tmp/content-wallet-${width}.png` })
   console.log(`PASS ${width}px: 6 scenario explorers, state changes/tables/evidence images, GPT diagram and expanded article details`)
 
+  await page.goto(`${base}/articles/wallet-payment-reconciliation#reconciliation-case`, { waitUntil: "networkidle" })
+  const reconciliation = page.getByRole("region", { name: "充值与对账完整案例", exact: true })
+  const resultTabs = reconciliation.getByRole("tablist", { name: "选择对账结果" }).getByRole("tab")
+  const screenTabs = reconciliation.getByRole("tablist", { name: "选择案例界面" }).getByRole("tab")
+  assert.equal(await resultTabs.count(), 4)
+  assert.equal(await screenTabs.count(), 5)
+  const ledgerExpectations = ["入账 100.00", "未找到关联入账", "仅入账 1 次", "无入账，不自动补偿"]
+  const panel = reconciliation.getByRole("tabpanel")
+  for (let resultIndex = 0; resultIndex < 4; resultIndex++) {
+    await resultTabs.nth(resultIndex).click()
+    for (let screenIndex = 0; screenIndex < 5; screenIndex++) {
+      await screenTabs.nth(screenIndex).click()
+      assert.equal(await screenTabs.nth(screenIndex).getAttribute("aria-selected"), "true")
+      assert((await panel.innerText()).includes("DP-DEMO-20261025-001"), "Every screen retains the same order identifier")
+      if (screenIndex === 3) {
+        const ledger = panel.locator("dl > div").filter({ has: page.getByText("账本结果", { exact: true }) })
+        assert((await ledger.locator("dd").innerText()).includes(ledgerExpectations[resultIndex]))
+        const balance = panel.locator("dl > div").filter({ has: page.getByText("预期入账后余额", { exact: true }) })
+        assert.equal(await balance.locator("dd").innerText(), [0, 2].includes(resultIndex) ? "1,360.00 DEMO" : "尚未确认")
+      }
+      if (screenIndex === 4) {
+        const status = panel.locator("dl > div").filter({ has: page.getByText("处理状态", { exact: true }) })
+        assert.equal(await status.locator("dd").innerText(), resultIndex === 0 ? "已复核关闭" : "待核实")
+      }
+    }
+  }
+  for (const tabs of [resultTabs, screenTabs]) {
+    await tabs.first().focus()
+    for (const [key, selected] of [["ArrowLeft", await tabs.count() - 1], ["Home", 0], ["End", await tabs.count() - 1], ["ArrowRight", 0]]) {
+      await page.keyboard.press(key)
+      assert.equal(await tabs.nth(selected).getAttribute("aria-selected"), "true")
+      assert.equal(await tabs.nth(selected).getAttribute("tabindex"), "0")
+      assert.equal(await tabs.nth(selected).evaluate((node) => node === document.activeElement), true)
+    }
+  }
+  assert.equal(await reconciliation.getByRole("list", { name: "对账流程图" }).locator("li").count(), 5)
+  await noOverflow(page, "Reconciliation complete case")
+  await reconciliation.scrollIntoViewIfNeeded()
+  await page.screenshot({ path: `/tmp/reconciliation-${width}.png` })
+  console.log(`PASS ${width}px: all 20 reconciliation screen/state combinations, ledger/balance consistency, keyboard controls and no page overflow`)
+
   for (const slug of workflows) {
     await page.goto(`${base}/ai-workflows/${slug}#workflow-process`, { waitUntil: "networkidle" })
     const process = page.getByRole("region", { name: "工作流过程与对照" })
@@ -122,6 +163,8 @@ export async function checkContentExpansion(page, base, prefix, width) {
   const input = page.getByRole("textbox", { name: "搜索知识库", exact: true })
   await input.fill("DIFF-DEMO-01")
   await page.locator(`main a[href="${prefix}/templates/wallet-reconciliation-checklist"]`).waitFor()
+  await input.fill("DP-DEMO-20261025-001")
+  await page.locator(`main a[href="${prefix}/articles/wallet-payment-reconciliation"]`).waitFor()
   await page.goto(base, { waitUntil: "networkidle" })
   assert.equal(await page.getByRole("navigation", { name: "业务主题导航" }).locator('a[href$="#scenario"]').count(), 6)
   assert.equal(await page.getByRole("region", { name: "最近更新", exact: true }).locator("time").count(), 3)

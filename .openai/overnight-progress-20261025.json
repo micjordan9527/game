@@ -1,0 +1,38 @@
+{
+  "updated_at": "2026-10-26T01:43:36.763936+00:00",
+  "baseline": {
+    "sites_version": 5,
+    "sites_commit": "35b6d7b72929b018bc93c6856b5e74d066b7b4d5",
+    "github_main": "498b4e8e63ec3cc0e77823277cee44d7b973f649",
+    "recovery_version": "appgprj_6addc756f42c81918d005093dc65171c~appgver_40b6d27a4ed8819185a2555b5e69f5c0"
+  },
+  "completed": [
+    {
+      "id": 1,
+      "title": "充值与对账完整案例",
+      "status": "validated_for_delivery",
+      "details": "统一演示订单号串联订单列表、订单详情、通道记录、账本流水和差异单；覆盖核对一致、缺账、重复通知、结果未知，并附流程图与复核说明。"
+    }
+  ],
+  "remaining": [
+    "账号受限与恢复完整案例",
+    "代理跨期结算案例",
+    "BM 手机端可操作原型",
+    "U8 个人中心原型",
+    "官网移动端对照"
+  ],
+  "validation": {
+    "content_check": "passed: 21 articles, 9 templates, 4 cases, 51 images",
+    "production_build": "passed: 88 static pages",
+    "browser_1440_390": "passed: 81-page full regression on the overnight checkpoint, then content/homepage verification of final changes at both widths",
+    "reconciliation_case": "passed: all 20 screen/state combinations, consistent identifiers, ledger/balance and difference status; keyboard and search",
+    "browser_errors": "none detected: hydration, script failures, missing local script/image responses and page overflow",
+    "delivery_verification": "Use the native Sites version/deployment and GitHub main records matching the current source; validation status alone is not a publication claim."
+  },
+  "next": "Verify this source in Sites deployment records and GitHub main before repeating delivery. If already delivered, continue with remaining item 1 only when new feature work is authorized. The overnight cutoff remains 2026-10-26 10:00 UTC+8; 09:00 onward is validation/fixes only, and 10:00 onward is report-only.",
+  "recovery": {
+    "live_version_before_delivery": 5,
+    "checkpoint": "ba9792036a359ab28b7fa0798c958e338d28fcb3",
+    "local_tag": "checkpoint-before-morning-validation-20261026"
+  }
+}
