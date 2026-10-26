@@ -3,14 +3,16 @@ import fs from "node:fs"
 
 export async function checkReleaseLog(page, base, prefix, width) {
   const releases = JSON.parse(fs.readFileSync("src/data/releaseHistory.json", "utf8"))
-  const articleSlugs = releases.history.flatMap((release) => release.articleSlugs)
-  assert.equal(articleSlugs.length, 15)
-  assert.equal(new Set(articleSlugs).size, 15, "Each content update belongs to exactly one release")
+  const updateSource = fs.readFileSync("src/data/knowledgeContentUpdates.ts", "utf8")
+  const updates = JSON.parse(updateSource.slice(updateSource.indexOf("= ") + 2))
+  const articleSlugs = [...releases.current.articleSlugs, ...releases.history.flatMap((release) => release.articleSlugs)]
+  assert.deepEqual([...articleSlugs].sort(), updates.map((item) => item.slug).sort())
+  assert.equal(new Set(articleSlugs).size, articleSlugs.length, "Each content update belongs to exactly one release")
   assert(releases.current.version > releases.history[0].version)
   await page.goto(base + "/updates", { waitUntil: "networkidle" })
   const latest = page.getByRole("region", { name: releases.current.title, exact: true })
   assert((await latest.innerText()).includes("v" + releases.current.version))
-  assert.equal(await latest.locator("li").count(), releases.current.changes.length)
+  assert.equal(await latest.locator("li").count(), releases.current.changes.length + releases.current.articleSlugs.length)
   assert((await latest.boundingBox()).y < 300, "Current release should lead the page")
   assert.equal(await page.locator("details[data-release-version][open]").count(), 0, "History is initially collapsed")
   assert.equal(await page.locator("#demonstrations a").count(), 1, "A single directory entry instead of ten old feature cards")
@@ -36,7 +38,7 @@ export async function checkReleaseLog(page, base, prefix, width) {
   await first.locator("summary").focus()
   await page.keyboard.press("Enter")
   await page.locator(`#v${releases.history[0].version}[open]`).waitFor()
-  assert.equal(await first.locator("[data-release-items] > li").count(), releases.history[0].changes.length)
+  assert.equal(await first.locator("[data-release-items] > li").count(), releases.history[0].changes.length + releases.history[0].articleSlugs.length)
   await page.keyboard.press("Enter")
   await page.locator(`#v${releases.history[0].version}:not([open])`).waitFor()
 

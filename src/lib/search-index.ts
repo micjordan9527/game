@@ -7,6 +7,7 @@ import { demonstrationEntries, demonstrationGroups } from "@/data/demonstrationE
 import { templateExamples } from "@/data/templateExamples"
 import { workflowProcesses } from "@/data/workflowProcess"
 import { caseCardDetails, adminTours } from "@/data/caseEnhancements"
+import { caseReadingGuides } from "@/data/caseReadingGuides"
 import "server-only"
 import { articles } from "@/data/articles"
 import { glossary } from "@/data/glossary"
@@ -127,11 +128,11 @@ export function buildSearchIndex(): SearchRecord[] {
         description: item.description,
         href: item.href,
         previewImage: showcaseItems.find((work) => work.slug === item.slug)?.cover,
-        tags: [...item.tags, ...(item.audience ?? [])],
+        tags: [...item.tags, ...(item.audience ?? []), ...(caseReadingGuides[item.slug] ? ["界面阅读说明"] : [])],
       },
       item.slug === "admin-optimization"
-        ? "老板 运营 产品 财务 客服 角色切换 经营看板 异常入口 钱包 充值 提现 资金流水 注单 风险审核 " + JSON.stringify(adminTours)
-        : item.tags.join(" ") + " " + JSON.stringify(caseCardDetails[item.slug] ?? {})
+        ? "老板 运营 产品 财务 客服 角色切换 经营看板 异常入口 钱包 充值 提现 资金流水 注单 风险审核 " + JSON.stringify({ adminTours, guide: caseReadingGuides[item.slug] })
+        : item.tags.join(" ") + " " + JSON.stringify({ details: caseCardDetails[item.slug] ?? {}, guide: caseReadingGuides[item.slug] })
     )
   })
 

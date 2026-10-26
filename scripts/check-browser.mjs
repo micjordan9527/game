@@ -13,12 +13,13 @@ import { checkAccountRecovery } from "./check-account-recovery.mjs"
 import { checkBusinessCases, checkMobileCases, checkWithdrawalAndStates } from "./check-completion.mjs"
 import { checkKnowledgeContent } from "./check-knowledge-content.mjs"
 import { checkReleaseLog } from "./check-release-log.mjs"
+import { checkCaseReading } from "./check-case-reading.mjs"
 
 const root = path.resolve("out")
 const prefix = process.env.TEST_BASE_PATH ?? ""
 const rounds = Number(process.env.REFRESH_ROUNDS ?? 2)
 const scope = process.env.CHECK_SCOPE ?? "all"
-assert(["all", "home", "site-update", "content", "account", "business", "mobile", "completion", "knowledge", "updates"].includes(scope), "Unsupported CHECK_SCOPE")
+assert(["all", "home", "site-update", "content", "account", "business", "mobile", "completion", "knowledge", "updates", "case-reading"].includes(scope), "Unsupported CHECK_SCOPE")
 assert(Number.isInteger(rounds) && rounds > 0 && rounds <= 50, "REFRESH_ROUNDS must be between 1 and 50")
 const contentTypes = {
   ".html": "text/html",
@@ -129,6 +130,7 @@ try {
     })
     const page = await context.newPage()
     await checkHomepage(page, base, prefix, width)
+    if (scope === "case-reading" || scope === "all") await checkCaseReading(page, base, prefix, width)
     if (scope === "updates") await checkReleaseLog(page, base, prefix, width)
     if (scope === "knowledge" || scope === "all") await checkKnowledgeContent(page, base, prefix, width)
     if (scope === "business" || scope === "all") await checkBusinessCases(page, base, prefix, width)

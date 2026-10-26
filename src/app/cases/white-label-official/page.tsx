@@ -5,6 +5,7 @@ import { OfficialResponsiveComparison } from "@/components/enrichment/OfficialRe
 import { officialFocus } from "@/data/caseEnhancements"
 import Link from "next/link"
 import { OfficialCasePreview } from "@/components/cases/OfficialCasePreview"
+import { CaseReadingGuide } from "@/components/cases/CaseReadingGuide"
 import { absoluteUrl } from "@/lib/seo"
 import { assetPath } from "@/lib/assets"
 import { appendAssetVersion } from "@/lib/assetVersion"
@@ -34,10 +35,12 @@ export default function WhiteLabelOfficialCasePage() {
           全屏打开 ↗
         </a>
       </div>
+      <a href="#case-reading-guide" className="mt-3 inline-block text-xs font-semibold text-brand-700">界面阅读说明 ↓</a>
       <div id="case-materials" className="scroll-mt-24"><OfficialCasePreview src={src} /></div>
       <a href="#official-responsive-comparison" className="mt-4 inline-block text-sm font-semibold text-brand-700">查看桌面与手机实际截图 ↓</a>
       <ImageFocusExplorer items={officialFocus} title="官网界面标注" provenance="来自现有官网演示的实际截图；咨询表单不发送数据。" />
       <OfficialResponsiveComparison />
+      <CaseReadingGuide slug="white-label-official" />
       <KnowledgeLinks open resources={resourcesForResource("案例", "white-label-official")} title="相关案例与图解" />
 
     </div>

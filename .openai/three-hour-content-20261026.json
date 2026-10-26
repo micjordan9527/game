@@ -1,0 +1,12 @@
+{
+  "project_id": "appgprj_6addc756f42c81918d005093dc65171c",
+  "started_at": "2026-10-26T11:46:34Z",
+  "cutoff_at": "2026-10-26T14:46:34Z",
+  "timezone": "Asia/Shanghai",
+  "plan": "docs/three-hour-content-20261026.md",
+  "stages": [
+    { "id": "case-reading", "status": "implementation_complete", "owner": "root", "items": ["admin-optimization", "bm-optimization", "competitor-analysis", "white-label-official"] },
+    { "id": "new-topics", "status": "pending", "items": ["export-masking-audit", "content-publication-versions", "game-catalog-availability", "transaction-limits-fees"] },
+    { "id": "questions-and-final-validation", "status": "pending", "question_count": 6 }
+  ]
+}

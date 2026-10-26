@@ -60,8 +60,30 @@ function formatPublished(value: string) {
   return new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Kuala_Lumpur", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(new Date(value))
 }
 
+function contentFor(slugs: string[]) {
+  return slugs.map((slug) => {
+    const item = knowledgeContentUpdates.find((entry) => entry.slug === slug)
+    if (!item) throw new Error(`Missing release article: ${slug}`)
+    return item
+  })
+}
+
+function contentChanges(items: ReturnType<typeof contentFor>): Change[] {
+  return items.map((item) => ({ id: item.slug, title: item.title, description: item.description, location: "文章正文 · " + decodeURIComponent(item.detailHref.split("#")[1]), href: item.detailHref, linkLabel: item.kind === "补充" ? "查看补充说明" : "查看专题重点", titleHref: item.href, related: { href: item.relatedHref, label: relatedLabels[item.relatedHref] ?? "相关说明" } }))
+}
+
+function contentCount(items: ReturnType<typeof contentFor>, pages: number) {
+  const added = items.filter((item) => item.kind === "新增").length
+  const enriched = items.length - added
+  return [added ? `新增文章 ${added} 篇` : "", enriched ? `补充文章 ${enriched} 篇` : "", items.length ? `GPT 配图 ${items.length} 张` : "", pages ? `页面变化 ${pages} 项` : ""].filter(Boolean).join(" · ")
+}
+
 export default function UpdatesPage() {
   const current = releases.current
+  const currentContent = contentFor(current.articleSlugs)
+  const currentChanges = [...contentChanges(currentContent), ...current.changes]
+  const allContent = contentFor([...current.articleSlugs, ...releases.history.flatMap((release) => release.articleSlugs)])
+  const contentVersions = [current, ...releases.history].filter((release) => release.articleSlugs.length).map((release) => release.version)
   return (
     <div className="container-shell max-w-5xl py-8 md:py-10">
       <ReleaseHashNavigation />
@@ -85,9 +107,9 @@ export default function UpdatesPage() {
         </div>
         <h2 id="current-release-title" className="mt-4 text-xl font-semibold text-ink">{current.title}</h2>
         <p className="mt-2 text-sm leading-7 text-muted">{current.summary}</p>
-        <p className="mt-2 text-xs text-muted">本次页面调整 {current.changes.length} 项</p>
+        <p className="mt-2 text-xs text-muted">{contentCount(currentContent, current.changes.length)}</p>
         <ul className="mt-5 divide-y divide-line">
-          {current.changes.map((item) => <ChangeRow key={item.id} item={item} compact />)}
+          {currentChanges.map((item) => <ChangeRow key={item.id} item={item} compact />)}
         </ul>
       </section>
 
@@ -99,19 +121,13 @@ export default function UpdatesPage() {
           </nav>
         </div>
         <div id="knowledge-content" className="scroll-mt-24">
-          <p className="mt-3 text-xs leading-6 text-muted">v11–v13 内容更新：新增 8 篇、补充 7 篇、GPT 配图 15 张。全站文章 {articles.length} 篇。演算与生成配图均有示例标识。</p>
+          <p className="mt-3 text-xs leading-6 text-muted">v{Math.min(...contentVersions)}–v{Math.max(...contentVersions)} 内容累计：{contentCount(allContent, 0)}。全站文章 {articles.length} 篇。演算与生成配图均有示例标识。</p>
           <div className="mt-4 space-y-3">
             {releases.history.map((release) => {
-              const content = release.articleSlugs.map((slug) => {
-                const item = knowledgeContentUpdates.find((entry) => entry.slug === slug)
-                if (!item) throw new Error(`Missing release article: ${slug}`)
-                return item
-              })
-              const added = content.filter((item) => item.kind === "新增").length
-              const enriched = content.length - added
-              const counts = [added ? `新增文章 ${added} 篇` : "", enriched ? `补充文章 ${enriched} 篇` : "", content.length ? `GPT 配图 ${content.length} 张` : "", release.changes.length ? `页面变化 ${release.changes.length} 项` : ""].filter(Boolean).join(" · ")
+              const content = contentFor(release.articleSlugs)
+              const counts = contentCount(content, release.changes.length)
               const changes: Change[] = [
-                ...content.map((item) => ({ id: item.slug, title: item.title, description: item.description, location: "文章正文 · " + decodeURIComponent(item.detailHref.split("#")[1]), href: item.detailHref, linkLabel: item.kind === "补充" ? "查看补充说明" : "查看专题重点", titleHref: item.href, related: { href: item.relatedHref, label: relatedLabels[item.relatedHref] ?? "相关说明" } })),
+                ...contentChanges(content),
                 ...release.changes,
               ]
               return (

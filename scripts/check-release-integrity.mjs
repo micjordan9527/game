@@ -40,7 +40,7 @@ const moduleSource = fs.readFileSync("src/data/businessCases.ts", "utf8")
 const updateSource = fs.readFileSync("src/data/knowledgeContentUpdates.ts", "utf8")
 const contentUpdates = JSON.parse(updateSource.slice(updateSource.indexOf("= ") + 2))
 const releaseNotes = JSON.parse(fs.readFileSync("src/data/releaseHistory.json", "utf8"))
-const groupedSlugs = releaseNotes.history.flatMap((release) => release.articleSlugs)
+const groupedSlugs = [...releaseNotes.current.articleSlugs, ...releaseNotes.history.flatMap((release) => release.articleSlugs)]
 assert.deepEqual([...groupedSlugs].sort(), contentUpdates.map((item) => item.slug).sort(), "Content updates must belong to one release each")
 assert.equal(new Set(groupedSlugs).size, groupedSlugs.length)
 assert(releaseNotes.current.version > releaseNotes.history[0].version)

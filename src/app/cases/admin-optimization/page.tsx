@@ -1,5 +1,6 @@
 import { ExternalLink } from "lucide-react"
 import { AdminOptimizationPreview } from "@/components/cases/AdminOptimizationPreview"
+import { CaseReadingGuide } from "@/components/cases/CaseReadingGuide"
 import { absoluteUrl } from "@/lib/seo"
 import { assetPath } from "@/lib/assets"
 import { appendAssetVersion } from "@/lib/assetVersion"
@@ -32,10 +33,12 @@ export default function AdminOptimizationCasePage() {
           全屏体验 <ExternalLink className="h-4 w-4" aria-hidden="true" />
         </a>
       </div>
+      <a href="#case-reading-guide" className="mt-3 inline-block text-xs font-semibold text-brand-700">界面阅读说明 ↓</a>
       <section id="case-materials" className="mt-5 scroll-mt-24" aria-label="后台交互演示">
         <AdminOptimizationPreview src={src} />
       </section>
       <p className="mt-3 text-xs leading-6 text-muted">交互演示 · 使用示例数据。原版入口需要对应网络与登录条件。</p>
+      <CaseReadingGuide slug="admin-optimization" />
       <KnowledgeLinks open resources={resourcesForResource("案例", "admin-optimization")} title="相关案例与图解" />
     </div>
   )
