@@ -1,5 +1,6 @@
 import { ScenarioExplorer } from "@/components/enrichment/ScenarioExplorer"
 import { ReconciliationCase } from "@/components/enrichment/ReconciliationCase"
+import { AccountRecoveryCase } from "@/components/enrichment/AccountRecoveryCase"
 import { topicScenarios } from "@/data/topicScenarios"
 import { notFound } from "next/navigation"
 import Image from "next/image"
@@ -130,6 +131,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </div>
       {topicScenarios[slug] ? <ScenarioExplorer scenario={topicScenarios[slug]} /> : null}
       {slug === "wallet-payment-reconciliation" ? <ReconciliationCase /> : null}
+      {slug === "member-account-states" ? <AccountRecoveryCase /> : null}
       <details open id="article-details" className="container-shell max-w-6xl rounded-lg border-y border-line py-5">
         <summary className="cursor-pointer font-semibold text-ink">查看详细说明</summary>
         <div className="container-shell grid max-w-6xl gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-start">

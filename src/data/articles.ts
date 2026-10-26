@@ -21,7 +21,7 @@ export const articles: Article[] = [
     audience: ["产品", "客服", "运营", "技术", "测试"],
     difficulty: "进阶",
     date: "2026-10-23",
-    updatedAt: "2026-10-25",
+    updatedAt: "2026-10-26",
   },
   {
     slug: "wallet-payment-reconciliation",
