@@ -1,6 +1,7 @@
 import { KnowledgeLinks } from "@/components/common/KnowledgeLinks"
 import { resourcesForResource } from "@/lib/knowledge-relations"
 import { ImageFocusExplorer } from "@/components/enrichment/ImageFocusExplorer"
+import { OfficialResponsiveComparison } from "@/components/enrichment/OfficialResponsiveComparison"
 import { officialFocus } from "@/data/caseEnhancements"
 import Link from "next/link"
 import { OfficialCasePreview } from "@/components/cases/OfficialCasePreview"
@@ -34,7 +35,9 @@ export default function WhiteLabelOfficialCasePage() {
         </a>
       </div>
       <div id="case-materials" className="scroll-mt-24"><OfficialCasePreview src={src} /></div>
+      <a href="#official-responsive-comparison" className="mt-4 inline-block text-sm font-semibold text-brand-700">查看桌面与手机实际截图 ↓</a>
       <ImageFocusExplorer items={officialFocus} title="官网界面标注" provenance="来自现有官网演示的实际截图；咨询表单不发送数据。" />
+      <OfficialResponsiveComparison />
       <KnowledgeLinks open resources={resourcesForResource("案例", "white-label-official")} title="相关案例与图解" />
 
     </div>

@@ -12,8 +12,11 @@
         "代理跨期结算",
         "完整案例集中入口"
       ],
-      "status": "validated_for_delivery",
-      "validation": "Content check and 1440/390 full 81-page regression passed, including 12 settlement combinations and case-filtered search. Local Chinese font build verification follows."
+      "status": "published",
+      "validation": "Content check and 1440/390 full 81-page regression passed, including 12 settlement combinations and case-filtered search. Local Chinese font build verification follows.",
+      "sites_version": 8,
+      "sites_source": "0438fc8c9469da68c6e060a12dc9e3573371cd5e",
+      "github": "cbfe67bd864846c27c9cfbf93e0c12867c53e6bb"
     },
     {
       "id": 2,
@@ -22,7 +25,8 @@
         "U8个人中心原型",
         "官网移动端对照"
       ],
-      "status": "pending"
+      "status": "validated_for_delivery",
+      "validation": "1440/390 mobile and site-update scopes passed: BM 12 filters/detail/back/footer, U8 20 group-state combinations, six real official captures; original image/search/module behavior retained."
     },
     {
       "id": 3,

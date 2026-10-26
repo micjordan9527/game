@@ -1,0 +1,104 @@
+[
+  {
+    "id": "services",
+    "device": "desktop",
+    "file": "official-services-desktop.jpg",
+    "width": 1440,
+    "height": 900,
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "captureMethod": "1440×900实际视口直接模块首屏截图；超出容器的内容可在原演示中纵向滚动",
+    "source": "/case-assets/white-label-official/index.html?case-preview=1#solution",
+    "materialType": "现有官网交互演示实际截图",
+    "caption": "同一官网演示的服务方案模块：流程图与三类服务卡片。",
+    "difference": "桌面并列服务卡片；手机改为单列，依次阅读范围与入口。流程图保留同一套内容。",
+    "bytes": 100668
+  },
+  {
+    "id": "structure",
+    "device": "desktop",
+    "file": "official-structure-desktop.jpg",
+    "width": 1440,
+    "height": 900,
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "captureMethod": "1440×900实际视口直接模块首屏截图；超出容器的内容可在原演示中纵向滚动",
+    "source": "/case-assets/white-label-official/index.html?case-preview=1#product",
+    "materialType": "现有官网交互演示实际截图",
+    "caption": "同一官网演示的产品能力模块：平台架构图与能力分组。",
+    "difference": "桌面将架构图与能力说明并排；手机按架构、能力说明顺序纵向排列，保留层级标签。",
+    "bytes": 104213
+  },
+  {
+    "id": "contact",
+    "device": "desktop",
+    "file": "official-contact-desktop.jpg",
+    "width": 1440,
+    "height": 900,
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "captureMethod": "1440×900实际视口直接模块首屏截图；超出容器的内容可在原演示中纵向滚动",
+    "source": "/case-assets/white-label-official/index.html?case-preview=1#contact",
+    "materialType": "现有官网交互演示实际截图",
+    "caption": "同一官网演示的咨询模块：示例联系方式与需求表单；表单不会发送数据。",
+    "difference": "桌面将联系方式与表单分栏；手机先看联系方式，再填写表单，输入字段保持单列。",
+    "bytes": 81803
+  },
+  {
+    "id": "services",
+    "device": "mobile",
+    "file": "official-services-mobile.jpg",
+    "width": 390,
+    "height": 1940,
+    "viewport": {
+      "width": 390,
+      "height": 2019
+    },
+    "captureMethod": "实际390宽度浏览器视口按模块高度扩展，直接元素截图；不改DOM、不拼接",
+    "source": "/case-assets/white-label-official/index.html?case-preview=1#solution",
+    "materialType": "现有官网交互演示实际截图",
+    "caption": "同一官网演示的服务方案模块：流程图与三类服务卡片。",
+    "difference": "桌面并列服务卡片；手机改为单列，依次阅读范围与入口。流程图保留同一套内容。",
+    "bytes": 85374
+  },
+  {
+    "id": "structure",
+    "device": "mobile",
+    "file": "official-structure-mobile.jpg",
+    "width": 390,
+    "height": 3935,
+    "viewport": {
+      "width": 390,
+      "height": 4015
+    },
+    "captureMethod": "实际390宽度浏览器视口按模块高度扩展，直接元素截图；不改DOM、不拼接",
+    "source": "/case-assets/white-label-official/index.html?case-preview=1#product",
+    "materialType": "现有官网交互演示实际截图",
+    "caption": "同一官网演示的产品能力模块：平台架构图与能力分组。",
+    "difference": "桌面将架构图与能力说明并排；手机按架构、能力说明顺序纵向排列，保留层级标签。",
+    "bytes": 151996
+  },
+  {
+    "id": "contact",
+    "device": "mobile",
+    "file": "official-contact-mobile.jpg",
+    "width": 390,
+    "height": 1256,
+    "viewport": {
+      "width": 390,
+      "height": 1335
+    },
+    "captureMethod": "实际390宽度浏览器视口按模块高度扩展，直接元素截图；不改DOM、不拼接",
+    "source": "/case-assets/white-label-official/index.html?case-preview=1#contact",
+    "materialType": "现有官网交互演示实际截图",
+    "caption": "同一官网演示的咨询模块：示例联系方式与需求表单；表单不会发送数据。",
+    "difference": "桌面将联系方式与表单分栏；手机先看联系方式，再填写表单，输入字段保持单列。",
+    "bytes": 53193
+  }
+]

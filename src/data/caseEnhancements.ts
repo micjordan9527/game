@@ -58,7 +58,7 @@ export const caseReadingLinks = {
 
 export const caseCardDetails: Record<string, { screens: string; material: string }> = {
   "admin-optimization": { screens: "运营看板、活动记录；充值列表与详情；会员列表与详情", material: "可操作演示 · 示例数据 · 9 张步骤截图" },
-  "bm-optimization": { screens: "首页分类、比赛状态、详情操作区", material: "原截图与生成式方案对照 · 3 处局部标注" },
-  "competitor-analysis": { screens: "首页入口、内容分组、个人中心", material: "分析信息图 · 3 处局部定位" },
-  "white-label-official": { screens: "服务卡片、架构说明、咨询表单", material: "网站演示 · 3 张界面截图与布局说明" },
+  "bm-optimization": { screens: "首页分类、比赛状态、详情操作区；可操作手机原型", material: "原截图与生成式方案对照 · 局部标注 · 虚构记录交互示意" },
+  "competitor-analysis": { screens: "首页入口、内容分组；个人中心与五种界面状态", material: "分析信息图 · 局部定位 · 个人中心交互示意" },
+  "white-label-official": { screens: "服务卡片、架构说明、咨询表单；桌面与手机对照", material: "网站演示 · 3 张界面标注 · 6 张响应式实际截图" },
 }

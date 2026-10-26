@@ -1,0 +1,74 @@
+[
+  {
+    "id": "services",
+    "device": "desktop",
+    "pageWidth": 1440,
+    "bodyWidth": 1440,
+    "viewportWidth": 1440,
+    "sectionWidth": 1440,
+    "sectionHeight": 900,
+    "imageCount": 0,
+    "unloadedImages": [],
+    "overflowingElements": []
+  },
+  {
+    "id": "structure",
+    "device": "desktop",
+    "pageWidth": 1440,
+    "bodyWidth": 1440,
+    "viewportWidth": 1440,
+    "sectionWidth": 1440,
+    "sectionHeight": 900,
+    "imageCount": 0,
+    "unloadedImages": [],
+    "overflowingElements": []
+  },
+  {
+    "id": "contact",
+    "device": "desktop",
+    "pageWidth": 1440,
+    "bodyWidth": 1440,
+    "viewportWidth": 1440,
+    "sectionWidth": 1440,
+    "sectionHeight": 900,
+    "imageCount": 0,
+    "unloadedImages": [],
+    "overflowingElements": []
+  },
+  {
+    "id": "services",
+    "device": "mobile",
+    "pageWidth": 390,
+    "bodyWidth": 390,
+    "viewportWidth": 390,
+    "sectionWidth": 390,
+    "sectionHeight": 1939,
+    "imageCount": 0,
+    "unloadedImages": [],
+    "overflowingElements": []
+  },
+  {
+    "id": "structure",
+    "device": "mobile",
+    "pageWidth": 390,
+    "bodyWidth": 390,
+    "viewportWidth": 390,
+    "sectionWidth": 390,
+    "sectionHeight": 3934,
+    "imageCount": 0,
+    "unloadedImages": [],
+    "overflowingElements": []
+  },
+  {
+    "id": "contact",
+    "device": "mobile",
+    "pageWidth": 390,
+    "bodyWidth": 390,
+    "viewportWidth": 390,
+    "sectionWidth": 390,
+    "sectionHeight": 1255,
+    "imageCount": 0,
+    "unloadedImages": [],
+    "overflowingElements": []
+  }
+]
