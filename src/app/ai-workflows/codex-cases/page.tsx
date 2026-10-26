@@ -12,7 +12,7 @@ export default function CodexCasesPage() {
   return (
     <div className="container-shell py-8">
       <Link href="/ai-workflows" className="text-sm font-semibold text-muted">
-        ← AI 成果
+        ← AI 工作流
       </Link>
       <h1 className="mt-4 text-3xl font-semibold text-ink">Codex 实践图解</h1>
       <p className="mt-3 text-sm leading-7 text-muted">用输入、处理和结果三个节点，看清常见工作流。</p>

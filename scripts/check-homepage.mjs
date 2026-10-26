@@ -38,6 +38,21 @@ export async function checkHomepage(page, base, prefix, width) {
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false)
   await page.screenshot({ path: `/tmp/knowledge-home-${width}.png` })
 
+  const header = page.locator("body > header")
+  const updatesLink = header.getByRole("link", { name: "更新记录", exact: true })
+  assert.equal(await updatesLink.count(), 1, "One visible update link in the header")
+  const updateBox = await updatesLink.boundingBox()
+  assert(updateBox && updateBox.y >= 0 && updateBox.y + updateBox.height <= 64, "Updates must be directly visible in the top bar")
+  if (width >= 1280) {
+    assert.deepEqual(await header.getByRole("navigation", { name: "顶部导航", exact: true }).getByRole("link").allInnerTexts(), ["案例", "功能图解", "AI 工作流", "素材规范", "术语库", "模板库", "更新记录", "搜索"])
+  }
+  await updatesLink.click()
+  await page.getByRole("heading", { name: "更新记录", level: 1, exact: true }).waitFor()
+  assert.equal(await updatesLink.getAttribute("aria-current"), "page")
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false)
+  await page.screenshot({ path: `/tmp/knowledge-top-navigation-${width}.png` })
+  await page.goto(base, { waitUntil: "networkidle" })
+
   const search = page.getByRole("search", { name: "首页搜索" })
   await search.getByRole("searchbox", { name: "搜索知识库", exact: true }).fill("钱包")
   await Promise.all([

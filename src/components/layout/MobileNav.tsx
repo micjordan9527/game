@@ -31,11 +31,11 @@ const resourceLinks: NavLinkItem[] = [
   { href: "/", label: "首页", icon: Home },
   { href: "/updates", label: "更新记录", icon: FileText },
   { href: "/cases", label: "案例", icon: BriefcaseBusiness },
-  { href: "/ai-workflows", label: "AI 成果", icon: Sparkles },
   { href: "/articles", label: "功能图解", icon: FileText },
+  { href: "/ai-workflows", label: "AI 工作流", icon: Sparkles },
   { href: "/design/material-standards", label: "素材规范", icon: MonitorCog },
   { href: "/design/states", label: "状态对照", icon: MonitorCog },
-  { href: "/templates", label: "工作模板", icon: Library },
+  { href: "/templates", label: "模板库", icon: Library },
   { href: "/glossary", label: "术语库", icon: BookOpen },
 ]
 
@@ -115,6 +115,13 @@ export function MobileNav() {
 
   return (
     <div className="flex items-center gap-2 xl:hidden">
+      <Link
+        href="/updates"
+        aria-current={pathname === "/updates" ? "page" : undefined}
+        className={`inline-flex h-11 shrink-0 items-center whitespace-nowrap rounded-md border px-3 text-sm font-medium hover:bg-paper ${pathname === "/updates" ? "border-brand-200 bg-brand-50 text-brand-700" : "border-line bg-white text-muted"}`}
+      >
+        更新记录
+      </Link>
       <Link
         href="/search"
         aria-label="全站搜索"

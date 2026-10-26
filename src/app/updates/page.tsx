@@ -30,10 +30,19 @@ export default function UpdatesPage() {
         <h1 className="mt-2 text-3xl font-semibold text-ink">更新记录</h1>
         <p className="mt-3 max-w-3xl leading-8 text-muted">按条目查看内容变化与所在位置。文章页先展示主题图解，“查看详细说明”默认展开；每项均可直接打开正文重点或相关界面。</p>
         <nav aria-label="更新记录导航" className="mt-4 flex flex-wrap gap-3 text-sm font-semibold text-brand-700">
+          <a href="#top-navigation">顶部导航</a>
           <a href="#knowledge-content">知识内容与配图</a>
           <a href="#demonstrations">功能与演示入口</a>
         </nav>
       </header>
+      <section id="top-navigation" className="scroll-mt-24 pt-10" aria-labelledby="top-navigation-title">
+        <h2 id="top-navigation-title" className="text-xl font-semibold">顶部导航与更新记录入口</h2>
+        <div className="mt-4 rounded-xl border border-line bg-white p-5 text-sm leading-7 text-muted">
+          <p>桌面顶部按“案例、功能图解、AI 工作流、素材规范、术语库、模板库”排列内容栏目，右侧提供“更新记录”和搜索。当前页面或所属栏目会高亮。</p>
+          <p className="mt-2">手机和平板顶部直接显示“更新记录”，可一键进入本页；完整栏目仍可从菜单打开。顶部、侧栏、手机菜单和页脚统一使用“AI 工作流”“模板库”。</p>
+          <Link href="/" className="mt-3 inline-block font-semibold text-brand-700">返回首页查看顶部入口 →</Link>
+        </div>
+      </section>
       <section id="knowledge-content" className="scroll-mt-24 pt-10" aria-labelledby="knowledge-content-title">
         <h2 id="knowledge-content-title" className="text-xl font-semibold">知识内容与配图 · {knowledgeContentUpdates.length} 项</h2>
         <p className="mt-2 text-sm leading-7 text-muted">本组配图均标明 GPT 生成示意图；正文中的演算与演示编号均为虚构说明，实际页面截图另附来源。</p>

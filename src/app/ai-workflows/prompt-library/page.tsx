@@ -12,7 +12,7 @@ export default function PromptLibraryPage() {
   return (
     <div className="container-shell py-8">
       <Link href="/ai-workflows" className="text-sm font-semibold text-muted">
-        ← AI 成果
+        ← AI 工作流
       </Link>
       <h1 className="mt-4 text-3xl font-semibold text-ink">AI 提示词工具</h1>
       <p className="mt-3 text-sm leading-7 text-muted">按用途查看产出结构，展开后复制使用。</p>

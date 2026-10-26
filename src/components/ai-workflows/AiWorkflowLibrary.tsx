@@ -32,9 +32,9 @@ export function AiWorkflowLibrary({
   )
   return (
     <div>
-      <div className="rounded-xl border border-line bg-white p-4" aria-label="AI 成果筛选">
+      <div className="rounded-xl border border-line bg-white p-4" aria-label="AI 工作流筛选">
         <label htmlFor="ai-workflow-search" className="sr-only">
-          搜索 AI 成果
+          搜索 AI 工作流
         </label>
         <input
           id="ai-workflow-search"

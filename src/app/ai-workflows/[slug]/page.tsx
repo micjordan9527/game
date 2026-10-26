@@ -31,7 +31,7 @@ export default async function AiWorkflowDetailPage({ params }: { params: Promise
   return (
     <div className="container-shell max-w-6xl py-6 md:py-8">
       <Link href="/ai-workflows" className="text-sm font-semibold text-muted hover:text-brand-700">
-        ← AI 成果
+        ← AI 工作流
       </Link>
       <h1 className="mt-4 text-3xl font-semibold text-ink">{workflow.title}</h1>
       <p className="mt-2 max-w-3xl text-sm leading-7 text-muted">{workflow.summary}</p>

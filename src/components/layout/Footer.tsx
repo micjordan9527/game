@@ -11,9 +11,9 @@ export function Footer() {
               ["/updates", "更新记录"],
               ["/cases", "案例"],
               ["/articles", "功能图解"],
-              ["/ai-workflows", "AI成果"],
+              ["/ai-workflows", "AI 工作流"],
               ["/design/material-standards", "素材规范"],
-              ["/templates", "工作模板"],
+              ["/templates", "模板库"],
             ].map(([href, title]) => (
               <Link key={href} href={href} className="hover:text-brand-700">
                 {title}

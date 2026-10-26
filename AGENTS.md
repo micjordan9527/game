@@ -21,6 +21,7 @@ Sites and GitHub delivery preference (2026-10-25):
 - Treat that Site's latest source/version as the editing baseline and retain a recoverable version before changes.
 - After every successful Site update, also commit the delivered changes to the existing GitHub repository https://github.com/micjordan9527/game on its main branch. Preserve unrelated remote changes; report the actual deployment state and GitHub commit link.
 - For each delivery, describe every changed feature or content item and provide its location or direct link. Keep the public /updates page accurate so the user can find the changes without searching the chat.
+- Keep “更新记录” directly visible in the desktop and mobile top bar. Navigation, AI library headings/back links and footer should consistently use “AI 工作流” and “模板库”.
 
 Image viewing preference (2026-10-25):
 - For BM/U8, “适应屏幕” fits the available width and preserves the image aspect ratio; long images scroll vertically without horizontal scrolling. Do not shrink the image to fit the viewport height.
