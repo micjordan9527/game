@@ -14,6 +14,9 @@ export function ArticleVisualBrief({ imagePrompts = [] }: { imagePrompts?: Image
           height: image.height ?? 900,
         }))}
       />
+      {imagePrompts.filter((image) => image.caption).map((image) => (
+        <p key={image.slug} className="mt-3 text-sm leading-7 text-muted">{image.caption}</p>
+      ))}
     </section>
   )
 }

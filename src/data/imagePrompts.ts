@@ -8,6 +8,7 @@ export type ImagePrompt = {
   kind?: "standard" | "long-infographic"
   width?: number
   height?: number
+  caption?: string
 }
 
 export const imagePrompts: ImagePrompt[] = [
@@ -202,6 +203,76 @@ export const imagePrompts: ImagePrompt[] = [
     kind: "long-infographic",
     width: 864,
     height: 1821,
+  },
+  {
+    slug: "member-agent-platform-knowledge-diagram",
+    title: "会员、代理、平台三者是什么关系 · 图解",
+    articleSlug: "member-agent-platform",
+    imageSrc: "/images/knowledge-20261026/member-agent-platform.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
+  },
+  {
+    slug: "operation-product-conversion-model-knowledge-diagram",
+    title: "运营和产品为什么要放在一起看 · 图解",
+    articleSlug: "operation-product-conversion-model",
+    imageSrc: "/images/knowledge-20261026/operation-product-conversion-model.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
+  },
+  {
+    slug: "first-deposit-retention-vip-knowledge-diagram",
+    title: "首存、复存、返水、VIP 分别是什么 · 图解",
+    articleSlug: "first-deposit-retention-vip",
+    imageSrc: "/images/knowledge-20261026/first-deposit-retention-vip.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
+  },
+  {
+    slug: "game-provider-api-knowledge-diagram",
+    title: "游戏厂商 API 如何对接 · 图解",
+    articleSlug: "game-provider-api",
+    imageSrc: "/images/knowledge-20261026/game-provider-api.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。步骤表示业务先后；记账与处理结果应在正文约定的原子边界内持久化。"
+  },
+  {
+    slug: "bet-ticket-status-knowledge-diagram",
+    title: "注单状态有哪些 · 图解",
+    articleSlug: "bet-ticket-status",
+    imageSrc: "/images/knowledge-20261026/bet-ticket-status.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。“已拒绝／无资金入账”指未受理、未扣款示例；预冻结或已扣款需按协议释放或冲正。状态以厂商契约为准。"
+  },
+  {
+    slug: "admin-information-hierarchy-knowledge-diagram",
+    title: "复杂后台页面怎样安排信息层级 · 图解",
+    articleSlug: "admin-information-hierarchy",
+    imageSrc: "/images/knowledge-20261026/admin-information-hierarchy.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。界面为概念示意，实际截图见正文链接的后台案例。"
+  },
+  {
+    slug: "data-report-metrics-knowledge-diagram",
+    title: "数据报表指标怎么看 · 图解",
+    articleSlug: "data-report-metrics",
+    imageSrc: "/images/knowledge-20261026/data-report-metrics.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
   },
 ]
 

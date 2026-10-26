@@ -1,0 +1,79 @@
+[
+  {
+    "articleSlug": "member-agent-platform",
+    "path": "/images/knowledge-20261026/member-agent-platform.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "会员、代理与平台的归属、服务与结算边界。",
+    "verification": "中文标签、方向已目视核对；代理归属不等于钱包权限。"
+  },
+  {
+    "articleSlug": "operation-product-conversion-model",
+    "path": "/images/knowledge-20261026/operation-product-conversion-model.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "运营目标转成页面、规则、指标与复盘的协作循环。",
+    "verification": "中文、循环箭头与顺序已目视核对；图中图表为示意，无实际业绩。"
+  },
+  {
+    "articleSlug": "first-deposit-retention-vip",
+    "path": "/images/knowledge-20261026/first-deposit-retention-vip.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "首存、复存、返水与VIP的条件、基数、周期、状态比较。",
+    "verification": "四栏中文标签已目视核对；无营销许诺，无虚构金额。"
+  },
+  {
+    "articleSlug": "game-provider-api",
+    "path": "/images/knowledge-20261026/game-provider-api.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "厂商交易请求经过验签、幂等、原子记账、保存结果并响应，超时查询原交易。",
+    "verification": "中文与箭头已目视核对；步骤表达业务先后，记账与结果持久化的原子范围须按正文定义。"
+  },
+  {
+    "articleSlug": "bet-ticket-status",
+    "path": "/images/knowledge-20261026/bet-ticket-status.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "注单受理、结算、拒绝、取消与重结算的示意状态流。",
+    "verification": "中文、箭头已目视核对；拒绝无入账仅指此图未接受未扣款的示例，已冻结或已扣款需按协议释放或冲正。"
+  },
+  {
+    "articleSlug": "admin-information-hierarchy",
+    "path": "/images/knowledge-20261026/admin-information-hierarchy.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "筛选、列表、详情、重要操作与日志的信息层级示意。",
+    "verification": "中文已目视核对；明确标记界面示意，不是实际产品截图；请配合既有真实截图阅读。"
+  },
+  {
+    "articleSlug": "data-report-metrics",
+    "path": "/images/knowledge-20261026/data-report-metrics.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "统一指标定义、时间与维度后，从汇总追溯明细，充值、流水、派彩分别统计。",
+    "verification": "中文与箭头已目视核对；图表无实际数据，无效果提升宣称。"
+  }
+]

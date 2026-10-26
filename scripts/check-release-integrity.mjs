@@ -27,7 +27,7 @@ for (const file of pages) {
   assert(canonical, `${file}: canonical missing`)
   assert.equal(new URL(canonical[1]).origin, origin, `${file}: canonical origin`)
 }
-for (const manifestPath of ["public/images/enrichment/provenance.json", "public/images/official-comparison/manifest.json"]) {
+for (const manifestPath of ["public/images/enrichment/provenance.json", "public/images/official-comparison/manifest.json", "public/images/knowledge-20261026/manifest.json"]) {
   const items = JSON.parse(fs.readFileSync(manifestPath, "utf8"))
   for (const item of items) {
     const file = item.path ? path.join("public", item.path) : path.join(path.dirname(manifestPath), item.file)
@@ -37,6 +37,19 @@ for (const manifestPath of ["public/images/enrichment/provenance.json", "public/
   }
 }
 const moduleSource = fs.readFileSync("src/data/businessCases.ts", "utf8")
+const updateSource = fs.readFileSync("src/data/knowledgeContentUpdates.ts", "utf8")
+const contentUpdates = JSON.parse(updateSource.slice(updateSource.indexOf("= ") + 2))
+for (const item of contentUpdates) {
+  for (const key of ["href", "detailHref", "relatedHref"]) {
+    const target = new URL(item[key], origin)
+    const file = resolveFile(prefix + target.pathname)
+    assert(file, `Content update ${item.slug}: missing ${item[key]}`)
+    if (target.hash) {
+      const id = decodeURIComponent(target.hash.slice(1))
+      assert(fs.readFileSync(file, "utf8").includes(`id="${id}"`), `Content update ${item.slug}: missing anchor ${item[key]}`)
+    }
+  }
+}
 const javascript = ts.transpileModule(moduleSource, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
 const data = await import("data:text/javascript;base64," + Buffer.from(javascript).toString("base64"))
 assert.equal(data.commissionCents(1_000_000, 300), 30_000)

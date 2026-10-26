@@ -1,0 +1,93 @@
+[
+  {
+    "articleSlug": "member-agent-platform",
+    "file": "member-agent-platform.png",
+    "originalPath": "/workspace/generated_images/exec-f3fc5a0c-65a3-4379-ab6b-9d88750decc0.png",
+    "width": 1536,
+    "height": 1024,
+    "prompt": "Create one polished Chinese editorial infographic for a neutral technical knowledge base, landscape 1536x1024. Off-white background, navy type, teal and pale orange accents, crisp vector-style cards, generous space, short accurate Simplified Chinese labels, no marketing. Title exact: 会员、代理与平台. Three clearly separated role cards across the page: left 会员 with labels 账号 / 余额 / 服务记录; center 代理 with labels 推广关系 / 归属记录 / 结算规则; right 平台 with labels 账号服务 / 钱包记账 / 权限审计. Teal line from 代理 to 会员 labeled 推广归属. Navy line from 平台 to 会员 labeled 提供服务. Navy line from 平台 to 代理 labeled 规则结算. At bottom a single separated pale-orange note card reading 代理归属不等于钱包权限. Do not connect agent to wallet with a money arrow. No money amounts, no real company logo, no UI screenshot impersonation. Footer exact 示意图. Use a clear typographic diagram, not photo.",
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "会员、代理与平台的归属、服务与结算边界。",
+    "verification": "中文标签、方向已目视核对；代理归属不等于钱包权限。"
+  },
+  {
+    "articleSlug": "operation-product-conversion-model",
+    "file": "operation-product-conversion-model.png",
+    "originalPath": "/workspace/generated_images/exec-776780af-5a45-45a7-b2f4-04ad96cef716.png",
+    "width": 1536,
+    "height": 1024,
+    "prompt": "Create a clean Chinese technical editorial infographic, landscape 1536x1024, same neutral visual family: white/off-white background, navy typography, teal flow arrows, pale orange review card, large short precise Simplified Chinese labels, no marketing or photorealistic UI. Exact title 运营目标到产品结构. Four evenly spaced cards in a clockwise loop: top left 目标 with small labels 问题 / 人群; top right 页面与规则 with small labels 入口 / 条件 / 状态; bottom right 指标 with small labels 口径 / 时间 / 明细; bottom left 复盘 with small labels 差异 / 原因 / 调整. Arrows exactly 目标 -> 页面与规则 -> 指标 -> 复盘 -> 目标, clearly arrowheads. Center label 共同定义. Footer small note 先确认口径，再解释变化. Include subtle document, wireframe, chart, notes icons, not real screen or real data. Extremely legible, ample space, no other text.",
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "运营目标转成页面、规则、指标与复盘的协作循环。",
+    "verification": "中文、循环箭头与顺序已目视核对；图中图表为示意，无实际业绩。"
+  },
+  {
+    "articleSlug": "first-deposit-retention-vip",
+    "file": "first-deposit-retention-vip.png",
+    "originalPath": "/workspace/generated_images/exec-0b3fd4e6-43cf-49ef-aa9d-392b3c8afbec.png",
+    "width": 1536,
+    "height": 1024,
+    "prompt": "Create one neutral Chinese comparison infographic landscape 1536x1024, white/off-white, navy type, teal and pale orange accents, crisp clean vector cards, short accurate simplified Chinese, no promotional copy, no amounts, no coins or gifts. Title exact 四类规则分别记录. Four large equal vertical cards side by side. Card 1 title 首存, content lines 首次成功充值 / 条件核验 / 一次性资格. Card 2 title 复存, content lines 后续成功充值 / 统计周期 / 资格记录. Card 3 title 返水, content lines 有效统计基数 / 比例与上限 / 结算状态. Card 4 title VIP, content lines 等级门槛 / 有效期 / 升降级记录. Use one simple corresponding icon per card (number 1, repeating document, calculator, tier steps). Bottom pale orange note 条件、基数、周期与状态需要分别定义. Footer small 示意图. Layout must be readable at mobile zoom, no dense text, no arrows between four independent concepts.",
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "首存、复存、返水与VIP的条件、基数、周期、状态比较。",
+    "verification": "四栏中文标签已目视核对；无营销许诺，无虚构金额。"
+  },
+  {
+    "articleSlug": "game-provider-api",
+    "file": "game-provider-api.png",
+    "originalPath": "/workspace/generated_images/exec-8e780d2b-895e-4f5a-bb37-6c55e502937e.png",
+    "width": 1536,
+    "height": 1024,
+    "prompt": "Create a precise Chinese technical infographic landscape 1536x1024 for API integration. Off-white background navy text, teal normal path, orange exception path, crisp flat cards, generous space. Title 平台与厂商的交易请求. Two vertical lanes with large headers 厂商 on left and 平台 on right. Normal flow top-to-bottom: on left card 交易请求, arrow right to platform card 验签与幂等, downward arrow to platform card 原子记账, downward arrow to platform card 保存结果, leftward arrow back to left lane card 返回响应. Draw a separate bottom orange horizontal path: 超时 -> 查询原交易 -> 核对结果. Small orange note bottom 同一业务交易，不重复扣款. No monetary figures, no pseudocode, no fake logs, no real logos. Keep only these labels and exact Chinese. Footer 示意图. Ensure arrowheads are unambiguous, no endless loop of debits.",
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "厂商交易请求经过验签、幂等、原子记账、保存结果并响应，超时查询原交易。",
+    "verification": "中文与箭头已目视核对；步骤表达业务先后，记账与结果持久化的原子范围须按正文定义。"
+  },
+  {
+    "articleSlug": "bet-ticket-status",
+    "file": "bet-ticket-status.png",
+    "originalPath": "/workspace/generated_images/exec-5c535836-f82e-4e3b-a34c-8f5436aa65cd.png",
+    "width": 1536,
+    "height": 1024,
+    "prompt": "Create a precise neutral Chinese state-transition infographic, landscape 1536x1024, off-white navy teal and pale orange flat technical diagram, ample space, large short labels. Title 注单状态与资金影响. Main top row three rounded teal cards left to right 待确认 -> 已受理 -> 已结算. Below 待确认 a branch down to muted card 已拒绝 with short sublabel 无资金入账. Below 已受理 a branch down to orange card 已取消 with short sublabel 按规则补偿. Below 已结算 a branch down to orange card 重结算 with short sublabel 按差额调整. Put clear arrowheads only from main card to corresponding exception card. Footer note exact 状态名称与处理规则以厂商协议为准. No amount, no bets, no odds, no real UI. Tiny bottom label 示意图. Do not add any other transitions, loops or illegible text.",
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "注单受理、结算、拒绝、取消与重结算的示意状态流。",
+    "verification": "中文、箭头已目视核对；拒绝无入账仅指此图未接受未扣款的示例，已冻结或已扣款需按协议释放或冲正。"
+  },
+  {
+    "articleSlug": "admin-information-hierarchy",
+    "file": "admin-information-hierarchy.png",
+    "originalPath": "/workspace/generated_images/exec-7286fc1c-015e-4b58-aafc-6e8b323e108f.png",
+    "width": 1536,
+    "height": 1024,
+    "prompt": "Create one neutral Chinese knowledge-base information hierarchy schematic, landscape 1536x1024, clean off-white, navy text, teal highlights, pale-orange caution, flat vector editorial diagram, no fake actual product screenshot, no logos. Title 后台页面的信息层级. Left large schematic browser panel labeled 界面示意. Its top zone labeled 筛选 with two plain rectangle fields below labeled 时间 and 状态; middle zone labeled 列表 with three abstract rows and one selected teal row; right side within panel a detail drawer labeled 详情 with three plain field lines and a bottom small outlined button 重要操作. To right of panel three stacked annotation cards: first 找到记录 (sublabel 筛选与排序), second 理解记录 (sublabel 字段与关联), third 追溯操作 (sublabel 操作者与日志). Thin connector lines from filter/list to first card, drawer details to second card, important action to third card. Bottom note 先核对对象，再确认操作. Tiny footer 示意图. No unreadable microcopy; all visible text as specified.",
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "筛选、列表、详情、重要操作与日志的信息层级示意。",
+    "verification": "中文已目视核对；明确标记界面示意，不是实际产品截图；请配合既有真实截图阅读。"
+  },
+  {
+    "articleSlug": "data-report-metrics",
+    "file": "data-report-metrics.png",
+    "originalPath": "/workspace/generated_images/exec-2341804d-382f-4ad2-beaa-29bc4e9ab962.png",
+    "width": 1536,
+    "height": 1024,
+    "prompt": "Create a clear Chinese technical editorial infographic landscape 1536x1024, white/off-white background navy typography, teal arrows, pale orange caution, flat vector cards and icons. Title 从指标定义追溯到明细. Left column three stacked small cards 指标定义 / 时间范围 / 统计维度, feed through bracket into center large card 汇总结果 (abstract simple bars with NO numeric values). Arrow from center to right large card 明细记录 (abstract three table rows, no fake data). Lower row three equal separate chips 充值 / 投注流水 / 派彩, separated by clear vertical dividers and label 分别统计. Bottom pale orange note 金额含义与去重规则需要统一. Footer 示意图. Large readable short exact simplified Chinese, no real data, no claims of growth, no miniature illegible chart labels. Keep clean spacing.",
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "统一指标定义、时间与维度后，从汇总追溯明细，充值、流水、派彩分别统计。",
+    "verification": "中文与箭头已目视核对；图表无实际数据，无效果提升宣称。"
+  }
+]

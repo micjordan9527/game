@@ -13,7 +13,8 @@ export async function checkHomepage(page, base, prefix, width) {
   )
   assert.equal(await page.getByRole("navigation", { name: "业务主题导航" }).getByRole("link").count(), 6)
   assert.equal(await page.getByRole("navigation", { name: "按角色浏览" }).getByRole("link").count(), 5)
-  assert.equal(await page.getByRole("navigation", { name: "常用资料", exact: true }).getByRole("link").count(), 3)
+  assert.equal(await page.getByRole("navigation", { name: "常用资料", exact: true }).getByRole("link").count(), 4)
+  await page.getByRole("navigation", { name: "常用资料", exact: true }).getByRole("link", { name: "更新记录", exact: true }).waitFor()
   for (const title of ["功能图解", "AI 工作流"]) {
     const region = page.getByRole("region", { name: title, exact: true })
     assert.equal(await region.getByRole("heading", { level: 3 }).count(), 2, title)

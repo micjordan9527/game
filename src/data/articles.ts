@@ -76,7 +76,7 @@ export const articles: Article[] = [
     audience: ["运营", "产品", "新人"],
     difficulty: "入门",
     date: "2026-05-29",
-    updatedAt: "2026-05-30",
+    updatedAt: "2026-10-26",
   },
   {
     slug: "wallet-center-vs-seamless",
@@ -109,7 +109,7 @@ export const articles: Article[] = [
     audience: ["产品", "运营", "老板", "新人"],
     difficulty: "入门",
     date: "2026-06-01",
-    updatedAt: "2026-06-01",
+    updatedAt: "2026-10-26",
   },
   {
     slug: "first-deposit-retention-vip",
@@ -120,7 +120,7 @@ export const articles: Article[] = [
     audience: ["运营", "新人"],
     difficulty: "入门",
     date: "2026-05-29",
-    updatedAt: "2026-05-30",
+    updatedAt: "2026-10-26",
   },
   {
     slug: "admin-modules",
@@ -142,7 +142,7 @@ export const articles: Article[] = [
     audience: ["产品", "技术", "项目经理"],
     difficulty: "进阶",
     date: "2026-05-29",
-    updatedAt: "2026-05-30",
+    updatedAt: "2026-10-26",
   },
   {
     slug: "launch-checklist",
@@ -175,7 +175,7 @@ export const articles: Article[] = [
     audience: ["产品", "客服", "开发"],
     difficulty: "入门",
     date: "2026-05-30",
-    updatedAt: "2026-10-25",
+    updatedAt: "2026-10-26",
   },
   {
     slug: "admin-information-hierarchy",
@@ -186,7 +186,7 @@ export const articles: Article[] = [
     audience: ["设计师", "产品", "前端", "运营"],
     difficulty: "进阶",
     date: "2026-09-10",
-    updatedAt: "2026-10-25",
+    updatedAt: "2026-10-26",
   },
   {
     slug: "risk-rule-basic",
@@ -208,7 +208,7 @@ export const articles: Article[] = [
     audience: ["运营", "产品", "管理者"],
     difficulty: "入门",
     date: "2026-05-30",
-    updatedAt: "2026-05-30",
+    updatedAt: "2026-10-26",
   },
   {
     slug: "community-operations-governance",
