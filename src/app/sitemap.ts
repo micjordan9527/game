@@ -35,6 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { url: absoluteUrl("/design/states"), lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/updates"), lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: absoluteUrl("/updates/demonstrations"), lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     {
       url: absoluteUrl("/ai-workflows/codex-cases"),
       lastModified: now,

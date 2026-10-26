@@ -39,6 +39,22 @@ for (const manifestPath of ["public/images/enrichment/provenance.json", "public/
 const moduleSource = fs.readFileSync("src/data/businessCases.ts", "utf8")
 const updateSource = fs.readFileSync("src/data/knowledgeContentUpdates.ts", "utf8")
 const contentUpdates = JSON.parse(updateSource.slice(updateSource.indexOf("= ") + 2))
+const releaseNotes = JSON.parse(fs.readFileSync("src/data/releaseHistory.json", "utf8"))
+const groupedSlugs = releaseNotes.history.flatMap((release) => release.articleSlugs)
+assert.deepEqual([...groupedSlugs].sort(), contentUpdates.map((item) => item.slug).sort(), "Content updates must belong to one release each")
+assert.equal(new Set(groupedSlugs).size, groupedSlugs.length)
+assert(releaseNotes.current.version > releaseNotes.history[0].version)
+for (const release of releaseNotes.history) {
+  assert(/^[0-9a-f]{40}$/.test(release.githubCommit))
+  assert(Number.isFinite(Date.parse(release.publishedAt)))
+}
+for (const change of [...releaseNotes.current.changes, ...releaseNotes.history.flatMap((release) => release.changes)]) {
+  const target = new URL(change.href, origin)
+  const file = resolveFile(prefix + target.pathname)
+  assert(file, `Release entry ${change.id}: missing ${change.href}`)
+  assert(change.location && change.description && change.linkLabel)
+  if (target.hash) assert(fs.readFileSync(file, "utf8").includes(`id="${decodeURIComponent(target.hash.slice(1))}"`), change.href)
+}
 for (const item of contentUpdates) {
   for (const key of ["href", "detailHref", "relatedHref"]) {
     const target = new URL(item[key], origin)

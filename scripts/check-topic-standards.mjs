@@ -123,6 +123,7 @@ export function checkTopicStandards(root, errors) {
     "/cases",
     "/search",
     "/updates",
+    "/updates/demonstrations",
     "/ai-workflows",
     ...articles.map((item) => `/articles/${item.slug}`),
     ...templates.map((item) => `/templates/${item.slug}`),

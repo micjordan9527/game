@@ -1,0 +1,56 @@
+{
+  "current": {
+    "version": 15,
+    "date": "2026-10-26",
+    "title": "更新记录按发布版本整理",
+    "summary": "集中查看本次变化、所在位置和直接入口，再按版本回看历史内容。",
+    "changes": [
+      { "id": "release-summary", "title": "首屏显示本次更新", "description": "展示当前版本、更新日期和本次页面变化，并提供站点与 GitHub 源码入口。", "location": "本页顶部", "href": "/", "linkLabel": "打开站点" },
+      { "id": "version-groups", "title": "历史记录按实际版本分组", "description": "v11–v14 分别列出文章、配图和页面变化，历史版本可展开查看；旧章节链接会自动打开对应记录。", "location": "本页历史版本", "href": "/updates#v14", "linkLabel": "查看 v14 记录" },
+      { "id": "demo-directory", "title": "已有功能移入演示目录", "description": "10 个已有功能集中到独立目录，分别说明演示内容和入口。", "location": "功能演示目录", "href": "/updates/demonstrations", "linkLabel": "打开演示目录" }
+    ]
+  },
+  "history": [
+    {
+      "version": 14,
+      "title": "顶部导航与更新记录入口",
+      "publishedAt": "2026-10-26T10:25:10.960205Z",
+      "githubCommit": "d8299d75855c3c176de84622b6403a2426a6de91",
+      "articleSlugs": [],
+      "changes": [
+        { "id": "desktop-update-link", "title": "桌面顶部增加更新记录", "description": "内容栏目集中排列，更新记录和搜索位于右侧。", "location": "桌面顶部右侧", "href": "/", "linkLabel": "查看顶部导航" },
+        { "id": "mobile-update-link", "title": "手机顶部直接打开更新记录", "description": "手机和平板顶部显示文字入口，页面滚动后仍可访问。", "location": "手机和平板顶部", "href": "/", "linkLabel": "查看首页入口" },
+        { "id": "navigation-labels", "title": "统一 AI 工作流与模板库名称", "description": "顶部、侧栏、手机菜单、页脚以及 AI 栏目标题、筛选和返回链接使用一致名称。", "location": "全站导航与 AI 栏目", "href": "/ai-workflows", "linkLabel": "打开 AI 工作流" },
+        { "id": "navigation-location", "title": "显示当前页面与所属栏目", "description": "顶部导航高亮当前页面，进入文章后标出所属栏目。", "location": "顶部当前栏目", "href": "/articles/game-provider-api", "linkLabel": "查看文章栏目高亮" }
+      ]
+    },
+    {
+      "version": 13,
+      "title": "配置、监控、备份与版本验收专题",
+      "publishedAt": "2026-10-26T09:04:10.150917Z",
+      "githubCommit": "72aa30e3e704a1972b159447d1caed5d1719f4ab",
+      "articleSlugs": ["multi-tenant-site-config", "monitoring-incident-recovery", "backup-restore-verification", "requirements-release-acceptance"],
+      "changes": [
+        { "id": "global-update-links", "title": "更新记录可从导航与搜索找到", "description": "侧栏、手机菜单和页脚增加入口，现有搜索可查到更新记录。", "location": "资料导航、手机菜单、页脚与搜索", "href": "/search?q=%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95", "linkLabel": "搜索更新记录" }
+      ]
+    },
+    {
+      "version": 12,
+      "title": "权限、工单、接口与时间口径专题",
+      "publishedAt": "2026-10-26T07:54:46.787741Z",
+      "githubCommit": "089542cb1220d1d79431d785475dc40fd1b0afb8",
+      "articleSlugs": ["access-approval-audit", "notification-support-tickets", "api-idempotency-compensation", "currency-timezone-reporting"],
+      "changes": []
+    },
+    {
+      "version": 11,
+      "title": "七篇业务知识补充与主题配图",
+      "publishedAt": "2026-10-26T06:47:09.666454Z",
+      "githubCommit": "4270765f3cff71d3704891baf5d75ec83b395781",
+      "articleSlugs": ["member-agent-platform", "operation-product-conversion-model", "first-deposit-retention-vip", "game-provider-api", "bet-ticket-status", "admin-information-hierarchy", "data-report-metrics"],
+      "changes": [
+        { "id": "first-update-page", "title": "建立逐项更新说明与首页入口", "description": "更新条目提供正文与配图位置、具体章节和相关界面链接，首页常用资料可进入更新记录。", "location": "首页常用资料与更新记录", "href": "/", "linkLabel": "查看首页入口" }
+      ]
+    }
+  ]
+}

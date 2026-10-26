@@ -52,6 +52,7 @@ const categoryIcons: Record<string, LucideIcon> = {
 
 export function MobileNav() {
   const pathname = usePathname()
+  const inUpdates = pathname === "/updates" || pathname.startsWith("/updates/")
   const [open, setOpen] = useState(false)
   const toggleRef = useRef<HTMLButtonElement>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
@@ -117,8 +118,8 @@ export function MobileNav() {
     <div className="flex items-center gap-2 xl:hidden">
       <Link
         href="/updates"
-        aria-current={pathname === "/updates" ? "page" : undefined}
-        className={`inline-flex h-11 shrink-0 items-center whitespace-nowrap rounded-md border px-3 text-sm font-medium hover:bg-paper ${pathname === "/updates" ? "border-brand-200 bg-brand-50 text-brand-700" : "border-line bg-white text-muted"}`}
+        aria-current={pathname === "/updates" ? "page" : inUpdates ? "location" : undefined}
+        className={`inline-flex h-11 shrink-0 items-center whitespace-nowrap rounded-md border px-3 text-sm font-medium hover:bg-paper ${inUpdates ? "border-brand-200 bg-brand-50 text-brand-700" : "border-line bg-white text-muted"}`}
       >
         更新记录
       </Link>

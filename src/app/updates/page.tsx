@@ -1,77 +1,147 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { ChevronDown, ExternalLink } from "lucide-react"
+import { ReleaseHashNavigation } from "@/components/updates/ReleaseHashNavigation"
+import { articles } from "@/data/articles"
 import { knowledgeContentUpdates } from "@/data/knowledgeContentUpdates"
+import releases from "@/data/releaseHistory.json"
 import { absoluteUrl } from "@/lib/seo"
 
 export const metadata: Metadata = {
   title: "更新记录",
-  description: "逐项查看知识内容、主题图解和界面演示的变化及直接入口。",
+  description: "按发布版本查看变化、所在位置和直接入口。",
   alternates: { canonical: absoluteUrl("/updates") },
 }
 
-const demonstrations = [
-  { title: "钱包对账", href: "/articles/wallet-payment-reconciliation#reconciliation-case", description: "同一演示订单的订单列表、详情、通道、账务与差异；切换一致、缺流水、重复通知和未知结果。" },
-  { title: "提现异常", href: "/articles/wallet-payment-reconciliation#withdrawal-case", description: "按原业务号查看审核、处理中、未知、退回和完成；区分可用、冻结与已付款金额。" },
-  { title: "账号受限与恢复", href: "/articles/member-account-states#account-recovery-case", description: "从查询到复核、补充资料和恢复，分别观察账号、会话、资料与资金状态。" },
-  { title: "代理跨期结算", href: "/articles/agent-system-design#agent-settlement-case", description: "查看会员归属、规则版本、结算批次和跨期调整，区分原记录与更正明细。" },
-  { title: "BM 手机原型", href: "/cases/bm-optimization#bm-mobile-prototype", description: "切换运动与赛事状态、打开详情并返回，观察筛选保留和底部操作反馈。" },
-  { title: "U8 个人中心原型", href: "/cases/competitor-analysis#u8-profile-prototype", description: "切换账号、资产、订单和服务，查看正常、加载、空结果、失败和受限五种状态。" },
-  { title: "官网模块与响应式对照", href: "/cases/white-label-official#official-responsive-comparison", description: "服务展示、页面结构和咨询入口三组模块的桌面／手机实际页面截图，可打开大图。" },
-  { title: "BM、U8 长图浏览", href: "/cases/bm-optimization", description: "在案例图集中打开大图，适应屏幕按可用宽度显示并纵向浏览；可切换原尺寸、上下张与缩略图。" },
-  { title: "六种界面状态", href: "/design/states", description: "并列查看加载、空结果、失败、受限、处理中和未知结果，跳转到对应演示。" },
-  { title: "搜索与详情往返", href: "/search", description: "按关键词与类型查资料；空搜索显示精选案例、图解与AI工作流；从详情返回保留查询和位置。" },
-]
+type Change = {
+  id: string
+  title: string
+  description: string
+  location: string
+  href: string
+  linkLabel: string
+  titleHref?: string
+  related?: { href: string; label: string }
+}
+
+const relatedLabels: Record<string, string> = {
+  "/articles/agent-system-design#agent-settlement-case": "代理结算演示",
+  "/articles/wallet-payment-reconciliation#reconciliation-case": "钱包对账演示",
+  "/articles/campaign-risk-review#scenario": "活动规则场景",
+  "/articles/bet-ticket-status#scenario": "注单状态场景",
+  "/cases/admin-optimization#admin-role-tour": "后台三角色导览",
+  "/articles/wallet-payment-reconciliation#withdrawal-case": "提现异常演示",
+  "/articles/data-report-metrics": "报表口径说明",
+  "/cases/white-label-official#official-responsive-comparison": "官网桌面与手机对照",
+  "/articles/monitoring-incident-recovery": "故障恢复说明",
+  "/design/states": "界面状态对照",
+}
+
+function ChangeRow({ item, compact = false }: { item: Change; compact?: boolean }) {
+  return (
+    <li id={item.id} className={`min-w-0 scroll-mt-24 first:pt-0 last:pb-0 ${compact ? "py-3" : "py-5"}`}>
+      <h3 className="font-semibold leading-7 text-ink">
+        {item.titleHref ? <Link href={item.titleHref} className="hover:text-brand-700">{item.title}</Link> : item.title}
+      </h3>
+      <p className={`mt-1 text-sm text-muted ${compact ? "leading-6" : "leading-7"}`}>{item.description}</p>
+      <div className={compact ? "mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1" : "mt-2"}>
+        <p className="text-xs leading-6 text-muted">位置：{item.location}</p>
+        <div className={`${compact ? "" : "mt-2"} flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-brand-700`}>
+          <Link href={item.href}>{item.linkLabel} →</Link>
+          {item.related ? <Link href={item.related.href}>{item.related.label} →</Link> : null}
+        </div>
+      </div>
+    </li>
+  )
+}
+
+function formatPublished(value: string) {
+  return new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Kuala_Lumpur", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(new Date(value))
+}
 
 export default function UpdatesPage() {
+  const current = releases.current
   return (
-    <div className="container-shell max-w-6xl py-10">
+    <div className="container-shell max-w-5xl py-8 md:py-10">
+      <ReleaseHashNavigation />
       <header>
-        <p className="text-sm text-muted">2026-10-26</p>
-        <h1 className="mt-2 text-3xl font-semibold text-ink">更新记录</h1>
-        <p className="mt-3 max-w-3xl leading-8 text-muted">按条目查看内容变化与所在位置。文章页先展示主题图解，“查看详细说明”默认展开；每项均可直接打开正文重点或相关界面。</p>
-        <nav aria-label="更新记录导航" className="mt-4 flex flex-wrap gap-3 text-sm font-semibold text-brand-700">
-          <a href="#top-navigation">顶部导航</a>
-          <a href="#knowledge-content">知识内容与配图</a>
-          <a href="#demonstrations">功能与演示入口</a>
-        </nav>
+        <h1 className="text-3xl font-semibold text-ink">更新记录</h1>
+        <p className="mt-2 text-sm leading-7 text-muted">查看每次发布的变化、所在位置和对应入口。</p>
       </header>
-      <section id="top-navigation" className="scroll-mt-24 pt-10" aria-labelledby="top-navigation-title">
-        <h2 id="top-navigation-title" className="text-xl font-semibold">顶部导航与更新记录入口</h2>
-        <div className="mt-4 rounded-xl border border-line bg-white p-5 text-sm leading-7 text-muted">
-          <p>桌面顶部按“案例、功能图解、AI 工作流、素材规范、术语库、模板库”排列内容栏目，右侧提供“更新记录”和搜索。当前页面或所属栏目会高亮。</p>
-          <p className="mt-2">手机和平板顶部直接显示“更新记录”，可一键进入本页；完整栏目仍可从菜单打开。顶部、侧栏、手机菜单和页脚统一使用“AI 工作流”“模板库”。</p>
-          <Link href="/" className="mt-3 inline-block font-semibold text-brand-700">返回首页查看顶部入口 →</Link>
+
+      <section id="current-release" className="mt-6 scroll-mt-24 rounded-xl border border-brand-100 bg-white p-5 md:p-7" aria-labelledby="current-release-title">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <span className="rounded-md bg-ink px-3 py-1 text-sm font-semibold text-white">v{current.version}</span>
+            <span className="text-xs font-semibold text-brand-700">当前版本</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted">
+            <p>更新日期：<time dateTime={current.date}>{current.date}</time></p>
+            <a href="https://github.com/micjordan9527/game/tree/main" className="inline-flex items-center gap-1 font-semibold text-brand-700">GitHub 源码<ExternalLink className="h-3 w-3" aria-hidden="true" /></a>
+          </div>
+        </div>
+        <h2 id="current-release-title" className="mt-4 text-xl font-semibold text-ink">{current.title}</h2>
+        <p className="mt-2 text-sm leading-7 text-muted">{current.summary}</p>
+        <p className="mt-2 text-xs text-muted">本次页面调整 {current.changes.length} 项</p>
+        <ul className="mt-5 divide-y divide-line">
+          {current.changes.map((item) => <ChangeRow key={item.id} item={item} compact />)}
+        </ul>
+      </section>
+
+      <section id="release-history" className="scroll-mt-24 pt-8" aria-labelledby="release-history-title">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 id="release-history-title" className="text-xl font-semibold text-ink">历史版本</h2>
+          <nav aria-label="版本定位" className="flex flex-wrap gap-2">
+            {releases.history.map((release) => <a key={release.version} href={`#v${release.version}`} className="rounded-md border border-line bg-white px-3 py-1.5 text-xs font-semibold text-muted hover:text-brand-700">v{release.version}</a>)}
+          </nav>
+        </div>
+        <div id="knowledge-content" className="scroll-mt-24">
+          <p className="mt-3 text-xs leading-6 text-muted">v11–v13 内容更新：新增 8 篇、补充 7 篇、GPT 配图 15 张。全站文章 {articles.length} 篇。演算与生成配图均有示例标识。</p>
+          <div className="mt-4 space-y-3">
+            {releases.history.map((release) => {
+              const content = release.articleSlugs.map((slug) => {
+                const item = knowledgeContentUpdates.find((entry) => entry.slug === slug)
+                if (!item) throw new Error(`Missing release article: ${slug}`)
+                return item
+              })
+              const added = content.filter((item) => item.kind === "新增").length
+              const enriched = content.length - added
+              const counts = [added ? `新增文章 ${added} 篇` : "", enriched ? `补充文章 ${enriched} 篇` : "", content.length ? `GPT 配图 ${content.length} 张` : "", release.changes.length ? `页面变化 ${release.changes.length} 项` : ""].filter(Boolean).join(" · ")
+              const changes: Change[] = [
+                ...content.map((item) => ({ id: item.slug, title: item.title, description: item.description, location: "文章正文 · " + decodeURIComponent(item.detailHref.split("#")[1]), href: item.detailHref, linkLabel: item.kind === "补充" ? "查看补充说明" : "查看专题重点", titleHref: item.href, related: { href: item.relatedHref, label: relatedLabels[item.relatedHref] ?? "相关说明" } })),
+                ...release.changes,
+              ]
+              return (
+                <details key={release.version} id={`v${release.version}`} data-release-version={release.version} data-release-kind={content.length ? "content" : "interface"} className="group scroll-mt-24 rounded-xl border border-line bg-white">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 md:p-5 [&::-webkit-details-marker]:hidden">
+                    <span className="min-w-0">
+                      <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <span className="font-semibold text-ink">v{release.version}</span>
+                        <span className="text-sm font-semibold leading-6 text-ink">{release.title}</span>
+                      </span>
+                      <span className="mt-1 block text-xs leading-6 text-muted">{counts}</span>
+                      <time dateTime={release.publishedAt} className="mt-1 block text-xs leading-5 text-muted">发布于 {formatPublished(release.publishedAt)}（UTC+8）</time>
+                    </span>
+                    <ChevronDown className="h-4 w-4 shrink-0 text-muted transition group-open:rotate-180" aria-hidden="true" />
+                  </summary>
+                  <div className="border-t border-line p-4 md:p-5">
+                    {release.version === 14 ? <div id="top-navigation" className="scroll-mt-24"><p id="top-navigation-title" className="mb-4 text-xs font-semibold text-muted">顶部导航调整</p></div> : null}
+                    <ul className="divide-y divide-line" data-release-items>
+                      {changes.map((item) => <ChangeRow key={item.id} item={item} />)}
+                    </ul>
+                    <a href={`https://github.com/micjordan9527/game/commit/${release.githubCommit}`} className="mt-5 inline-flex items-center gap-2 border-t border-line pt-4 text-xs font-semibold text-brand-700">查看 v{release.version} 源码提交 <ExternalLink className="h-3 w-3" aria-hidden="true" /></a>
+                  </div>
+                </details>
+              )
+            })}
+          </div>
         </div>
       </section>
-      <section id="knowledge-content" className="scroll-mt-24 pt-10" aria-labelledby="knowledge-content-title">
-        <h2 id="knowledge-content-title" className="text-xl font-semibold">知识内容与配图 · {knowledgeContentUpdates.length} 项</h2>
-        <p className="mt-2 text-sm leading-7 text-muted">本组配图均标明 GPT 生成示意图；正文中的演算与演示编号均为虚构说明，实际页面截图另附来源。</p>
-        <ol className="mt-5 grid gap-4 md:grid-cols-2">
-          {knowledgeContentUpdates.map((item, index) => (
-            <li key={item.slug} id={item.slug} className="min-w-0 scroll-mt-24 rounded-xl border border-line bg-white p-5">
-              <p className="text-xs font-semibold text-muted">{String(index + 1).padStart(2, "0")} · {item.kind}正文与主题图解</p>
-              <h3 className="mt-2 font-semibold text-ink"><Link href={item.href}>{item.title}</Link></h3>
-              <p className="mt-2 text-sm leading-7 text-muted">{item.description}</p>
-              <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold text-brand-700">
-                <Link href={item.href}>文章与配图 →</Link>
-                <Link href={item.detailHref}>正文重点 →</Link>
-                <Link href={item.relatedHref}>相关界面与说明 →</Link>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-      <section id="demonstrations" className="scroll-mt-24 pt-10" aria-labelledby="demonstrations-title">
-        <h2 id="demonstrations-title" className="text-xl font-semibold">功能与演示入口</h2>
-        <p className="mt-2 text-sm leading-7 text-muted">已有功能集中列在这里，便于查找；本轮新增和补充的知识内容见上方条目。</p>
-        <div className="mt-5 grid gap-3 md:grid-cols-2">
-          {demonstrations.map((item) => (
-            <Link key={item.title} href={item.href} className="min-w-0 rounded-xl border border-line bg-white p-5 hover:border-brand-200">
-              <h3 className="font-semibold text-ink">{item.title} →</h3>
-              <p className="mt-2 text-sm leading-7 text-muted">{item.description}</p>
-            </Link>
-          ))}
-        </div>
+
+      <section id="demonstrations" className="mt-8 scroll-mt-24 border-t border-line pt-6" aria-labelledby="demonstrations-title">
+        <h2 id="demonstrations-title" className="text-lg font-semibold text-ink">功能演示目录</h2>
+        <p className="mt-2 text-sm leading-7 text-muted">钱包、账号、代理、BM、U8、官网与界面状态等 10 个已有演示。</p>
+        <Link href="/updates/demonstrations" className="mt-3 inline-block text-sm font-semibold text-brand-700">查看 10 个功能演示 →</Link>
       </section>
     </div>
   )

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict"
 import fs from "node:fs"
+import { checkReleaseLog } from "./check-release-log.mjs"
 
 export async function checkKnowledgeContent(page, base, prefix, width) {
   const manifest = JSON.parse(fs.readFileSync("public/images/knowledge-20261026/manifest.json", "utf8"))
@@ -16,10 +17,7 @@ export async function checkKnowledgeContent(page, base, prefix, width) {
     await page.getByRole("navigation", { name: "知识库导航", exact: true }).getByRole("link", { name: "更新记录", exact: true }).click()
   }
   await page.locator("#knowledge-content").waitFor()
-  assert.equal(await page.locator("#knowledge-content ol > li").count(), manifest.length)
-  assert.equal(await page.locator("#demonstrations a").count(), 10)
-  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false)
-  await page.screenshot({ path: `/tmp/knowledge-updates-${width}.png` })
+  await checkReleaseLog(page, base, prefix, width)
   for (const [index, item] of updates.entries()) {
     const material = manifest.find((image) => image.articleSlug === item.slug)
     assert(material && material.source === "GPT Image" && material.materialType === "GPT 生成示意图")
