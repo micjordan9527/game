@@ -62,5 +62,41 @@ export const knowledgeContentUpdates = [
     "href": "/articles/data-report-metrics",
     "detailHref": "/articles/data-report-metrics#一个指标需要一张口径卡",
     "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case"
+  },
+  {
+    "slug": "access-approval-audit",
+    "title": "权限、审批与审计记录",
+    "description": "新增权限、数据范围、独立审批、执行与审计说明，包含超时退款申请示例。",
+    "kind": "新增",
+    "href": "/articles/access-approval-audit",
+    "detailHref": "/articles/access-approval-audit#权限检查的四个维度",
+    "relatedHref": "/cases/admin-optimization#admin-role-tour"
+  },
+  {
+    "slug": "notification-support-tickets",
+    "title": "消息通知与客服工单",
+    "description": "新增通知和工单全流程，明确送达、已读、解决、关闭及原业务结果的区别。",
+    "kind": "新增",
+    "href": "/articles/notification-support-tickets",
+    "detailHref": "/articles/notification-support-tickets#两套状态分别保存",
+    "relatedHref": "/articles/wallet-payment-reconciliation#withdrawal-case"
+  },
+  {
+    "slug": "api-idempotency-compensation",
+    "title": "接口幂等、乱序与补偿",
+    "description": "新增业务键、并发原子边界、乱序控制与补偿记录，说明未知结果先查证。",
+    "kind": "新增",
+    "href": "/articles/api-idempotency-compensation",
+    "detailHref": "/articles/api-idempotency-compensation#业务键和请求号分开",
+    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case"
+  },
+  {
+    "slug": "currency-timezone-reporting",
+    "title": "多币种、时区与跨日统计",
+    "description": "新增金额精度、原币与折算、UTC与业务日、半开区间和关账调整说明。",
+    "kind": "新增",
+    "href": "/articles/currency-timezone-reporting",
+    "detailHref": "/articles/currency-timezone-reporting#跨日演算与查询区间",
+    "relatedHref": "/articles/data-report-metrics"
   }
 ]

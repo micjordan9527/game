@@ -75,5 +75,91 @@
     "generatedAt": "2026-10-26",
     "description": "统一指标定义、时间与维度后，从汇总追溯明细，充值、流水、派彩分别统计。",
     "verification": "中文与箭头已目视核对；图表无实际数据，无效果提升宣称。"
+  },
+  {
+    "articleSlug": "access-approval-audit",
+    "path": "/images/knowledge-20261026/access-approval-audit.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "权限、审批与审计的概念关系与流程示意；非真实业务截图",
+    "verification": [
+      "提交申请",
+      "校验权限",
+      "独立审批",
+      "执行操作",
+      "审计记录",
+      "数据范围",
+      "申请人与审批人分离",
+      "未通过：终止操作"
+    ]
+  },
+  {
+    "articleSlug": "notification-support-tickets",
+    "path": "/images/knowledge-20261026/notification-support-tickets.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "消息通知与客服工单的概念关系与流程示意；非真实业务截图",
+    "verification": [
+      "业务事件",
+      "发送通知",
+      "送达回执",
+      "创建工单",
+      "分配负责人",
+      "调查处理",
+      "用户确认",
+      "关闭工单",
+      "消息送达 ≠ 问题解决"
+    ]
+  },
+  {
+    "articleSlug": "api-idempotency-compensation",
+    "path": "/images/knowledge-20261026/api-idempotency-compensation.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "接口幂等、乱序与补偿的概念关系与流程示意；非真实业务截图",
+    "verification": [
+      "业务键去重",
+      "状态校验",
+      "账本提交",
+      "重复请求",
+      "返回原结果",
+      "乱序请求",
+      "暂存核对",
+      "结果未知",
+      "查询核对",
+      "确认差异",
+      "补偿记录",
+      "补偿关联原交易",
+      "账本只记一次"
+    ]
+  },
+  {
+    "articleSlug": "currency-timezone-reporting",
+    "path": "/images/knowledge-20261026/currency-timezone-reporting.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "多币种、时区与跨日统计的概念关系与流程示意；非真实业务截图",
+    "verification": [
+      "USD 汇总",
+      "EUR 汇总",
+      "不同币种分开统计",
+      "UTC 事件时间",
+      "业务时区",
+      "固定口径",
+      "归属业务日",
+      "明细核对"
+    ]
   }
 ]

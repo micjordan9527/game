@@ -243,4 +243,92 @@ export const articles: Article[] = [
     date: "2026-05-30",
     updatedAt: "2026-10-25",
   },
+  {
+      slug: "access-approval-audit",
+      title: "权限、审批与审计记录",
+      description: "区分身份权限、数据范围、独立审批和执行结果，用虚构退款场景核对操作边界与审计证据。",
+      category: "devops-risk",
+      tags: [
+        "权限",
+        "审批",
+        "审计",
+        "数据范围",
+        "角色"
+      ],
+      audience: [
+        "产品",
+        "技术",
+        "测试",
+        "运营"
+      ],
+      difficulty: "进阶",
+      date: "2026-10-26",
+      updatedAt: "2026-10-26"
+  },
+  {
+      slug: "notification-support-tickets",
+      title: "消息通知与客服工单",
+      description: "区分事件通知、送达状态和问题处理，用工单字段与状态说明受理、转派、解决和用户确认。",
+      category: "operation",
+      tags: [
+        "客服",
+        "工单",
+        "通知",
+        "状态流转",
+        "异常处理"
+      ],
+      audience: [
+        "产品",
+        "客服",
+        "运营",
+        "技术"
+      ],
+      difficulty: "进阶",
+      date: "2026-10-26",
+      updatedAt: "2026-10-26"
+  },
+  {
+      slug: "api-idempotency-compensation",
+      title: "接口幂等、乱序与补偿",
+      description: "用业务唯一键、状态版本和账务证据解释重复请求、乱序事件、结果未知与补偿，避免重复资金动作。",
+      category: "development",
+      tags: [
+        "API",
+        "幂等",
+        "补偿",
+        "状态流转",
+        "对账"
+      ],
+      audience: [
+        "技术",
+        "产品",
+        "测试",
+        "项目经理"
+      ],
+      difficulty: "专业",
+      date: "2026-10-26",
+      updatedAt: "2026-10-26"
+  },
+  {
+      slug: "currency-timezone-reporting",
+      title: "多币种、时区与跨日统计",
+      description: "区分原币金额、折算口径、事件时间和业务日，用跨日示例说明汇总、对账和修订边界。",
+      category: "development",
+      tags: [
+        "多币种",
+        "时区",
+        "数据报表",
+        "对账",
+        "金额精度"
+      ],
+      audience: [
+        "技术",
+        "产品",
+        "财务",
+        "测试"
+      ],
+      difficulty: "进阶",
+      date: "2026-10-26",
+      updatedAt: "2026-10-26"
+  },
 ]

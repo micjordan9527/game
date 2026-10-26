@@ -89,5 +89,117 @@
     "generatedAt": "2026-10-26",
     "description": "统一指标定义、时间与维度后，从汇总追溯明细，充值、流水、派彩分别统计。",
     "verification": "中文与箭头已目视核对；图表无实际数据，无效果提升宣称。"
+  },
+  {
+    "articleSlug": "access-approval-audit",
+    "file": "access-approval-audit.png",
+    "originalPath": "/workspace/generated_images/exec-79afffec-74d5-492e-8432-057fd16b233b.png",
+    "width": 1536,
+    "height": 1024,
+    "title": "权限、审批与审计",
+    "prompt": "Create one polished landscape 1536x1024 technical infographic in Simplified Chinese for a neutral knowledge base. Topic 权限、审批与审计. Off-white background, navy text, teal rounded cards, pale orange exception note, crisp flat vector editorial style, generous whitespace. EXACT short Chinese text only: title 权限、审批与审计; five connected main cards left to right: 提交申请 → 校验权限 → 独立审批 → 执行操作 → 审计记录. Under 校验权限 a small label 数据范围; under 独立审批 label 申请人与审批人分离; under 审计记录 labels 操作人 / 时间 / 变更前后. A small distinct bottom note 未通过：终止操作. Main arrows must point left to right. No long paragraphs, no logos, no slogans, no real data, no screenshots. High legibility large Chinese labels, technical schematic not a real product interface.",
+    "materialType": "GPT 生成示意图",
+    "generatedAt": "2026-10-26",
+    "verifiedLabels": [
+      "提交申请",
+      "校验权限",
+      "独立审批",
+      "执行操作",
+      "审计记录",
+      "数据范围",
+      "申请人与审批人分离",
+      "未通过：终止操作"
+    ],
+    "caveats": [
+      "通用流程示意；实际审批分支和审计字段以系统配置为准"
+    ],
+    "finalPath": "/workspace/work/knowledge-images-new/access-approval-audit.png",
+    "description": "权限、审批与审计的概念关系与流程示意；非真实业务截图"
+  },
+  {
+    "articleSlug": "notification-support-tickets",
+    "file": "notification-support-tickets.png",
+    "originalPath": "/workspace/generated_images/exec-60be4edd-7ac8-4b9d-884c-19e60e66d129.png",
+    "width": 1536,
+    "height": 1024,
+    "title": "消息通知与客服工单",
+    "prompt": "Create one landscape 1536x1024 infographic in Simplified Chinese, neutral technical knowledge base, title 消息通知与客服工单. Clean off-white background, navy text, teal cards, pale orange caution, flat technical editorial vector design, generous whitespace, large short Chinese labels. Two separate clearly titled horizontal tracks. Top track title 消息通知; cards 业务事件 → 发送通知 → 送达回执. Bottom track title 客服工单; cards 创建工单 → 分配负责人 → 调查处理 → 用户确认 → 关闭工单. Only bottom track indicates resolution. A large pale orange note at bottom: 消息送达 ≠ 问题解决. Add tiny side tag 处理记录 under 调查处理. Arrows point right and do not cross tracks. No long text, no logos, no slogans, no real screenshots or numerical claims. High legibility, restrained professional schematic.",
+    "materialType": "GPT 生成示意图",
+    "generatedAt": "2026-10-26",
+    "verifiedLabels": [
+      "业务事件",
+      "发送通知",
+      "送达回执",
+      "创建工单",
+      "分配负责人",
+      "调查处理",
+      "用户确认",
+      "关闭工单",
+      "消息送达 ≠ 问题解决"
+    ],
+    "caveats": [
+      "送达与业务处理状态独立；实际自动关闭规则需在正文说明"
+    ],
+    "finalPath": "/workspace/work/knowledge-images-new/notification-support-tickets.png",
+    "description": "消息通知与客服工单的概念关系与流程示意；非真实业务截图"
+  },
+  {
+    "articleSlug": "api-idempotency-compensation",
+    "file": "api-idempotency-compensation.png",
+    "originalPath": "/workspace/generated_images/exec-6c07bff9-d97a-48bd-afd9-4ce112167df1.png",
+    "width": 1536,
+    "height": 1024,
+    "title": "接口幂等、乱序与补偿",
+    "prompt": "Create one landscape 1536x1024 neutral technical infographic in Simplified Chinese. Title 接口幂等、乱序与补偿. Off-white background, navy typography, teal cards, pale orange unknown-path accent. Flat crisp professional editorial schematic with large labels. Main row left to right: 接收请求 → 业务键去重 → 状态校验 → 账本提交 → 返回结果. Under 业务键去重, separate downward branch labeled 重复请求 points to box 返回原结果. Under 状态校验, small downward branch 乱序请求 points to box 暂存核对. A separate bottom horizontal recovery lane, with NO direct arrow from top to compensation: 结果未知 → 查询核对 → 确认差异 → 补偿记录. Caption beneath recovery lane: 补偿关联原交易. Small final note 账本只记一次. Chinese short labels only, no code, no long paragraphs, no logos or promotional claims. Clear unambiguous arrows.",
+    "materialType": "GPT 生成示意图",
+    "generatedAt": "2026-10-26",
+    "verifiedLabels": [
+      "业务键去重",
+      "状态校验",
+      "账本提交",
+      "重复请求",
+      "返回原结果",
+      "乱序请求",
+      "暂存核对",
+      "结果未知",
+      "查询核对",
+      "确认差异",
+      "补偿记录",
+      "补偿关联原交易",
+      "账本只记一次"
+    ],
+    "caveats": [
+      "账本只记一次指同一业务事件幂等提交；补偿是独立关联事件，不能覆盖原记录",
+      "未知结果先查询，证据确认差异后才能补偿"
+    ],
+    "finalPath": "/workspace/work/knowledge-images-new/api-idempotency-compensation.png",
+    "description": "接口幂等、乱序与补偿的概念关系与流程示意；非真实业务截图"
+  },
+  {
+    "articleSlug": "currency-timezone-reporting",
+    "file": "currency-timezone-reporting.png",
+    "originalPath": "/workspace/generated_images/exec-2e12ee0a-f0aa-4958-b892-8b529af1d714.png",
+    "width": 1536,
+    "height": 1024,
+    "title": "多币种、时区与跨日统计",
+    "prompt": "Create a landscape 1536x1024 editorial technical infographic in Simplified Chinese, title 多币种、时区与跨日统计. Off-white, navy, teal, light orange, flat vector professional knowledge-base schematic with generous whitespace. Upper half two physically separate parallel currency lanes: lane USD: 交易记录 → USD 汇总; lane EUR: 交易记录 → EUR 汇总. No connecting or merging arrows between currency lanes. A small orange label below them: 不同币种分开统计. Lower half a single clear left-to-right sequence: UTC 事件时间 → 业务时区 → 归属业务日 → 明细核对. Above the business-timezone card small label 固定口径. Keep only these short Chinese labels and currency codes. No numerical rates, no dates, no screenshots, no promotional text. Very readable large type, arrows unambiguous. This is a conceptual illustration, not real report data.",
+    "materialType": "GPT 生成示意图",
+    "generatedAt": "2026-10-26",
+    "verifiedLabels": [
+      "USD 汇总",
+      "EUR 汇总",
+      "不同币种分开统计",
+      "UTC 事件时间",
+      "业务时区",
+      "固定口径",
+      "归属业务日",
+      "明细核对"
+    ],
+    "caveats": [
+      "币种独立展示；如需折算须另列汇率来源和版本",
+      "业务日口径与事件发生、入账及统计时间应在正文分别定义"
+    ],
+    "finalPath": "/workspace/work/knowledge-images-new/currency-timezone-reporting.png",
+    "description": "多币种、时区与跨日统计的概念关系与流程示意；非真实业务截图"
   }
 ]

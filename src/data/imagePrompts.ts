@@ -274,6 +274,46 @@ export const imagePrompts: ImagePrompt[] = [
     height: 1024,
     caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
   },
+  {
+    slug: "access-approval-audit-knowledge-diagram",
+    title: "权限、审批与审计记录 · 图解",
+    articleSlug: "access-approval-audit",
+    imageSrc: "/images/knowledge-20261026/access-approval-audit.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
+  },
+  {
+    slug: "notification-support-tickets-knowledge-diagram",
+    title: "消息通知与客服工单 · 图解",
+    articleSlug: "notification-support-tickets",
+    imageSrc: "/images/knowledge-20261026/notification-support-tickets.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
+  },
+  {
+    slug: "api-idempotency-compensation-knowledge-diagram",
+    title: "接口幂等、乱序与补偿 · 图解",
+    articleSlug: "api-idempotency-compensation",
+    imageSrc: "/images/knowledge-20261026/api-idempotency-compensation.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。“账本只记一次”指同一业务动作；经核实的补偿采用独立关联记录。"
+  },
+  {
+    slug: "currency-timezone-reporting-knowledge-diagram",
+    title: "多币种、时区与跨日统计 · 图解",
+    articleSlug: "currency-timezone-reporting",
+    imageSrc: "/images/knowledge-20261026/currency-timezone-reporting.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
+  },
 ]
 
 export function getImagePromptForArticle(articleSlug: string) {
