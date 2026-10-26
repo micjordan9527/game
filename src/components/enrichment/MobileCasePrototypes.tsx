@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useState, type ReactNode } from "react"
+import { useEffect, useState, type ReactNode } from "react"
 
 const matches = [
   { id: "MATCH-DEMO-001", sport: "足球", home: "示例 A 队", away: "示例 B 队", score: "1 : 0", status: "进行中", time: "65:00" },
@@ -44,8 +44,15 @@ export function U8ProfilePrototype() {
   const [group, setGroup] = useState("账号")
   const [state, setState] = useState("正常")
   const [order, setOrder] = useState("")
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const requestedGroup = params.get("profileGroup")
+    const requestedState = params.get("profileState")
+    if (requestedGroup && ["账号", "资产", "订单", "服务"].includes(requestedGroup)) setGroup(requestedGroup)
+    if (requestedState && ["正常", "加载中", "空结果", "失败", "受限"].includes(requestedState)) setState(requestedState)
+  }, [])
   return <section id="u8-profile-prototype" aria-label="U8个人中心交互原型" className="mt-8 scroll-mt-24 rounded-xl border border-line bg-paper p-4 md:p-6">
-    <h2 className="text-2xl font-semibold text-ink">U8 个人中心交互原型</h2><p className="mt-3 text-sm leading-7 text-muted">依据现有个人中心信息分组重建的交互示意，使用演示账号与金额。选择一个界面状态，对照内容、反馈和可执行下一步。</p>
+    <h2 className="text-2xl font-semibold text-ink">U8 个人中心交互原型</h2><p className="mt-3 text-sm leading-7 text-muted">依据现有个人中心信息分组重建的交互示意，使用演示账号与金额。各案例为独立快照；选择一个界面状态，对照内容、反馈和可执行下一步。</p>
     <div aria-label="个人中心状态选择" className="mt-4 flex flex-wrap gap-2">{["正常", "加载中", "空结果", "失败", "受限"].map((item) => <button key={item} type="button" aria-pressed={state === item} onClick={() => { setState(item); setOrder("") }} className={state === item ? activeButton : button}>{item}</button>)}</div>
     <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(240px,1fr)]"><Phone title="U8 个人中心"><div className="p-4"><div className="rounded-xl bg-brand-50 p-4"><p className="text-xs text-muted">演示账号</p><p className="mt-2 font-semibold text-ink">MEM-DEMO-018</p><p className="mt-2 text-xs text-muted">账号信息与资产、订单状态分别显示</p></div><div aria-label="个人中心分组" className="mt-4 grid grid-cols-4 gap-1">{["账号", "资产", "订单", "服务"].map((item) => <button key={item} type="button" aria-pressed={group === item} onClick={() => { setGroup(item); setOrder("") }} className={group === item ? activeButton : button}>{item}</button>)}</div>
       <div aria-label="个人中心内容" aria-busy={state === "加载中"} className="mt-5 min-h-[250px] rounded-xl border border-line p-4">

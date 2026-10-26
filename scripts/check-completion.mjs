@@ -144,3 +144,77 @@ export async function checkMobileCases(page, base, prefix, width) {
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false)
   console.log(`PASS ${width}px: BM 12 filters, empty/reset/detail/back/footer; U8 20 group/state combinations, retry/assets/orders; six real official captures and mobile image viewing`)
 }
+
+export async function checkWithdrawalAndStates(page, base, prefix, width) {
+  await page.goto(`${base}/articles/wallet-payment-reconciliation#withdrawal-case`, { waitUntil: "networkidle" })
+  const section = page.locator("#withdrawal-case")
+  const stages = section.getByRole("tablist", { name: "选择案例状态" }).getByRole("tab")
+  const screens = section.getByRole("tablist", { name: "选择案例界面" }).getByRole("tab")
+  const panel = section.getByRole("tabpanel")
+  const field = (name) => panel.getByText(name, { exact: true }).locator("..").locator("dd")
+  assert.equal(await stages.count(), 5)
+  assert.equal(await screens.count(), 5)
+  for (let stage = 0; stage < 5; stage++) {
+    await stages.nth(stage).click()
+    for (let screen = 0; screen < 5; screen++) {
+      await screens.nth(screen).click()
+      assert((await panel.innerText()).includes("WD-DEMO-20261026-001"))
+      if (screen === 3) {
+        const available = parseFloat(await field("当前可用").innerText())
+        const frozen = parseFloat(await field("当前冻结").innerText())
+        const book = parseFloat(await field("账面合计").innerText())
+        const paid = parseFloat(await field("已付出").innerText())
+        assert.equal(available + frozen, book)
+        assert.equal(book + paid, 1260)
+        assert.equal(available, stage === 3 ? 1260 : 1160)
+        assert.equal(frozen, stage < 3 ? 100 : 0)
+        assert.equal(paid, stage === 4 ? 100 : 0)
+      }
+      if (screen === 1) assert.equal(await field("原付款请求").innerText(), "CH-WD-DEMO-001")
+    }
+  }
+  await stages.first().focus()
+  await page.keyboard.press("End")
+  assert.equal(await stages.last().getAttribute("aria-selected"), "true")
+  await page.keyboard.press("ArrowRight")
+  assert.equal(await stages.first().getAttribute("aria-selected"), "true")
+  assert.notEqual(await page.locator("#article-details").getAttribute("open"), null)
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false)
+  await section.screenshot({ path: `/tmp/withdrawal-${width}.png` })
+  await page.goto(`${base}/articles/wallet-payment-reconciliation?caseStage=${encodeURIComponent("结果未知")}#withdrawal-case`, { waitUntil: "networkidle" })
+  await section.getByRole("tab", { name: "结果未知", exact: true, selected: true }).waitFor()
+  await page.reload({ waitUntil: "networkidle" })
+  await section.getByRole("tab", { name: "结果未知", exact: true, selected: true }).waitFor()
+  await page.goto(`${base}/design/states`, { waitUntil: "networkidle" })
+  const comparison = page.getByRole("region", { name: "六种界面状态对照", exact: true })
+  assert.equal(await comparison.getByRole("article").count(), 6)
+  const targets = await comparison.getByRole("link").evaluateAll((nodes) => nodes.map((node) => node.href))
+  for (const href of targets) {
+    await page.goto(href, { waitUntil: "networkidle" })
+    const url = new URL(href)
+    if (url.searchParams.has("profileState")) {
+      const u8 = page.locator("#u8-profile-prototype")
+      await u8.getByRole("button", { name: url.searchParams.get("profileState"), exact: true, pressed: true }).waitFor()
+      await u8.locator('[aria-label="个人中心分组"]').getByRole("button", { name: "订单", exact: true, pressed: true }).waitFor()
+    } else await page.locator("#withdrawal-case").getByRole("tab", { name: url.searchParams.get("caseStage"), exact: true, selected: true }).waitFor()
+  }
+  await page.goto(`${base}/design/states`, { waitUntil: "networkidle" })
+  const edge = page.locator("#edge-states")
+  for (const tab of await edge.getByRole("tab").all()) {
+    await tab.click()
+    assert.equal(await edge.getByRole("link").count(), 1)
+    const href = await edge.getByRole("link").getAttribute("href")
+    assert(href.startsWith(prefix + "/"))
+  }
+  const feedback = page.locator("#state-feedback")
+  await feedback.getByRole("tab", { name: "处理中", exact: true }).click()
+  await feedback.getByRole("button", { name: "查看处理状态", exact: true }).click()
+  assert((await feedback.getByRole("status").innerText()).includes("演示已触发"))
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false)
+  await page.goto(`${base}/search?q=WD-DEMO-20261026-001`, { waitUntil: "networkidle" })
+  await page.getByRole("button", { name: /^案例/ }).click()
+  await page.locator(`main a[href="${prefix}/articles/wallet-payment-reconciliation#withdrawal-case"]`).waitFor()
+  await page.goto(`${base}/search?q=${encodeURIComponent("界面状态对照")}`, { waitUntil: "networkidle" })
+  await page.locator(`main a[href="${prefix}/design/states"]`).waitFor()
+  console.log(`PASS ${width}px: 25 withdrawal combinations, conserved balances and one payout request; six exact-state deep links/reload, reused state demos and search`)
+}

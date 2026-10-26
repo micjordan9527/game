@@ -29,16 +29,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Content check
-        run: npm run check:content
+      - name: Install verification browser
+        run: npx playwright-core install --with-deps chromium
 
-      - name: Build
-        run: npm run build
-
-      - name: Check production navigation
+      - name: Verify release
         env:
           HTML_CHUNK_DELAY_MS: "15"
-        run: npm run check:browser
+        run: npm run check:release
+
+      - name: Retain verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: main-release-checks
+          path: .openai/validation-report.json
+          retention-days: 7
+          if-no-files-found: ignore
 
   deploy:
     needs: verify

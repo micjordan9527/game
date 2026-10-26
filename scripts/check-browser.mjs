@@ -3,20 +3,20 @@ import fs from "node:fs"
 import http from "node:http"
 import path from "node:path"
 import { setTimeout as delay } from "node:timers/promises"
-import { chromium } from "playwright-core"
+const { chromium } = await import(process.env.PLAYWRIGHT_MODULE ?? "playwright-core")
 import { checkUnavailableStorage, checkWorkTools } from "./check-work-tools.mjs"
 import { checkShowcase } from "./check-showcase.mjs"
 import { checkHomepage } from "./check-homepage.mjs"
 import { checkSiteUpdate } from "./check-site-update.mjs"
 import { checkContentExpansion } from "./check-content-expansion.mjs"
 import { checkAccountRecovery } from "./check-account-recovery.mjs"
-import { checkBusinessCases, checkMobileCases } from "./check-completion.mjs"
+import { checkBusinessCases, checkMobileCases, checkWithdrawalAndStates } from "./check-completion.mjs"
 
 const root = path.resolve("out")
 const prefix = process.env.TEST_BASE_PATH ?? ""
 const rounds = Number(process.env.REFRESH_ROUNDS ?? 2)
 const scope = process.env.CHECK_SCOPE ?? "all"
-assert(["all", "home", "site-update", "content", "account", "business", "mobile"].includes(scope), "Unsupported CHECK_SCOPE")
+assert(["all", "home", "site-update", "content", "account", "business", "mobile", "completion"].includes(scope), "Unsupported CHECK_SCOPE")
 assert(Number.isInteger(rounds) && rounds > 0 && rounds <= 50, "REFRESH_ROUNDS must be between 1 and 50")
 const contentTypes = {
   ".html": "text/html",
@@ -87,7 +87,7 @@ try {
   base = base.replace(/\/$/, "")
   const executablePath =
     process.env.CHROMIUM_EXECUTABLE ??
-    ["/usr/bin/chromium", "/usr/bin/google-chrome", "/usr/bin/google-chrome-stable"].find((candidate) =>
+    ["/usr/bin/chromium", "/usr/bin/google-chrome", "/usr/bin/google-chrome-stable", chromium.executablePath()].find((candidate) =>
       fs.existsSync(candidate)
     )
   assert(executablePath, "Set CHROMIUM_EXECUTABLE to an installed Chromium or Chrome browser")
@@ -129,6 +129,7 @@ try {
     await checkHomepage(page, base, prefix, width)
     if (scope === "business" || scope === "all") await checkBusinessCases(page, base, prefix, width)
     if (scope === "mobile" || scope === "all") await checkMobileCases(page, base, prefix, width)
+    if (scope === "completion" || scope === "all") await checkWithdrawalAndStates(page, base, prefix, width)
     if (scope === "account" || scope === "all") await checkAccountRecovery(page, base, prefix, width)
     if (scope === "content" || scope === "all") await checkContentExpansion(page, base, prefix, width)
     if (scope === "site-update" || scope === "all") await checkSiteUpdate(page, base, prefix, width)

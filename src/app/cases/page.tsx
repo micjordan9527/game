@@ -14,6 +14,7 @@ export default function CasesPage() {
       <h1 className="text-3xl font-semibold text-ink">案例</h1>
       <p className="mt-3 text-sm leading-7 text-muted">后台原型、网站预览与界面优化对照。</p>
       <a href="#business-cases" className="mt-3 inline-block text-sm font-semibold text-brand-700">按业务流程查看案例 ↓</a>
+      <Link href="/design/states" className="ml-4 text-sm font-semibold text-brand-700">界面状态对照 →</Link>
       <div className="mt-6">
         <ShowcaseGrid items={showcaseItems.filter((item) => item.href.startsWith("/cases/"))} />
       </div>

@@ -63,7 +63,7 @@ export function StatusFeedbackTool() {
     <section className="py-12">
       <div className="rounded-xl border border-line bg-white p-6 shadow-sm md:p-8">
         <p className="text-sm font-semibold text-brand-700">状态反馈检查器</p>
-        <h2 className="mt-2 text-2xl font-semibold text-ink">状态出现时，用户是否知道发生了什么？</h2>
+        <h2 className="mt-2 text-2xl font-semibold text-ink">业务状态：结果、原因与下一步</h2>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">切换常见业务状态，检查反馈是否同时交代结果、原因、影响和下一步动作。</p>
 
         <div className="mt-5 flex flex-wrap gap-2" role="tablist" aria-label="选择状态">

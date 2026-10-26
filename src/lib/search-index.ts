@@ -1,5 +1,6 @@
 import { topicScenarios } from "@/data/topicScenarios"
 import { businessCaseEntries } from "@/data/caseLibrary"
+import { stateExamples } from "@/data/stateExamples"
 import { templateExamples } from "@/data/templateExamples"
 import { workflowProcesses } from "@/data/workflowProcess"
 import { caseCardDetails, adminTours } from "@/data/caseEnhancements"
@@ -52,6 +53,7 @@ export function buildSearchIndex(): SearchRecord[] {
     })
   }
   businessCaseEntries.forEach((item) => add({ id: `business-case:${item.id}`, kind: "案例", title: item.title, description: item.description, href: item.href, tags: item.tags }, item.keywords))
+  add({ id: "design:states", kind: "设计专题", title: "界面状态对照", description: "加载、空结果、失败、受限、处理中与未知结果的界面反馈及实际演示入口。", href: "/design/states", tags: ["界面", "状态", "设计", "产品", "前端"] }, JSON.stringify(stateExamples))
 
   articles.forEach((article) => {
     const markdown = getMarkdownArticle(article.slug)

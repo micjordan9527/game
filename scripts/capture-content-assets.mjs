@@ -2,7 +2,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
-import { chromium } from 'playwright-core';
+const { chromium } = await import(process.env.PLAYWRIGHT_MODULE ?? 'playwright-core');
 const project=process.cwd();
 const root=path.join(project,'public');
 const output=path.join(root,'images/enrichment');

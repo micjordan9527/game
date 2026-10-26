@@ -32,19 +32,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check content
-        run: npm run check:content
+      - name: Install verification browser
+        run: npx playwright-core install --with-deps chromium
 
-      - name: Build static site
+      - name: Verify release under /game
         env:
           GITHUB_PAGES: "true"
-        run: npm run build
-
-      - name: Check production navigation under /game
-        env:
           TEST_BASE_PATH: "/game"
           HTML_CHUNK_DELAY_MS: "15"
-        run: npm run check:browser
+        run: npm run check:release
+
+      - name: Retain verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages-release-checks
+          path: .openai/validation-report.json
+          retention-days: 7
+          if-no-files-found: ignore
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

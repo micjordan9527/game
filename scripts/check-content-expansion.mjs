@@ -168,7 +168,7 @@ export async function checkContentExpansion(page, base, prefix, width) {
   await page.goto(base, { waitUntil: "networkidle" })
   assert.equal(await page.getByRole("navigation", { name: "业务主题导航" }).locator('a[href$="#scenario"]').count(), 6)
   assert.equal(await page.getByRole("region", { name: "最近更新", exact: true }).locator("time").count(), 3)
-  assert((await page.getByRole("region", { name: "最近更新", exact: true }).innerText()).includes("9 张后台步骤截图"))
+  assert((await page.getByRole("region", { name: "最近更新", exact: true }).innerText()).includes("代理跨期结算"))
   await noOverflow(page, "Updated homepage")
   await settle(page)
   console.log(`PASS ${width}px: new content indexed, curated deep links and specific update descriptions`)

@@ -25,8 +25,11 @@
         "U8个人中心原型",
         "官网移动端对照"
       ],
-      "status": "validated_for_delivery",
-      "validation": "1440/390 mobile and site-update scopes passed: BM 12 filters/detail/back/footer, U8 20 group-state combinations, six real official captures; original image/search/module behavior retained."
+      "status": "published",
+      "validation": "1440/390 mobile and site-update scopes passed: BM 12 filters/detail/back/footer, U8 20 group-state combinations, six real official captures; original image/search/module behavior retained.",
+      "sites_version": 9,
+      "sites_source": "5bdd434f088bc6aed5d14d37473a415e507ca118",
+      "github": "02afe9d113c831b17bfc81737ba806e0d768165b"
     },
     {
       "id": 3,
@@ -35,8 +38,20 @@
         "界面状态对照页",
         "发布验收自动化完善"
       ],
-      "status": "pending"
+      "status": "validated_for_delivery",
+      "validation": "Unified release check passed: content, 89 static build entries/82 HTML pages, internal references/canonical/provenance/money conservation, full 1440/390 browser regression with all new and existing interactions."
     }
   ],
-  "delivery_note": "Native Sites deployments and matching GitHub commits establish publication; this source progress file alone does not."
+  "delivery_note": "Native Sites deployments and matching GitHub commits establish publication; this source progress file alone does not.",
+  "content_items_remaining": [],
+  "validation_report": {
+    "checked_at": "2026-10-26T03:09:39.857Z",
+    "status": "passed",
+    "checks": [
+      "content",
+      "production-build",
+      "export-integrity",
+      "browser-regression"
+    ]
+  }
 }

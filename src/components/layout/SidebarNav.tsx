@@ -47,6 +47,7 @@ const resourceLinks: NavLinkItem[] = [
   { href: "/articles", label: "功能图解", icon: FileText, suffix: String(articles.length) },
   { href: "/ai-workflows", label: "AI 成果", icon: Sparkles, suffix: String(aiWorkflows.length) },
   { href: "/design/material-standards", label: "素材规范", icon: MonitorCog },
+  { href: "/design/states", label: "状态对照", icon: MonitorCog },
   { href: "/search", label: "全站搜索", icon: Search },
   { href: "/glossary", label: "术语库", icon: BookOpen },
   { href: "/templates", label: "模板库", icon: Library },

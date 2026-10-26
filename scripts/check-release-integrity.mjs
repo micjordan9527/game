@@ -1,0 +1,58 @@
+import assert from "node:assert/strict"
+import fs from "node:fs"
+import path from "node:path"
+import ts from "typescript"
+
+const root = path.resolve("out")
+const prefix = process.env.TEST_BASE_PATH ?? ""
+const origin = process.env.GITHUB_PAGES === "true" ? "https://micjordan9527.github.io" : new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://baowang-knowledge.aurora-5448.chatgpt.site").origin
+const errors = []
+const pages = fs.readdirSync(root, { recursive: true }).filter((file) => file.endsWith(".html") && !file.startsWith("case-assets/") && file !== "404.html")
+const resolveFile = (pathname) => {
+  const relative = decodeURIComponent(pathname.slice(prefix.length)).replace(/^\//, "")
+  const target = path.resolve(root, relative || "index.html")
+  if (target !== root && !target.startsWith(root + path.sep)) return null
+  return [target, target + ".html", path.join(target, "index.html")].find((file) => fs.existsSync(file) && fs.statSync(file).isFile())
+}
+for (const file of pages) {
+  const html = fs.readFileSync(path.join(root, file), "utf8")
+  for (const [, raw] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+    const value = raw.replaceAll("&amp;", "&")
+    if (!value.startsWith("/") || value.startsWith("//")) continue
+    const url = new URL(value, origin)
+    if (prefix && !url.pathname.startsWith(prefix + "/") && url.pathname !== prefix) continue
+    if (!resolveFile(url.pathname)) errors.push(`${file}: missing ${url.pathname}`)
+  }
+  const canonical = html.match(/<link[^>]*rel="canonical"[^>]*href="([^"]+)"/)
+  assert(canonical, `${file}: canonical missing`)
+  assert.equal(new URL(canonical[1]).origin, origin, `${file}: canonical origin`)
+}
+for (const manifestPath of ["public/images/enrichment/provenance.json", "public/images/official-comparison/manifest.json"]) {
+  const items = JSON.parse(fs.readFileSync(manifestPath, "utf8"))
+  for (const item of items) {
+    const file = item.path ? path.join("public", item.path) : path.join(path.dirname(manifestPath), item.file)
+    assert(fs.existsSync(file), `Provenance references a missing asset: ${file}`)
+    assert(item.width > 0 && item.height > 0)
+    assert(item.source && item.materialType)
+  }
+}
+const moduleSource = fs.readFileSync("src/data/businessCases.ts", "utf8")
+const javascript = ts.transpileModule(moduleSource, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+const data = await import("data:text/javascript;base64," + Buffer.from(javascript).toString("base64"))
+assert.equal(data.commissionCents(1_000_000, 300), 30_000)
+assert.equal(data.commissionCents(1_200_000, 400), 48_000)
+assert.equal(data.commissionCents(-200_000, 300), -6_000)
+for (const stage of data.withdrawalStages) {
+  assert.equal(stage.available + stage.frozen + stage.paid, 126_000, stage.label + ": funds conservation")
+  assert(stage.available >= 0 && stage.frozen >= 0 && stage.paid >= 0)
+  if (["处理中", "结果未知"].includes(stage.label)) assert.equal(stage.frozen, 10_000)
+  if (stage.label === "已完成") assert.equal(stage.available, 116_000, "Successful payment must not debit available twice")
+}
+for (const demo of [data.settlementCase, data.withdrawalCase]) {
+  for (const stage of demo.stages) {
+    assert.equal(stage.fields.length, demo.screens.length)
+    for (const screen of stage.fields) assert(screen.some(([, value]) => value === demo.recordId))
+  }
+}
+assert.deepEqual([...new Set(errors)], [], "Broken exported internal references:\n" + [...new Set(errors)].join("\n"))
+console.log(`Integrity checks passed: ${pages.length} exported pages, internal files, canonical origins, asset provenance, settlement arithmetic and withdrawal conservation.`)
