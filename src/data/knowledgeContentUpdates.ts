@@ -98,5 +98,41 @@ export const knowledgeContentUpdates = [
     "href": "/articles/currency-timezone-reporting",
     "detailHref": "/articles/currency-timezone-reporting#跨日演算与查询区间",
     "relatedHref": "/articles/data-report-metrics"
+  },
+  {
+    "slug": "multi-tenant-site-config",
+    "title": "多租户与站点配置",
+    "description": "新增租户／站点／版本边界，说明缓存、导出、配置发布与回退的隔离检查。",
+    "kind": "新增",
+    "href": "/articles/multi-tenant-site-config",
+    "detailHref": "/articles/multi-tenant-site-config#三种范围分别保存",
+    "relatedHref": "/cases/white-label-official#official-responsive-comparison"
+  },
+  {
+    "slug": "monitoring-incident-recovery",
+    "title": "监控、告警与故障恢复",
+    "description": "新增监控层次、告警分派、止损、积压核对和恢复验证，区分服务与业务恢复。",
+    "kind": "新增",
+    "href": "/articles/monitoring-incident-recovery",
+    "detailHref": "/articles/monitoring-incident-recovery#从止损到恢复验证",
+    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case"
+  },
+  {
+    "slug": "backup-restore-verification",
+    "title": "数据备份与恢复验证",
+    "description": "新增备份依赖、隔离恢复、完整性与业务一致性校验，以及RPO／RTO演算。",
+    "kind": "新增",
+    "href": "/articles/backup-restore-verification",
+    "detailHref": "/articles/backup-restore-verification#在隔离环境中实际恢复",
+    "relatedHref": "/articles/monitoring-incident-recovery"
+  },
+  {
+    "slug": "requirements-release-acceptance",
+    "title": "需求变更与版本验收",
+    "description": "新增变更范围、正常与异常验收、版本证据、发布观察和回退边界。",
+    "kind": "新增",
+    "href": "/articles/requirements-release-acceptance",
+    "detailHref": "/articles/requirements-release-acceptance#验收矩阵",
+    "relatedHref": "/design/states"
   }
 ]

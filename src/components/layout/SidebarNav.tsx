@@ -44,6 +44,7 @@ type NavLinkItem = {
 }
 
 const resourceLinks: NavLinkItem[] = [
+  { href: "/updates", label: "更新记录", icon: FileText },
   { href: "/articles", label: "功能图解", icon: FileText, suffix: String(articles.length) },
   { href: "/ai-workflows", label: "AI 成果", icon: Sparkles, suffix: String(aiWorkflows.length) },
   { href: "/design/material-standards", label: "素材规范", icon: MonitorCog },

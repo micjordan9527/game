@@ -331,4 +331,93 @@ export const articles: Article[] = [
       date: "2026-10-26",
       updatedAt: "2026-10-26"
   },
+  {
+      slug: "multi-tenant-site-config",
+      title: "多租户与站点配置",
+      description: "区分租户隔离、站点配置和版本发布，用配置变更示例解释范围校验、缓存、预览与回退。",
+      category: "development",
+      tags: [
+        "多租户",
+        "站点配置",
+        "数据隔离",
+        "配置版本",
+        "发布"
+      ],
+      audience: [
+        "技术",
+        "产品",
+        "运维",
+        "测试"
+      ],
+      difficulty: "专业",
+      date: "2026-10-26",
+      updatedAt: "2026-10-26"
+  },
+  {
+      slug: "monitoring-incident-recovery",
+      title: "监控、告警与故障恢复",
+      description: "从业务指标到告警分派，说明定位、止损、恢复验证和复盘，区分技术恢复与业务数据修复。",
+      category: "devops-risk",
+      tags: [
+        "监控",
+        "告警",
+        "故障恢复",
+        "对账",
+        "运维"
+      ],
+      audience: [
+        "运维",
+        "技术",
+        "产品",
+        "测试"
+      ],
+      difficulty: "进阶",
+      date: "2026-10-26",
+      updatedAt: "2026-10-26"
+  },
+  {
+      slug: "backup-restore-verification",
+      title: "数据备份与恢复验证",
+      description: "区分备份成功、数据可恢复与业务可用，用隔离恢复步骤说明一致性校验、RPO、RTO和恢复后的对账。",
+      category: "devops-risk",
+      tags: [
+        "备份",
+        "恢复",
+        "RPO",
+        "RTO",
+        "数据校验"
+      ],
+      audience: [
+        "运维",
+        "技术",
+        "测试",
+        "项目经理"
+      ],
+      difficulty: "专业",
+      date: "2026-10-26",
+      updatedAt: "2026-10-26"
+  },
+  {
+      slug: "requirements-release-acceptance",
+      title: "需求变更与版本验收",
+      description: "从变更范围、影响分析到版本证据，说明正常与异常验收、发布检查、观察和回退边界。",
+      category: "product",
+      tags: [
+        "需求变更",
+        "版本验收",
+        "发布",
+        "回退",
+        "状态流转"
+      ],
+      audience: [
+        "产品",
+        "项目经理",
+        "设计师",
+        "技术",
+        "测试"
+      ],
+      difficulty: "进阶",
+      date: "2026-10-26",
+      updatedAt: "2026-10-26"
+  },
 ]

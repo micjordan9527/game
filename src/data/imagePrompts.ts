@@ -314,6 +314,46 @@ export const imagePrompts: ImagePrompt[] = [
     height: 1024,
     caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
   },
+  {
+    slug: "multi-tenant-site-config-knowledge-diagram",
+    title: "多租户与站点配置 · 图解",
+    articleSlug: "multi-tenant-site-config",
+    imageSrc: "/images/knowledge-20261026/multi-tenant-site-config.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
+  },
+  {
+    slug: "monitoring-incident-recovery-knowledge-diagram",
+    title: "监控、告警与故障恢复 · 图解",
+    articleSlug: "monitoring-incident-recovery",
+    imageSrc: "/images/knowledge-20261026/monitoring-incident-recovery.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
+  },
+  {
+    slug: "backup-restore-verification-knowledge-diagram",
+    title: "数据备份与恢复验证 · 图解",
+    articleSlug: "backup-restore-verification",
+    imageSrc: "/images/knowledge-20261026/backup-restore-verification.png",
+    kind: "standard",
+    width: 1942,
+    height: 809,
+    caption: "GPT 生成示意图。恢复指标须通过实际演练测量，图中不包含生产系统实测值。"
+  },
+  {
+    slug: "requirements-release-acceptance-knowledge-diagram",
+    title: "需求变更与版本验收 · 图解",
+    articleSlug: "requirements-release-acceptance",
+    imageSrc: "/images/knowledge-20261026/requirements-release-acceptance.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
+  },
 ]
 
 export function getImagePromptForArticle(articleSlug: string) {

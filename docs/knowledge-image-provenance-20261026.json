@@ -201,5 +201,128 @@
     ],
     "finalPath": "/workspace/work/knowledge-images-new/currency-timezone-reporting.png",
     "description": "多币种、时区与跨日统计的概念关系与流程示意；非真实业务截图"
+  },
+  {
+    "articleSlug": "multi-tenant-site-config",
+    "file": "multi-tenant-site-config.png",
+    "originalPath": "/workspace/generated_images/exec-8f45a585-2a37-477f-bd4c-c6a4a466df1d.png",
+    "width": 1536,
+    "height": 1024,
+    "title": "多租户隔离与站点配置版本",
+    "prompt": "Create one landscape 1536x1024 editorial technical infographic in Simplified Chinese, neutral knowledge-base topic 多租户与站点配置. Off-white background, navy text, teal cards, pale orange rollback accent, crisp flat vector design, generous whitespace, large simple labels. Upper half show two separate rectangular boundary containers labelled 租户 A and 租户 B. Within EACH container exactly two cards: 站点配置 and 业务数据. Strong visible boundary between tenants, absolutely no arrows crossing or mixing tenants. A small caption between areas: 数据按租户隔离. Lower half a separate shared conceptual version workflow, five cards left to right: 配置草稿 → 预览校验 → 版本发布 → 观察验证; a curved arrow from 观察验证 to extra orange card 回滚版本. Small label under 版本发布: 绑定站点与版本. Do not suggest rollback of transaction data. No code, no real data, no logos, no slogans, no lengthy text. Clear arrows.",
+    "materialType": "GPT 生成示意图",
+    "generatedAt": "2026-10-26",
+    "verifiedLabels": [
+      "租户 A",
+      "租户 B",
+      "站点配置",
+      "业务数据",
+      "数据按租户隔离",
+      "配置草稿",
+      "预览校验",
+      "版本发布",
+      "观察验证",
+      "回滚版本",
+      "绑定站点与版本"
+    ],
+    "caveats": [
+      "回滚对象是站点配置版本；不回滚业务交易记录",
+      "租户隔离还必须覆盖接口、缓存、队列和导出等边界"
+    ],
+    "finalPath": "/workspace/work/knowledge-images-new/multi-tenant-site-config.png",
+    "description": "多租户隔离与站点配置版本的概念关系与流程示意；非真实业务截图"
+  },
+  {
+    "articleSlug": "monitoring-incident-recovery",
+    "file": "monitoring-incident-recovery.png",
+    "originalPath": "/workspace/generated_images/exec-04aa005f-d3f7-4c9b-81a8-ec3fea96384d.png",
+    "width": 1536,
+    "height": 1024,
+    "title": "监控、告警与故障恢复",
+    "prompt": "Create a NEW clean landscape1536x1024 Chinese technical infographic, title 监控、告警与故障恢复. Six large numbered cards in ONE horizontal left-to-right row, no second row, no winding connectors. The exact sequence must be 01 监控指标 → 02 触发告警 → 03 分级定位 → 04 降低影响 → 05 验证恢复 → 06 记录复盘. Each card can be narrow portrait with a simple icon above large two-line Chinese label. All five arrows must point RIGHT. Bottom spacious supporting row contains short labels below relevant cards: under01 延迟 / 错误 / 积压; under03 负责人; under05 关键链路核验. Bottom orange note 告警消失 ≠ 业务恢复. Neutral knowledge-base schematic, off-white background, navy text, teal cards, pale orange emphasis, crisp flat vector, generous whitespace, high Chinese legibility. No real numerical results, no logos, no slogans, no screenshots.",
+    "materialType": "GPT 生成示意图",
+    "generatedAt": "2026-10-26",
+    "verifiedLabels": [
+      "监控指标",
+      "触发告警",
+      "分级定位",
+      "降低影响",
+      "验证恢复",
+      "记录复盘",
+      "延迟",
+      "错误",
+      "积压",
+      "负责人",
+      "关键链路核验",
+      "告警消失 ≠ 业务恢复"
+    ],
+    "caveats": [
+      "第一版箭头跳过处置步骤，已废弃并重新生成；只采用当前单行顺序版",
+      "图中无实际服务可用性或故障恢复测量数据"
+    ],
+    "finalPath": "/workspace/work/knowledge-images-new/monitoring-incident-recovery.png",
+    "description": "监控、告警与故障恢复的概念关系与流程示意；非真实业务截图"
+  },
+  {
+    "articleSlug": "backup-restore-verification",
+    "file": "backup-restore-verification.png",
+    "originalPath": "/workspace/generated_images/exec-bdbe28c4-9f7b-479e-9f66-3aeaae621641.png",
+    "title": "数据备份与恢复验证",
+    "prompt": "Create landscape1536x1024 technical infographic in Simplified Chinese, title 数据备份与恢复验证. Neutral knowledge-base illustration, off-white navy teal pale orange, flat crisp vector, large short labels, generous whitespace. Five numbered main cards all in ONE horizontal row with arrows only to RIGHT: 01 备份记录 → 02 隔离恢复 → 03 完整性核验 → 04 测量恢复指标 → 05 受控恢复. Under 备份记录 small tag 时间点 / 范围. Under 隔离恢复 small tag 独立环境. Under 完整性核验 small tag 文件 / 账本 / 关键链路. Under 测量恢复指标 two separate short tags RPO and RTO. A pale orange note at bottom: 备份成功 ≠ 恢复可用. No specific time claims, no fake data, no logos, no screenshots. Correct Chinese and unambiguous order. Do not depict restore directly into production before checks.",
+    "materialType": "GPT 生成示意图",
+    "generatedAt": "2026-10-26",
+    "verifiedLabels": [
+      "备份记录",
+      "隔离恢复",
+      "完整性核验",
+      "测量恢复指标",
+      "受控恢复",
+      "时间点",
+      "范围",
+      "独立环境",
+      "文件 / 账本 / 关键链路",
+      "RPO",
+      "RTO",
+      "备份成功 ≠ 恢复可用"
+    ],
+    "caveats": [
+      "RPO/RTO为恢复目标与实测核对的指标，不代表已达到任何时长",
+      "恢复验证先在隔离环境完成；受控切换需要独立操作流程"
+    ],
+    "width": 1942,
+    "height": 809,
+    "finalPath": "/workspace/work/knowledge-images-new/backup-restore-verification.png",
+    "description": "数据备份与恢复验证的概念关系与流程示意；非真实业务截图"
+  },
+  {
+    "articleSlug": "requirements-release-acceptance",
+    "file": "requirements-release-acceptance.png",
+    "originalPath": "/workspace/generated_images/exec-3659146f-7b45-460d-a459-d226ec30c1fc.png",
+    "width": 1536,
+    "height": 1024,
+    "title": "需求变更与版本验收",
+    "prompt": "Create a landscape1536x1024 technical infographic in Simplified Chinese, title 需求变更与版本验收. Neutral knowledge-base illustration, off-white navy teal pale orange, crisp flat vector professional layout, generous whitespace, large short Chinese labels. Exactly six numbered cards in ONE horizontal left-to-right row: 01 变更申请 → 02 影响分析 → 03 确认版本 → 04 验收检查 → 05 版本发布 → 06 观察结果. Only right-pointing connecting arrows. Under 影响分析 small label 页面 / 规则 / 数据. Under 确认版本 small label 范围与依据. Under 验收检查 small label 正常与异常. Under 观察结果 a vertical downward orange branch leads to one extra box 回滚已验证版本. Clearly label branch 触发条件满足. Small bottom caption 记录验收证据. No real customer claims, no screenshots, no marketing, no specific performance metrics. Correct Chinese, clear flow.",
+    "materialType": "GPT 生成示意图",
+    "generatedAt": "2026-10-26",
+    "verifiedLabels": [
+      "变更申请",
+      "影响分析",
+      "确认版本",
+      "验收检查",
+      "版本发布",
+      "观察结果",
+      "页面 / 规则 / 数据",
+      "范围与依据",
+      "正常与异常",
+      "触发条件满足",
+      "回滚已验证版本",
+      "记录验收证据"
+    ],
+    "caveats": [
+      "示意流程不代表站点实际审批记录或部署结果",
+      "回滚范围及数据兼容性需要单独验证"
+    ],
+    "finalPath": "/workspace/work/knowledge-images-new/requirements-release-acceptance.png",
+    "description": "需求变更与版本验收的概念关系与流程示意；非真实业务截图"
   }
 ]

@@ -161,5 +161,100 @@
       "归属业务日",
       "明细核对"
     ]
+  },
+  {
+    "articleSlug": "multi-tenant-site-config",
+    "path": "/images/knowledge-20261026/multi-tenant-site-config.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "多租户隔离与站点配置版本的概念关系与流程示意；非真实业务截图",
+    "verification": [
+      "租户 A",
+      "租户 B",
+      "站点配置",
+      "业务数据",
+      "数据按租户隔离",
+      "配置草稿",
+      "预览校验",
+      "版本发布",
+      "观察验证",
+      "回滚版本",
+      "绑定站点与版本"
+    ]
+  },
+  {
+    "articleSlug": "monitoring-incident-recovery",
+    "path": "/images/knowledge-20261026/monitoring-incident-recovery.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "监控、告警与故障恢复的概念关系与流程示意；非真实业务截图",
+    "verification": [
+      "监控指标",
+      "触发告警",
+      "分级定位",
+      "降低影响",
+      "验证恢复",
+      "记录复盘",
+      "延迟",
+      "错误",
+      "积压",
+      "负责人",
+      "关键链路核验",
+      "告警消失 ≠ 业务恢复"
+    ]
+  },
+  {
+    "articleSlug": "backup-restore-verification",
+    "path": "/images/knowledge-20261026/backup-restore-verification.png",
+    "width": 1942,
+    "height": 809,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "数据备份与恢复验证的概念关系与流程示意；非真实业务截图",
+    "verification": [
+      "备份记录",
+      "隔离恢复",
+      "完整性核验",
+      "测量恢复指标",
+      "受控恢复",
+      "时间点",
+      "范围",
+      "独立环境",
+      "文件 / 账本 / 关键链路",
+      "RPO",
+      "RTO",
+      "备份成功 ≠ 恢复可用"
+    ]
+  },
+  {
+    "articleSlug": "requirements-release-acceptance",
+    "path": "/images/knowledge-20261026/requirements-release-acceptance.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "需求变更与版本验收的概念关系与流程示意；非真实业务截图",
+    "verification": [
+      "变更申请",
+      "影响分析",
+      "确认版本",
+      "验收检查",
+      "版本发布",
+      "观察结果",
+      "页面 / 规则 / 数据",
+      "范围与依据",
+      "正常与异常",
+      "触发条件满足",
+      "回滚已验证版本",
+      "记录验收证据"
+    ]
   }
 ]

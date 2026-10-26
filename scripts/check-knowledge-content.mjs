@@ -7,7 +7,15 @@ export async function checkKnowledgeContent(page, base, prefix, width) {
   const updates = JSON.parse(source.slice(source.indexOf("= ") + 2))
   assert.equal(updates.length, manifest.length)
   assert.equal(new Set(manifest.map((item) => item.articleSlug)).size, manifest.length)
-  await page.goto(base + "/updates", { waitUntil: "networkidle" })
+  await page.locator("footer").getByRole("link", { name: "更新记录", exact: true }).waitFor()
+  if (width === 390) {
+    await page.getByRole("button", { name: "打开导航", exact: true }).click()
+    await page.getByRole("navigation", { name: "移动端知识库导航", exact: true }).getByRole("link", { name: "更新记录", exact: true }).click()
+    await page.getByRole("dialog", { name: "知识库导航", exact: true }).waitFor({ state: "hidden" })
+  } else {
+    await page.getByRole("navigation", { name: "知识库导航", exact: true }).getByRole("link", { name: "更新记录", exact: true }).click()
+  }
+  await page.locator("#knowledge-content").waitFor()
   assert.equal(await page.locator("#knowledge-content ol > li").count(), manifest.length)
   assert.equal(await page.locator("#demonstrations a").count(), 10)
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false)
@@ -50,5 +58,7 @@ export async function checkKnowledgeContent(page, base, prefix, width) {
     assert.equal(new URL(page.url()).searchParams.get("type"), "文章")
     await link.waitFor()
   }
-  console.log(`PASS ${width}px: ${manifest.length} content updates, exact section links, GPT provenance, PNG dimensions/loading, expanded articles, image close and article search/return`)
+  await page.goto(base + "/search?q=" + encodeURIComponent("更新记录"), { waitUntil: "networkidle" })
+  await page.locator(`main a[href="${prefix}/updates"]`).waitFor()
+  console.log(`PASS ${width}px: ${manifest.length} content updates, global/mobile/footer access, exact section links, GPT provenance, PNG dimensions/loading, expanded articles, image close and article search/return`)
 }
