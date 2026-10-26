@@ -17,6 +17,21 @@ export async function checkReleaseLog(page, base, prefix, width) {
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false)
   await page.screenshot({ path: `/tmp/release-log-${width}.png` })
 
+  const checkCopiedVersion = async (region, version) => {
+    await region.getByRole("button", { name: `复制 v${version} 链接`, exact: true }).click()
+    await region.getByRole("button", { name: "已复制", exact: true }).waitFor()
+    const url = new URL(await page.evaluate(() => navigator.clipboard.readText()))
+    const expectedOrigin = process.env.GITHUB_PAGES === "true" ? "https://micjordan9527.github.io" : new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://baowang-knowledge.aurora-5448.chatgpt.site").origin
+    assert.equal(url.origin, expectedOrigin)
+    assert.equal(url.pathname, prefix + "/updates")
+    assert.equal(url.hash, "#v" + version)
+    const shared = await page.context().newPage()
+    await shared.goto(base + "/updates" + url.hash, { waitUntil: "networkidle" })
+    await shared.locator(version === releases.current.version ? "#v" + version : `#v${version}[open]`).waitFor({ state: "attached" })
+    await shared.close()
+  }
+  await checkCopiedVersion(latest, releases.current.version)
+
   const first = page.locator("#v" + releases.history[0].version)
   await first.locator("summary").focus()
   await page.keyboard.press("Enter")
@@ -44,6 +59,7 @@ export async function checkReleaseLog(page, base, prefix, width) {
   await page.goBack({ waitUntil: "networkidle" })
   await page.locator("#v13[open]").waitFor()
   await article.waitFor()
+  await checkCopiedVersion(page.locator("#v13"), 13)
 
   for (const [hash, version] of [["top-navigation", 14], ["access-approval-audit", 12], ["member-agent-platform", 11]]) {
     await page.goto(base + "/updates#" + hash, { waitUntil: "networkidle" })
@@ -60,12 +76,23 @@ export async function checkReleaseLog(page, base, prefix, width) {
   await page.goto(base + "/updates#demonstrations", { waitUntil: "networkidle" })
   await page.locator("#demonstrations").getByRole("link").click()
   await page.getByRole("heading", { name: "功能演示目录", level: 1, exact: true }).waitFor()
-  const directory = page.getByRole("list", { name: "已有功能演示", exact: true })
-  assert.equal(await directory.locator("li").count(), 10)
+  const directory = page.getByRole("region", { name: "已有功能演示", exact: true })
+  assert.equal(await directory.locator("[data-demo-entry]").count(), 10)
   assert.equal(await directory.getByRole("link").count(), 10)
+  const groupNav = page.getByRole("navigation", { name: "演示场景定位", exact: true })
+  assert.equal(await groupNav.getByRole("link").count(), 3)
+  for (const [group, count] of [["business-process", 4], ["interface-design", 4], ["browse-search", 2]]) {
+    assert.equal(await page.locator(`#${group} [data-demo-entry]`).count(), count)
+    await groupNav.locator(`a[href="#${group}"]`).click()
+    assert.equal(new URL(page.url()).hash, "#" + group)
+  }
+  for (const card of await directory.locator("[data-demo-entry]").all()) assert((await card.innerText()).includes("位置："))
+  await page.screenshot({ path: `/tmp/demo-directory-${width}.png` })
   assert.equal(await page.locator("body > header").getByRole("link", { name: "更新记录", exact: true }).getAttribute("aria-current"), "location")
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false)
   await page.locator(`main a[href="${prefix}/updates#demonstrations"]`).click()
   await page.locator("#demonstrations-title").waitFor()
-  console.log(`PASS ${width}px: current release, version counts, collapsed history/keyboard, version and legacy deep links/reload, article return and separate 10-demo directory`)
+  await page.goto(base + "/search?q=" + encodeURIComponent("界面设计"), { waitUntil: "networkidle" })
+  await page.locator(`main a[href="${prefix}/updates/demonstrations"]`).waitFor()
+  console.log(`PASS ${width}px: current/history link copy and fresh-tab sharing, version counts, collapsed history/keyboard, legacy links, article return and 10 demos in3 located groups`)
 }

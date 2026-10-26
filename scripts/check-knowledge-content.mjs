@@ -8,14 +8,7 @@ export async function checkKnowledgeContent(page, base, prefix, width) {
   const updates = JSON.parse(source.slice(source.indexOf("= ") + 2))
   assert.equal(updates.length, manifest.length)
   assert.equal(new Set(manifest.map((item) => item.articleSlug)).size, manifest.length)
-  await page.locator("footer").getByRole("link", { name: "更新记录", exact: true }).waitFor()
-  if (width === 390) {
-    await page.getByRole("button", { name: "打开导航", exact: true }).click()
-    await page.getByRole("navigation", { name: "移动端知识库导航", exact: true }).getByRole("link", { name: "更新记录", exact: true }).click()
-    await page.getByRole("dialog", { name: "知识库导航", exact: true }).waitFor({ state: "hidden" })
-  } else {
-    await page.getByRole("navigation", { name: "知识库导航", exact: true }).getByRole("link", { name: "更新记录", exact: true }).click()
-  }
+  await page.locator("body > header").getByRole("link", { name: "更新记录", exact: true }).click()
   await page.locator("#knowledge-content").waitFor()
   await checkReleaseLog(page, base, prefix, width)
   for (const [index, item] of updates.entries()) {
@@ -58,5 +51,5 @@ export async function checkKnowledgeContent(page, base, prefix, width) {
   }
   await page.goto(base + "/search?q=" + encodeURIComponent("更新记录"), { waitUntil: "networkidle" })
   await page.locator(`main a[href="${prefix}/updates"]`).waitFor()
-  console.log(`PASS ${width}px: ${manifest.length} content updates, global/mobile/footer access, exact section links, GPT provenance, PNG dimensions/loading, expanded articles, image close and article search/return`)
+  console.log(`PASS ${width}px: ${manifest.length} content updates, direct header access, exact section links, GPT provenance, PNG dimensions/loading, expanded articles, image close and article search/return`)
 }

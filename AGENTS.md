@@ -22,6 +22,7 @@ Sites and GitHub delivery preference (2026-10-25):
 - After every successful Site update, also commit the delivered changes to the existing GitHub repository https://github.com/micjordan9527/game on its main branch. Preserve unrelated remote changes; report the actual deployment state and GitHub commit link.
 - For each delivery, describe every changed feature or content item and provide its location or direct link. Keep the public /updates page accurate so the user can find the changes without searching the chat.
 - Keep “更新记录” directly visible in the desktop and mobile top bar. Navigation, AI library headings/back links and footer should consistently use “AI 工作流” and “模板库”.
+- The global “更新记录” entry belongs only in the desktop/mobile header; do not repeat it in the sidebar, expanded mobile menu, footer or homepage quick links. Contextual change links and return links may remain.
 - Keep /updates organized by actual publication versions, with a current summary and collapsible history. Preserve old section links and return position. Keep existing demos in /updates/demonstrations. Count each article/image change in its own release once. Before deployment, verify releaseHistory.json's current version matches the native saved version number; current.date is an update date, while historical publishedAt values must come from confirmed deployments.
 
 Image viewing preference (2026-10-25):

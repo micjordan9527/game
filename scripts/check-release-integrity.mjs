@@ -68,6 +68,18 @@ for (const item of contentUpdates) {
 }
 const javascript = ts.transpileModule(moduleSource, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
 const data = await import("data:text/javascript;base64," + Buffer.from(javascript).toString("base64"))
+const demoJavascript = ts.transpileModule(fs.readFileSync("src/data/demonstrationEntries.ts", "utf8"), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+const demos = await import("data:text/javascript;base64," + Buffer.from(demoJavascript).toString("base64"))
+assert.equal(demos.demonstrationEntries.length, 10)
+assert.equal(new Set(demos.demonstrationEntries.map((item) => item.title)).size, 10)
+for (const item of demos.demonstrationEntries) {
+  assert(demos.demonstrationGroups.some((group) => group.id === item.group))
+  assert(item.location)
+  const target = new URL(item.href, origin)
+  const file = resolveFile(prefix + target.pathname)
+  assert(file, item.href)
+  if (target.hash) assert(fs.readFileSync(file, "utf8").includes(`id="${decodeURIComponent(target.hash.slice(1))}"`), item.href)
+}
 assert.equal(data.commissionCents(1_000_000, 300), 30_000)
 assert.equal(data.commissionCents(1_200_000, 400), 48_000)
 assert.equal(data.commissionCents(-200_000, 300), -6_000)

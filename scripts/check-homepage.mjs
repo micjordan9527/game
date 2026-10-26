@@ -13,8 +13,9 @@ export async function checkHomepage(page, base, prefix, width) {
   )
   assert.equal(await page.getByRole("navigation", { name: "业务主题导航" }).getByRole("link").count(), 6)
   assert.equal(await page.getByRole("navigation", { name: "按角色浏览" }).getByRole("link").count(), 5)
-  assert.equal(await page.getByRole("navigation", { name: "常用资料", exact: true }).getByRole("link").count(), 4)
-  await page.getByRole("navigation", { name: "常用资料", exact: true }).getByRole("link", { name: "更新记录", exact: true }).waitFor()
+  assert.equal(await page.getByRole("navigation", { name: "常用资料", exact: true }).getByRole("link").count(), 3)
+  assert.equal(await page.getByRole("navigation", { name: "常用资料", exact: true }).getByRole("link", { name: "更新记录", exact: true }).count(), 0)
+  assert.equal(await page.locator("footer").getByRole("link", { name: "更新记录", exact: true }).count(), 0)
   for (const title of ["功能图解", "AI 工作流"]) {
     const region = page.getByRole("region", { name: title, exact: true })
     assert.equal(await region.getByRole("heading", { level: 3 }).count(), 2, title)
@@ -44,7 +45,13 @@ export async function checkHomepage(page, base, prefix, width) {
   const updateBox = await updatesLink.boundingBox()
   assert(updateBox && updateBox.y >= 0 && updateBox.y + updateBox.height <= 64, "Updates must be directly visible in the top bar")
   if (width >= 1280) {
+    assert.equal(await page.getByRole("navigation", { name: "知识库导航", exact: true }).getByRole("link", { name: "更新记录", exact: true }).count(), 0)
     assert.deepEqual(await header.getByRole("navigation", { name: "顶部导航", exact: true }).getByRole("link").allInnerTexts(), ["案例", "功能图解", "AI 工作流", "素材规范", "术语库", "模板库", "更新记录", "搜索"])
+  } else {
+    await header.getByRole("button", { name: "打开导航", exact: true }).click()
+    assert.equal(await page.getByRole("navigation", { name: "移动端知识库导航", exact: true }).getByRole("link", { name: "更新记录", exact: true }).count(), 0)
+    await page.keyboard.press("Escape")
+    await page.getByRole("dialog", { name: "知识库导航", exact: true }).waitFor({ state: "hidden" })
   }
   await updatesLink.click()
   await page.getByRole("heading", { name: "更新记录", level: 1, exact: true }).waitFor()

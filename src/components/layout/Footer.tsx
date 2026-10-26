@@ -8,7 +8,6 @@ export function Footer() {
           <SiteLogo />
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
             {[
-              ["/updates", "更新记录"],
               ["/cases", "案例"],
               ["/articles", "功能图解"],
               ["/ai-workflows", "AI 工作流"],

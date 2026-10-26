@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ChevronDown, ExternalLink } from "lucide-react"
 import { ReleaseHashNavigation } from "@/components/updates/ReleaseHashNavigation"
+import { CopyTemplateButton } from "@/components/templates/CopyTemplateButton"
 import { articles } from "@/data/articles"
 import { knowledgeContentUpdates } from "@/data/knowledgeContentUpdates"
 import releases from "@/data/releaseHistory.json"
@@ -70,10 +71,12 @@ export default function UpdatesPage() {
       </header>
 
       <section id="current-release" className="mt-6 scroll-mt-24 rounded-xl border border-brand-100 bg-white p-5 md:p-7" aria-labelledby="current-release-title">
+        <span id={`v${current.version}`} className="block scroll-mt-24" aria-hidden="true" />
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="rounded-md bg-ink px-3 py-1 text-sm font-semibold text-white">v{current.version}</span>
             <span className="text-xs font-semibold text-brand-700">当前版本</span>
+            <CopyTemplateButton content={absoluteUrl(`/updates#v${current.version}`)} label={`复制 v${current.version} 链接`} />
           </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted">
             <p>更新日期：<time dateTime={current.date}>{current.date}</time></p>
@@ -129,7 +132,10 @@ export default function UpdatesPage() {
                     <ul className="divide-y divide-line" data-release-items>
                       {changes.map((item) => <ChangeRow key={item.id} item={item} />)}
                     </ul>
-                    <a href={`https://github.com/micjordan9527/game/commit/${release.githubCommit}`} className="mt-5 inline-flex items-center gap-2 border-t border-line pt-4 text-xs font-semibold text-brand-700">查看 v{release.version} 源码提交 <ExternalLink className="h-3 w-3" aria-hidden="true" /></a>
+                    <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-line pt-4">
+                      <CopyTemplateButton content={absoluteUrl(`/updates#v${release.version}`)} label={`复制 v${release.version} 链接`} />
+                      <a href={`https://github.com/micjordan9527/game/commit/${release.githubCommit}`} className="inline-flex items-center gap-2 text-xs font-semibold text-brand-700">查看 v{release.version} 源码提交 <ExternalLink className="h-3 w-3" aria-hidden="true" /></a>
+                    </div>
                   </div>
                 </details>
               )

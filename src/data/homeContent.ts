@@ -25,7 +25,6 @@ export const homeContent = {
     { title: "体育业务", description: "赛事、玩法、注单", href: "/articles/bet-ticket-status#scenario", icon: "sports" },
   ],
   quickLinks: [
-    { title: "更新记录", href: "/updates" },
     { title: "素材规范", href: "/design/material-standards" },
     { title: "模板库", href: "/templates" },
     { title: "术语库", href: "/glossary" },

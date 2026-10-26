@@ -29,7 +29,6 @@ type NavLinkItem = { href: string; label: string; icon: LucideIcon }
 
 const resourceLinks: NavLinkItem[] = [
   { href: "/", label: "首页", icon: Home },
-  { href: "/updates", label: "更新记录", icon: FileText },
   { href: "/cases", label: "案例", icon: BriefcaseBusiness },
   { href: "/articles", label: "功能图解", icon: FileText },
   { href: "/ai-workflows", label: "AI 工作流", icon: Sparkles },
