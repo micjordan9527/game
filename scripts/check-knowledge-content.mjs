@@ -30,12 +30,16 @@ export async function checkKnowledgeContent(page, base, prefix, width) {
     assert.equal(await image.evaluate((node) => node.naturalWidth), material.width)
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, item.slug)
     if (index === 0 || item.slug === "backup-restore-verification") {
+      const trigger = visual.getByRole("button", { name: "查看大图" })
+      await trigger.evaluate((node) => node.scrollIntoView({ block: "center", behavior: "instant" }))
+      await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
       const top = await page.evaluate(() => scrollY)
-      await visual.getByRole("button", { name: "查看大图" }).click()
+      await trigger.click()
       const dialog = page.getByRole("dialog")
       await dialog.locator("img").evaluate((node) => node.decode())
       await page.keyboard.press("Escape")
       await dialog.waitFor({ state: "hidden" })
+      await page.waitForFunction(() => document.body.style.position !== "fixed")
       assert(Math.abs(await page.evaluate(() => scrollY) - top) < 5, "Article image close preserves position")
     }
     await page.goto(base + "/search?q=" + encodeURIComponent(item.title) + "&type=" + encodeURIComponent("文章"), { waitUntil: "networkidle" })

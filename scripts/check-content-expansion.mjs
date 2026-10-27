@@ -169,7 +169,8 @@ export async function checkContentExpansion(page, base, prefix, width) {
   assert.equal(await page.getByRole("navigation", { name: "业务主题导航" }).locator('a[href$="#scenario"]').count(), 6)
   assert.equal(await page.getByRole("region", { name: "最近更新", exact: true }).locator("time").count(), 3)
   const recentUpdates = page.getByRole("region", { name: "最近更新", exact: true })
-  assert((await recentUpdates.innerText()).includes("15 张主题配图"))
+  const imageCount = JSON.parse(fs.readFileSync("public/images/knowledge-20261026/manifest.json", "utf8")).length
+  assert((await recentUpdates.innerText()).includes(`${imageCount} 张主题配图`))
   await recentUpdates.locator(`a[href="${prefix}/updates#knowledge-content"]`).waitFor()
   await noOverflow(page, "Updated homepage")
   await settle(page)

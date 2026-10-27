@@ -5,8 +5,65 @@
   "timezone": "Asia/Shanghai",
   "plan": "docs/three-hour-content-20261026.md",
   "stages": [
-    { "id": "case-reading", "status": "implementation_complete", "owner": "root", "items": ["admin-optimization", "bm-optimization", "competitor-analysis", "white-label-official"] },
-    { "id": "new-topics", "status": "implementation_complete", "started_at": "2026-10-26T12:53:42Z", "completed_at": "2026-10-26T13:12:00Z", "owner": "automation", "items": ["export-masking-audit", "content-publication-versions", "game-catalog-availability", "transaction-limits-fees"], "validation": ["content:33 articles/9 templates/4 cases/70 images", "build:103 static routes", "integrity:96 exported pages"], "browser": "managed preview unavailable because preview launcher passed unsupported --host to Next.js; no browser pass claimed" },
-    { "id": "questions-and-final-validation", "status": "pending", "question_count": 6 }
-  ]
+    {
+      "id": "case-reading",
+      "status": "published",
+      "owner": "root",
+      "items": [
+        "admin-optimization",
+        "bm-optimization",
+        "competitor-analysis",
+        "white-label-official"
+      ]
+    },
+    {
+      "id": "new-topics",
+      "status": "published",
+      "started_at": "2026-10-26T12:53:42Z",
+      "completed_at": "2026-10-26T13:12:00Z",
+      "owner": "automation",
+      "items": [
+        "export-masking-audit",
+        "content-publication-versions",
+        "game-catalog-availability",
+        "transaction-limits-fees"
+      ],
+      "validation": [
+        "content:33 articles/9 templates/4 cases/70 images",
+        "build:103 static routes",
+        "integrity:96 exported pages"
+      ],
+      "browser": "managed preview unavailable because preview launcher passed unsupported --host to Next.js; no browser pass claimed"
+    },
+    {
+      "id": "questions-and-final-validation",
+      "status": "implementation_complete",
+      "question_count": 6,
+      "owner": "root",
+      "validation": {
+        "status": "passed",
+        "started_at": "2026-10-27T01:34:16.005Z",
+        "scopes": [
+          "content",
+          "production-build",
+          "export-integrity",
+          "full-browser-regression"
+        ],
+        "viewports": [
+          1440,
+          390
+        ],
+        "pages": 96
+      }
+    }
+  ],
+  "continued_by_user_at": "2026-10-27",
+  "continuation_authorization": "User requested continuation after the original cutoff; finish remaining work in the current conversation. Do not resume the expired schedule.",
+  "prior_delivery": {
+    "version": 18,
+    "source": "7f2f88b2541bf5905d566e39c689886751e153f5",
+    "publishedAt": "2026-10-26T13:14:16.393961Z",
+    "github_sync": "verified",
+    "github_commit": "95a57d621a8526e477799d5253f4c3d45c751a5e"
+  }
 }

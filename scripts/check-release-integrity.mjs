@@ -45,8 +45,12 @@ assert.deepEqual([...groupedSlugs].sort(), contentUpdates.map((item) => item.slu
 assert.equal(new Set(groupedSlugs).size, groupedSlugs.length)
 assert(releaseNotes.current.version > releaseNotes.history[0].version)
 for (const release of releaseNotes.history) {
-  assert(/^[0-9a-f]{40}$/.test(release.githubCommit))
+  assert(release.githubCommit === null || /^[0-9a-f]{40}$/.test(release.githubCommit))
   assert(Number.isFinite(Date.parse(release.publishedAt)))
+}
+for (const release of [releaseNotes.current, ...releaseNotes.history]) {
+  const ids = [...release.articleSlugs, ...release.changes.map((item) => item.id)]
+  assert.equal(new Set(ids).size, ids.length, `v${release.version}: duplicate release rows`)
 }
 for (const change of [...releaseNotes.current.changes, ...releaseNotes.history.flatMap((release) => release.changes)]) {
   const target = new URL(change.href, origin)
@@ -70,6 +74,19 @@ const javascript = ts.transpileModule(moduleSource, { compilerOptions: { module:
 const data = await import("data:text/javascript;base64," + Buffer.from(javascript).toString("base64"))
 const demoJavascript = ts.transpileModule(fs.readFileSync("src/data/demonstrationEntries.ts", "utf8"), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
 const demos = await import("data:text/javascript;base64," + Buffer.from(demoJavascript).toString("base64"))
+const questionJavascript = ts.transpileModule(fs.readFileSync("src/data/businessQuestions.ts", "utf8"), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+const { businessQuestions } = await import("data:text/javascript;base64," + Buffer.from(questionJavascript).toString("base64"))
+assert.equal(businessQuestions.length, 6)
+assert.equal(new Set(businessQuestions.map((item) => item.id)).size, 6)
+for (const item of businessQuestions) {
+  assert.equal(item.steps.length, 3)
+  for (const link of [item.demo, item.article]) {
+    const target = new URL(link.href, origin)
+    const file = resolveFile(prefix + target.pathname)
+    assert(file, link.href)
+    if (target.hash) assert(fs.readFileSync(file, "utf8").includes(`id="${decodeURIComponent(target.hash.slice(1))}"`), link.href)
+  }
+}
 assert.equal(demos.demonstrationEntries.length, 10)
 assert.equal(new Set(demos.demonstrationEntries.map((item) => item.title)).size, 10)
 for (const item of demos.demonstrationEntries) {

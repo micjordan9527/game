@@ -365,10 +365,39 @@
     "prompt": "Create a clean landscape technical infographic in Simplified Chinese. Center 游戏目录 with four separated states: 前台可见, 厂商维护, 账号受限, 区域／币种不支持. Add diagnostic strip 游戏 ID → 条件校验 → 原因码 → 处理入口 and warning 登录失败 ≠ 游戏下架. Neutral knowledge-base style; no game artwork, logos, screenshots or marketing.",
     "materialType": "GPT 生成示意图",
     "generatedAt": "2026-10-26",
-    "verifiedLabels": ["游戏目录", "前台可见", "厂商维护", "账号受限", "区域 / 币种不支持", "游戏 ID", "条件校验", "原因码", "处理入口", "登录失败 ≠ 游戏下架"],
-    "caveats": ["登录失败不能单独证明游戏已下架", "赛事暂停与游戏目录状态不是同一概念"],
+    "verifiedLabels": [
+      "游戏目录",
+      "前台可见",
+      "厂商维护",
+      "账号受限",
+      "区域 / 币种不支持",
+      "游戏 ID",
+      "条件校验",
+      "原因码",
+      "处理入口",
+      "登录失败 ≠ 游戏下架"
+    ],
+    "caveats": [
+      "登录失败不能单独证明游戏已下架",
+      "赛事暂停与游戏目录状态不是同一概念"
+    ],
     "finalPath": "/images/knowledge-20261026/game-catalog-availability.png",
-    "description": "游戏目录和可用状态的分层诊断；非真实业务截图"
+    "description": "游戏目录和可用状态的分层诊断；非真实业务截图",
+    "revisions": [
+      {
+        "generatedAt": "2026-10-27",
+        "originalPath": "/workspace/generated_images/exec-1db25e90-b07d-44db-b887-02f3cec18add.png",
+        "prompt": "只修正这张知识库图的一个错误：左侧绿色“前台可见”下方正文改成“仅说明入口可见 / 能否进入需另查条件”。不能写可正常游玩。保留其他模块、箭头、文字和风格，清晰中文。",
+        "width": 1536,
+        "height": 1024,
+        "verifiedLabels": [
+          "仅说明入口可见",
+          "能否进入需另查条件",
+          "登录失败 ≠ 游戏下架"
+        ],
+        "reason": "修正目录可见被误写为可正常游玩的表述。"
+      }
+    ]
   },
   {
     "articleSlug": "transaction-limits-fees",

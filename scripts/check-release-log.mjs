@@ -1,5 +1,6 @@
 import assert from "node:assert/strict"
 import fs from "node:fs"
+import { checkBusinessQuestions } from "./check-business-questions.mjs"
 
 export async function checkReleaseLog(page, base, prefix, width) {
   const releases = JSON.parse(fs.readFileSync("src/data/releaseHistory.json", "utf8"))
@@ -81,6 +82,8 @@ export async function checkReleaseLog(page, base, prefix, width) {
   const directory = page.getByRole("region", { name: "已有功能演示", exact: true })
   assert.equal(await directory.locator("[data-demo-entry]").count(), 10)
   assert.equal(await directory.getByRole("link").count(), 10)
+  await checkBusinessQuestions(page, base, prefix, width)
+  await page.goto(base + "/updates/demonstrations", { waitUntil: "networkidle" })
   const groupNav = page.getByRole("navigation", { name: "演示场景定位", exact: true })
   assert.equal(await groupNav.getByRole("link").count(), 3)
   for (const [group, count] of [["business-process", 4], ["interface-design", 4], ["browse-search", 2]]) {

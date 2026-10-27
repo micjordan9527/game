@@ -150,7 +150,7 @@ export default function UpdatesPage() {
                     </ul>
                     <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-line pt-4">
                       <CopyTemplateButton content={absoluteUrl(`/updates#v${release.version}`)} label={`复制 v${release.version} 链接`} />
-                      <a href={`https://github.com/micjordan9527/game/commit/${release.githubCommit}`} className="inline-flex items-center gap-2 text-xs font-semibold text-brand-700">查看 v{release.version} 源码提交 <ExternalLink className="h-3 w-3" aria-hidden="true" /></a>
+                      {release.githubCommit ? <a href={`https://github.com/micjordan9527/game/commit/${release.githubCommit}`} className="inline-flex items-center gap-2 text-xs font-semibold text-brand-700">查看 v{release.version} 源码提交 <ExternalLink className="h-3 w-3" aria-hidden="true" /></a> : <span className="text-xs text-muted">GitHub 同步未完成</span>}
                     </div>
                   </div>
                 </details>

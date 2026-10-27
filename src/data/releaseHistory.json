@@ -1,55 +1,104 @@
 {
   "current": {
-    "version": 18,
-    "date": "2026-10-26",
-    "title": "四篇业务控制专题与示意图",
-    "summary": "补充数据导出、内容发布、游戏可用状态及交易限额说明，区分实际案例、虚构演算与 GPT 示意图。",
-    "articleSlugs": [
-      "export-masking-audit",
-      "content-publication-versions",
-      "game-catalog-availability",
-      "transaction-limits-fees"
-    ],
+    "version": 19,
+    "date": "2026-10-27",
+    "title": "六个业务问题的排查路径与演示入口",
+    "summary": "按具体问题查看判断顺序、记录证据和处理边界，直达演示与正文；修正图解表述并保留图片阅读位置。",
+    "articleSlugs": [],
     "changes": [
       {
-        "id": "export-masking-audit",
-        "title": "数据导出、脱敏与下载审计",
-        "description": "分开查看、导出与下载权限，记录筛选快照、脱敏版本、文件有效期及下载审计。",
-        "location": "文章 · 数据与权限",
-        "href": "/articles/export-masking-audit",
-        "linkLabel": "打开专题"
+        "id": "question-deposit-balance",
+        "title": "充值成功但余额未变化",
+        "description": "对照平台订单、通道结果和有效流水，区分缺账、重复通知与未知结果。",
+        "location": "功能演示目录 · 按问题找入口",
+        "href": "/updates/demonstrations#question-deposit-balance",
+        "linkLabel": "查看问题与入口"
       },
       {
-        "id": "content-publication-versions",
-        "title": "公告、帮助内容与发布版本",
-        "description": "区分草稿、审核、计划发布时间、实际生效版本、更正记录及用户已读边界。",
-        "location": "文章 · 内容与版本",
-        "href": "/articles/content-publication-versions",
-        "linkLabel": "打开专题"
+        "id": "question-withdrawal-timeout",
+        "title": "提现超时与原请求查询",
+        "description": "区分未知和明确失败，说明冻结保持、授权释放与避免重复付款。",
+        "location": "功能演示目录 · 按问题找入口",
+        "href": "/updates/demonstrations#question-withdrawal-timeout",
+        "linkLabel": "查看问题与入口"
       },
       {
-        "id": "game-catalog-availability",
-        "title": "游戏目录与可用状态",
-        "description": "分层说明目录可见、厂商维护、账号限制、区域／币种条件和登录原因码。",
-        "location": "文章 · 游戏与接口",
+        "id": "question-account-relogin",
+        "title": "账号恢复与重新登录",
+        "description": "分别检查账号、会话、资料和资金状态，避免把恢复账号当作所有申请已批准。",
+        "location": "功能演示目录 · 按问题找入口",
+        "href": "/updates/demonstrations#question-account-relogin",
+        "linkLabel": "查看问题与入口"
+      },
+      {
+        "id": "question-agent-old-settlement",
+        "title": "归属变化与旧结算批次",
+        "description": "按归属和规则快照查看原批次，历史更正保留关联调整。",
+        "location": "功能演示目录 · 按问题找入口",
+        "href": "/updates/demonstrations#question-agent-old-settlement",
+        "linkLabel": "查看问题与入口"
+      },
+      {
+        "id": "question-profile-states",
+        "title": "个人中心空结果、失败和受限",
+        "description": "对照U8原型的四个分组、五种状态，说明原因与对应下一步。",
+        "location": "功能演示目录 · 按问题找入口",
+        "href": "/updates/demonstrations#question-profile-states",
+        "linkLabel": "查看问题与入口"
+      },
+      {
+        "id": "question-official-form-delivery",
+        "title": "咨询表单反馈与实际送达",
+        "description": "区分界面反馈、服务端受理和渠道送达；本地案例不发送数据。",
+        "location": "功能演示目录 · 按问题找入口",
+        "href": "/updates/demonstrations#question-official-form-delivery",
+        "linkLabel": "查看问题与入口"
+      },
+      {
+        "id": "availability-image-correction",
+        "title": "游戏状态图的可见与可用边界",
+        "description": "修正前台可见卡片，明确它只说明入口可见，能否进入仍需核对其他条件。",
+        "location": "游戏目录与可用状态 · 主题信息图",
         "href": "/articles/game-catalog-availability",
-        "linkLabel": "打开专题"
+        "linkLabel": "查看修正后的图解"
       },
       {
-        "id": "transaction-limits-fees",
-        "title": "交易限额、费用与金额校验",
-        "description": "说明单笔／周期／剩余额度、原币精度、手续费、到账金额与未知结果处理。",
-        "location": "文章 · 交易与账务",
-        "href": "/articles/transaction-limits-fees",
-        "linkLabel": "打开专题"
+        "id": "article-image-reading-position",
+        "title": "文章与AI工作流大图关闭后保留位置",
+        "description": "查看大图时固定页面，关闭后恢复原阅读位置和打开按钮焦点，切换图片不重新锁定页面。",
+        "location": "文章主题信息图与AI工作流图片浏览",
+        "href": "/articles/backup-restore-verification",
+        "linkLabel": "查看图解与大图浏览"
+      },
+      {
+        "id": "content-release-counts",
+        "title": "专题条目与配图数量",
+        "description": "首页列出19张主题配图；v18按四个专题逐项给出正文、配图和相关入口，合并重复条目。",
+        "location": "首页最近更新与v18版本记录",
+        "href": "/updates#v18",
+        "linkLabel": "查看四篇专题记录"
       }
     ]
   },
   "history": [
     {
+      "version": 18,
+      "title": "四篇业务控制专题与示意图",
+      "summary": "补充数据导出、内容发布、游戏可用状态及交易限额说明，区分实际案例、虚构演算与 GPT 示意图。",
+      "articleSlugs": [
+        "export-masking-audit",
+        "content-publication-versions",
+        "game-catalog-availability",
+        "transaction-limits-fees"
+      ],
+      "changes": [],
+      "publishedAt": "2026-10-26T13:14:16.393961Z",
+      "githubCommit": "95a57d621a8526e477799d5253f4c3d45c751a5e"
+    },
+    {
       "version": 17,
       "title": "四个案例的界面阅读说明",
-      "publishedAt": "2026-10-26T12:12:08.319376Z",
+      "publishedAt": "2026-10-26T12:09:46.946236Z",
       "githubCommit": "f7f4e41f7f8fb422af4e9803e8d8dd00ee8efdc5",
       "articleSlugs": [],
       "changes": [

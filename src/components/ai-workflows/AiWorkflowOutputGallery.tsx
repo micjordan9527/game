@@ -12,8 +12,11 @@ export function AiWorkflowOutputGallery({ outputs, label = "输出" }: { outputs
   const [isPinned, setIsPinned] = useState(false)
   const [pinnedStyle, setPinnedStyle] = useState({ left: 0, width: 0 })
   const galleryRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
   const selectedOutput = outputs[selectedIndex] ?? outputs[0]
   const activeOutput = lightboxIndex === null ? null : (outputs[lightboxIndex] ?? null)
+  const isOpen = activeOutput !== null
   const canNavigate = outputs.length > 1
   const topOffsetPx = 64
   const controlsHeight = 72
@@ -61,23 +64,34 @@ export function AiWorkflowOutputGallery({ outputs, label = "输出" }: { outputs
   }, [outputs.length, topOffsetPx])
 
   useEffect(() => {
-    if (lightboxIndex === null) return
+    if (!isOpen) return
+    const top = window.scrollY
+    const body = document.body
+    const previous = { position: body.style.position, top: body.style.top, width: body.style.width, overflow: body.style.overflow, paddingRight: body.style.paddingRight }
+    const scrollbar = window.innerWidth - document.documentElement.clientWidth
+    body.style.position = "fixed"
+    body.style.top = `-${top}px`
+    body.style.width = "100%"
+    body.style.overflow = "hidden"
+    if (scrollbar) body.style.paddingRight = `${scrollbar}px`
+    closeRef.current?.focus({ preventScroll: true })
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setLightboxIndex(null)
       if (!canNavigate) return
-      if (event.key === "ArrowLeft") showPrevious()
-      if (event.key === "ArrowRight") showNext()
+      if (event.key === "ArrowLeft") { event.preventDefault(); showPrevious() }
+      if (event.key === "ArrowRight") { event.preventDefault(); showNext() }
     }
 
-    document.body.style.overflow = "hidden"
     window.addEventListener("keydown", handleKeyDown)
 
     return () => {
-      document.body.style.overflow = ""
+      Object.assign(body.style, previous)
+      window.scrollTo({ top, behavior: "instant" })
+      triggerRef.current?.focus({ preventScroll: true })
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [canNavigate, lightboxIndex, outputs.length])
+  }, [canNavigate, isOpen])
 
   if (!selectedOutput) {
     return (
@@ -147,7 +161,7 @@ export function AiWorkflowOutputGallery({ outputs, label = "输出" }: { outputs
         <button
           type="button"
           className="group relative block w-full cursor-zoom-in bg-paper p-3 text-left"
-          onClick={() => setLightboxIndex(selectedIndex)}
+          onClick={(event) => { triggerRef.current = event.currentTarget; setLightboxIndex(selectedIndex) }}
         >
           <img
             src={assetPath(selectedOutput.image)}
@@ -237,6 +251,7 @@ export function AiWorkflowOutputGallery({ outputs, label = "输出" }: { outputs
                   </>
                 ) : null}
                 <button
+                  ref={closeRef}
                   className="flex h-9 w-9 items-center justify-center rounded-md border border-line bg-white text-muted hover:bg-paper hover:text-ink"
                   onClick={() => setLightboxIndex(null)}
                   type="button"
