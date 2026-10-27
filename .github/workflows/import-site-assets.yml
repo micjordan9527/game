@@ -20,5 +20,5 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
-      - name: Import and verify only the declared public assets
+      - name: Restore only the declared assets and verify delivered source hashes
         run: python3 scripts/import-site-assets.py

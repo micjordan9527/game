@@ -6,7 +6,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
-import urllib.request
+import base64
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = "https://baowang-knowledge.aurora-5448.chatgpt.site"
@@ -27,10 +27,15 @@ for item in manifest["files"]:
     if verify_only:
         data = target.read_bytes()
     else:
-        url = ORIGIN + "/" + path.removeprefix("public/")
-        with urllib.request.urlopen(url, timeout=45) as response:
-            assert response.url == url and response.status == 200
-            data = response.read(10 * 1024 * 1024 + 1)
+        chunks = item["chunks"]
+        assert 0 < len(chunks) <= 100
+        parts = []
+        for chunk in chunks:
+            assert re.fullmatch(r"\.openai/asset-chunks/[a-z0-9.-]+\.b64", chunk)
+            chunk_path = ROOT / chunk
+            assert not chunk_path.is_symlink() and chunk_path.parent.resolve() == ROOT / ".openai/asset-chunks"
+            parts.append(base64.b64decode(chunk_path.read_bytes(), validate=True))
+        data = b"".join(parts)
     assert len(data) <= 10 * 1024 * 1024 and data.startswith(b"\x89PNG\r\n\x1a\n")
     actual = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
     assert actual == item["git_blob_sha"], path + ": asset does not match delivered source"
@@ -40,7 +45,10 @@ for item in manifest["files"]:
     paths.append(path)
     print(path + ": verified " + actual)
 if not verify_only:
-    subprocess.run(["git", "add", "--", *paths], cwd=ROOT, check=True)
+    chunk_paths = [chunk for item in manifest["files"] for chunk in item["chunks"]]
+    for path in chunk_paths:
+        (ROOT / path).unlink()
+    subprocess.run(["git", "add", "-A", "--", *paths, *chunk_paths], cwd=ROOT, check=True)
     changed = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=ROOT).returncode
     if changed:
         subprocess.run(["git", "-c", "user.name=github-actions[bot]", "-c", "user.email=41898282+github-actions[bot]@users.noreply.github.com", "commit", "-m", "Import verified assets from published Site v" + str(manifest["sites_version"])], cwd=ROOT, check=True)
