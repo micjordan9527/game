@@ -1,5 +1,24 @@
 import type { FlowStep } from "@/components/common/FeatureFlow"
 export const articleFlows: Record<string, { title: string; steps: FlowStep[] }> = {
+  "admin-filter-list-states": {
+    title: "列表查询与返回的四个位置",
+    steps: [
+      { title: "编辑条件", text: "输入尚未应用，结果保留原条件标识。" },
+      { title: "提交查询", text: "区分加载、无匹配和失败，成功才替换结果。" },
+      { title: "打开详情", text: "保存条件、排序、页码与原记录位置。" },
+      { title: "返回列表", text: "恢复上下文，数据变化时说明回退位置。" },
+    ],
+  },
+  "form-validation-submit-feedback": {
+    title: "从填写到原申请结果",
+    steps: [
+      { title: "字段校验", text: "保留填写内容，指出错误字段与修改方式。" },
+      { title: "发送申请", text: "暂停重复操作，等待本次请求响应。" },
+      { title: "辨认结果", text: "分别表达已受理、未受理与未知结果。" },
+      { title: "核对原申请", text: "未知时先查原结果，受理不等于发布。" },
+    ],
+  },
+
   "member-agent-platform": {
     title: "三种角色怎样连接",
     steps: [

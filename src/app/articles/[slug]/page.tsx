@@ -1,3 +1,5 @@
+import { AdminListDemo } from "@/components/enrichment/AdminListDemo"
+import { FormFeedbackDemo } from "@/components/enrichment/FormFeedbackDemo"
 import { ScenarioExplorer } from "@/components/enrichment/ScenarioExplorer"
 import { ReconciliationCase } from "@/components/enrichment/ReconciliationCase"
 import { AccountRecoveryCase } from "@/components/enrichment/AccountRecoveryCase"
@@ -131,6 +133,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <FeatureFlow {...flow} caption="功能关系示意" />
         ) : null}
       </div>
+      {slug === "admin-filter-list-states" ? <AdminListDemo /> : null}
+      {slug === "form-validation-submit-feedback" ? <FormFeedbackDemo /> : null}
       {topicScenarios[slug] ? <ScenarioExplorer scenario={topicScenarios[slug]} /> : null}
       {slug === "wallet-payment-reconciliation" ? <ReconciliationCase /> : null}
       {slug === "member-account-states" ? <AccountRecoveryCase /> : null}

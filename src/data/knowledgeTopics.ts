@@ -41,7 +41,7 @@ export const knowledgeTopics: KnowledgeTopic[] = [
     slug: "admin",
     title: "后台与页面设计",
     description: "先拆模块与信息层级，再对照后台案例和 UI 设计系统。",
-    articles: ["admin-modules", "admin-information-hierarchy", "access-approval-audit", "requirements-release-acceptance", "multi-tenant-site-config"],
+    articles: ["admin-modules", "admin-information-hierarchy", "admin-filter-list-states", "form-validation-submit-feedback", "access-approval-audit", "requirements-release-acceptance", "multi-tenant-site-config"],
     cases: ["admin-optimization"],
     templates: ["data-report-spec"],
     workflows: ["ui-design-system"],

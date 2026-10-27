@@ -1,8 +1,11 @@
 import assert from "node:assert/strict"
 import fs from "node:fs"
+import ts from "typescript"
 import { checkBusinessQuestions } from "./check-business-questions.mjs"
 
 export async function checkReleaseLog(page, base, prefix, width) {
+  const demoJs = ts.transpileModule(fs.readFileSync("src/data/demonstrationEntries.ts", "utf8"), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+  const { demonstrationEntries, demonstrationGroups } = await import("data:text/javascript;base64," + Buffer.from(demoJs).toString("base64"))
   const releases = JSON.parse(fs.readFileSync("src/data/releaseHistory.json", "utf8"))
   const updateSource = fs.readFileSync("src/data/knowledgeContentUpdates.ts", "utf8")
   const updates = JSON.parse(updateSource.slice(updateSource.indexOf("= ") + 2))
@@ -80,13 +83,13 @@ export async function checkReleaseLog(page, base, prefix, width) {
   await page.locator("#demonstrations").getByRole("link").click()
   await page.getByRole("heading", { name: "功能演示目录", level: 1, exact: true }).waitFor()
   const directory = page.getByRole("region", { name: "已有功能演示", exact: true })
-  assert.equal(await directory.locator("[data-demo-entry]").count(), 10)
-  assert.equal(await directory.getByRole("link").count(), 10)
+  assert.equal(await directory.locator("[data-demo-entry]").count(), demonstrationEntries.length)
+  assert.equal(await directory.getByRole("link").count(), demonstrationEntries.length)
   await checkBusinessQuestions(page, base, prefix, width)
   await page.goto(base + "/updates/demonstrations", { waitUntil: "networkidle" })
   const groupNav = page.getByRole("navigation", { name: "演示场景定位", exact: true })
   assert.equal(await groupNav.getByRole("link").count(), 3)
-  for (const [group, count] of [["business-process", 4], ["interface-design", 4], ["browse-search", 2]]) {
+  for (const [group, count] of demonstrationGroups.map((item) => [item.id, demonstrationEntries.filter((entry) => entry.group === item.id).length])) {
     assert.equal(await page.locator(`#${group} [data-demo-entry]`).count(), count)
     await groupNav.locator(`a[href="#${group}"]`).click()
     assert.equal(new URL(page.url()).hash, "#" + group)
@@ -99,5 +102,5 @@ export async function checkReleaseLog(page, base, prefix, width) {
   await page.locator("#demonstrations-title").waitFor()
   await page.goto(base + "/search?q=" + encodeURIComponent("界面设计"), { waitUntil: "networkidle" })
   await page.locator(`main a[href="${prefix}/updates/demonstrations"]`).waitFor()
-  console.log(`PASS ${width}px: current/history link copy and fresh-tab sharing, version counts, collapsed history/keyboard, legacy links, article return and 10 demos in3 located groups`)
+  console.log(`PASS ${width}px: current/history link copy and fresh-tab sharing, version counts, collapsed history/keyboard, legacy links, article return and ${demonstrationEntries.length} demos in ${demonstrationGroups.length} located groups`)
 }

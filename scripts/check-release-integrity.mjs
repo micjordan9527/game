@@ -87,8 +87,8 @@ for (const item of businessQuestions) {
     if (target.hash) assert(fs.readFileSync(file, "utf8").includes(`id="${decodeURIComponent(target.hash.slice(1))}"`), link.href)
   }
 }
-assert.equal(demos.demonstrationEntries.length, 10)
-assert.equal(new Set(demos.demonstrationEntries.map((item) => item.title)).size, 10)
+assert.equal(demos.demonstrationEntries.length, 12)
+assert.equal(new Set(demos.demonstrationEntries.map((item) => item.title)).size, demos.demonstrationEntries.length)
 for (const item of demos.demonstrationEntries) {
   assert(demos.demonstrationGroups.some((group) => group.id === item.group))
   assert(item.location)

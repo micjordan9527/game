@@ -1,46 +1,79 @@
 {
   "current": {
-    "version": 21,
+    "version": 22,
     "date": "2026-10-27",
-    "title": "首页角色进入图解筛选",
-    "summary": "从首页按角色查看全部匹配图解，分享筛选链接，打开文章后返回原来的筛选与阅读位置。",
-    "articleSlugs": [],
+    "title": "后台列表与表单交互图解",
+    "summary": "新增两篇交互设计图解与可操作示例，说明查询状态、详情返回、字段错误与未知结果；可从角色筛选、主题和演示目录进入。",
+    "articleSlugs": [
+      "admin-filter-list-states",
+      "form-validation-submit-feedback"
+    ],
     "changes": [
       {
-        "id": "home-role-library",
-        "title": "首页角色直达对应图解",
-        "description": "运营、产品、交互、设计、开发均进入知识图解总库，并自动选中对应角色。",
-        "location": "首页业务主题 · 按角色看图解",
-        "href": "/",
-        "linkLabel": "查看首页角色入口"
+        "id": "interaction-role-articles",
+        "title": "交互与设计角色可找到两篇新图解",
+        "description": "两篇均归入设计体验，并关联后台主题、实际后台案例、界面状态与需求资料；复用现有角色和全文搜索。",
+        "location": "首页按角色看图解 · 设计体验主题",
+        "href": "/articles?role=interaction",
+        "linkLabel": "查看交互图解",
+        "related": {
+          "href": "/design",
+          "label": "查看设计体验主题"
+        }
       },
       {
-        "id": "library-filter-url",
-        "title": "筛选条件保存在网址中",
-        "description": "角色与标签可组合筛选，显示已选条件和匹配数量；支持刷新、分享及浏览器前进后退。",
-        "location": "知识图解 · 角色与标签筛选",
-        "href": "/articles?role=operation",
-        "linkLabel": "查看运营图解"
-      },
-      {
-        "id": "library-reading-return",
-        "title": "从文章返回原来的结果位置",
-        "description": "返回图解列表时保留角色、标签、标签展开状态和阅读位置；全部图解与重置可清除筛选。",
-        "location": "知识图解列表与文章往返",
-        "href": "/articles?role=product&tag=%E4%BC%9A%E5%91%98",
-        "linkLabel": "查看组合筛选"
-      },
-      {
-        "id": "role-collections-retained",
-        "title": "角色精选保留全部图解入口",
-        "description": "原有角色精选链接继续展示案例、文章与实用资料，并可进入同角色的全部图解。",
-        "location": "原有角色精选页",
-        "href": "/roles/design",
-        "linkLabel": "查看设计资料精选"
+        "id": "interface-demo-directory",
+        "title": "演示目录增加列表与表单入口",
+        "description": "界面设计组增加两个直接定位入口，共12项演示。新增文章采用可操作界面示意，不计入GPT配图数量。",
+        "location": "功能演示目录 · 界面设计",
+        "href": "/updates/demonstrations#interface-design",
+        "linkLabel": "查看界面设计演示"
       }
     ]
   },
   "history": [
+    {
+      "version": 21,
+      "title": "首页角色进入图解筛选",
+      "summary": "从首页按角色查看全部匹配图解，分享筛选链接，打开文章后返回原来的筛选与阅读位置。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "home-role-library",
+          "title": "首页角色直达对应图解",
+          "description": "运营、产品、交互、设计、开发均进入知识图解总库，并自动选中对应角色。",
+          "location": "首页业务主题 · 按角色看图解",
+          "href": "/",
+          "linkLabel": "查看首页角色入口"
+        },
+        {
+          "id": "library-filter-url",
+          "title": "筛选条件保存在网址中",
+          "description": "角色与标签可组合筛选，显示已选条件和匹配数量；支持刷新、分享及浏览器前进后退。",
+          "location": "知识图解 · 角色与标签筛选",
+          "href": "/articles?role=operation",
+          "linkLabel": "查看运营图解"
+        },
+        {
+          "id": "library-reading-return",
+          "title": "从文章返回原来的结果位置",
+          "description": "返回图解列表时保留角色、标签、标签展开状态和阅读位置；全部图解与重置可清除筛选。",
+          "location": "知识图解列表与文章往返",
+          "href": "/articles?role=product&tag=%E4%BC%9A%E5%91%98",
+          "linkLabel": "查看组合筛选"
+        },
+        {
+          "id": "role-collections-retained",
+          "title": "角色精选保留全部图解入口",
+          "description": "原有角色精选链接继续展示案例、文章与实用资料，并可进入同角色的全部图解。",
+          "location": "原有角色精选页",
+          "href": "/roles/design",
+          "linkLabel": "查看设计资料精选"
+        }
+      ],
+      "publishedAt": "2026-10-27T09:33:09.466801Z",
+      "githubCommit": "ad5b44264ad9053ab6c336c730ac56f5119ed057"
+    },
     {
       "version": 20,
       "title": "知识图解与主题目录",

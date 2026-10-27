@@ -5,6 +5,7 @@ import { ReleaseHashNavigation } from "@/components/updates/ReleaseHashNavigatio
 import { CopyTemplateButton } from "@/components/templates/CopyTemplateButton"
 import { articles } from "@/data/articles"
 import { knowledgeContentUpdates } from "@/data/knowledgeContentUpdates"
+import { demonstrationEntries } from "@/data/demonstrationEntries"
 import releases from "@/data/releaseHistory.json"
 import { absoluteUrl } from "@/lib/seo"
 
@@ -69,13 +70,14 @@ function contentFor(slugs: string[]) {
 }
 
 function contentChanges(items: ReturnType<typeof contentFor>): Change[] {
-  return items.map((item) => ({ id: item.slug, title: item.title, description: item.description, location: "文章正文 · " + decodeURIComponent(item.detailHref.split("#")[1]), href: item.detailHref, linkLabel: item.kind === "补充" ? "查看补充说明" : "查看专题重点", titleHref: item.href, related: { href: item.relatedHref, label: relatedLabels[item.relatedHref] ?? "相关说明" } }))
+  return items.map((item) => ({ id: item.slug, title: item.title, description: item.description, location: item.visualType === "界面演示" ? "知识图解 · " + (item.slug === "admin-filter-list-states" ? "后台列表演示" : "表单提交演示") : "文章正文 · " + decodeURIComponent(item.detailHref.split("#")[1]), href: item.detailHref, linkLabel: item.kind === "补充" ? "查看补充说明" : "查看专题重点", titleHref: item.href, related: { href: item.relatedHref, label: relatedLabels[item.relatedHref] ?? "相关说明" } }))
 }
 
 function contentCount(items: ReturnType<typeof contentFor>, pages: number) {
   const added = items.filter((item) => item.kind === "新增").length
   const enriched = items.length - added
-  return [added ? `新增文章 ${added} 篇` : "", enriched ? `补充文章 ${enriched} 篇` : "", items.length ? `GPT 配图 ${items.length} 张` : "", pages ? `页面变化 ${pages} 项` : ""].filter(Boolean).join(" · ")
+  const images = items.filter((item) => item.visualType !== "界面演示").length
+  return [added ? `新增文章 ${added} 篇` : "", enriched ? `补充文章 ${enriched} 篇` : "", images ? `GPT 配图 ${images} 张` : "", pages ? `页面变化 ${pages} 项` : ""].filter(Boolean).join(" · ")
 }
 
 export default function UpdatesPage() {
@@ -162,8 +164,8 @@ export default function UpdatesPage() {
 
       <section id="demonstrations" className="mt-8 scroll-mt-24 border-t border-line pt-6" aria-labelledby="demonstrations-title">
         <h2 id="demonstrations-title" className="text-lg font-semibold text-ink">功能演示目录</h2>
-        <p className="mt-2 text-sm leading-7 text-muted">钱包、账号、代理、BM、U8、官网与界面状态等 10 个已有演示。</p>
-        <Link href="/updates/demonstrations" className="mt-3 inline-block text-sm font-semibold text-brand-700">查看 10 个功能演示 →</Link>
+        <p className="mt-2 text-sm leading-7 text-muted">钱包、账号、代理、BM、U8、官网、列表与表单等 {demonstrationEntries.length} 个可操作或可对照的演示。</p>
+        <Link href="/updates/demonstrations" className="mt-3 inline-block text-sm font-semibold text-brand-700">查看 {demonstrationEntries.length} 个功能演示 →</Link>
       </section>
     </div>
   )

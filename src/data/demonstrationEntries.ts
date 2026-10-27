@@ -1,4 +1,7 @@
 export const demonstrationEntries = [
+  { group: "interface-design", location: "知识图解 · 后台筛选与列表状态", title: "后台筛选与列表", href: "/articles/admin-filter-list-states#list-demo", description: "编辑与应用条件、翻页、无匹配结果、查询失败与重试；从详情返回保留条件、排序、页码和位置。" },
+  { group: "interface-design", location: "知识图解 · 表单校验与提交反馈", title: "表单校验与提交", href: "/articles/form-validation-submit-feedback#form-demo", description: "空白与字段错误、提交中、明确未受理、未知结果及原申请查询；区分已受理与已发布。" },
+
   { group: "business-process", location: "钱包文章 · 对账联动案例", title: "钱包对账", href: "/articles/wallet-payment-reconciliation#reconciliation-case", description: "同一演示订单的订单列表、详情、通道、账务与差异；切换一致、缺流水、重复通知和未知结果。" },
   { group: "business-process", location: "钱包文章 · 提现异常案例", title: "提现异常", href: "/articles/wallet-payment-reconciliation#withdrawal-case", description: "按原业务号查看审核、处理中、未知、退回和完成；区分可用、冻结与已付款金额。" },
   { group: "business-process", location: "会员与账号文章 · 受限恢复案例", title: "账号受限与恢复", href: "/articles/member-account-states#account-recovery-case", description: "从查询到复核、补充资料和恢复，分别观察账号、会话、资料与资金状态。" },

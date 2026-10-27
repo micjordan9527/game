@@ -7,7 +7,8 @@ export const knowledgeContentUpdates = [
     "kind": "补充",
     "href": "/articles/member-agent-platform",
     "detailHref": "/articles/member-agent-platform#身份归属和资金是三条关系",
-    "relatedHref": "/articles/agent-system-design#agent-settlement-case"
+    "relatedHref": "/articles/agent-system-design#agent-settlement-case",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "operation-product-conversion-model",
@@ -16,7 +17,8 @@ export const knowledgeContentUpdates = [
     "kind": "补充",
     "href": "/articles/operation-product-conversion-model",
     "detailHref": "/articles/operation-product-conversion-model#把一个目标写成可以核对的需求",
-    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case"
+    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "first-deposit-retention-vip",
@@ -25,7 +27,8 @@ export const knowledgeContentUpdates = [
     "kind": "补充",
     "href": "/articles/first-deposit-retention-vip",
     "detailHref": "/articles/first-deposit-retention-vip#四类概念要分别写清规则口径",
-    "relatedHref": "/articles/campaign-risk-review#scenario"
+    "relatedHref": "/articles/campaign-risk-review#scenario",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "game-provider-api",
@@ -34,7 +37,8 @@ export const knowledgeContentUpdates = [
     "kind": "补充",
     "href": "/articles/game-provider-api",
     "detailHref": "/articles/game-provider-api#先确认钱包模式再分配接口责任",
-    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case"
+    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "bet-ticket-status",
@@ -43,7 +47,8 @@ export const knowledgeContentUpdates = [
     "kind": "补充",
     "href": "/articles/bet-ticket-status",
     "detailHref": "/articles/bet-ticket-status#业务状态与资金动作不要合并",
-    "relatedHref": "/articles/bet-ticket-status#scenario"
+    "relatedHref": "/articles/bet-ticket-status#scenario",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "admin-information-hierarchy",
@@ -52,7 +57,8 @@ export const knowledgeContentUpdates = [
     "kind": "补充",
     "href": "/articles/admin-information-hierarchy",
     "detailHref": "/articles/admin-information-hierarchy#同一条记录如何从列表走到审计",
-    "relatedHref": "/cases/admin-optimization#admin-role-tour"
+    "relatedHref": "/cases/admin-optimization#admin-role-tour",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "data-report-metrics",
@@ -61,7 +67,8 @@ export const knowledgeContentUpdates = [
     "kind": "补充",
     "href": "/articles/data-report-metrics",
     "detailHref": "/articles/data-report-metrics#一个指标需要一张口径卡",
-    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case"
+    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "access-approval-audit",
@@ -70,7 +77,8 @@ export const knowledgeContentUpdates = [
     "kind": "新增",
     "href": "/articles/access-approval-audit",
     "detailHref": "/articles/access-approval-audit#权限检查的四个维度",
-    "relatedHref": "/cases/admin-optimization#admin-role-tour"
+    "relatedHref": "/cases/admin-optimization#admin-role-tour",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "notification-support-tickets",
@@ -79,7 +87,8 @@ export const knowledgeContentUpdates = [
     "kind": "新增",
     "href": "/articles/notification-support-tickets",
     "detailHref": "/articles/notification-support-tickets#两套状态分别保存",
-    "relatedHref": "/articles/wallet-payment-reconciliation#withdrawal-case"
+    "relatedHref": "/articles/wallet-payment-reconciliation#withdrawal-case",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "api-idempotency-compensation",
@@ -88,7 +97,8 @@ export const knowledgeContentUpdates = [
     "kind": "新增",
     "href": "/articles/api-idempotency-compensation",
     "detailHref": "/articles/api-idempotency-compensation#业务键和请求号分开",
-    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case"
+    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "currency-timezone-reporting",
@@ -97,7 +107,8 @@ export const knowledgeContentUpdates = [
     "kind": "新增",
     "href": "/articles/currency-timezone-reporting",
     "detailHref": "/articles/currency-timezone-reporting#跨日演算与查询区间",
-    "relatedHref": "/articles/data-report-metrics"
+    "relatedHref": "/articles/data-report-metrics",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "multi-tenant-site-config",
@@ -106,7 +117,8 @@ export const knowledgeContentUpdates = [
     "kind": "新增",
     "href": "/articles/multi-tenant-site-config",
     "detailHref": "/articles/multi-tenant-site-config#三种范围分别保存",
-    "relatedHref": "/cases/white-label-official#official-responsive-comparison"
+    "relatedHref": "/cases/white-label-official#official-responsive-comparison",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "monitoring-incident-recovery",
@@ -115,7 +127,8 @@ export const knowledgeContentUpdates = [
     "kind": "新增",
     "href": "/articles/monitoring-incident-recovery",
     "detailHref": "/articles/monitoring-incident-recovery#从止损到恢复验证",
-    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case"
+    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "backup-restore-verification",
@@ -124,7 +137,8 @@ export const knowledgeContentUpdates = [
     "kind": "新增",
     "href": "/articles/backup-restore-verification",
     "detailHref": "/articles/backup-restore-verification#在隔离环境中实际恢复",
-    "relatedHref": "/articles/monitoring-incident-recovery"
+    "relatedHref": "/articles/monitoring-incident-recovery",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "requirements-release-acceptance",
@@ -133,7 +147,8 @@ export const knowledgeContentUpdates = [
     "kind": "新增",
     "href": "/articles/requirements-release-acceptance",
     "detailHref": "/articles/requirements-release-acceptance#验收矩阵",
-    "relatedHref": "/design/states"
+    "relatedHref": "/design/states",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "export-masking-audit",
@@ -142,7 +157,8 @@ export const knowledgeContentUpdates = [
     "kind": "新增",
     "href": "/articles/export-masking-audit",
     "detailHref": "/articles/export-masking-audit#三段权限分别判断",
-    "relatedHref": "/articles/access-approval-audit#权限检查的四个维度"
+    "relatedHref": "/articles/access-approval-audit#权限检查的四个维度",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "content-publication-versions",
@@ -151,7 +167,8 @@ export const knowledgeContentUpdates = [
     "kind": "新增",
     "href": "/articles/content-publication-versions",
     "detailHref": "/articles/content-publication-versions#内容对象需要哪些范围",
-    "relatedHref": "/cases/white-label-official#case-reading-guide"
+    "relatedHref": "/cases/white-label-official#case-reading-guide",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "game-catalog-availability",
@@ -160,7 +177,8 @@ export const knowledgeContentUpdates = [
     "kind": "新增",
     "href": "/articles/game-catalog-availability",
     "detailHref": "/articles/game-catalog-availability#把可见和可玩拆开",
-    "relatedHref": "/articles/game-provider-api#先确认钱包模式再分配接口责任"
+    "relatedHref": "/articles/game-provider-api#先确认钱包模式再分配接口责任",
+    "visualType": "GPT 配图"
   },
   {
     "slug": "transaction-limits-fees",
@@ -169,6 +187,27 @@ export const knowledgeContentUpdates = [
     "kind": "新增",
     "href": "/articles/transaction-limits-fees",
     "detailHref": "/articles/transaction-limits-fees#限额不是一个数字",
-    "relatedHref": "/articles/wallet-payment-reconciliation#withdrawal-case"
+    "relatedHref": "/articles/wallet-payment-reconciliation#withdrawal-case",
+    "visualType": "GPT 配图"
+  },
+  {
+    "slug": "admin-filter-list-states",
+    "title": "后台筛选与列表状态：从查询到详情返回",
+    "description": "用可操作的虚构工单列表区分输入条件与已应用条件，说明加载、无结果、失败、分页和详情返回。",
+    "kind": "新增",
+    "href": "/articles/admin-filter-list-states",
+    "detailHref": "/articles/admin-filter-list-states#list-demo",
+    "relatedHref": "/cases/admin-optimization#admin-role-tour",
+    "visualType": "界面演示"
+  },
+  {
+    "slug": "form-validation-submit-feedback",
+    "title": "表单校验与提交反馈：从字段错误到未知结果",
+    "description": "用公告申请演示字段错误、提交中、明确未受理、未知结果和原申请查询，区分前端校验与业务受理。",
+    "kind": "新增",
+    "href": "/articles/form-validation-submit-feedback",
+    "detailHref": "/articles/form-validation-submit-feedback#form-demo",
+    "relatedHref": "/design/states",
+    "visualType": "界面演示"
   }
 ]

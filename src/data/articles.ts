@@ -13,6 +13,53 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "admin-filter-list-states",
+    title: "后台筛选与列表状态：从查询到详情返回",
+    description: "用可操作的虚构工单列表区分输入条件与已应用条件，说明加载、无结果、失败、分页和详情返回。",
+    category: "design",
+    tags: [
+      "后台设计",
+      "筛选",
+      "列表",
+      "空结果",
+      "详情返回"
+    ],
+    audience: [
+      "交互",
+      "设计",
+      "产品",
+      "开发",
+      "运营",
+      "测试"
+    ],
+    difficulty: "进阶",
+    date: "2026-10-27",
+    updatedAt: "2026-10-27"
+  },
+  {
+    slug: "form-validation-submit-feedback",
+    title: "表单校验与提交反馈：从字段错误到未知结果",
+    description: "用公告申请演示字段错误、提交中、明确未受理、未知结果和原申请查询，区分前端校验与业务受理。",
+    category: "design",
+    tags: [
+      "交互设计",
+      "表单",
+      "字段校验",
+      "提交反馈",
+      "未知结果"
+    ],
+    audience: [
+      "交互",
+      "设计",
+      "产品",
+      "开发",
+      "测试"
+    ],
+    difficulty: "进阶",
+    date: "2026-10-27",
+    updatedAt: "2026-10-27"
+  },
+  {
     slug: "member-account-states",
     title: "会员与账号状态：从注册登录到受限恢复",
     description: "区分账号、验证、会话与权限状态，用状态表、虚构示例和检查表梳理资料变更与异常恢复。",

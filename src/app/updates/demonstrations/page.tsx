@@ -16,8 +16,8 @@ export default function DemonstrationsPage() {
     <div className="container-shell max-w-5xl py-8 md:py-10">
       <Link href="/updates#demonstrations" className="text-sm font-semibold text-brand-700">← 更新记录</Link>
       <h1 className="mt-5 text-3xl font-semibold text-ink">功能演示目录</h1>
-      <p className="mt-3 text-sm leading-7 text-muted">10 个已有功能的说明与入口。各次发布新增或调整的内容见更新记录。</p>
-      <a href="#business-process" className="mt-3 inline-block text-sm font-semibold text-brand-700">按场景查看 10 个演示 ↓</a>
+      <p className="mt-3 text-sm leading-7 text-muted">{demonstrationEntries.length} 个已有功能的说明与入口。各次发布新增或调整的内容见更新记录。</p>
+      <a href="#business-process" className="mt-3 inline-block text-sm font-semibold text-brand-700">按场景查看 {demonstrationEntries.length} 个演示 ↓</a>
       <section id="business-questions" className="mt-7 scroll-mt-24" aria-labelledby="business-questions-title">
         <h2 id="business-questions-title" className="text-xl font-semibold text-ink">按问题找入口</h2>
         <p className="mt-2 text-sm leading-7 text-muted">先辨认当前问题，再对照同一记录的状态与证据。每项提供演示和正文说明。</p>
