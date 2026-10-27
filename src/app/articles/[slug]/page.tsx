@@ -1,3 +1,5 @@
+import { BulkActionDemo } from "@/components/enrichment/BulkActionDemo"
+import { ExportTaskDemo } from "@/components/enrichment/ExportTaskDemo"
 import { AdminListDemo } from "@/components/enrichment/AdminListDemo"
 import { FormFeedbackDemo } from "@/components/enrichment/FormFeedbackDemo"
 import { ScenarioExplorer } from "@/components/enrichment/ScenarioExplorer"
@@ -133,6 +135,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <FeatureFlow {...flow} caption="功能关系示意" />
         ) : null}
       </div>
+      {slug === "admin-bulk-actions" ? <BulkActionDemo /> : null}
+      {slug === "export-masking-audit" ? <ExportTaskDemo /> : null}
       {slug === "admin-filter-list-states" ? <AdminListDemo /> : null}
       {slug === "form-validation-submit-feedback" ? <FormFeedbackDemo /> : null}
       {topicScenarios[slug] ? <ScenarioExplorer scenario={topicScenarios[slug]} /> : null}

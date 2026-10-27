@@ -1,4 +1,4 @@
-// Delivered content entries; every destination exists in this source version.
+// Delivered content entries; slug identifies a release entry; articleSlug records repeat updates.
 export const knowledgeContentUpdates = [
   {
     "slug": "member-agent-platform",
@@ -239,5 +239,28 @@ export const knowledgeContentUpdates = [
     "detailHref": "/articles/wallet-center-vs-seamless#先把名称说清楚",
     "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case",
     "visualType": "GPT 配图"
+  },
+  {
+    "slug": "admin-bulk-actions",
+    "title": "后台批量操作：范围确认与部分失败",
+    "description": "新增范围选择、影响确认、执行前状态校验与单条结果说明，提供八条虚构工单的可操作演示。",
+    "kind": "新增",
+    "href": "/articles/admin-bulk-actions",
+    "detailHref": "/articles/admin-bulk-actions#bulk-action-demo",
+    "relatedHref": "/cases/admin-optimization#admin-role-tour",
+    "visualType": "界面演示",
+    "location": "知识图解 · 批量关闭工单演示"
+  },
+  {
+    "slug": "export-masking-audit-v24",
+    "articleSlug": "export-masking-audit",
+    "title": "数据导出、脱敏与下载审计",
+    "description": "补充任务全过程演示：筛选快照、排队生成、失败与取消、权限和站点变化、链接过期及脱敏CSV下载。",
+    "kind": "补充",
+    "href": "/articles/export-masking-audit",
+    "detailHref": "/articles/export-masking-audit#export-task-demo",
+    "relatedHref": "/articles/admin-bulk-actions#bulk-action-demo",
+    "visualType": "界面演示",
+    "location": "知识图解 · 导出任务演示"
   }
 ]

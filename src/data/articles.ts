@@ -13,6 +13,18 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "admin-bulk-actions",
+    title: "后台批量操作：范围确认与部分失败",
+    description: "用虚构工单演示当前页与全部匹配记录、执行前确认、状态变化、部分失败和仅处理失败项，说明批次与单条结果的区别。",
+    category: "design",
+    tags: ["后台设计", "批量操作", "范围确认", "部分失败", "审计"],
+    audience: ["交互", "设计", "产品", "开发", "运营", "测试"],
+    difficulty: "进阶",
+    date: "2026-10-27",
+    updatedAt: "2026-10-27",
+  },
+
+  {
     slug: "admin-filter-list-states",
     title: "后台筛选与列表状态：从查询到详情返回",
     description: "用可操作的虚构工单列表区分输入条件与已应用条件，说明加载、无结果、失败、分页和详情返回。",
@@ -470,13 +482,13 @@ export const articles: Article[] = [
   {
     slug: "export-masking-audit",
     title: "数据导出、脱敏与下载审计",
-    description: "区分页面查看、导出任务和文件下载权限，用筛选快照、脱敏版本、过期链接与审计字段说明数据离开页面后的控制边界。",
+    description: "用可操作任务演示筛选快照、排队生成、失败与取消、脱敏文件下载、链接过期和权限变化，区分查看、创建与下载。",
     category: "devops-risk",
     tags: ["数据导出", "脱敏", "下载", "审计", "权限"],
-    audience: ["产品", "技术", "运营", "测试", "风控"],
+    audience: ["产品", "技术", "运营", "测试", "风控", "交互", "设计"],
     difficulty: "进阶",
     date: "2026-10-26",
-    updatedAt: "2026-10-26",
+    updatedAt: "2026-10-27",
   },
   {
     slug: "content-publication-versions",

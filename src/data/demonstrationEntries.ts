@@ -1,4 +1,6 @@
 export const demonstrationEntries = [
+  { group: "interface-design", location: "知识图解 · 后台批量操作", title: "后台批量操作", href: "/articles/admin-bulk-actions#bulk-action-demo", description: "区分当前页和全部匹配，确认对象范围，模拟状态变化、部分失败、跳过和仅选择失败项。" },
+  { group: "business-process", location: "知识图解 · 数据导出、脱敏与下载审计", title: "导出任务全过程", href: "/articles/export-masking-audit#export-task-demo", description: "固定筛选快照，观察排队、生成、失败、取消、下载、过期与权限变化，可下载虚构脱敏CSV。" },
   { group: "interface-design", location: "知识图解 · 后台筛选与列表状态", title: "后台筛选与列表", href: "/articles/admin-filter-list-states#list-demo", description: "编辑与应用条件、翻页、无匹配结果、查询失败与重试；从详情返回保留条件、排序、页码和位置。" },
   { group: "interface-design", location: "知识图解 · 表单校验与提交反馈", title: "表单校验与提交", href: "/articles/form-validation-submit-feedback#form-demo", description: "空白与字段错误、提交中、明确未受理、未知结果及原申请查询；区分已受理与已发布。" },
 

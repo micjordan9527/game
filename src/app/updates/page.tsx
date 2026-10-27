@@ -70,7 +70,7 @@ function contentFor(slugs: string[]) {
 }
 
 function contentChanges(items: ReturnType<typeof contentFor>): Change[] {
-  return items.map((item) => ({ id: item.slug, title: item.title, description: item.description, location: item.visualType === "界面演示" ? "知识图解 · " + (item.slug === "admin-filter-list-states" ? "后台列表演示" : "表单提交演示") : "文章正文 · " + decodeURIComponent(item.detailHref.split("#")[1]), href: item.detailHref, linkLabel: item.kind === "补充" ? "查看补充说明" : "查看专题重点", titleHref: item.href, related: { href: item.relatedHref, label: relatedLabels[item.relatedHref] ?? "相关说明" } }))
+  return items.map((item) => ({ id: item.slug, title: item.title, description: item.description, location: item.location ?? (item.visualType === "界面演示" ? "知识图解 · " + (item.slug === "admin-filter-list-states" ? "后台列表演示" : "表单提交演示") : "文章正文 · " + decodeURIComponent(item.detailHref.split("#")[1])), href: item.detailHref, linkLabel: item.kind === "补充" ? "查看补充说明" : "查看专题重点", titleHref: item.href, related: { href: item.relatedHref, label: relatedLabels[item.relatedHref] ?? "相关说明" } }))
 }
 
 function contentCount(items: ReturnType<typeof contentFor>, pages: number) {

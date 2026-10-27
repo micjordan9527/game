@@ -1,5 +1,6 @@
 import type { FlowStep } from "@/components/common/FeatureFlow"
 export const articleFlows: Record<string, { title: string; steps: FlowStep[] }> = {
+  "admin-bulk-actions": { title: "从选择范围到单条结果", steps: [{ title: "明确范围", text: "当前页、全部匹配或失败项分别说明。" }, { title: "确认影响", text: "固定对象，展示条件、数量与动作后果。" }, { title: "逐条校验", text: "执行时重查状态和权限，不重做已完成对象。" }, { title: "分别反馈", text: "成功、失败、跳过与未知分别处理。" }] },
   "admin-filter-list-states": {
     title: "列表查询与返回的四个位置",
     steps: [
