@@ -209,5 +209,35 @@ export const knowledgeContentUpdates = [
     "detailHref": "/articles/form-validation-submit-feedback#form-demo",
     "relatedHref": "/design/states",
     "visualType": "界面演示"
+  },
+  {
+    "slug": "what-is-white-label",
+    "title": "什么是包网？",
+    "description": "从模块、交付物、服务边界与验收证据理解包网，区分前台页面、平台系统和外部服务。",
+    "kind": "补充",
+    "href": "/articles/what-is-white-label",
+    "detailHref": "/articles/what-is-white-label#示例分工与责任边界",
+    "relatedHref": "/cases/white-label-official#official-responsive-comparison",
+    "visualType": "GPT 配图"
+  },
+  {
+    "slug": "how-gambling-platform-works",
+    "title": "博彩平台是怎么运转的？",
+    "description": "把前台操作对应到账号、订单、钱包、外部服务与后台记录，说明责任交接和异常排查顺序。",
+    "kind": "补充",
+    "href": "/articles/how-gambling-platform-works",
+    "detailHref": "/articles/how-gambling-platform-works#前台动作对应哪些后台记录",
+    "relatedHref": "/cases/admin-optimization#admin-role-tour",
+    "visualType": "正文与图表"
+  },
+  {
+    "slug": "wallet-center-vs-seamless",
+    "title": "中心钱包和免转钱包有什么区别？",
+    "description": "区分平台主钱包、页面免转体验与Transfer／Seamless接入，结合接口职责、虚构金额与异常记录核对两种模型。",
+    "kind": "补充",
+    "href": "/articles/wallet-center-vs-seamless",
+    "detailHref": "/articles/wallet-center-vs-seamless#先把名称说清楚",
+    "relatedHref": "/articles/wallet-payment-reconciliation#reconciliation-case",
+    "visualType": "GPT 配图"
   }
 ]

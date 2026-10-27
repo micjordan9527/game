@@ -5,7 +5,7 @@ import { checkReleaseLog } from "./check-release-log.mjs"
 export async function checkKnowledgeContent(page, base, prefix, width) {
   const manifest = JSON.parse(fs.readFileSync("public/images/knowledge-20261026/manifest.json", "utf8"))
   const source = fs.readFileSync("src/data/knowledgeContentUpdates.ts", "utf8")
-  const updates = JSON.parse(source.slice(source.indexOf("= ") + 2)).filter((item) => item.visualType !== "界面演示")
+  const updates = JSON.parse(source.slice(source.indexOf("= ") + 2)).filter((item) => manifest.some((image) => image.articleSlug === item.slug))
   assert.equal(updates.length, manifest.length)
   assert.equal(new Set(manifest.map((item) => item.articleSlug)).size, manifest.length)
   await page.locator("body > header").getByRole("link", { name: "更新记录", exact: true }).click()

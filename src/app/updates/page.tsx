@@ -76,7 +76,7 @@ function contentChanges(items: ReturnType<typeof contentFor>): Change[] {
 function contentCount(items: ReturnType<typeof contentFor>, pages: number) {
   const added = items.filter((item) => item.kind === "新增").length
   const enriched = items.length - added
-  const images = items.filter((item) => item.visualType !== "界面演示").length
+  const images = items.filter((item) => item.visualType === "GPT 配图").length
   return [added ? `新增文章 ${added} 篇` : "", enriched ? `补充文章 ${enriched} 篇` : "", images ? `GPT 配图 ${images} 张` : "", pages ? `页面变化 ${pages} 项` : ""].filter(Boolean).join(" · ")
 }
 

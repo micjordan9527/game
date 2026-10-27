@@ -1,0 +1,26 @@
+[
+  {
+    "articleSlug": "what-is-white-label",
+    "path": "/images/platform-wallet-20261027/platform-modules.png",
+    "width": 1024,
+    "height": 1536,
+    "source": "GPT Image",
+    "materialType": "GPT 生成示意图",
+    "generatedAt": "2026-10-27",
+    "description": "前台、平台系统、外部服务及记录核对的示例关系。",
+    "verification": "中文标签、方向与说明边界已目视核对；金额与业务规则以正文为准。",
+    "sha256": "85c4576cb6a2d32c9c0aaab8527c15e976d2fcb778b3f3ffbf74050aa071f059"
+  },
+  {
+    "articleSlug": "wallet-center-vs-seamless",
+    "path": "/images/platform-wallet-20261027/wallet-integration.png",
+    "width": 1024,
+    "height": 1536,
+    "source": "GPT Image",
+    "materialType": "GPT 生成示意图",
+    "generatedAt": "2026-10-27",
+    "description": "转账式与回调式接口方向和原交易核对；不把中心钱包视为模式名称。",
+    "verification": "中文标签、方向与说明边界已目视核对；金额与业务规则以正文为准。",
+    "sha256": "16cc557dc7b2ef0b90aaf3971fe25adefdf4a7861ddf36ae8eaff90373a25ed7"
+  }
+]

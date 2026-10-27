@@ -22,9 +22,10 @@ type LongImageGalleryProps = {
   items: LongImageItem[]
   emptyMessage: string
   label?: string
+  groupLabel?: string
 }
 
-export function LongImageGallery({ items, emptyMessage, label = "案例长图" }: LongImageGalleryProps) {
+export function LongImageGallery({ items, emptyMessage, label = "案例长图", groupLabel = "案例长图组" }: LongImageGalleryProps) {
   const titleId = useId()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const activeItem = activeIndex === null ? null : items[activeIndex] ?? null
@@ -124,7 +125,7 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图" }
 
   return (
     <>
-      <section className="mt-6 grid gap-6 lg:grid-cols-2" aria-label="案例长图组">
+      <section className="mt-6 grid gap-6 lg:grid-cols-2" aria-label={groupLabel}>
         {items.map((item, index) => (
           <article key={item.id} className="overflow-hidden rounded-lg border border-line bg-white shadow-sm">
             <div className="border-b border-line p-5">

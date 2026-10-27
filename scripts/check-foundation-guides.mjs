@@ -1,0 +1,87 @@
+import assert from "node:assert/strict"
+import fs from "node:fs"
+import { createHash } from "node:crypto"
+import ts from "typescript"
+import matter from "gray-matter"
+
+const slugs = ["what-is-white-label", "how-gambling-platform-works", "wallet-center-vs-seamless"]
+export async function checkFoundationGuides(page, base, prefix, width) {
+  const source = ts.transpileModule(fs.readFileSync("src/data/articles.ts", "utf8"), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+  const { articles } = await import("data:text/javascript;base64," + Buffer.from(source).toString("base64"))
+  const manifest = JSON.parse(fs.readFileSync("public/images/platform-wallet-20261027/manifest.json", "utf8"))
+  assert.equal(manifest.length, 2)
+  for (const slug of slugs) {
+    const meta = articles.find((item) => item.slug === slug)
+    const { data } = matter(fs.readFileSync(`content/articles/${slug}.md`, "utf8"))
+    for (const key of ["title", "description", "category", "tags", "audience", "difficulty"]) assert.deepEqual(data[key], meta[key], slug + ": metadata " + key)
+    assert.equal(data.date.toISOString().slice(0, 10), meta.date)
+    assert.equal(data.updatedAt.toISOString().slice(0, 10), "2026-10-27")
+    const response = await page.goto(base + "/articles/" + slug, { waitUntil: "networkidle" })
+    assert.equal(response.status(), 200)
+    assert.equal(await page.locator("main h1").innerText(), meta.title)
+    await page.locator("#article-details[open]").waitFor()
+    await page.locator("#article-content .not-prose").first().scrollIntoViewIfNeeded()
+    await page.locator("#article-content svg[id^=mermaid-]").waitFor()
+    const html = await page.locator("#article-content").innerText()
+    if (slug === "what-is-white-label") assert(html.includes("示例分工与责任边界") && html.includes("WL-DEMO-001"))
+    if (slug === "how-gambling-platform-works") assert(html.includes("前台动作对应哪些后台记录") && html.includes("FLOW-DEMO-001"))
+    if (slug === "wallet-center-vs-seamless") {
+      assert(html.includes("三个层次") && html.includes("105.00") && html.includes("TR-DEMO-001"))
+      assert.equal(await page.locator('#article-content a[href^="https://docs.hub88.io/"]').count(), 3)
+      const table = page.locator("#article-content table").filter({ hasText: "本例合计" })
+      const values = await table.locator("tbody tr").evaluateAll((rows) => rows.map((row) => [...row.querySelectorAll("td")].slice(1, 4).map((cell) => Number(cell.textContent))))
+      assert.deepEqual(values, [[100, 0, 100], [70, 30, 100], [80, 20, 100]])
+      for (const [platform, provider, total] of values) assert.equal(platform + provider, total)
+    }
+    const material = manifest.find((item) => item.articleSlug === slug)
+    if (material) {
+      const bytes = fs.readFileSync("public" + material.path)
+      assert.equal(createHash("sha256").update(bytes).digest("hex"), material.sha256)
+      assert.equal(bytes.readUInt32BE(16), material.width)
+      assert.equal(bytes.readUInt32BE(20), material.height)
+      const visual = page.getByRole("region", { name: "主题信息图", exact: true })
+      assert((await visual.innerText()).includes("GPT 生成示意图"))
+      const image = visual.locator("img").first()
+      await image.scrollIntoViewIfNeeded(); await image.evaluate((node) => node.decode())
+      assert.equal(await image.evaluate((node) => node.naturalWidth), 1024)
+      const trigger = visual.getByRole("button", { name: /查看完整长图/ })
+      await trigger.evaluate((node) => node.scrollIntoView({ block: "center", behavior: "instant" }))
+      const top = await page.evaluate(() => scrollY)
+      await trigger.click()
+      const dialog = page.getByRole("dialog")
+      await dialog.locator("img").evaluate((node) => node.decode())
+      const viewport = dialog.getByRole("region", { name: "图片浏览区域", exact: true })
+      assert.equal(await dialog.getByRole("button", { name: "适应屏幕", exact: true }).getAttribute("aria-pressed"), "true")
+      assert.equal(await viewport.evaluate((node) => node.scrollWidth <= node.clientWidth + 1), true)
+      const fit = await dialog.locator("img").evaluate((node) => ({ width: node.clientWidth, height: node.clientHeight }))
+      assert(Math.abs(fit.height / fit.width - 1.5) < 0.02)
+      await dialog.getByRole("button", { name: "原尺寸", exact: true }).click()
+      assert.equal(await dialog.locator("img").evaluate((node) => node.clientWidth), 1024)
+      await dialog.getByRole("button", { name: "适应屏幕", exact: true }).click()
+      await page.screenshot({ path: `/tmp/foundation-${slug}-${width}.png` })
+      await page.keyboard.press("Escape")
+      await dialog.waitFor({ state: "hidden" })
+      await page.waitForFunction((top) => Math.abs(scrollY - top) < 8 && document.body.style.position !== "fixed", top)
+    }
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false)
+    await page.goto(base + "/search?q=" + encodeURIComponent(meta.title) + "&type=" + encodeURIComponent("文章"), { waitUntil: "networkidle" })
+    await page.locator(`main a[href="${prefix}/articles/${slug}"]`).click()
+    await page.locator("#article-details[open]").waitFor()
+    await page.goBack({ waitUntil: "networkidle" })
+    assert.equal(new URL(page.url()).searchParams.get("q"), meta.title)
+    assert.equal(new URL(page.url()).searchParams.get("type"), "文章")
+  }
+  await page.goto(base + "/glossary?q=" + encodeURIComponent("钱包"), { waitUntil: "networkidle" })
+  await page.locator("#central-wallet summary").click()
+  await page.locator("#seamless-wallet summary").click()
+  assert((await page.locator("#central-wallet").innerText()).includes("不等于转账式接入"))
+  assert((await page.locator("#seamless-wallet").innerText()).includes("不直接证明采用Seamless接口"))
+  await page.goto(base + "/articles?role=development", { waitUntil: "networkidle" })
+  for (const slug of slugs) await page.locator(`[aria-label="文章列表"] a[href="${prefix}/articles/${slug}"]`).waitFor()
+  await page.goto(base + "/updates#v23", { waitUntil: "networkidle" })
+  const release = page.locator("#current-release")
+  const text = await release.innerText()
+  assert(text.includes("补充文章 3 篇") && text.includes("GPT 配图 2 张") && !text.includes("新增文章"))
+  for (const slug of slugs) await release.locator("#" + slug).waitFor()
+  console.log(`PASS foundation guides ${width}px: three existing URLs, metadata/dates/default-open, Mermaid, evidence links, wallet arithmetic, 2 GPT images and hashes, width-fit/original/close position, search return, glossary, development role and accurate v23 counts`)
+}

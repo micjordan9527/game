@@ -9,6 +9,7 @@ export type ImagePrompt = {
   width?: number
   height?: number
   caption?: string
+  viewer?: "scroll"
 }
 
 export const imagePrompts: ImagePrompt[] = [
@@ -52,14 +53,14 @@ export const imagePrompts: ImagePrompt[] = [
   },
   {
     slug: "white-label-structure",
-    title: "包网平台结构图",
+    title: "平台模块与职责 · 示例结构",
     articleSlug: "what-is-white-label",
-    imageSrc: "/images/articles/white-label-structure.png",
-    imageSrcWebp: "/images/articles/white-label-structure.webp",
-    imageSrcAvif: "/images/articles/white-label-structure.avif",
+    imageSrc: "/images/platform-wallet-20261027/platform-modules.png",
     kind: "standard",
-    width: 1672,
-    height: 941,
+    viewer: "scroll",
+    caption: "GPT 生成示意图。前台、平台系统与外部服务是示例层次；日志、流水和对账贯穿各环节，实际分工以项目约定为准。",
+    width: 1024,
+    height: 1536,
   },
   {
     slug: "sportsbook-ticket-flow",
@@ -74,14 +75,14 @@ export const imagePrompts: ImagePrompt[] = [
   },
   {
     slug: "wallet-comparison",
-    title: "中心钱包 vs 免转钱包对比图",
+    title: "转账式与回调式钱包接入",
     articleSlug: "wallet-center-vs-seamless",
-    imageSrc: "/images/articles/wallet-comparison.png",
-    imageSrcWebp: "/images/articles/wallet-comparison.webp",
-    imageSrcAvif: "/images/articles/wallet-comparison.avif",
+    imageSrc: "/images/platform-wallet-20261027/wallet-integration.png",
     kind: "standard",
-    width: 1672,
-    height: 941,
+    viewer: "scroll",
+    caption: "GPT 生成示意图。平台主钱包、接入方式与页面免转体验分别判断；图示不代表某个真实平台的接口或资金记录。",
+    width: 1024,
+    height: 1536,
   },
   {
     slug: "launch-checklist-flow",

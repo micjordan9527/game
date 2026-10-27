@@ -100,7 +100,8 @@ export async function checkInteractionGuides(page, base, prefix, width) {
     for (const path of [listPath, formPath]) await page.locator(`[aria-label="文章列表"] a[href="${prefix}${path}"]`).waitFor()
   }
   await page.goto(base + "/updates#v22", { waitUntil: "networkidle" })
-  const release = page.locator("#current-release")
+  await page.locator("#v22[open]").waitFor()
+  const release = page.locator("#v22")
   assert((await release.innerText()).includes("新增文章 2 篇"))
   assert(!(await release.innerText()).includes("GPT 配图"), "No generated image is attributed to interactive demos")
   console.log(`PASS interaction guides ${width}px: applied/draft filters, loading/failure/retry/empty, pagination and detail return/focus, field errors, submitting/unknown/original lookup/rejected/accepted, search return, both roles and accurate release counts`)

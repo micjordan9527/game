@@ -1,37 +1,75 @@
 {
   "current": {
-    "version": 22,
+    "version": 23,
     "date": "2026-10-27",
-    "title": "后台列表与表单交互图解",
-    "summary": "新增两篇交互设计图解与可操作示例，说明查询状态、详情返回、字段错误与未知结果；可从角色筛选、主题和演示目录进入。",
+    "title": "平台职责与钱包模式说明",
+    "summary": "补充三篇现有文章，区分平台模块、服务职责、业务记录与钱包接入；更新两张生成示意图，并核对钱包术语和接口来源。",
     "articleSlugs": [
-      "admin-filter-list-states",
-      "form-validation-submit-feedback"
+      "what-is-white-label",
+      "how-gambling-platform-works",
+      "wallet-center-vs-seamless"
     ],
     "changes": [
       {
-        "id": "interaction-role-articles",
-        "title": "交互与设计角色可找到两篇新图解",
-        "description": "两篇均归入设计体验，并关联后台主题、实际后台案例、界面状态与需求资料；复用现有角色和全文搜索。",
-        "location": "首页按角色看图解 · 设计体验主题",
-        "href": "/articles?role=interaction",
-        "linkLabel": "查看交互图解",
+        "id": "wallet-term-boundaries",
+        "title": "钱包术语区分账户、接入与体验",
+        "description": "中心钱包与免转钱包的术语说明同步调整，区分主账户层次、Transfer／Seamless接入和页面上的手动转账体验。",
+        "location": "术语库 · 钱包",
+        "href": "/glossary#central-wallet",
+        "linkLabel": "查看钱包术语",
         "related": {
-          "href": "/design",
-          "label": "查看设计体验主题"
+          "href": "/articles/wallet-center-vs-seamless#公开接口资料怎样支持这个区别",
+          "label": "查看核对来源"
         }
       },
       {
-        "id": "interface-demo-directory",
-        "title": "演示目录增加列表与表单入口",
-        "description": "界面设计组增加两个直接定位入口，共12项演示。新增文章采用可操作界面示意，不计入GPT配图数量。",
-        "location": "功能演示目录 · 界面设计",
-        "href": "/updates/demonstrations#interface-design",
-        "linkLabel": "查看界面设计演示"
+        "id": "foundation-diagram-viewer",
+        "title": "两张新图按宽度查看",
+        "description": "平台模块和钱包接入图使用生成示意标识，支持适应屏幕、原尺寸和关闭后恢复位置；平台运转文章复用原有概念图。",
+        "location": "包网组成与钱包对照 · 主题信息图",
+        "href": "/articles/what-is-white-label",
+        "linkLabel": "查看平台模块图",
+        "related": {
+          "href": "/articles/wallet-center-vs-seamless",
+          "label": "查看钱包接入图"
+        }
       }
     ]
   },
   "history": [
+    {
+      "version": 22,
+      "title": "后台列表与表单交互图解",
+      "summary": "新增两篇交互设计图解与可操作示例，说明查询状态、详情返回、字段错误与未知结果；可从角色筛选、主题和演示目录进入。",
+      "articleSlugs": [
+        "admin-filter-list-states",
+        "form-validation-submit-feedback"
+      ],
+      "changes": [
+        {
+          "id": "interaction-role-articles",
+          "title": "交互与设计角色可找到两篇新图解",
+          "description": "两篇均归入设计体验，并关联后台主题、实际后台案例、界面状态与需求资料；复用现有角色和全文搜索。",
+          "location": "首页按角色看图解 · 设计体验主题",
+          "href": "/articles?role=interaction",
+          "linkLabel": "查看交互图解",
+          "related": {
+            "href": "/design",
+            "label": "查看设计体验主题"
+          }
+        },
+        {
+          "id": "interface-demo-directory",
+          "title": "演示目录增加列表与表单入口",
+          "description": "界面设计组增加两个直接定位入口，共12项演示。新增文章采用可操作界面示意，不计入GPT配图数量。",
+          "location": "功能演示目录 · 界面设计",
+          "href": "/updates/demonstrations#interface-design",
+          "linkLabel": "查看界面设计演示"
+        }
+      ],
+      "publishedAt": "2026-10-27T10:31:06.434120Z",
+      "githubCommit": "93610032e039eb3018d7a2937b8dd15b00feefe4"
+    },
     {
       "version": 21,
       "title": "首页角色进入图解筛选",
