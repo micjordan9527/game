@@ -109,12 +109,12 @@ export default function HomePage() {
               )
             })}
           </nav>
-          <nav aria-label="按角色浏览" className="mt-3 flex flex-wrap items-center gap-1.5 border-t border-line pt-3">
-            <span className="mr-1 text-xs text-muted">角色</span>
+          <nav aria-label="按角色看图解" className="mt-3 flex flex-wrap items-center gap-1.5 border-t border-line pt-3">
+            <span className="mr-1 text-xs text-muted">按角色看图解</span>
             {workRoles.map((role) => (
               <Link
                 key={role.slug}
-                href={`/roles/${role.slug}`}
+                href={`/articles?role=${role.slug}`}
                 className="rounded-md bg-white px-2 py-1.5 text-xs font-semibold text-muted hover:bg-brand-50 hover:text-brand-700"
               >
                 {role.title}

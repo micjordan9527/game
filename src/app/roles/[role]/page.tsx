@@ -38,6 +38,7 @@ export default async function RolePage({ params }: { params: Promise<{ role: str
       </Link>
       <h1 className="mt-4 text-3xl font-semibold text-ink">{entry.title}精选</h1>
       <p className="mt-3 text-sm leading-7 text-muted">从{entry.title}视角查看案例、知识图解与实用资料。</p>
+      <Link href={`/articles?role=${entry.slug}`} className="mt-3 inline-block text-sm font-semibold text-brand-700">查看{entry.title}的全部图解 →</Link>
       <nav aria-label="角色资料筛选" className="my-5 flex flex-wrap gap-2">
         {workRoles.map((item) => (
           <Link

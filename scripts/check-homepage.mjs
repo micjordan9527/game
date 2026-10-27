@@ -12,7 +12,9 @@ export async function checkHomepage(page, base, prefix, width) {
     [`${prefix}/cases/admin-optimization`, `${prefix}/cases/bm-optimization`]
   )
   assert.equal(await page.getByRole("navigation", { name: "业务主题导航" }).getByRole("link").count(), 6)
-  assert.equal(await page.getByRole("navigation", { name: "按角色浏览" }).getByRole("link").count(), 5)
+  const roleLinks = page.getByRole("navigation", { name: "按角色看图解" }).getByRole("link")
+  assert.equal(await roleLinks.count(), 5)
+  assert.deepEqual(await roleLinks.evaluateAll((links) => links.map((link) => link.getAttribute("href"))), ["operation", "product", "interaction", "design", "development"].map((role) => `${prefix}/articles?role=${role}`))
   assert.equal(await page.getByRole("navigation", { name: "常用资料", exact: true }).getByRole("link").count(), 3)
   assert.equal(await page.getByRole("navigation", { name: "常用资料", exact: true }).getByRole("link", { name: "更新记录", exact: true }).count(), 0)
   assert.equal(await page.locator("footer").getByRole("link", { name: "更新记录", exact: true }).count(), 0)

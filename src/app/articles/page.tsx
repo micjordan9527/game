@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { ArticleLibrary } from "@/components/articles/ArticleLibrary"
 import { articles } from "@/data/articles"
 import { absoluteUrl } from "@/lib/seo"
+import { Suspense } from "react"
 
 export const metadata: Metadata = {
   title: "知识图解",
@@ -27,7 +28,9 @@ export default function ArticlesPage() {
           按主题、角色与标签查看业务关系、界面状态和处理流程。
         </p>
       </section>
-      <ArticleLibrary articles={articles} />
+      <Suspense fallback={<p role="status" className="py-8 text-sm text-muted">正在读取图解…</p>}>
+        <ArticleLibrary articles={articles} />
+      </Suspense>
     </div>
   )
 }

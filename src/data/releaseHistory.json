@@ -1,66 +1,108 @@
 {
   "current": {
-    "version": 20,
+    "version": 21,
     "date": "2026-10-27",
-    "title": "知识图解与主题目录",
-    "summary": "从统一入口浏览知识图解，按主题进入内容；在当前版块目录和文章位置路径中继续查找。",
+    "title": "首页角色进入图解筛选",
+    "summary": "从首页按角色查看全部匹配图解，分享筛选链接，打开文章后返回原来的筛选与阅读位置。",
     "articleSlugs": [],
     "changes": [
       {
-        "id": "knowledge-library-entry",
-        "title": "知识图解统一入口",
-        "description": "顶部、首页、页脚、卡片和搜索精选统一使用知识图解；全部33篇文章保留原链接。",
-        "location": "顶部导航与全部图解页",
-        "href": "/articles",
-        "linkLabel": "打开知识图解"
+        "id": "home-role-library",
+        "title": "首页角色直达对应图解",
+        "description": "运营、产品、交互、设计、开发均进入知识图解总库，并自动选中对应角色。",
+        "location": "首页业务主题 · 按角色看图解",
+        "href": "/",
+        "linkLabel": "查看首页角色入口"
       },
       {
-        "id": "section-specific-directories",
-        "title": "当前版块显示对应目录",
-        "description": "案例、AI工作流与模板分别显示自己的目录；手机菜单使用相同目录，更新记录页不再显示侧栏。",
-        "location": "桌面左侧／手机导航",
-        "href": "/cases",
-        "linkLabel": "查看案例目录"
+        "id": "library-filter-url",
+        "title": "筛选条件保存在网址中",
+        "description": "角色与标签可组合筛选，显示已选条件和匹配数量；支持刷新、分享及浏览器前进后退。",
+        "location": "知识图解 · 角色与标签筛选",
+        "href": "/articles?role=operation",
+        "linkLabel": "查看运营图解"
       },
       {
-        "id": "knowledge-subjects",
-        "title": "按主题浏览知识内容",
-        "description": "全部图解下按八个主题浏览；展开当前主题文章，篇数只统计文章，专题和原型入口单独列出。",
-        "location": "知识图解目录 · 按主题浏览",
-        "href": "/product",
-        "linkLabel": "查看产品设计主题"
+        "id": "library-reading-return",
+        "title": "从文章返回原来的结果位置",
+        "description": "返回图解列表时保留角色、标签、标签展开状态和阅读位置；全部图解与重置可清除筛选。",
+        "location": "知识图解列表与文章往返",
+        "href": "/articles?role=product&tag=%E4%BC%9A%E5%91%98",
+        "linkLabel": "查看组合筛选"
       },
       {
-        "id": "article-location-path",
-        "title": "文章显示所属主题与返回入口",
-        "description": "显示知识图解、所属主题与文章名称；可返回主题或总库，当前主题和文章有对应高亮。",
-        "location": "文章标题上方与当前目录",
-        "href": "/articles/member-account-states",
-        "linkLabel": "查看文章位置路径"
-      },
-      {
-        "id": "special-topic-directories",
-        "title": "保留体育与设计专题入口",
-        "description": "体育专题、设计原型和状态对照继续可访问，所属知识版块高亮与目录一致。",
-        "location": "体育博彩与设计体验目录",
-        "href": "/sportsbook",
-        "linkLabel": "查看体育专题",
-        "related": {
-          "href": "/design",
-          "label": "查看设计体验"
-        }
-      },
-      {
-        "id": "question-anchor-position",
-        "title": "问题入口明确定位到标题",
-        "description": "点击问题入口后显示对应标题与说明；重复点击同一问题也会重新定位，键盘焦点跟随标题。",
-        "location": "功能演示目录 · 业务问题定位",
-        "href": "/updates/demonstrations#question-agent-old-settlement",
-        "linkLabel": "查看问题定位"
+        "id": "role-collections-retained",
+        "title": "角色精选保留全部图解入口",
+        "description": "原有角色精选链接继续展示案例、文章与实用资料，并可进入同角色的全部图解。",
+        "location": "原有角色精选页",
+        "href": "/roles/design",
+        "linkLabel": "查看设计资料精选"
       }
     ]
   },
   "history": [
+    {
+      "version": 20,
+      "title": "知识图解与主题目录",
+      "summary": "从统一入口浏览知识图解，按主题进入内容；在当前版块目录和文章位置路径中继续查找。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "knowledge-library-entry",
+          "title": "知识图解统一入口",
+          "description": "顶部、首页、页脚、卡片和搜索精选统一使用知识图解；全部33篇文章保留原链接。",
+          "location": "顶部导航与全部图解页",
+          "href": "/articles",
+          "linkLabel": "打开知识图解"
+        },
+        {
+          "id": "section-specific-directories",
+          "title": "当前版块显示对应目录",
+          "description": "案例、AI工作流与模板分别显示自己的目录；手机菜单使用相同目录，更新记录页不再显示侧栏。",
+          "location": "桌面左侧／手机导航",
+          "href": "/cases",
+          "linkLabel": "查看案例目录"
+        },
+        {
+          "id": "knowledge-subjects",
+          "title": "按主题浏览知识内容",
+          "description": "全部图解下按八个主题浏览；展开当前主题文章，篇数只统计文章，专题和原型入口单独列出。",
+          "location": "知识图解目录 · 按主题浏览",
+          "href": "/product",
+          "linkLabel": "查看产品设计主题"
+        },
+        {
+          "id": "article-location-path",
+          "title": "文章显示所属主题与返回入口",
+          "description": "显示知识图解、所属主题与文章名称；可返回主题或总库，当前主题和文章有对应高亮。",
+          "location": "文章标题上方与当前目录",
+          "href": "/articles/member-account-states",
+          "linkLabel": "查看文章位置路径"
+        },
+        {
+          "id": "special-topic-directories",
+          "title": "保留体育与设计专题入口",
+          "description": "体育专题、设计原型和状态对照继续可访问，所属知识版块高亮与目录一致。",
+          "location": "体育博彩与设计体验目录",
+          "href": "/sportsbook",
+          "linkLabel": "查看体育专题",
+          "related": {
+            "href": "/design",
+            "label": "查看设计体验"
+          }
+        },
+        {
+          "id": "question-anchor-position",
+          "title": "问题入口明确定位到标题",
+          "description": "点击问题入口后显示对应标题与说明；重复点击同一问题也会重新定位，键盘焦点跟随标题。",
+          "location": "功能演示目录 · 业务问题定位",
+          "href": "/updates/demonstrations#question-agent-old-settlement",
+          "linkLabel": "查看问题定位"
+        }
+      ],
+      "publishedAt": "2026-10-27T08:25:26.791978Z",
+      "githubCommit": "989a8e353dda41e9dbc8e3002f7a0a3f5e8c5534"
+    },
     {
       "version": 19,
       "title": "六个业务问题的排查路径与演示入口",

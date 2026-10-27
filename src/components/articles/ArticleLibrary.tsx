@@ -1,10 +1,12 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, type MouseEvent } from "react"
+import { useSearchParams } from "next/navigation"
 import { Filter, RotateCcw } from "lucide-react"
 import type { Article } from "@/data/articles"
 import { ArticleCard } from "@/components/common/ArticleCard"
 import { resourceAudiences } from "@/lib/work-audiences"
+import { libraryAudience, libraryRoleParam } from "@/lib/article-library-filters"
 
 const allOption = "全部"
 const allOptionLabel = "全部"
@@ -26,37 +28,72 @@ function collectOptions(items: string[]) {
 }
 
 export function ArticleLibrary({ articles }: { articles: Article[] }) {
+  const searchParams = useSearchParams()
+  const tagDetailsRef = useRef<HTMLDetailsElement>(null)
   const tags = useMemo(() => collectOptions(articles.flatMap((article) => article.tags)), [articles])
-  const difficulties = useMemo(() => collectOptions(articles.map((article) => article.difficulty)), [articles])
   const audiences = useMemo(
     () =>
       collectOptions(articles.flatMap((article) => resourceAudiences(`/articles/${article.slug}`, article.audience))),
     [articles]
   )
-  const [tag, setTag] = useState(allOption)
-  const [difficulty, setDifficulty] = useState(allOption)
-  const [audience, setAudience] = useState(allOption)
+  const audience = libraryAudience(searchParams.get("role") ?? "", audiences.map((item) => item.value))
+  const requestedTag = searchParams.get("tag") ?? allOption
+  const tag = tags.some((item) => item.value === requestedTag) ? requestedTag : allOption
+  const filterKey = searchParams.toString()
 
   const filteredArticles = useMemo(
     () =>
       articles.filter((article) => {
         const matchTag = tag === allOption || article.tags.includes(tag)
-        const matchDifficulty = difficulty === allOption || article.difficulty === difficulty
         const matchAudience =
           audience === allOption || resourceAudiences(`/articles/${article.slug}`, article.audience).includes(audience)
-        return matchTag && matchDifficulty && matchAudience
+        return matchTag && matchAudience
       }),
-    [articles, audience, difficulty, tag]
+    [articles, audience, tag]
   )
 
-  function resetFilters() {
-    setTag(allOption)
-    setDifficulty(allOption)
-    setAudience(allOption)
+  function rememberPosition() {
+    window.history.replaceState({ ...window.history.state, knowledgeArticleLibraryReturn: {
+      url: window.location.pathname + window.location.search, top: window.scrollY, tagsOpen: tagDetailsRef.current?.open === true,
+    } }, "")
+  }
+
+  function updateFilters(nextAudience: string, nextTag: string) {
+    const params = new URLSearchParams(window.location.search)
+    if (nextAudience === allOption) params.delete("role")
+    else params.set("role", libraryRoleParam(nextAudience))
+    if (nextTag === allOption) params.delete("tag")
+    else params.set("tag", nextTag)
+    const url = window.location.pathname + (params.size ? "?" + params : "")
+    if (url === window.location.pathname + window.location.search) return
+    rememberPosition()
+    // Let Next synchronize its search parameters while retaining ordinary back/forward history.
+    window.history.pushState(null, "", url)
+  }
+
+  useEffect(() => {
+    let frame = 0
+    const saved = window.history.state?.knowledgeArticleLibraryReturn
+    if (saved?.url === window.location.pathname + window.location.search && Number.isFinite(saved.top)) {
+      if (tagDetailsRef.current) tagDetailsRef.current.open = saved.tagsOpen === true
+      frame = window.requestAnimationFrame(() => {
+        frame = window.requestAnimationFrame(() => {
+          window.scrollTo({ top: saved.top, behavior: "instant" })
+          window.history.replaceState({ ...window.history.state, knowledgeArticleLibraryReturn: null }, "")
+        })
+      })
+    }
+    return () => window.cancelAnimationFrame(frame)
+  }, [filterKey, filteredArticles.length])
+
+  function rememberArticle(event: MouseEvent<HTMLDivElement>) {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    const anchor = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[href]") : null
+    if (anchor?.origin === window.location.origin) rememberPosition()
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[17rem_1fr]">
+    <div className="grid gap-6 lg:grid-cols-[17rem_1fr]" onClickCapture={rememberArticle}>
       <aside
         className="rounded-lg border border-line bg-white p-4 shadow-sm lg:sticky lg:top-24 lg:self-start"
         aria-label="文章筛选"
@@ -68,7 +105,7 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
           </div>
           <button
             type="button"
-            onClick={resetFilters}
+            onClick={() => updateFilters(allOption, allOption)}
             className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-muted hover:bg-paper hover:text-ink"
           >
             <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
@@ -76,14 +113,19 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
           </button>
         </div>
 
-        <FilterGroup label="角色" options={audiences} active={audience} onChange={setAudience} />
-        <FilterGroup label="标签" options={tags} active={tag} onChange={setTag} />
+        <FilterGroup label="角色" options={audiences} active={audience} onChange={(value) => updateFilters(value, tag)} />
+        <details ref={tagDetailsRef} data-article-tags className="mt-5 border-t border-line pt-4">
+          <summary className="cursor-pointer text-sm font-semibold leading-7 text-ink">标签筛选 · {tag}</summary>
+          <FilterGroup label="标签" options={tags} active={tag} onChange={(value) => updateFilters(audience, value)} />
+        </details>
       </aside>
 
-      <section aria-label="文章列表">
+      <section id="article-results" aria-label="文章列表" data-selected-role={audience} data-selected-tag={tag}>
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm text-muted">
-            共 <span className="font-semibold text-ink">{filteredArticles.length}</span> 篇资料
+          <p role="status" data-library-summary className="text-sm leading-7 text-muted">
+            <span className="mr-3 font-semibold text-brand-700">角色：{audience}</span>
+            {tag !== allOption ? <span className="mr-3">标签：{tag}</span> : null}
+            共 <span className="font-semibold text-ink">{filteredArticles.length}</span> 篇图解
           </p>
           <p className="text-xs text-muted">按主题与角色查找图解</p>
         </div>
@@ -114,13 +156,14 @@ function FilterGroup({
   onChange: (value: string) => void
 }) {
   return (
-    <div className="mt-5 border-t border-line pt-4">
+    <div role="group" aria-label={`${label}筛选`} className="mt-5 border-t border-line pt-4">
       <div className="text-sm font-semibold text-ink">{label}</div>
       <div className="mt-3 flex flex-wrap gap-2">
         {options.map((option) => (
           <button
             key={option.value}
             type="button"
+            data-filter-value={option.value}
             onClick={() => onChange(option.value)}
             aria-pressed={active === option.value}
             className={[
