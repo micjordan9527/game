@@ -354,6 +354,46 @@ export const imagePrompts: ImagePrompt[] = [
     height: 1024,
     caption: "GPT 生成示意图。概念关系与流程说明；非真实业务截图。规则、字段和虚构示例见下方详细说明。"
   },
+  {
+    slug: "export-masking-audit-knowledge-diagram",
+    title: "数据导出、脱敏与下载审计 · 图解",
+    articleSlug: "export-masking-audit",
+    imageSrc: "/images/knowledge-20261026/export-masking-audit.png",
+    kind: "standard",
+    width: 1942,
+    height: 809,
+    caption: "GPT 生成示意图。流程和字段关系用于说明；非真实后台截图，不能证明现有导出权限或审计已经实现。"
+  },
+  {
+    slug: "content-publication-versions-knowledge-diagram",
+    title: "公告、帮助内容与发布版本 · 图解",
+    articleSlug: "content-publication-versions",
+    imageSrc: "/images/knowledge-20261026/content-publication-versions.png",
+    kind: "standard",
+    width: 1942,
+    height: 809,
+    caption: "GPT 生成示意图。发布流程为概念说明；实际生效状态需要以目标站点和版本证据核对。"
+  },
+  {
+    slug: "game-catalog-availability-knowledge-diagram",
+    title: "游戏目录与可用状态 · 图解",
+    articleSlug: "game-catalog-availability",
+    imageSrc: "/images/knowledge-20261026/game-catalog-availability.png",
+    kind: "standard",
+    width: 1536,
+    height: 1024,
+    caption: "GPT 生成示意图。登录失败可能来自维护、账号、区域或币种条件，不等同游戏下架。"
+  },
+  {
+    slug: "transaction-limits-fees-knowledge-diagram",
+    title: "交易限额、费用与金额校验 · 图解",
+    articleSlug: "transaction-limits-fees",
+    imageSrc: "/images/knowledge-20261026/transaction-limits-fees.png",
+    kind: "standard",
+    width: 1774,
+    height: 887,
+    caption: "GPT 生成示意图。费用关系为概念说明，不表示现有站点启用收费；结果未知时沿原订单查询。"
+  },
 ]
 
 export function getImagePromptForArticle(articleSlug: string) {

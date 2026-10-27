@@ -36,6 +36,10 @@ const articleRelations: Record<string, { cases?: string[]; templates?: string[];
   "community-operations-governance": { templates: ["incident-review"] },
   "channel-quality-review": { templates: ["risk-rule-review"] },
   "campaign-risk-review": { templates: ["promotion-system-prd", "risk-rule-review"] },
+  "export-masking-audit": { cases: ["admin-optimization"], templates: ["data-report-spec", "risk-rule-review"] },
+  "content-publication-versions": { cases: ["white-label-official"], templates: ["launch-checklist"] },
+  "game-catalog-availability": { cases: ["bm-optimization", "competitor-analysis"], templates: ["launch-checklist"] },
+  "transaction-limits-fees": { cases: ["admin-optimization"], templates: ["wallet-reconciliation-checklist", "launch-checklist"] },
 }
 
 function toArticle(slug: string): RelatedResource | null {

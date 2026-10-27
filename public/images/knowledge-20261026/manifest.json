@@ -256,5 +256,49 @@
       "回滚已验证版本",
       "记录验收证据"
     ]
+  },
+  {
+    "articleSlug": "export-masking-audit",
+    "path": "/images/knowledge-20261026/export-masking-audit.png",
+    "width": 1942,
+    "height": 809,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "筛选快照、导出权限、脱敏、限时下载与审计的概念流程；非真实业务截图",
+    "verification": ["筛选快照", "导出权限", "脱敏生成", "限时下载", "审计记录", "脱敏版本", "过期或越权：拒绝下载"]
+  },
+  {
+    "articleSlug": "content-publication-versions",
+    "path": "/images/knowledge-20261026/content-publication-versions.png",
+    "width": 1942,
+    "height": 809,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "内容草稿到发布、更正的版本流程；非真实业务截图",
+    "verification": ["内容草稿", "审核确认", "定时发布", "生效版本", "更正记录", "站点", "语言", "有效期", "规则版本", "已发布内容用更正，不覆盖历史"]
+  },
+  {
+    "articleSlug": "game-catalog-availability",
+    "path": "/images/knowledge-20261026/game-catalog-availability.png",
+    "width": 1536,
+    "height": 1024,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "游戏目录可见、维护、账号与地区币种条件的分层诊断；非真实业务截图",
+    "verification": ["游戏目录", "前台可见", "厂商维护", "账号受限", "区域 / 币种不支持", "游戏 ID", "条件校验", "原因码", "处理入口", "登录失败 ≠ 游戏下架"]
+  },
+  {
+    "articleSlug": "transaction-limits-fees",
+    "path": "/images/knowledge-20261026/transaction-limits-fees.png",
+    "width": 1774,
+    "height": 887,
+    "materialType": "GPT 生成示意图",
+    "source": "GPT Image",
+    "generatedAt": "2026-10-26",
+    "description": "单笔、周期、剩余额度及费用和未知结果处理；非真实业务截图",
+    "verification": ["单笔限额", "周期限额", "剩余额度", "金额校验", "原币金额", "手续费", "到账金额", "结果未知", "查询原订单", "不新建重复交易"]
   }
 ]

@@ -134,5 +134,41 @@ export const knowledgeContentUpdates = [
     "href": "/articles/requirements-release-acceptance",
     "detailHref": "/articles/requirements-release-acceptance#验收矩阵",
     "relatedHref": "/design/states"
+  },
+  {
+    "slug": "export-masking-audit",
+    "title": "数据导出、脱敏与下载审计",
+    "description": "新增查看、导出与下载的分段权限，补充筛选快照、脱敏版本、过期链接和下载审计。",
+    "kind": "新增",
+    "href": "/articles/export-masking-audit",
+    "detailHref": "/articles/export-masking-audit#三段权限分别判断",
+    "relatedHref": "/articles/access-approval-audit#权限检查的四个维度"
+  },
+  {
+    "slug": "content-publication-versions",
+    "title": "公告、帮助内容与发布版本",
+    "description": "新增草稿、审核、定时发布、生效版本和更正记录，覆盖站点、语言、有效期与已读边界。",
+    "kind": "新增",
+    "href": "/articles/content-publication-versions",
+    "detailHref": "/articles/content-publication-versions#内容对象需要哪些范围",
+    "relatedHref": "/cases/white-label-official#case-reading-guide"
+  },
+  {
+    "slug": "game-catalog-availability",
+    "title": "游戏目录与可用状态",
+    "description": "新增目录可见、厂商维护、账号限制、区域／币种条件及登录原因码的分层排查。",
+    "kind": "新增",
+    "href": "/articles/game-catalog-availability",
+    "detailHref": "/articles/game-catalog-availability#把可见和可玩拆开",
+    "relatedHref": "/articles/game-provider-api#先确认钱包模式再分配接口责任"
+  },
+  {
+    "slug": "transaction-limits-fees",
+    "title": "交易限额、费用与金额校验",
+    "description": "新增单笔／周期／剩余额度、原币精度、费用和到账金额说明，结果未知沿原订单查询。",
+    "kind": "新增",
+    "href": "/articles/transaction-limits-fees",
+    "detailHref": "/articles/transaction-limits-fees#限额不是一个数字",
+    "relatedHref": "/articles/wallet-payment-reconciliation#withdrawal-case"
   }
 ]

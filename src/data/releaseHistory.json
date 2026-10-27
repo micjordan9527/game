@@ -1,46 +1,92 @@
 {
   "current": {
-    "version": 17,
+    "version": 18,
     "date": "2026-10-26",
-    "title": "四个案例的界面阅读说明",
-    "summary": "按具体位置阅读现有界面，区分材料观察、交互演示与尚需验证的业务能力。",
-    "articleSlugs": [],
+    "title": "四篇业务控制专题与示意图",
+    "summary": "补充数据导出、内容发布、游戏可用状态及交易限额说明，区分实际案例、虚构演算与 GPT 示意图。",
+    "articleSlugs": [
+      "export-masking-audit",
+      "content-publication-versions",
+      "game-catalog-availability",
+      "transaction-limits-fees"
+    ],
     "changes": [
       {
-        "id": "reading-admin-optimization",
-        "title": "后台角色、记录与账务证据",
-        "description": "补充三条界面阅读说明，分别标明位置、可观察内容、判断边界及对应入口。",
-        "location": "案例 · 后台优化 · 界面阅读说明",
-        "href": "/cases/admin-optimization#case-reading-guide",
-        "linkLabel": "打开阅读说明"
+        "id": "export-masking-audit",
+        "title": "数据导出、脱敏与下载审计",
+        "description": "分开查看、导出与下载权限，记录筛选快照、脱敏版本、文件有效期及下载审计。",
+        "location": "文章 · 数据与权限",
+        "href": "/articles/export-masking-audit",
+        "linkLabel": "打开专题"
       },
       {
-        "id": "reading-bm-optimization",
-        "title": "BM视觉方案与手机交互",
-        "description": "补充三条界面阅读说明，分别标明位置、可观察内容、判断边界及对应入口。",
-        "location": "案例 · BM优化 · 界面阅读说明",
-        "href": "/cases/bm-optimization#case-reading-guide",
-        "linkLabel": "打开阅读说明"
+        "id": "content-publication-versions",
+        "title": "公告、帮助内容与发布版本",
+        "description": "区分草稿、审核、计划发布时间、实际生效版本、更正记录及用户已读边界。",
+        "location": "文章 · 内容与版本",
+        "href": "/articles/content-publication-versions",
+        "linkLabel": "打开专题"
       },
       {
-        "id": "reading-competitor-analysis",
-        "title": "U8入口分组与账号资产状态",
-        "description": "补充三条界面阅读说明，分别标明位置、可观察内容、判断边界及对应入口。",
-        "location": "案例 · U8页面优化 · 界面阅读说明",
-        "href": "/cases/competitor-analysis#case-reading-guide",
-        "linkLabel": "打开阅读说明"
+        "id": "game-catalog-availability",
+        "title": "游戏目录与可用状态",
+        "description": "分层说明目录可见、厂商维护、账号限制、区域／币种条件和登录原因码。",
+        "location": "文章 · 游戏与接口",
+        "href": "/articles/game-catalog-availability",
+        "linkLabel": "打开专题"
       },
       {
-        "id": "reading-white-label-official",
-        "title": "官网服务、结构与咨询反馈",
-        "description": "补充三条界面阅读说明，分别标明位置、可观察内容、判断边界及对应入口。",
-        "location": "案例 · 包网官网 · 界面阅读说明",
-        "href": "/cases/white-label-official#case-reading-guide",
-        "linkLabel": "打开阅读说明"
+        "id": "transaction-limits-fees",
+        "title": "交易限额、费用与金额校验",
+        "description": "说明单笔／周期／剩余额度、原币精度、手续费、到账金额与未知结果处理。",
+        "location": "文章 · 交易与账务",
+        "href": "/articles/transaction-limits-fees",
+        "linkLabel": "打开专题"
       }
     ]
   },
   "history": [
+    {
+      "version": 17,
+      "title": "四个案例的界面阅读说明",
+      "publishedAt": "2026-10-26T12:12:08.319376Z",
+      "githubCommit": "f7f4e41f7f8fb422af4e9803e8d8dd00ee8efdc5",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "reading-admin-optimization",
+          "title": "后台角色、记录与账务证据",
+          "description": "补充三条界面阅读说明，分别标明位置、可观察内容、判断边界及对应入口。",
+          "location": "案例 · 后台优化 · 界面阅读说明",
+          "href": "/cases/admin-optimization#case-reading-guide",
+          "linkLabel": "打开阅读说明"
+        },
+        {
+          "id": "reading-bm-optimization",
+          "title": "BM视觉方案与手机交互",
+          "description": "补充三条界面阅读说明，分别标明位置、可观察内容、判断边界及对应入口。",
+          "location": "案例 · BM优化 · 界面阅读说明",
+          "href": "/cases/bm-optimization#case-reading-guide",
+          "linkLabel": "打开阅读说明"
+        },
+        {
+          "id": "reading-competitor-analysis",
+          "title": "U8入口分组与账号资产状态",
+          "description": "补充三条界面阅读说明，分别标明位置、可观察内容、判断边界及对应入口。",
+          "location": "案例 · U8页面优化 · 界面阅读说明",
+          "href": "/cases/competitor-analysis#case-reading-guide",
+          "linkLabel": "打开阅读说明"
+        },
+        {
+          "id": "reading-white-label-official",
+          "title": "官网服务、结构与咨询反馈",
+          "description": "补充三条界面阅读说明，分别标明位置、可观察内容、判断边界及对应入口。",
+          "location": "案例 · 包网官网 · 界面阅读说明",
+          "href": "/cases/white-label-official#case-reading-guide",
+          "linkLabel": "打开阅读说明"
+        }
+      ]
+    },
     {
       "version": 16,
       "title": "更新入口精简与演示场景分组",

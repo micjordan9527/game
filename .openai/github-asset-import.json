@@ -1,0 +1,10 @@
+{
+  "origin": "https://baowang-knowledge.aurora-5448.chatgpt.site",
+  "sites_version": 18,
+  "files": [
+    { "path": "public/images/knowledge-20261026/content-publication-versions.png", "git_blob_sha": "92cf96d54c88222989ee8b4e0a42d4e71f240555" },
+    { "path": "public/images/knowledge-20261026/export-masking-audit.png", "git_blob_sha": "392c57b9b0e7ffb4241cfc800f687c3f4d57a02a" },
+    { "path": "public/images/knowledge-20261026/game-catalog-availability.png", "git_blob_sha": "027351396c6b9923c22b7e5eb74f46bc92709d49" },
+    { "path": "public/images/knowledge-20261026/transaction-limits-fees.png", "git_blob_sha": "bd79669499c6e4fb28432c41437e91d96acf6d33" }
+  ]
+}

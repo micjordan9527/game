@@ -6,7 +6,7 @@
   "plan": "docs/three-hour-content-20261026.md",
   "stages": [
     { "id": "case-reading", "status": "implementation_complete", "owner": "root", "items": ["admin-optimization", "bm-optimization", "competitor-analysis", "white-label-official"] },
-    { "id": "new-topics", "status": "pending", "items": ["export-masking-audit", "content-publication-versions", "game-catalog-availability", "transaction-limits-fees"] },
+    { "id": "new-topics", "status": "implementation_complete", "started_at": "2026-10-26T12:53:42Z", "completed_at": "2026-10-26T13:12:00Z", "owner": "automation", "items": ["export-masking-audit", "content-publication-versions", "game-catalog-availability", "transaction-limits-fees"], "validation": ["content:33 articles/9 templates/4 cases/70 images", "build:103 static routes", "integrity:96 exported pages"], "browser": "managed preview unavailable because preview launcher passed unsupported --host to Next.js; no browser pass claimed" },
     { "id": "questions-and-final-validation", "status": "pending", "question_count": 6 }
   ]
 }

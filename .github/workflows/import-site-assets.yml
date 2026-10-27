@@ -1,0 +1,24 @@
+name: Import verified Site assets
+
+on:
+  push:
+    branches: ["site-sync-*"]
+    paths: [".openai/github-asset-import.json"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-asset-import-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Import and verify only the declared public assets
+        run: python3 scripts/import-site-assets.py
