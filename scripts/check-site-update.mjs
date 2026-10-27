@@ -109,7 +109,7 @@ export async function checkSiteUpdate(page, base, prefix, width) {
   await page.goto(`${base}/search`, { waitUntil: "networkidle" })
   const recommendations = page.getByRole("region", { name: "精选资料", exact: true })
   assert.equal(await recommendations.getByRole("link").count(), 6)
-  for (const group of ["精选案例", "精选功能图解", "精选AI 工作流"]) assert.equal(await page.getByRole("region", { name: group, exact: true }).getByRole("link").count(), 2)
+  for (const group of ["精选案例", "精选知识图解", "精选AI 工作流"]) assert.equal(await page.getByRole("region", { name: group, exact: true }).getByRole("link").count(), 2)
   await page.screenshot({ path: `/tmp/knowledge-search-${width}.png` })
   const input = page.getByRole("textbox", { name: "搜索知识库", exact: true })
   await input.pressSequentially("api", { delay: 25 })

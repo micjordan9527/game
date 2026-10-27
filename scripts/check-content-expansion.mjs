@@ -158,7 +158,7 @@ export async function checkContentExpansion(page, base, prefix, width) {
   console.log(`PASS ${width}px: 2 workflow process/comparison sections and 3 complete copyable template examples`)
 
   await page.goto(`${base}/search`, { waitUntil: "networkidle" })
-  const recommended = page.getByRole("region", { name: "精选功能图解", exact: true })
+  const recommended = page.getByRole("region", { name: "精选知识图解", exact: true })
   for (const link of await recommended.getByRole("link").all()) assert((await link.getAttribute("href")).endsWith("#scenario"))
   const input = page.getByRole("textbox", { name: "搜索知识库", exact: true })
   await input.fill("DIFF-DEMO-01")

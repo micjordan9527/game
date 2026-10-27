@@ -9,7 +9,7 @@ export function Footer() {
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
             {[
               ["/cases", "案例"],
-              ["/articles", "功能图解"],
+              ["/articles", "知识图解"],
               ["/ai-workflows", "AI 工作流"],
               ["/design/material-standards", "素材规范"],
               ["/templates", "模板库"],

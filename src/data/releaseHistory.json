@@ -1,86 +1,148 @@
 {
   "current": {
-    "version": 19,
+    "version": 20,
     "date": "2026-10-27",
-    "title": "六个业务问题的排查路径与演示入口",
-    "summary": "按具体问题查看判断顺序、记录证据和处理边界，直达演示与正文；修正图解表述并保留图片阅读位置。",
+    "title": "知识图解与主题目录",
+    "summary": "从统一入口浏览知识图解，按主题进入内容；在当前版块目录和文章位置路径中继续查找。",
     "articleSlugs": [],
     "changes": [
       {
-        "id": "question-deposit-balance",
-        "title": "充值成功但余额未变化",
-        "description": "对照平台订单、通道结果和有效流水，区分缺账、重复通知与未知结果。",
-        "location": "功能演示目录 · 按问题找入口",
-        "href": "/updates/demonstrations#question-deposit-balance",
-        "linkLabel": "查看问题与入口"
+        "id": "knowledge-library-entry",
+        "title": "知识图解统一入口",
+        "description": "顶部、首页、页脚、卡片和搜索精选统一使用知识图解；全部33篇文章保留原链接。",
+        "location": "顶部导航与全部图解页",
+        "href": "/articles",
+        "linkLabel": "打开知识图解"
       },
       {
-        "id": "question-withdrawal-timeout",
-        "title": "提现超时与原请求查询",
-        "description": "区分未知和明确失败，说明冻结保持、授权释放与避免重复付款。",
-        "location": "功能演示目录 · 按问题找入口",
-        "href": "/updates/demonstrations#question-withdrawal-timeout",
-        "linkLabel": "查看问题与入口"
+        "id": "section-specific-directories",
+        "title": "当前版块显示对应目录",
+        "description": "案例、AI工作流与模板分别显示自己的目录；手机菜单使用相同目录，更新记录页不再显示侧栏。",
+        "location": "桌面左侧／手机导航",
+        "href": "/cases",
+        "linkLabel": "查看案例目录"
       },
       {
-        "id": "question-account-relogin",
-        "title": "账号恢复与重新登录",
-        "description": "分别检查账号、会话、资料和资金状态，避免把恢复账号当作所有申请已批准。",
-        "location": "功能演示目录 · 按问题找入口",
-        "href": "/updates/demonstrations#question-account-relogin",
-        "linkLabel": "查看问题与入口"
+        "id": "knowledge-subjects",
+        "title": "按主题浏览知识内容",
+        "description": "全部图解下按八个主题浏览；展开当前主题文章，篇数只统计文章，专题和原型入口单独列出。",
+        "location": "知识图解目录 · 按主题浏览",
+        "href": "/product",
+        "linkLabel": "查看产品设计主题"
       },
       {
-        "id": "question-agent-old-settlement",
-        "title": "归属变化与旧结算批次",
-        "description": "按归属和规则快照查看原批次，历史更正保留关联调整。",
-        "location": "功能演示目录 · 按问题找入口",
+        "id": "article-location-path",
+        "title": "文章显示所属主题与返回入口",
+        "description": "显示知识图解、所属主题与文章名称；可返回主题或总库，当前主题和文章有对应高亮。",
+        "location": "文章标题上方与当前目录",
+        "href": "/articles/member-account-states",
+        "linkLabel": "查看文章位置路径"
+      },
+      {
+        "id": "special-topic-directories",
+        "title": "保留体育与设计专题入口",
+        "description": "体育专题、设计原型和状态对照继续可访问，所属知识版块高亮与目录一致。",
+        "location": "体育博彩与设计体验目录",
+        "href": "/sportsbook",
+        "linkLabel": "查看体育专题",
+        "related": {
+          "href": "/design",
+          "label": "查看设计体验"
+        }
+      },
+      {
+        "id": "question-anchor-position",
+        "title": "问题入口明确定位到标题",
+        "description": "点击问题入口后显示对应标题与说明；重复点击同一问题也会重新定位，键盘焦点跟随标题。",
+        "location": "功能演示目录 · 业务问题定位",
         "href": "/updates/demonstrations#question-agent-old-settlement",
-        "linkLabel": "查看问题与入口"
-      },
-      {
-        "id": "question-profile-states",
-        "title": "个人中心空结果、失败和受限",
-        "description": "对照U8原型的四个分组、五种状态，说明原因与对应下一步。",
-        "location": "功能演示目录 · 按问题找入口",
-        "href": "/updates/demonstrations#question-profile-states",
-        "linkLabel": "查看问题与入口"
-      },
-      {
-        "id": "question-official-form-delivery",
-        "title": "咨询表单反馈与实际送达",
-        "description": "区分界面反馈、服务端受理和渠道送达；本地案例不发送数据。",
-        "location": "功能演示目录 · 按问题找入口",
-        "href": "/updates/demonstrations#question-official-form-delivery",
-        "linkLabel": "查看问题与入口"
-      },
-      {
-        "id": "availability-image-correction",
-        "title": "游戏状态图的可见与可用边界",
-        "description": "修正前台可见卡片，明确它只说明入口可见，能否进入仍需核对其他条件。",
-        "location": "游戏目录与可用状态 · 主题信息图",
-        "href": "/articles/game-catalog-availability",
-        "linkLabel": "查看修正后的图解"
-      },
-      {
-        "id": "article-image-reading-position",
-        "title": "文章与AI工作流大图关闭后保留位置",
-        "description": "查看大图时固定页面，关闭后恢复原阅读位置和打开按钮焦点，切换图片不重新锁定页面。",
-        "location": "文章主题信息图与AI工作流图片浏览",
-        "href": "/articles/backup-restore-verification",
-        "linkLabel": "查看图解与大图浏览"
-      },
-      {
-        "id": "content-release-counts",
-        "title": "专题条目与配图数量",
-        "description": "首页列出19张主题配图；v18按四个专题逐项给出正文、配图和相关入口，合并重复条目。",
-        "location": "首页最近更新与v18版本记录",
-        "href": "/updates#v18",
-        "linkLabel": "查看四篇专题记录"
+        "linkLabel": "查看问题定位"
       }
     ]
   },
   "history": [
+    {
+      "version": 19,
+      "title": "六个业务问题的排查路径与演示入口",
+      "summary": "按具体问题查看判断顺序、记录证据和处理边界，直达演示与正文；修正图解表述并保留图片阅读位置。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "question-deposit-balance",
+          "title": "充值成功但余额未变化",
+          "description": "对照平台订单、通道结果和有效流水，区分缺账、重复通知与未知结果。",
+          "location": "功能演示目录 · 按问题找入口",
+          "href": "/updates/demonstrations#question-deposit-balance",
+          "linkLabel": "查看问题与入口"
+        },
+        {
+          "id": "question-withdrawal-timeout",
+          "title": "提现超时与原请求查询",
+          "description": "区分未知和明确失败，说明冻结保持、授权释放与避免重复付款。",
+          "location": "功能演示目录 · 按问题找入口",
+          "href": "/updates/demonstrations#question-withdrawal-timeout",
+          "linkLabel": "查看问题与入口"
+        },
+        {
+          "id": "question-account-relogin",
+          "title": "账号恢复与重新登录",
+          "description": "分别检查账号、会话、资料和资金状态，避免把恢复账号当作所有申请已批准。",
+          "location": "功能演示目录 · 按问题找入口",
+          "href": "/updates/demonstrations#question-account-relogin",
+          "linkLabel": "查看问题与入口"
+        },
+        {
+          "id": "question-agent-old-settlement",
+          "title": "归属变化与旧结算批次",
+          "description": "按归属和规则快照查看原批次，历史更正保留关联调整。",
+          "location": "功能演示目录 · 按问题找入口",
+          "href": "/updates/demonstrations#question-agent-old-settlement",
+          "linkLabel": "查看问题与入口"
+        },
+        {
+          "id": "question-profile-states",
+          "title": "个人中心空结果、失败和受限",
+          "description": "对照U8原型的四个分组、五种状态，说明原因与对应下一步。",
+          "location": "功能演示目录 · 按问题找入口",
+          "href": "/updates/demonstrations#question-profile-states",
+          "linkLabel": "查看问题与入口"
+        },
+        {
+          "id": "question-official-form-delivery",
+          "title": "咨询表单反馈与实际送达",
+          "description": "区分界面反馈、服务端受理和渠道送达；本地案例不发送数据。",
+          "location": "功能演示目录 · 按问题找入口",
+          "href": "/updates/demonstrations#question-official-form-delivery",
+          "linkLabel": "查看问题与入口"
+        },
+        {
+          "id": "availability-image-correction",
+          "title": "游戏状态图的可见与可用边界",
+          "description": "修正前台可见卡片，明确它只说明入口可见，能否进入仍需核对其他条件。",
+          "location": "游戏目录与可用状态 · 主题信息图",
+          "href": "/articles/game-catalog-availability",
+          "linkLabel": "查看修正后的图解"
+        },
+        {
+          "id": "article-image-reading-position",
+          "title": "文章与AI工作流大图关闭后保留位置",
+          "description": "查看大图时固定页面，关闭后恢复原阅读位置和打开按钮焦点，切换图片不重新锁定页面。",
+          "location": "文章主题信息图与AI工作流图片浏览",
+          "href": "/articles/backup-restore-verification",
+          "linkLabel": "查看图解与大图浏览"
+        },
+        {
+          "id": "content-release-counts",
+          "title": "专题条目与配图数量",
+          "description": "首页列出19张主题配图；v18按四个专题逐项给出正文、配图和相关入口，合并重复条目。",
+          "location": "首页最近更新与v18版本记录",
+          "href": "/updates#v18",
+          "linkLabel": "查看四篇专题记录"
+        }
+      ],
+      "publishedAt": "2026-10-27T01:47:21.519679Z",
+      "githubCommit": "dd06272a1d0cec77d74d99234edf75236212c00c"
+    },
     {
       "version": 18,
       "title": "四篇业务控制专题与示意图",

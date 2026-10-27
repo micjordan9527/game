@@ -6,48 +6,30 @@ import { useEffect, useRef, useState } from "react"
 import {
   BookOpen,
   BriefcaseBusiness,
-  ChevronDown,
-  Compass,
   FileText,
-  FolderKanban,
   Home,
   Library,
   Menu,
   MonitorCog,
   Search,
-  ShieldCheck,
   Sparkles,
-  Trophy,
   X,
 } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
-import { articles } from "@/data/articles"
-import { categories } from "@/data/categories"
-import { caseNavItems } from "@/lib/site"
+import { ContentNavigation } from "@/components/layout/ContentNavigation"
+import { isNavigationSectionActive } from "@/lib/content-navigation"
 
 type NavLinkItem = { href: string; label: string; icon: LucideIcon }
 
 const resourceLinks: NavLinkItem[] = [
   { href: "/", label: "首页", icon: Home },
   { href: "/cases", label: "案例", icon: BriefcaseBusiness },
-  { href: "/articles", label: "功能图解", icon: FileText },
+  { href: "/articles", label: "知识图解", icon: FileText },
   { href: "/ai-workflows", label: "AI 工作流", icon: Sparkles },
   { href: "/design/material-standards", label: "素材规范", icon: MonitorCog },
-  { href: "/design/states", label: "状态对照", icon: MonitorCog },
   { href: "/templates", label: "模板库", icon: Library },
   { href: "/glossary", label: "术语库", icon: BookOpen },
 ]
-
-const categoryIcons: Record<string, LucideIcon> = {
-  industry: Compass,
-  sportsbook: Trophy,
-  "white-label": BriefcaseBusiness,
-  product: FolderKanban,
-  operation: Sparkles,
-  design: MonitorCog,
-  development: FileText,
-  "devops-risk": ShieldCheck,
-}
 
 export function MobileNav() {
   const pathname = usePathname()
@@ -55,14 +37,6 @@ export function MobileNav() {
   const [open, setOpen] = useState(false)
   const toggleRef = useRef<HTMLButtonElement>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
-
-  const currentArticleSlug = pathname.startsWith("/articles/") ? pathname.split("/")[2] : undefined
-  const currentArticle = articles.find((article) => article.slug === currentArticleSlug)
-  const activeCategorySlug =
-    currentArticle?.category ??
-    (pathname.startsWith("/sports")
-      ? "sportsbook"
-      : categories.find((category) => pathname === "/" + category.slug)?.slug)
 
   // Close the menu if navigation happened outside this component.
   useEffect(() => setOpen(false), [pathname])
@@ -177,38 +151,15 @@ export function MobileNav() {
                     <MobileLink
                       key={item.href}
                       {...item}
-                      active={pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href + "/"))}
+                      active={isNavigationSectionActive(pathname, item.href)}
+                      current={pathname === item.href}
                       onClick={() => closeMenu()}
                     />
                   ))}
                 </div>
               </section>
 
-              <NavGroup title="案例资料" defaultOpen={pathname.startsWith("/cases")}>
-                {caseNavItems.map((item) => (
-                  <MobileLink
-                    key={item.href}
-                    href={item.href}
-                    label={item.label}
-                    icon={BriefcaseBusiness}
-                    active={pathname === item.href}
-                    onClick={() => closeMenu()}
-                  />
-                ))}
-              </NavGroup>
-
-              <NavGroup title="知识栏目" defaultOpen={Boolean(activeCategorySlug)}>
-                {categories.map((category) => (
-                  <MobileLink
-                    key={category.slug}
-                    href={"/" + category.slug}
-                    label={category.title}
-                    icon={categoryIcons[category.slug] ?? FileText}
-                    active={activeCategorySlug === category.slug}
-                    onClick={() => closeMenu()}
-                  />
-                ))}
-              </NavGroup>
+              <ContentNavigation pathname={pathname} onNavigate={() => closeMenu()} />
 
               <p className="text-xs leading-6 text-muted">选择案例、图解或素材，直接查看具体内容。</p>
             </nav>
@@ -219,37 +170,18 @@ export function MobileNav() {
   )
 }
 
-function NavGroup({
-  title,
-  defaultOpen,
-  children,
-}: {
-  title: string
-  defaultOpen: boolean
-  children: React.ReactNode
-}) {
-  return (
-    <details open={defaultOpen} className="group rounded-lg border border-line bg-white">
-      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 text-sm font-semibold text-ink [&::-webkit-details-marker]:hidden">
-        {title}
-        <ChevronDown className="h-4 w-4 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
-      </summary>
-      <div className="grid gap-2 border-t border-line p-3">{children}</div>
-    </details>
-  )
-}
-
 function MobileLink({
   href,
   label,
   icon: Icon,
   active,
+  current,
   onClick,
-}: NavLinkItem & { active: boolean; onClick: () => void }) {
+}: NavLinkItem & { active: boolean; current: boolean; onClick: () => void }) {
   return (
     <Link
       href={href}
-      aria-current={active ? "page" : undefined}
+      aria-current={current ? "page" : active ? "location" : undefined}
       onClick={onClick}
       className={[
         "flex min-h-11 min-w-0 items-center gap-2 rounded-md px-3 py-2 text-sm transition",

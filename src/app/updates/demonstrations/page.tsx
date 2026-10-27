@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { demonstrationEntries, demonstrationGroups } from "@/data/demonstrationEntries"
 import { businessQuestions } from "@/data/businessQuestions"
+import { BusinessQuestionNavigation } from "@/components/updates/BusinessQuestionNavigation"
 import { absoluteUrl } from "@/lib/seo"
 
 export const metadata: Metadata = {
@@ -20,13 +21,11 @@ export default function DemonstrationsPage() {
       <section id="business-questions" className="mt-7 scroll-mt-24" aria-labelledby="business-questions-title">
         <h2 id="business-questions-title" className="text-xl font-semibold text-ink">按问题找入口</h2>
         <p className="mt-2 text-sm leading-7 text-muted">先辨认当前问题，再对照同一记录的状态与证据。每项提供演示和正文说明。</p>
-        <nav aria-label="业务问题定位" className="mt-4 flex flex-wrap gap-2">
-          {businessQuestions.map((item, index) => <a key={item.id} href={`#question-${item.id}`} className="rounded-md border border-line bg-white px-3 py-2 text-sm text-brand-700">{index + 1}. {item.title}</a>)}
-        </nav>
+        <BusinessQuestionNavigation items={businessQuestions.map(({ id, title }) => ({ id, title }))} />
         <div className="mt-5 grid gap-4 md:grid-cols-2">
           {businessQuestions.map((item) => (
             <article key={item.id} id={`question-${item.id}`} className="min-w-0 scroll-mt-24 rounded-xl border border-line bg-white p-5" aria-labelledby={`question-${item.id}-title`}>
-              <h3 id={`question-${item.id}-title`} className="font-semibold leading-7 text-ink">{item.title}</h3>
+              <h3 id={`question-${item.id}-title`} tabIndex={-1} className="font-semibold leading-7 text-ink">{item.title}</h3>
               <p className="mt-2 text-sm leading-7 text-muted">{item.summary}</p>
               <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-7 text-ink">
                 {item.steps.map((step) => <li key={step}>{step}</li>)}

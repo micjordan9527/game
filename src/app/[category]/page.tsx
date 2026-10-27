@@ -46,7 +46,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       />
       {slug === "design" ? <DesignExperienceHub /> : null}
       <section className="mt-6" aria-label="栏目图解">
-        <h2 className="mb-5 text-xl font-semibold text-ink">功能与图解</h2>
+        <h2 className="mb-5 text-xl font-semibold text-ink">本主题图解</h2>
         <div className="grid gap-5 md:grid-cols-2">
           {articles.map((article) => (
             <ArticleCard key={article.slug} article={article} />

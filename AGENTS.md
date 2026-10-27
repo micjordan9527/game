@@ -25,6 +25,12 @@ Sites and GitHub delivery preference (2026-10-25):
 - The global “更新记录” entry belongs only in the desktop/mobile header; do not repeat it in the sidebar, expanded mobile menu, footer or homepage quick links. Contextual change links and return links may remain.
 - Keep /updates organized by actual publication versions, with a current summary and collapsible history. Preserve old section links and return position. Keep existing demos in /updates/demonstrations. Count each article/image change in its own release once. Before deployment, verify releaseHistory.json's current version matches the native saved version number; current.date is an update date, while historical publishedAt values must come from confirmed deployments.
 
+Knowledge navigation (accepted 2026-10-27):
+- Use “知识图解” for the /articles library and its navigation labels.
+- The library contains all articles; “按主题浏览” organizes the same articles into the eight existing categories. Keep article URLs and specialized sports/design pages.
+- Desktop and mobile share the current-section directory. Cases, knowledge, AI workflows and templates show their own entries. Do not restore a full global resource menu beside every page.
+- Article position links follow 知识图解 → 所属主题 → 当前文章; highlight the topic as a parent and the article as the current page. Updates remain a header-only global entry.
+
 Image viewing preference (2026-10-25):
 - For BM/U8, “适应屏幕” fits the available width and preserves the image aspect ratio; long images scroll vertically without horizontal scrolling. Do not shrink the image to fit the viewport height.
 - Keep reading position when changing display scale and restore the page position when closing the viewer.

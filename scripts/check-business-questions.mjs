@@ -8,13 +8,23 @@ export async function checkBusinessQuestions(page, base, prefix, width) {
   const section = page.getByRole("region", { name: "按问题找入口", exact: true })
   assert.equal(await section.locator("article").count(), 6)
   const nav = section.getByRole("navigation", { name: "业务问题定位", exact: true })
-  for (const item of businessQuestions) {
+  for (const item of [...businessQuestions, businessQuestions[3], businessQuestions[3]]) {
     const card = section.locator("#question-" + item.id)
     assert.equal(await card.locator("ol > li").count(), 3)
     assert((await card.innerText()).includes(item.boundary))
     for (const link of [item.demo, item.article]) assert.equal(await card.locator(`a[href="${prefix}${link.href}"]`).count(), 1)
     await nav.locator(`a[href="#question-${item.id}"]`).click()
-    await page.waitForFunction((id) => { const top = document.getElementById(id)?.getBoundingClientRect().top; return top >= 65 && top <= 120 }, "question-" + item.id)
+    assert.equal(new URL(page.url()).hash, "#question-" + item.id)
+    try {
+      await page.waitForFunction((id) => {
+        const title = document.getElementById(id)?.getBoundingClientRect()
+        const header = document.querySelector("body > header").getBoundingClientRect()
+        return title && title.top >= header.bottom - 1 && title.bottom <= innerHeight + 1
+      }, "question-" + item.id + "-title")
+    } catch (error) {
+      const state = await page.evaluate((id) => ({ hash: location.hash, top: document.getElementById(id)?.getBoundingClientRect().top, scroll: scrollY, maximum: document.documentElement.scrollHeight - innerHeight }), "question-" + item.id + "-title")
+      throw new Error(`Question heading is obscured at ${width}px: ${JSON.stringify(state)}`, { cause: error })
+    }
   }
   await page.screenshot({ path: `/tmp/business-questions-${width}.png` })
   for (const item of [businessQuestions[0], businessQuestions.at(-1)]) {
@@ -32,5 +42,5 @@ export async function checkBusinessQuestions(page, base, prefix, width) {
     await page.waitForFunction((saved) => Math.abs(scrollY - saved) < 8, top)
   }
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false)
-  console.log(`PASS ${width}px: six business questions, 18 diagnostic steps, 12 direct links, all question anchors and search/return`)
+  console.log(`PASS ${width}px: six business questions, 18 diagnostic steps, 12 direct links, visible headings, repeated same-hash positioning and search/return`)
 }

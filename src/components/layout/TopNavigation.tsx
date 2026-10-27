@@ -3,10 +3,11 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Search } from "lucide-react"
+import { isNavigationSectionActive } from "@/lib/content-navigation"
 
 const links = [
   { href: "/cases", label: "案例" },
-  { href: "/articles", label: "功能图解" },
+  { href: "/articles", label: "知识图解" },
   { href: "/ai-workflows", label: "AI 工作流" },
   { href: "/design/material-standards", label: "素材规范" },
   { href: "/glossary", label: "术语库" },
@@ -21,7 +22,7 @@ export function TopNavigation() {
     <nav aria-label="顶部导航" className="hidden items-center gap-1 xl:flex">
       {links.map((link) => {
         const current = pathname === link.href
-        const active = current || pathname.startsWith(link.href + "/")
+        const active = isNavigationSectionActive(pathname, link.href)
         const utility = link.href === "/updates" || link.href === "/search"
         return (
           <Link

@@ -88,7 +88,7 @@ export default function HomePage() {
 
       <div className="mt-6 grid items-start gap-6 xl:grid-cols-[minmax(0,2fr)_minmax(18rem,1fr)]">
         <section aria-labelledby="home-topics-title" className="min-w-0 xl:order-2">
-          <h2 id="home-topics-title" className="text-xl font-semibold text-ink">
+          <h2 id="home-topics-title" className="scroll-mt-24 text-xl font-semibold text-ink">
             业务主题
           </h2>
           <nav aria-label="业务主题导航" className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-2">
@@ -124,7 +124,7 @@ export default function HomePage() {
         </section>
         <section aria-labelledby="home-cases-title" className="min-w-0 xl:order-1">
           <div className="mb-3 flex items-center justify-between gap-3">
-            <h2 id="home-cases-title" className="text-xl font-semibold text-ink">
+            <h2 id="home-cases-title" className="scroll-mt-24 text-xl font-semibold text-ink">
               精选案例
             </h2>
             <Link href="/cases" className="inline-flex items-center gap-1 text-xs font-semibold text-brand-700">
@@ -138,8 +138,8 @@ export default function HomePage() {
 
       <section aria-labelledby="home-diagrams-title" className="mt-8 border-t border-line pt-6">
         <div className="mb-4 flex items-center justify-between gap-3">
-          <h2 id="home-diagrams-title" className="text-xl font-semibold text-ink">
-            功能图解
+          <h2 id="home-diagrams-title" className="scroll-mt-24 text-xl font-semibold text-ink">
+            知识图解
           </h2>
           <Link href="/articles" className="text-xs font-semibold text-brand-700">
             全部图解 →
@@ -173,7 +173,7 @@ export default function HomePage() {
 
       <section aria-labelledby="home-workflows-title" className="mt-8 border-t border-line pt-6">
         <div className="mb-4 flex items-center justify-between gap-3">
-          <h2 id="home-workflows-title" className="text-xl font-semibold text-ink">
+          <h2 id="home-workflows-title" className="scroll-mt-24 text-xl font-semibold text-ink">
             AI 工作流
           </h2>
           <Link href="/ai-workflows" className="text-xs font-semibold text-brand-700">

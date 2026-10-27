@@ -23,7 +23,7 @@ export function ArticleCard({ article }: { article: Article }) {
         ) : (
           <div className="flex aspect-[16/10] items-center bg-brand-50/60 p-5">
             <div className="w-full">
-              <p className="text-xs font-semibold text-brand-700">功能图解</p>
+              <p className="text-xs font-semibold text-brand-700">知识图解</p>
               <div className="mt-4 flex flex-wrap items-center gap-2">
                 {(flow?.steps ?? []).map((step) => (
                   <span
