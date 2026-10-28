@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react"
-import { useEffect, useId, useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties } from "react"
 import { assetPath } from "@/lib/assets"
 
 type LongImageItem = {
@@ -16,6 +16,14 @@ type LongImageItem = {
   width: number
   height: number
   sourceHref?: string
+  crop?: { x: number; y: number; width: number; height: number }
+}
+
+function CroppedImage({ item, className, style }: { item: LongImageItem; className?: string; style?: CSSProperties }) {
+  const crop = item.crop!
+  return <svg data-gallery-image data-cropped-image role="img" aria-label={item.title} viewBox={`${crop.x} ${crop.y} ${crop.width} ${crop.height}`} width={crop.width} height={crop.height} className={className} style={style} overflow="hidden">
+    <image href={assetPath(item.src)} width={item.width} height={item.height} />
+  </svg>
 }
 
 type LongImageGalleryProps = {
@@ -29,6 +37,8 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
   const titleId = useId()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const activeItem = activeIndex === null ? null : items[activeIndex] ?? null
+  const activeWidth = activeItem?.crop?.width ?? activeItem?.width
+  const activeHeight = activeItem?.crop?.height ?? activeItem?.height
   const canNavigate = items.length > 1
   const isOpen = activeItem !== null
   const [viewMode, setViewMode] = useState<"fit" | "actual">("fit")
@@ -41,7 +51,7 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
   const changeViewMode = (mode: typeof viewMode) => {
     if (mode === viewMode) return
     const viewport = viewportRef.current
-    const image = viewport?.querySelector("img")
+    const image = viewport?.querySelector("[data-gallery-image]")
     if (viewport && image) {
       const size = image.getBoundingClientRect()
       viewPointRef.current = {
@@ -54,7 +64,7 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
 
   useLayoutEffect(() => {
     const viewport = viewportRef.current
-    const image = viewport?.querySelector("img")
+    const image = viewport?.querySelector("[data-gallery-image]")
     const point = viewPointRef.current
     if (!viewport || !image || !point) return
     const size = image.getBoundingClientRect()
@@ -142,10 +152,11 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
               }}
               type="button"
             >
-              <picture className="block max-h-80 overflow-hidden rounded-md sm:max-h-[28rem]">
+              {item.crop ? <div className="block overflow-hidden rounded-md"><CroppedImage item={item} className="mx-auto block h-auto w-full rounded-md bg-white shadow-sm" /></div> : <picture className="block max-h-80 overflow-hidden rounded-md sm:max-h-[28rem]">
                 {item.srcAvif ? <source srcSet={assetPath(item.srcAvif)} type="image/avif" /> : null}
                 {item.srcWebp ? <source srcSet={assetPath(item.srcWebp)} type="image/webp" /> : null}
                 <Image
+                  data-gallery-image
                   src={assetPath(item.src)}
                   alt={item.title}
                   width={item.width}
@@ -154,10 +165,10 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
                   className="mx-auto h-auto w-full rounded-md bg-white shadow-sm"
                   loading="lazy"
                 />
-              </picture>
-              <span className="mt-3 flex items-center justify-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-xs font-semibold text-brand-700 group-hover:border-brand-200">
+              </picture>}
+              <span className={`mt-3 flex items-center justify-center gap-2 rounded-md border border-line bg-white px-3 py-2 ${item.crop ? "text-sm" : "text-xs"} font-semibold text-brand-700 group-hover:border-brand-200`}>
                 <Maximize2 className="h-4 w-4" aria-hidden="true" />
-                查看完整长图
+                {item.crop ? "放大这一局部" : "查看完整长图"}
               </span>
             </button>
             {item.sourceHref ? (
@@ -209,14 +220,15 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
                 ) : null}
               </div>
               <p className="mt-2 text-xs leading-5 text-muted" id={`${titleId}-hint`}>
-                {viewMode === "actual" ? `原尺寸 ${activeItem.width} × ${activeItem.height}，上下左右滑动查看细节。` : "按窗口宽度显示，上下滑动查看完整长图。"}
+                {viewMode === "actual" ? `原尺寸 ${activeWidth} × ${activeHeight}，上下左右滑动查看细节。` : activeItem.crop ? "局部按窗口宽度显示，上下滑动查看；可切换原界面与方案。" : "按窗口宽度显示，上下滑动查看完整长图。"}
               </p>
             </div>
             <div ref={viewportRef} role="region" aria-label="图片浏览区域" aria-describedby={`${titleId}-hint`} tabIndex={0} className="min-h-0 flex-1 overflow-auto overscroll-contain bg-paper p-2 sm:p-4">
-              <picture className="block w-full" style={viewMode === "actual" ? { width: activeItem.width } : undefined}>
+              {activeItem.crop ? <CroppedImage item={activeItem} className={viewMode === "fit" ? "block h-auto w-full max-w-full shadow-sm" : "block h-auto max-w-none bg-white shadow-sm"} style={viewMode === "actual" ? { width: activeWidth } : undefined} /> : <picture className="block w-full" style={viewMode === "actual" ? { width: activeWidth } : undefined}>
                 {activeItem.srcAvif ? <source srcSet={assetPath(activeItem.srcAvif)} type="image/avif" /> : null}
                 {activeItem.srcWebp ? <source srcSet={assetPath(activeItem.srcWebp)} type="image/webp" /> : null}
                 <Image
+                  data-gallery-image
                   src={assetPath(activeItem.src)}
                   alt={activeItem.title}
                   width={activeItem.width}
@@ -225,12 +237,12 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
                   className={viewMode === "fit" ? "h-auto w-full max-w-full shadow-sm" : "h-auto max-w-none bg-white shadow-sm"}
                   style={viewMode === "actual" ? { width: activeItem.width } : undefined}
                 />
-              </picture>
+              </picture>}
             </div>
             {canNavigate ? (
               <div className="grid shrink-0 gap-2 border-t border-line bg-white p-3">
                 <p className="px-1 text-xs font-semibold text-muted">
-                  点击缩略图可跳转到对应长图
+                  {activeItem.crop ? "点击缩略图可切换原界面与方案局部" : "点击缩略图可跳转到对应长图"}
                 </p>
                 <div className="no-scrollbar grid auto-cols-max grid-flow-col gap-2 overflow-x-auto pb-1">
                   {items.map((item, index) => (
@@ -245,7 +257,7 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
                         activeIndex === index ? "border-brand-700 ring-brand-200" : "border-line hover:border-brand-100",
                       ].join(" ")}
                     >
-                      <picture className="block h-full w-full">
+                      {item.crop ? <CroppedImage item={item} className="block h-full w-full rounded-sm" /> : <picture className="block h-full w-full">
                         {item.srcAvif ? <source srcSet={assetPath(item.srcAvif)} type="image/avif" /> : null}
                         {item.srcWebp ? <source srcSet={assetPath(item.srcWebp)} type="image/webp" /> : null}
                         <Image
@@ -257,7 +269,7 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
                           className="h-full w-full rounded-sm object-cover"
                           loading="lazy"
                         />
-                      </picture>
+                      </picture>}
                       <span
                         className={[
                           "absolute left-1 top-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-black/50 text-[10px] text-white",

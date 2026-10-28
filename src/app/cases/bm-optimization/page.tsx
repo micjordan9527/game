@@ -39,7 +39,7 @@ const versionedBmImages = bmImages.map((image) => ({
 
 export const metadata = {
   title: "BM手机端优化",
-  description: "首页与详情页的分类、状态和底部操作区改版对照。",
+  description: "首页分类、状态层级与详情操作区三组局部对照，原界面和生成式方案可分别放大，并对照手机原型。",
   alternates: { canonical: absoluteUrl("/cases/bm-optimization") },
 }
 export default function BmOptimizationCasePage() {

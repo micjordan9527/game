@@ -16,16 +16,17 @@ export const adminTours = [
   ] },
 ]
 
-export type ImageFocus = { id: string; title: string; src: string; width: number; height: number; crop?: { x: number; y: number; width: number; height: number }; caption: string; note: string }
+export type FocusCrop = { x: number; y: number; width: number; height: number }
+export type ImageFocus = { id: string; title: string; src: string; width: number; height: number; crop?: FocusCrop; caption: string; note: string; comparison?: { before: { crop: FocusCrop; label: string; caption: string }; after: { crop: FocusCrop; label: string; caption: string }; demoHref: string; demoLabel: string } }
 export const bmFocus: ImageFocus[] = [
-  { id: "categories", title: "首页分类", src: "/case-assets/bm-optimization/bm-home-optimization.avif", width: 1600, height: 1160, crop: { x: 0, y: 250, width: 1600, height: 360 }, caption: "对照原图与生成式方案的顶部分类、入口与首组内容。", note: "分类要表达稳定的内容范围；即时比分和比赛阶段属于状态信息，不宜混用。" },
-  { id: "status", title: "状态层级", src: "/case-assets/bm-optimization/bm-home-optimization.avif", width: 1600, height: 1160, crop: { x: 0, y: 530, width: 1600, height: 350 }, caption: "对照列表中比赛、比分和信息块的排布。", note: "用文字与分组表达状态，颜色作为辅助；不能只靠颜色判断是否可操作。" },
-  { id: "actions", title: "详情操作区", src: "/case-assets/bm-optimization/bm-detail-optimization.avif", width: 1600, height: 1160, crop: { x: 0, y: 810, width: 1600, height: 330 }, caption: "查看详情页下部与操作区域的对照。", note: "重要操作与当前对象、金额及状态保持关联；生成式方案中的文字与间距仍需逐项核对。" },
+  { id: "categories", title: "首页分类", src: "/case-assets/bm-optimization/bm-home-optimization.avif", width: 1600, height: 1160, crop: { x: 0, y: 250, width: 1600, height: 360 }, caption: "把同一张首页材料中的顶部入口拆开对照。", note: "先看每排回答什么：专题、日期条件和球类分别辨认。原型可组合选择球类与比赛状态，静态方案不证明真实筛选已经实现。", comparison: { before: { crop: { x: 110, y: 317, width: 310, height: 115 }, label: "原界面局部", caption: "上排有热门、滚球、今日、早盘等入口，下排是球类图标。" }, after: { crop: { x: 875, y: 350, width: 295, height: 132 }, label: "方案局部 · 生成示意", caption: "顶部增加专题入口，球类图标单独一排，下方继续提供筛选。" }, demoHref: "#bm-mobile-prototype", demoLabel: "在手机原型组合球类与状态筛选" } },
+  { id: "status", title: "状态层级", src: "/case-assets/bm-optimization/bm-home-optimization.avif", width: 1600, height: 1160, crop: { x: 0, y: 530, width: 1600, height: 350 }, caption: "把队名、时间、比分与多列数字放在同一阅读范围内看。", note: "方案把比分放到队名旁的小块，其他数字按列排列。颜色辅助阅读；是否进行中、是否已结束仍需文字和业务状态说明。", comparison: { before: { crop: { x: 110, y: 433, width: 310, height: 181 }, label: "原界面局部", caption: "同一条记录里有时间、双方名称及多列数字，需逐项辨认。" }, after: { crop: { x: 875, y: 488, width: 295, height: 207 }, label: "方案局部 · 生成示意", caption: "队名旁显示小比分块，右侧数字按不同列分组。" }, demoHref: "#bm-mobile-prototype", demoLabel: "在手机原型对照未开始、进行中和已结束" } },
+  { id: "actions", title: "详情操作区", src: "/case-assets/bm-optimization/bm-detail-optimization.avif", width: 1600, height: 1160, crop: { x: 0, y: 810, width: 1600, height: 330 }, caption: "只看详情底部的记录、汇总与操作位置。", note: "原图这个局部是连续记录，方案增加底部汇总栏，右侧仍有悬浮图标。遮挡、固定位置和手机安全区需要实际操作核对，图片不能证明这些行为。", comparison: { before: { crop: { x: 110, y: 775, width: 310, height: 183 }, label: "原界面局部", caption: "详情底部继续排列记录，截图中没有展示同样的底部汇总栏。" }, after: { crop: { x: 875, y: 775, width: 295, height: 183 }, label: "方案局部 · 生成示意", caption: "底部增加数量、金额与操作区域，右侧仍能看到悬浮图标。" }, demoHref: "#bm-mobile-prototype", demoLabel: "在手机原型打开详情并核对当前记录" } },
 ]
 export const u8Focus: ImageFocus[] = [
-  { id: "home-entry", title: "首页入口", src: "/case-assets/competitor-analysis/u8/u8-homepage-optimization.avif", width: 2160, height: 5696, crop: { x: 0, y: 0, width: 2160, height: 1850 }, caption: "从原首页和问题拆解中查看首屏目标、入口数量与内容关系。", note: "入口多并不等于路径清楚；先确认用户当前要找的功能，再检查同类入口是否集中。" },
-  { id: "home-groups", title: "首页分组", src: "/case-assets/competitor-analysis/u8/u8-homepage-optimization.avif", width: 2160, height: 5696, crop: { x: 0, y: 1850, width: 2160, height: 1850 }, caption: "继续查看首页信息分组与改版方向的局部材料。", note: "区分常用功能、活动信息与帮助服务，减少同一区域中的目标竞争。" },
-  { id: "profile", title: "个人中心", src: "/case-assets/competitor-analysis/u8/u8-profile-optimization.avif", width: 2160, height: 5696, crop: { x: 0, y: 0, width: 2160, height: 2100 }, caption: "定位个人中心的账号信息、资产与服务入口。", note: "账号身份、资产状态、操作入口分别表达；余额显示不应代替订单状态说明。" },
+  { id: "home-entry", title: "首页入口", src: "/case-assets/competitor-analysis/u8/u8-homepage-optimization.avif", width: 2160, height: 5696, crop: { x: 0, y: 0, width: 2160, height: 1850 }, caption: "从分析图中分别取出首页原界面与改版示意的首屏。", note: "材料中的改版示意把登录／注册放成整行按钮，辅助服务另排一行。图中变化只说明布局，不能据此判断真实点击率；下方原型展示的是个人中心分组。", comparison: { before: { crop: { x: 200, y: 595, width: 410, height: 650 }, label: "材料中的原界面", caption: "未登录提示、服务入口和多块宣传内容同时出现在首屏。" }, after: { crop: { x: 200, y: 2725, width: 410, height: 650 }, label: "材料中的改版示意", caption: "登录／注册变成整行按钮，辅助服务保持独立一排。" }, demoHref: "#u8-profile-prototype", demoLabel: "在个人中心原型对照入口分组" } },
+  { id: "home-groups", title: "首页分组", src: "/case-assets/competitor-analysis/u8/u8-homepage-optimization.avif", width: 2160, height: 5696, crop: { x: 0, y: 1850, width: 2160, height: 1850 }, caption: "只看首页下部的内容分类、浮条与底部导航。", note: "对照可见结构：原界面的分类下方有蓝色浮条，改版示意这个局部不再展示相同浮条。滚动时是否遮挡、浮层是否可关闭，仍需实际设备检查。", comparison: { before: { crop: { x: 200, y: 1245, width: 410, height: 355 }, label: "材料中的原界面", caption: "内容分类、蓝色浮条和底部图标出现在相邻区域。" }, after: { crop: { x: 200, y: 3375, width: 410, height: 355 }, label: "材料中的改版示意", caption: "内容分类与底部导航分区显示，该局部没有相同蓝色浮条。" }, demoHref: "#u8-profile-prototype", demoLabel: "在个人中心原型切换账号、资产、订单和服务" } },
+  { id: "profile", title: "个人中心", src: "/case-assets/competitor-analysis/u8/u8-profile-optimization.avif", width: 2160, height: 5696, crop: { x: 0, y: 0, width: 2160, height: 2100 }, caption: "把钱包主卡、资金入口与收益区拆出来对照。", note: "方案把钱包主卡、充值／提现和收益区分组。真实余额、单笔订单和账号状态仍要分别判断；原型可切换四类分组与五种界面状态。", comparison: { before: { crop: { x: 200, y: 720, width: 410, height: 660 }, label: "材料中的原界面", caption: "余额、充提入口、今日收益和更多服务连续排列。" }, after: { crop: { x: 200, y: 2845, width: 410, height: 780 }, label: "材料中的改版示意", caption: "钱包主卡与两个资金入口成组，收益和常用服务另设区域。" }, demoHref: "#u8-profile-prototype", demoLabel: "在个人中心原型对照资产、订单与异常状态" } },
 ]
 export const officialFocus: ImageFocus[] = [
   { id: "services", title: "服务卡片", src: "/images/enrichment/official-services.jpg", width: 1320, height: 800, caption: "现有官网演示的服务方案模块截图。", note: "用相同卡片层级对照服务范围，再把方案差异放进标题与条目，便于横向比较。" },
@@ -58,7 +59,7 @@ export const caseReadingLinks = {
 
 export const caseCardDetails: Record<string, { screens: string; material: string }> = {
   "admin-optimization": { screens: "运营看板、活动记录；充值列表与详情；会员列表与详情", material: "可操作演示 · 示例数据 · 9 张步骤截图" },
-  "bm-optimization": { screens: "首页分类、比赛状态、详情操作区；可操作手机原型", material: "原截图与生成式方案对照 · 局部标注 · 虚构记录交互示意" },
-  "competitor-analysis": { screens: "首页入口、内容分组；个人中心与五种界面状态", material: "分析信息图 · 局部定位 · 个人中心交互示意" },
+  "bm-optimization": { screens: "首页分类、比赛状态、详情操作区；可操作手机原型", material: "原截图与生成式方案 · 3组可放大局部对照 · 虚构记录交互示意" },
+  "competitor-analysis": { screens: "首页入口、内容分组；个人中心与五种界面状态", material: "分析信息图 · 3组可放大局部对照 · 个人中心交互示意" },
   "white-label-official": { screens: "服务卡片、架构说明、咨询表单；桌面与手机对照", material: "网站演示 · 3 张界面标注 · 6 张响应式实际截图" },
 }

@@ -41,7 +41,7 @@ const versionedCompetitorInfographics = competitorInfographics.map((item) => ({
 
 export const metadata = {
   title: "竞品分析",
-  description: "沉淀竞品页面拆解、优化方案和信息图。",
+  description: "U8首页入口、底部导航和个人中心三组局部对照，分别查看材料中的原界面与改版示意，再操作个人中心状态原型。",
   alternates: {
     canonical: absoluteUrl("/cases/competitor-analysis"),
   },

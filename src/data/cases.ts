@@ -48,7 +48,7 @@ export const caseItems: CaseItem[] = [
   {
     slug: "bm-optimization",
     title: "BM优化",
-    description: "查看手机端首页与详情页的分类、状态和操作区对照。",
+    description: "查看首页分类、状态与详情操作区三组局部，分别放大原界面与生成式方案。",
     status: "已接入",
     href: "/cases/bm-optimization",
     coverSrc: "/case-assets/bm-optimization/bm-home-optimization.png",
@@ -66,7 +66,7 @@ export const caseItems: CaseItem[] = [
   {
     slug: "competitor-analysis",
     title: "竞品分析",
-    description: "查看 U8 首页与个人中心的改版对照图。",
+    description: "查看U8首页入口、底部导航与个人中心三组局部，分别放大材料中的原界面与改版示意。",
     status: "已接入",
     href: "/cases/competitor-analysis",
     coverSrc: "/case-assets/competitor-analysis/u8/u8-homepage-optimization.jpg",
