@@ -310,5 +310,28 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/admin-bulk-actions#bulk-action-demo",
     "visualType": "界面图解",
     "location": "设计体验 · 界面信息图"
+  },
+  {
+    "slug": "content-publication-versions-v26",
+    "articleSlug": "content-publication-versions",
+    "title": "公告、帮助内容与发布版本",
+    "description": "用五幅界面图和可操作示例，区分草稿、审核、定时生效、前台版本、更正与撤回，并分别核对站点和语言。",
+    "kind": "补充",
+    "href": "/articles/content-publication-versions",
+    "detailHref": "/articles/content-publication-versions#visual-guide",
+    "relatedHref": "/articles/content-publication-versions#publication-demo",
+    "visualType": "界面图解",
+    "location": "产品设计 · 公告发布图解与演示"
+  },
+  {
+    "slug": "mobile-page-layout",
+    "title": "手机页面布局：列表、表单与底部操作",
+    "description": "用六幅手机界面图讲清列表卡片、长表单、底部留白、键盘可见区域、详情返回与账号资产分组，并对照BM和U8材料。",
+    "kind": "新增",
+    "href": "/articles/mobile-page-layout",
+    "detailHref": "/articles/mobile-page-layout#visual-guide",
+    "relatedHref": "/articles/mobile-page-layout#mobile-layout-demo",
+    "visualType": "界面图解",
+    "location": "设计体验 · 手机布局图解与演示"
   }
 ]

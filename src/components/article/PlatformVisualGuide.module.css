@@ -1,0 +1,28 @@
+.phone { max-width: 320px; margin: 12px auto; border: 2px solid #93aab3; border-radius: 18px; overflow: hidden; background: white; }
+.phoneHeader { padding: 12px; border-bottom: 1px solid #cddde2; background: #edf5f4; font-weight: 700; }
+.phoneBody { padding: 12px; }
+.bottomAction { border-top: 2px solid #7daaa4; padding: 12px; background: #edf5f4; }
+.safeSpace { border: 1px dashed #729a93; margin-top: 14px; padding: 18px 10px; background: #edf5f4; color: #245d58; }
+.keyboard { padding: 14px 10px; background: #dce5ea; text-align: center; border-top: 2px solid #9aafb9; }
+.keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
+.keys span { border: 1px solid #9aafb9; background: white; border-radius: 5px; padding: 9px 2px; }
+.compactTable { display: grid; grid-template-columns: 1fr 1fr 1fr; border: 1px solid #cbd9df; border-radius: 5px; overflow: hidden; }
+.compactTable > span { padding: 9px 5px; border-bottom: 1px solid #cbd9df; background: white; }
+.compactTable > span:nth-child(-n+3) { background: #e7eff2; font-weight: 600; }
+.scopeGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.scopeGrid > div { border: 1px solid #cbd9df; background: white; border-radius: 7px; padding: 12px; }
+.scopeGrid strong { display: block; margin-top: 8px; font-size: 24px; }
+.versionRail { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 5px; }
+.versionRail > span { display: grid; gap: 5px; text-align: center; }
+.versionRail strong { border-radius: 8px; padding: 12px; background: #e1eee9; color: #245d58; font-size: 24px; }
+.versionRail small { font-size: 14px; }
+.timeline { padding-left: 14px; border-left: 3px solid #7daaa4; }
+.timeline > div { position: relative; padding: 10px 5px 14px; }
+.timeline > div::before { position: absolute; left: -20px; top: 17px; content: ""; width: 9px; height: 9px; background: #32716d; border-radius: 50%; }
+.timeline strong { display: block; }
+.trace { display: grid; grid-template-columns: 76px minmax(0,1fr); gap: 10px; padding: 12px 0; border-bottom: 1px solid #cbd9df; }
+.trace > span:first-child { color: #526575; }
+.references { margin-top: 22px; }
+.references h3 { font-size: 18px; line-height: 1.7; font-weight: 700; }
+.references p { margin-top: 10px; font-size: 14px; line-height: 1.8; }
+@media (max-width: 430px) { .scopeGrid { grid-template-columns: minmax(0,1fr); } }

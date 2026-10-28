@@ -11,20 +11,20 @@ export const designArticleGuides: Record<string, { title: string; intro: string;
   "admin-bulk-actions": { title: "选中8条，为什么只有4条成功", intro: "按下方演示的默认设置：全部8条，模拟一条失败，不额外模拟状态变化。", demo: "#bulk-action-demo" },
 }
 
-function Frame({ n, title, note, children }: { n: string; title: string; note: string; children: ReactNode }) {
+export function Frame({ n, title, note, children }: { n: string; title: string; note: string; children: ReactNode }) {
   return <figure className={styles.frame} data-guide-frame>
     <figcaption className={styles.frameTitle}><span className={styles.number}>{n}</span><h3>{title}</h3></figcaption>
     <div className={styles.screen}>{children}</div>
     <p className={styles.note}><ArrowRight aria-hidden="true" size={18} /><span>{note}</span></p>
   </figure>
 }
-function Action({ children, disabled = false, secondary = false }: { children: ReactNode; disabled?: boolean; secondary?: boolean }) {
+export function Action({ children, disabled = false, secondary = false }: { children: ReactNode; disabled?: boolean; secondary?: boolean }) {
   return <span className={`${styles.action} ${disabled ? styles.disabled : ""} ${secondary ? styles.secondary : ""}`}>{children}</span>
 }
-function Badge({ children, tone = "neutral" }: { children: ReactNode; tone?: "neutral" | "good" | "warn" | "bad" }) {
+export function Badge({ children, tone = "neutral" }: { children: ReactNode; tone?: "neutral" | "good" | "warn" | "bad" }) {
   return <span className={`${styles.badge} ${styles[tone]}`}>{children}</span>
 }
-function Field({ label, value, error }: { label: string; value: string; error?: string }) {
+export function Field({ label, value, error }: { label: string; value: string; error?: string }) {
   return <div className={styles.field}><span>{label}</span><div className={error ? styles.invalid : ""}>{value || "未填写"}</div>{error ? <strong className={styles.error}>{error}</strong> : null}</div>
 }
 function RecordRow({ id, selected = false, result }: { id: string; selected?: boolean; result?: string }) {

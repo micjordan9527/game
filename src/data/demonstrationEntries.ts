@@ -1,4 +1,6 @@
 export const demonstrationEntries = [
+  { group: "business-process", location: "产品设计 · 公告、帮助内容与发布版本", title: "公告审核与发布", href: "/articles/content-publication-versions#publication-demo", description: "固定版本和站点语言，观察审核、定时、发布失败、改稿失效、前台旧版本、更正、撤回与到期。" },
+  { group: "interface-design", location: "设计体验 · 手机页面布局", title: "手机布局与信息优先级", href: "/articles/mobile-page-layout#mobile-layout-demo", description: "复用响应布局演示切换桌面、平板和手机，查看默认与展开信息，并进入BM、U8原型。" },
   { group: "interface-design", location: "知识图解 · 后台批量操作", title: "后台批量操作", href: "/articles/admin-bulk-actions#bulk-action-demo", description: "区分当前页和全部匹配，确认对象范围，模拟状态变化、部分失败、跳过和仅选择失败项。" },
   { group: "business-process", location: "知识图解 · 数据导出、脱敏与下载审计", title: "导出任务全过程", href: "/articles/export-masking-audit#export-task-demo", description: "固定筛选快照，观察排队、生成、失败、取消、下载、过期与权限变化，可下载虚构脱敏CSV。" },
   { group: "interface-design", location: "知识图解 · 后台筛选与列表状态", title: "后台筛选与列表", href: "/articles/admin-filter-list-states#list-demo", description: "编辑与应用条件、翻页、无匹配结果、查询失败与重试；从详情返回保留条件、排序、页码和位置。" },

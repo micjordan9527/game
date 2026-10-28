@@ -13,6 +13,17 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "mobile-page-layout",
+    title: "手机页面布局：列表、表单与底部操作",
+    description: "用六幅手机界面图讲清列表卡片、长表单、底部留白、键盘可见区域、详情返回与账号资产分组，并对照BM和U8材料。",
+    category: "design",
+    tags: ["手机布局", "响应式", "表单", "底部操作", "详情返回"],
+    audience: ["交互", "设计", "产品", "开发", "测试", "运营"],
+    difficulty: "进阶",
+    date: "2026-10-28",
+    updatedAt: "2026-10-28",
+  },
+  {
     slug: "admin-bulk-actions",
     title: "后台批量操作：范围确认与部分失败",
     description: "用八条虚构工单画清当前页与全部匹配、确认范围、四条成功一条失败三条跳过，以及只处理失败项。",
@@ -493,13 +504,13 @@ export const articles: Article[] = [
   {
     slug: "content-publication-versions",
     title: "公告、帮助内容与发布版本",
-    description: "区分草稿、审核、定时发布、生效版本和更正记录，说明站点、语言、有效期、规则版本与用户已读的保存边界。",
+    description: "用五幅界面图和可操作示例，区分草稿、审核、定时生效、前台版本、更正与撤回，并分别核对站点和语言。",
     category: "product",
     tags: ["内容发布", "公告", "帮助中心", "版本", "多站点"],
-    audience: ["产品", "运营", "客服", "技术", "测试"],
+    audience: ["产品", "运营", "客服", "技术", "测试", "交互", "设计"],
     difficulty: "进阶",
     date: "2026-10-26",
-    updatedAt: "2026-10-26",
+    updatedAt: "2026-10-28",
   },
   {
     slug: "game-catalog-availability",

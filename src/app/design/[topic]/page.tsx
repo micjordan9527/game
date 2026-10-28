@@ -107,6 +107,7 @@ export default async function DesignTopicPage({ params }: { params: Promise<{ to
         <SectionHeader as="h1" eyebrow="设计体验专题" title={item.title} description={item.description} />
       </div>
 
+      {topic === "mobile" ? <Link href="/articles/mobile-page-layout#visual-guide" className="mt-5 block rounded-lg border border-line bg-white p-4 text-sm font-semibold leading-7 text-brand-700">手机页面布局图解：列表卡片、长表单、底部操作、键盘与详情返回 →</Link> : null}
       {item.content}
 
       <section className="border-t border-line py-10">

@@ -1,18 +1,30 @@
 {
   "current": {
-    "version": 25,
+    "version": 26,
     "date": "2026-10-28",
-    "title": "四篇设计文章改为界面信息图",
-    "summary": "用具体字段、按钮状态与结果对照讲解信息层级、筛选列表、表单反馈和批量操作；手机逐幅阅读，图解后可直接操作演示，详细规则默认展开。",
+    "title": "公告发布与手机布局图解",
+    "summary": "补充公告审核、计划生效、前台版本、更正与撤回演示；新增手机布局文章，用11幅界面场景解释列表、表单、键盘和返回，并复用BM、U8材料及响应布局演示。",
     "articleSlugs": [
-      "admin-information-hierarchy-v25",
-      "admin-filter-list-states-v25",
-      "form-validation-submit-feedback-v25",
-      "admin-bulk-actions-v25"
+      "content-publication-versions-v26",
+      "mobile-page-layout"
     ],
     "changes": []
   },
   "history": [
+    {
+      "version": 25,
+      "title": "四篇设计文章改为界面信息图",
+      "summary": "用具体字段、按钮状态与结果对照讲解信息层级、筛选列表、表单反馈和批量操作；手机逐幅阅读，图解后可直接操作演示，详细规则默认展开。",
+      "articleSlugs": [
+        "admin-information-hierarchy-v25",
+        "admin-filter-list-states-v25",
+        "form-validation-submit-feedback-v25",
+        "admin-bulk-actions-v25"
+      ],
+      "changes": [],
+      "publishedAt": "2026-10-28T06:48:47.837565+00:00",
+      "githubCommit": "f6e96be7cdde17e311d29c57dc2c8e7141a414de"
+    },
     {
       "version": 24,
       "title": "批量操作与导出任务演示",

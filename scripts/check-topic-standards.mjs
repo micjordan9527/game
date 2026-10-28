@@ -49,11 +49,12 @@ export function checkTopicStandards(root, errors) {
   const designTopics = readRecords(root, "src/components/design/DesignExperienceHub.tsx", "designTopics")
   const visuals = readRecords(root, "src/data/imagePrompts.ts", "imagePrompts")
   const flows = readRecords(root, "src/data/articleFlows.ts", "articleFlows")
+  const platformGuides = readRecords(root, "src/components/article/PlatformVisualGuide.tsx", "guides")
   const showcase = readRecords(root, "src/data/showcase.ts", "showcaseItems")
   const sports = readRecords(root, "src/data/sports.ts", "sportsModules")
   const home = readRecords(root, "src/data/homeContent.ts", "homeContent")
   for (const article of articles) {
-    if (!visuals.some((image) => image.articleSlug === article.slug) && !flows[article.slug]?.steps?.length)
+    if (!visuals.some((image) => image.articleSlug === article.slug) && !flows[article.slug]?.steps?.length && !platformGuides[article.slug]?.demo)
       errors.push(`article ${article.slug}: missing visual explanation`)
   }
   for (const image of [
