@@ -146,7 +146,7 @@ export function buildSearchIndex(): SearchRecord[] {
         title: item.title,
         description: item.summary,
         href: `/ai-workflows/${item.slug}`,
-        previewImage: item.outputs[0]?.image,
+        previewImage: item.outputs[0]?.image ?? item.caseImage,
         tags: [item.scenario, ...item.tags],
       },
       [item.prompt, item.referenceNote, item.extensionNote ?? "", JSON.stringify(workflowProcesses[item.slug as keyof typeof workflowProcesses] ?? {})].join(" ")

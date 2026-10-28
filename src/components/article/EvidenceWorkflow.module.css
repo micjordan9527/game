@@ -1,0 +1,17 @@
+.record { border: 1px solid #c8d8de; border-radius: 8px; padding: 12px; background: white; }
+.record + .record { margin-top: 12px; }
+.record strong { display: block; }
+.record p { margin-top: 7px; }
+.source { color: #256c69; font-weight: 700; }
+.crop { position: relative; overflow: hidden; max-width: 330px; margin: 12px auto; border: 1px solid #bdced5; border-radius: 7px; background: white; }
+.crop img { position: absolute; height: auto; max-width: none; }
+.fullWidth { margin-top: 22px; }
+.rows { display: grid; gap: 12px; margin-top: 16px; }
+.matrix { border: 1px solid #d0dce1; border-radius: 8px; padding: 14px; background: #f8fafb; }
+.matrix h3 { font-size: 16px; font-weight: 700; }
+.matrix dl { margin-top: 12px; display: grid; gap: 10px; }
+.matrix dt { color: #526575; font-weight: 600; }
+.matrix dd { margin-top: 3px; }
+.link { color: #205f67; font-weight: 600; text-decoration: underline; }
+.break { overflow-wrap: anywhere; }
+@media (min-width: 768px) { .rows { grid-template-columns: minmax(0,1fr) minmax(0,1fr); } }

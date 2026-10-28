@@ -333,5 +333,17 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/mobile-page-layout#mobile-layout-demo",
     "visualType": "界面图解",
     "location": "设计体验 · 手机布局图解与演示"
+  },
+  {
+    "slug": "launch-checklist-v27",
+    "articleSlug": "launch-checklist",
+    "title": "博彩平台上线前检查清单",
+    "description": "用验收信息图区分版本、范围、预期、实际结果与证据，比较缺少记录、只有截图和已完成的v26历史自动检查。",
+    "kind": "补充",
+    "href": "/articles/launch-checklist",
+    "detailHref": "/articles/launch-checklist#visual-guide",
+    "relatedHref": "/articles/launch-checklist#acceptance-evidence",
+    "visualType": "界面图解",
+    "location": "运维风控 · 验收证据图解与对照"
   }
 ]

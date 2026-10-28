@@ -1,4 +1,5 @@
 export const demonstrationEntries = [
+  { group: "business-process", location: "运维风控 · 上线前检查清单", title: "验收证据对照", href: "/articles/launch-checklist#acceptance-evidence", description: "切换缺少实测记录、已完成的v26历史工作流和只有截图的记录，分别查看预期、实际、证据与结论边界。" },
   { group: "business-process", location: "产品设计 · 公告、帮助内容与发布版本", title: "公告审核与发布", href: "/articles/content-publication-versions#publication-demo", description: "固定版本和站点语言，观察审核、定时、发布失败、改稿失效、前台旧版本、更正、撤回与到期。" },
   { group: "interface-design", location: "设计体验 · 手机页面布局", title: "手机布局与信息优先级", href: "/articles/mobile-page-layout#mobile-layout-demo", description: "复用响应布局演示切换桌面、平板和手机，查看默认与展开信息，并进入BM、U8原型。" },
   { group: "interface-design", location: "知识图解 · 后台批量操作", title: "后台批量操作", href: "/articles/admin-bulk-actions#bulk-action-demo", description: "区分当前页和全部匹配，确认对象范围，模拟状态变化、部分失败、跳过和仅选择失败项。" },

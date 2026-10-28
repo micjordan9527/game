@@ -1,5 +1,7 @@
 import { BulkActionDemo } from "@/components/enrichment/BulkActionDemo"
 import { PublicationLifecycleDemo } from "@/components/enrichment/PublicationLifecycleDemo"
+import { AcceptanceEvidenceExplorer } from "@/components/enrichment/AcceptanceEvidenceExplorer"
+import { AcceptanceVisualGuide } from "@/components/article/AcceptanceVisualGuide"
 import { ResponsivePriorityDemo } from "@/components/design/ResponsivePriorityDemo"
 import { ExportTaskDemo } from "@/components/enrichment/ExportTaskDemo"
 import { AdminListDemo } from "@/components/enrichment/AdminListDemo"
@@ -123,6 +125,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const flow = articleFlows[article.slug]
   const designGuide = designArticleGuides[article.slug]
   const platformGuide = hasPlatformGuide(article.slug)
+  const acceptanceGuide = article.slug === "launch-checklist"
   const navigation = articleData ? getArticleReadingNavigation(articleData) : undefined
   const excludedTermIds = article.slug === "wallet-payment-reconciliation" ? ["turnover"] : []
   const relatedTerms = articleData
@@ -134,13 +137,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {articleData ? <ArticleJsonLd article={articleData} /> : null}
       <ReadingProgress slug={article.slug} title={article.meta.title} />
       <ArticleHero {...article.meta} audience={resourceAudiences(`/articles/${slug}`, article.meta.audience)} />
-      {platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
+      {acceptanceGuide ? <AcceptanceVisualGuide /> : platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
         {visuals.length ? (
           <ArticleVisualBrief imagePrompts={visuals} />
         ) : flow ? (
           <FeatureFlow {...flow} caption="功能关系示意" />
         ) : null}
       </div>}
+      {acceptanceGuide ? <AcceptanceEvidenceExplorer /> : null}
       {slug === "content-publication-versions" ? <PublicationLifecycleDemo /> : null}
       {slug === "mobile-page-layout" ? <section id="mobile-layout-demo" aria-label="手机布局与信息优先级演示" className="container-shell mb-8 max-w-6xl scroll-mt-24"><h2 className="text-2xl font-semibold">手机布局与信息优先级演示</h2><p className="mt-3 text-sm leading-7 text-muted">复用现有响应布局演示，切换桌面、平板和手机，观察默认字段与展开内容。键盘场景见上方静态图，实际设备的输入法和安全区需另行验证。</p><ResponsivePriorityDemo /><div className="flex flex-wrap gap-4 text-sm font-semibold text-brand-700"><Link href="/cases/bm-optimization#bm-mobile-prototype">操作BM分类与详情返回 →</Link><Link href="/cases/competitor-analysis#u8-profile-prototype">操作U8账号、资产与状态 →</Link></div></section> : null}
       {slug === "admin-bulk-actions" ? <BulkActionDemo /> : null}
@@ -159,7 +163,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             id="article-content"
             className="article-body prose prose-slate min-w-0 max-w-none prose-headings:scroll-mt-24 prose-headings:tracking-normal prose-p:leading-8 prose-li:leading-8 prose-a:text-brand-700 prose-code:rounded prose-code:bg-paper prose-code:px-1 prose-code:py-0.5 prose-code:text-ink"
           >
-            {(designGuide || platformGuide) && visuals.length ? <div className="not-prose mb-8"><h2 className="mb-4 text-lg font-semibold">概念总览图</h2><ArticleVisualBrief imagePrompts={visuals} /></div> : null}
+            {(designGuide || platformGuide || acceptanceGuide) && visuals.length ? <div className="not-prose mb-8"><h2 className="mb-4 text-lg font-semibold">概念总览图</h2><ArticleVisualBrief imagePrompts={visuals} /></div> : null}
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{

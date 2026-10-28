@@ -1,16 +1,52 @@
 {
   "current": {
-    "version": 26,
+    "version": 27,
     "date": "2026-10-28",
-    "title": "公告发布与手机布局图解",
-    "summary": "补充公告审核、计划生效、前台版本、更正与撤回演示；新增手机布局文章，用11幅界面场景解释列表、表单、键盘和返回，并复用BM、U8材料及响应布局演示。",
+    "title": "验收证据与两个实用AI工作流",
+    "summary": "补充上线验收证据，新增需求转矩阵和截图转案例两个AI工作流；用12幅界面场景、可复制输入输出与原始证据说明复核方法。预置示例与真实历史检查分别标明。",
     "articleSlugs": [
-      "content-publication-versions-v26",
-      "mobile-page-layout"
+      "launch-checklist-v27"
     ],
-    "changes": []
+    "changes": [
+      {
+        "id": "workflow-requirements-matrix",
+        "title": "需求转字段与状态矩阵",
+        "description": "提供带R编号的虚构需求、5项字段、6种状态与待确认项；可替换输入并复制提示词，预置输出不会随编辑伪装成新结果。",
+        "location": "AI 工作流 · 需求梳理",
+        "href": "/ai-workflows/requirements-state-matrix#workflow-outputs",
+        "linkLabel": "查看需求示例",
+        "related": {
+          "href": "/ai-workflows/requirements-state-matrix#workflow-prompt",
+          "label": "替换输入与复制提示词"
+        }
+      },
+      {
+        "id": "workflow-screenshot-case",
+        "title": "截图转案例说明",
+        "description": "使用现有后台截图，以E编号对应可见事实、设计解释与待验证结论；提供完整材料、示例说明和人工复核方法。",
+        "location": "AI 工作流 · 案例整理",
+        "href": "/ai-workflows/screenshot-case-description#workflow-outputs",
+        "linkLabel": "查看截图示例",
+        "related": {
+          "href": "/ai-workflows/screenshot-case-description#screenshot-source",
+          "label": "查看原始截图与来源"
+        }
+      }
+    ]
   },
   "history": [
+    {
+      "version": 26,
+      "title": "公告发布与手机布局图解",
+      "summary": "补充公告审核、计划生效、前台版本、更正与撤回演示；新增手机布局文章，用11幅界面场景解释列表、表单、键盘和返回，并复用BM、U8材料及响应布局演示。",
+      "articleSlugs": [
+        "content-publication-versions-v26",
+        "mobile-page-layout"
+      ],
+      "changes": [],
+      "publishedAt": "2026-10-28T07:22:32.173518+00:00",
+      "githubCommit": "aa1370b68a3944fcadd5cbc138746a5c3a667890"
+    },
     {
       "version": 25,
       "title": "四篇设计文章改为界面信息图",

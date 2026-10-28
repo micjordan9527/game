@@ -9,6 +9,7 @@ export type AiWorkflowOutput = {
 export type AiWorkflowVisualKind = "brief" | "directions" | "assets" | "figma" | "handoff"
 
 export type AiWorkflow = {
+  kind?: "structured"
   slug: string
   title: string
   summary: string
@@ -114,6 +115,32 @@ export const aiWorkflows: AiWorkflow[] = [
         alt: "控件、按钮、表单、反馈和其它组件规范",
       },
     ],
+  },
+  {
+    kind: "structured",
+    slug: "requirements-state-matrix",
+    title: "需求转字段与状态矩阵",
+    summary: "用虚构工单需求示范从原文编号到字段、状态、异常和待确认项，提供预置输出、人工复核方法与可替换输入的提示词。",
+    scenario: "需求梳理",
+    tags: ["需求", "字段", "状态矩阵", "异常", "人工复核"],
+    prompt: "将带编号的需求整理成字段表与状态矩阵。每行关联原文来源，分开标记已说明规则和待确认项，不自行补出权限、时限和持久化策略。",
+    referenceNote: "输入为本站编制的REQ-DEMO-001虚构需求，输出是供复核的预置示例，不是实时AI结果。",
+    caseImage: "/images/enrichment/admin-finance-02.jpg",
+    caseAlt: "后台列表结构参考，与本工作流的虚构工单需求分别判断",
+    outputs: [],
+  },
+  {
+    kind: "structured",
+    slug: "screenshot-case-description",
+    title: "截图转案例说明",
+    summary: "用现有后台截图逐句对应可见事实、设计解释和待验证结论，提供示例说明与提示词，不从截图编造权限、性能或改版效果。",
+    scenario: "案例整理",
+    tags: ["截图", "案例", "证据", "事实与推断", "人工复核"],
+    prompt: "根据已脱敏且获准使用的截图，编号列出可见事实，再写页面任务、信息结构、设计解释与待验证事项。每个事实关联证据；未知的后端能力和效果数据不得补写。",
+    referenceNote: "输入为本地后台演示截图MAT-DEMO-001，非生产记录；输出是本站整理的预置示例，需要人工核对。",
+    caseImage: "/images/enrichment/admin-finance-02.jpg",
+    caseAlt: "MAT-DEMO-001充值记录原始参考截图，非生产数据",
+    outputs: [],
   },
 ]
 

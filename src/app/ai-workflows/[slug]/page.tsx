@@ -1,4 +1,5 @@
 import { WorkflowProcess } from "@/components/enrichment/WorkflowProcess"
+import { PracticalWorkflowDetail } from "@/components/ai-workflows/PracticalWorkflowDetail"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { AiWorkflowOutputGallery } from "@/components/ai-workflows/AiWorkflowOutputGallery"
@@ -27,6 +28,7 @@ export default async function AiWorkflowDetailPage({ params }: { params: Promise
   const { slug } = await params
   const workflow = getAiWorkflow(slug)
   if (!workflow) notFound()
+  if (workflow.kind === "structured") return <PracticalWorkflowDetail workflow={workflow} />
   const brand = slug === "brand-visual-system"
   return (
     <div className="container-shell max-w-6xl py-6 md:py-8">

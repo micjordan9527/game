@@ -24,7 +24,7 @@ export default function AiWorkflowsPage() {
         <p className="text-sm font-semibold text-brand-700">Library</p>
         <div className="mt-2 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <h1 className="text-2xl font-semibold tracking-normal text-ink md:text-3xl">AI 工作流</h1>
-          <p className="max-w-2xl text-sm leading-7 text-muted">查看生成的品牌与界面成果，展开了解做法。</p>
+          <p className="max-w-2xl text-sm leading-7 text-muted">查看输入、输出与复核方法，或浏览品牌与界面图组。</p>
         </div>
       </section>
 

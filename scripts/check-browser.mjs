@@ -18,6 +18,7 @@ import { checkContextNavigation } from "./check-context-navigation.mjs"
 import { checkBulkExport } from "./check-bulk-export.mjs"
 import { checkDesignVisualGuides } from "./check-design-visual-guides.mjs"
 import { checkPublicationMobile } from "./check-publication-mobile.mjs"
+import { checkEvidenceAi } from "./check-evidence-ai.mjs"
 import { checkFoundationGuides } from "./check-foundation-guides.mjs"
 import { checkInteractionGuides } from "./check-interaction-guides.mjs"
 import { checkRoleLibrary } from "./check-role-library.mjs"
@@ -26,7 +27,7 @@ const root = path.resolve("out")
 const prefix = process.env.TEST_BASE_PATH ?? ""
 const rounds = Number(process.env.REFRESH_ROUNDS ?? 2)
 const scope = process.env.CHECK_SCOPE ?? "all"
-assert(["all", "home", "site-update", "content", "account", "business", "mobile", "completion", "knowledge", "updates", "case-reading", "navigation", "role-library", "interaction", "foundation", "bulk-export", "design-visual", "publication-mobile"].includes(scope), "Unsupported CHECK_SCOPE")
+assert(["all", "home", "site-update", "content", "account", "business", "mobile", "completion", "knowledge", "updates", "case-reading", "navigation", "role-library", "interaction", "foundation", "bulk-export", "design-visual", "publication-mobile", "evidence-ai"].includes(scope), "Unsupported CHECK_SCOPE")
 assert(Number.isInteger(rounds) && rounds > 0 && rounds <= 50, "REFRESH_ROUNDS must be between 1 and 50")
 const contentTypes = {
   ".html": "text/html",
@@ -137,6 +138,7 @@ try {
     })
     const page = await context.newPage()
     await checkHomepage(page, base, prefix, width)
+    if (scope === "evidence-ai" || scope === "all") await checkEvidenceAi(page, base, prefix, width)
     if (scope === "publication-mobile" || scope === "all") await checkPublicationMobile(page, base, prefix, width)
     if (scope === "design-visual" || scope === "publication-mobile" || scope === "all") await checkDesignVisualGuides(page, base, prefix, width)
     if (scope === "bulk-export" || scope === "design-visual" || scope === "all") await checkBulkExport(page, base, prefix, width)

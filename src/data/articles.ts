@@ -217,13 +217,13 @@ export const articles: Article[] = [
   {
     slug: "launch-checklist",
     title: "博彩平台上线前检查清单",
-    description: "整理注册、充值、提现、游戏、注单、活动、权限、监控等上线前检查项。",
+    description: "用验收信息图区分版本、范围、预期、实际结果与证据，比较缺少记录、只有截图和已完成的v26历史自动检查。",
     category: "devops-risk",
-    tags: ["上线", "检查清单", "运维"],
-    audience: ["项目经理", "运维", "产品"],
+    tags: ["上线", "检查清单", "运维", "验收证据"],
+    audience: ["项目经理", "运维", "产品", "开发", "测试", "运营"],
     difficulty: "进阶",
     date: "2026-05-29",
-    updatedAt: "2026-05-30",
+    updatedAt: "2026-10-28",
   },
   {
     slug: "payment-channel-basic",
