@@ -104,4 +104,4 @@ flowchart TD
 
 ## 相关术语
 
-验收证据、版本范围、实际结果、未知结果、回滚、监控与复核。继续看[版本验收矩阵](/articles/requirements-release-acceptance#验收矩阵)，或用[需求转矩阵工作流](/ai-workflows/requirements-state-matrix)整理输入。
+验收证据、版本范围、实际结果、未知结果、回滚、监控与复核。继续看[版本验收矩阵](/articles/requirements-release-acceptance#验收矩阵)。

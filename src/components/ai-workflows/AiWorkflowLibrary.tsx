@@ -40,7 +40,7 @@ export function AiWorkflowLibrary({
           id="ai-workflow-search"
           value={keyword}
           onChange={(event) => setKeyword(event.target.value)}
-          placeholder="搜索需求、矩阵、截图、品牌、UI…"
+          placeholder="搜索品牌、UI、网页、移动端…"
           className="w-full min-w-0 rounded-lg border border-line bg-paper px-4 py-3 text-sm outline-none focus:border-brand-300"
         />
         <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -108,11 +108,11 @@ export function AiWorkflowLibrary({
             </div>
             <div className="p-5">
               <span className="text-xs font-semibold text-brand-700">
-                {workflow.scenario} · {workflow.kind === "structured" ? "输入与输出示例" : `${workflow.outputs.length} 张成果`}
+                {workflow.scenario} · {workflow.outputs.length} 张成果
               </span>
               <h2 className="mt-2 text-xl font-semibold text-ink">{workflow.title}</h2>
               <p className="mt-2 line-clamp-2 text-sm leading-7 text-muted">{workflow.summary}</p>
-              <span className="mt-3 inline-block text-sm font-semibold text-brand-700">{workflow.kind === "structured" ? "查看示例 →" : "查看成果 →"}</span>
+              <span className="mt-3 inline-block text-sm font-semibold text-brand-700">查看成果 →</span>
             </div>
           </Link>
         ))}

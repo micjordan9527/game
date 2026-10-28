@@ -44,7 +44,7 @@ export const knowledgeTopics: KnowledgeTopic[] = [
     articles: ["admin-modules", "admin-information-hierarchy", "admin-filter-list-states", "form-validation-submit-feedback", "mobile-page-layout", "content-publication-versions", "admin-bulk-actions", "export-masking-audit", "access-approval-audit", "launch-checklist", "requirements-release-acceptance", "multi-tenant-site-config"],
     cases: ["admin-optimization"],
     templates: ["data-report-spec"],
-    workflows: ["ui-design-system", "requirements-state-matrix", "screenshot-case-description"],
+    workflows: ["ui-design-system"],
   },
   {
     slug: "campaign",

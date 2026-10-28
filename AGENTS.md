@@ -41,3 +41,7 @@ Knowledge presentation preference (2026-10-28):
 Image viewing preference (2026-10-25):
 - For BM/U8, “适应屏幕” fits the available width and preserves the image aspect ratio; long images scroll vertically without horizontal scrolling. Do not shrink the image to fit the viewport height.
 - Keep reading position when changing display scale and restore the page position when closing the viewer.
+
+Latest content preference (2026-10-28, supersedes earlier roadmap suggestions):
+- The user rejected and requested deletion of the requirement-to-field/state-matrix and screenshot-to-case-description workflows. Do not recreate them under different names or add similar abstract prompt/input/output demonstrations.
+- Prioritize concrete existing interfaces, actual cases, visual comparisons and clear functional diagrams. New content must be directly understandable and useful without studying invented framework terminology.
