@@ -1,0 +1,34 @@
+.metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.metrics > div { padding: 12px; border: 1px solid #b7cdd1; border-radius: 8px; background: white; }
+.metrics > div:last-child { grid-column: 1 / -1; border-color: #719e94; background: #edf7f1; }
+.metrics dt { color: #526575; }
+.metrics dd { margin-top: 4px; font-size: 28px; font-weight: 700; line-height: 1.5; }
+.metrics small { margin-left: 6px; font-size: 14px; font-weight: 600; }
+.order { margin-top: 12px; padding: 12px; border: 1px solid #bdcfd6; border-left: 4px solid #568f7d; border-radius: 7px; background: white; }
+.order > div { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.order p { color: #526575; }
+.order b { font-size: 20px; }
+.equation { margin-top: 14px; padding: 12px; border: 2px solid #6c9b8d; border-radius: 7px; background: #e9f5ed; font-size: 16px; font-weight: 700; }
+.excluded { border-left-color: #b58a41; background: #fffaf0; }
+.sample { margin-top: 14px; padding: 12px; border: 1px solid #bdcfd6; border-radius: 8px; background: white; }
+.sample h4 { font-size: 15px; font-weight: 700; }
+.sample .metrics dd { font-size: 24px; }
+.game { margin: 8px auto; max-width: 340px; border: 1px solid #b6cbd1; border-radius: 12px; overflow: hidden; background: white; }
+.cover { display: flex; align-items: center; gap: 14px; padding: 22px 16px; background: #dceee8; color: #245e52; }
+.cover svg { flex-shrink: 0; }
+.cover strong { display: block; font-size: 20px; line-height: 1.6; }
+.cover span { display: block; margin-top: 6px; }
+.maintenance { background: #fff0cf; color: #805000; }
+.restricted { background: #f9e6e4; color: #8c3531; }
+.unknown { background: #e8edf1; color: #526575; }
+.gameBody { padding: 14px; }
+.gameBody > p { margin-top: 10px; }
+.reason { margin-top: 14px; padding: 10px; border: 1px solid #b8cbd0; border-radius: 5px; background: #f2f6f7; }
+.reason strong { display: block; margin-bottom: 5px; }
+.reason code { font-family: inherit; overflow-wrap: anywhere; font-size: 14px; }
+.reference { margin-top: 22px; padding: 16px; border: 1px solid #cad9df; border-radius: 12px; background: white; }
+.reference h3 { font-size: 18px; line-height: 1.7; font-weight: 700; }
+.reference > p { margin: 10px 0 16px; font-size: 14px; line-height: 1.8; color: #526575; }
+.links { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-top: 20px; }
+.links a { color: #205d61; font-size: 14px; line-height: 1.8; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.links a:focus-visible { outline: 3px solid #226f72; outline-offset: 4px; }

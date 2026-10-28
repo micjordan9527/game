@@ -3,6 +3,7 @@ import { PublicationLifecycleDemo } from "@/components/enrichment/PublicationLif
 import { AcceptanceEvidenceExplorer } from "@/components/enrichment/AcceptanceEvidenceExplorer"
 import { AcceptanceVisualGuide } from "@/components/article/AcceptanceVisualGuide"
 import { SupportPermissionGuide, hasSupportPermissionGuide } from "@/components/article/SupportPermissionGuide"
+import { ReportCatalogGuide, hasReportCatalogGuide } from "@/components/article/ReportCatalogGuide"
 import { ResponsivePriorityDemo } from "@/components/design/ResponsivePriorityDemo"
 import { ExportTaskDemo } from "@/components/enrichment/ExportTaskDemo"
 import { AdminListDemo } from "@/components/enrichment/AdminListDemo"
@@ -128,6 +129,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const platformGuide = hasPlatformGuide(article.slug)
   const acceptanceGuide = article.slug === "launch-checklist"
   const supportPermissionGuide = hasSupportPermissionGuide(article.slug)
+  const reportCatalogGuide = hasReportCatalogGuide(article.slug)
   const navigation = articleData ? getArticleReadingNavigation(articleData) : undefined
   const excludedTermIds = article.slug === "wallet-payment-reconciliation" ? ["turnover"] : []
   const relatedTerms = articleData
@@ -139,7 +141,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {articleData ? <ArticleJsonLd article={articleData} /> : null}
       <ReadingProgress slug={article.slug} title={article.meta.title} />
       <ArticleHero {...article.meta} audience={resourceAudiences(`/articles/${slug}`, article.meta.audience)} />
-      {supportPermissionGuide ? <SupportPermissionGuide slug={article.slug} /> : acceptanceGuide ? <AcceptanceVisualGuide /> : platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
+      {reportCatalogGuide ? <ReportCatalogGuide slug={article.slug} /> : supportPermissionGuide ? <SupportPermissionGuide slug={article.slug} /> : acceptanceGuide ? <AcceptanceVisualGuide /> : platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
         {visuals.length ? (
           <ArticleVisualBrief imagePrompts={visuals} />
         ) : flow ? (
@@ -165,7 +167,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             id="article-content"
             className="article-body prose prose-slate min-w-0 max-w-none prose-headings:scroll-mt-24 prose-headings:tracking-normal prose-p:leading-8 prose-li:leading-8 prose-a:text-brand-700 prose-code:rounded prose-code:bg-paper prose-code:px-1 prose-code:py-0.5 prose-code:text-ink"
           >
-            {(designGuide || platformGuide || acceptanceGuide || supportPermissionGuide) && visuals.length ? <div className="not-prose mb-8"><h2 className="mb-4 text-lg font-semibold">概念总览图</h2><ArticleVisualBrief imagePrompts={visuals} /></div> : null}
+            {(designGuide || platformGuide || acceptanceGuide || supportPermissionGuide || reportCatalogGuide) && visuals.length ? <div className="not-prose mb-8"><h2 className="mb-4 text-lg font-semibold">概念总览图</h2><ArticleVisualBrief imagePrompts={visuals} /></div> : null}
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{

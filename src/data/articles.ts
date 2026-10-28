@@ -272,13 +272,13 @@ export const articles: Article[] = [
   {
     slug: "data-report-metrics",
     title: "数据报表指标怎么看？",
-    description: "解释注册、首存、复存、流水、注单、派彩和留存等常见报表指标。",
+    description: "用四组界面对照充值汇总、三笔明细、重复通知和币种日期筛选，逐项核对2人、3笔、350 USD的来源。",
     category: "operation",
     tags: ["数据报表", "流水", "首存", "留存"],
-    audience: ["运营", "产品", "管理者"],
+    audience: ["运营", "产品", "财务", "管理者"],
     difficulty: "入门",
     date: "2026-05-30",
-    updatedAt: "2026-10-26",
+    updatedAt: "2026-10-28",
   },
   {
     slug: "community-operations-governance",
@@ -517,13 +517,13 @@ export const articles: Article[] = [
   {
     slug: "game-catalog-availability",
     title: "游戏目录与可用状态",
-    description: "区分前台可见、厂商维护、账号受限、区域或币种条件与登录失败，用游戏ID和原因码定位可用性问题。",
+    description: "用同一游戏的四种界面对照正常、维护、账号受限和查询失败，说明提示、进入按钮和下一步处理的区别。",
     category: "development",
     tags: ["游戏目录", "游戏状态", "厂商维护", "区域限制", "登录"],
     audience: ["产品", "技术", "运营", "客服", "测试"],
     difficulty: "进阶",
     date: "2026-10-26",
-    updatedAt: "2026-10-26",
+    updatedAt: "2026-10-28",
   },
   {
     slug: "transaction-limits-fees",

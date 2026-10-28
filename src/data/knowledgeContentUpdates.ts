@@ -369,5 +369,29 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/notification-support-tickets#visual-guide",
     "visualType": "界面图解",
     "location": "知识图解 · 权限、审批与审计记录 · 顶部四组界面对照"
+  },
+  {
+    "slug": "data-report-metrics-v30",
+    "articleSlug": "data-report-metrics",
+    "title": "数据报表指标怎么看？",
+    "description": "四组界面把2人、3笔、350 USD对应到原始明细，说明重复通知、未知80 USD、EUR筛选与跨日归属；复用资金概览和充值记录截图。",
+    "kind": "补充",
+    "href": "/articles/data-report-metrics",
+    "detailHref": "/articles/data-report-metrics#visual-guide",
+    "relatedHref": "/articles/currency-timezone-reporting",
+    "visualType": "界面图解",
+    "location": "知识图解 · 数据报表 · 顶部四组明细与汇总对照"
+  },
+  {
+    "slug": "game-catalog-availability-v30",
+    "articleSlug": "game-catalog-availability",
+    "title": "游戏目录与可用状态",
+    "description": "四种独立界面对照可进入、维护、账号受限与查询失败，说明提示、按钮和处理入口；游戏与原因码均为讲解示例。",
+    "kind": "补充",
+    "href": "/articles/game-catalog-availability",
+    "detailHref": "/articles/game-catalog-availability#visual-guide",
+    "relatedHref": "/articles/member-account-states#account-recovery-case",
+    "visualType": "界面图解",
+    "location": "知识图解 · 游戏目录 · 顶部四种可用状态对照"
   }
 ]

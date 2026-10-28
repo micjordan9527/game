@@ -1,16 +1,28 @@
 {
   "current": {
-    "version": 29,
+    "version": 30,
     "date": "2026-10-28",
-    "title": "客服处理与角色权限界面对照",
-    "summary": "两篇现有文章增加八组界面图解，展示用户咨询、内部备注、补充资料、回复结果，以及客服申请、财务审核与原退款结果；配现有后台截图对照。",
+    "title": "报表金额与游戏可用状态图解",
+    "summary": "两篇现有文章增加八组界面，逐笔核对报表人数、笔数和原币金额，区分游戏正常、维护、账号受限与查询失败；配既有后台截图和相关演示入口。",
     "articleSlugs": [
-      "notification-support-tickets-v29",
-      "access-approval-audit-v29"
+      "data-report-metrics-v30",
+      "game-catalog-availability-v30"
     ],
     "changes": []
   },
   "history": [
+    {
+      "version": 29,
+      "title": "客服处理与角色权限界面对照",
+      "summary": "两篇现有文章增加八组界面图解，展示用户咨询、内部备注、补充资料、回复结果，以及客服申请、财务审核与原退款结果；配现有后台截图对照。",
+      "articleSlugs": [
+        "notification-support-tickets-v29",
+        "access-approval-audit-v29"
+      ],
+      "changes": [],
+      "publishedAt": "2026-10-28T09:54:42.133672+00:00",
+      "githubCommit": "489c71ee7c9e12e2e7c1b761ee619e2ecc9aaa20"
+    },
     {
       "version": 28,
       "title": "移除两项AI工作流示例",
