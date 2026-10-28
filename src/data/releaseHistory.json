@@ -1,30 +1,42 @@
 {
   "current": {
-    "version": 28,
+    "version": 29,
     "date": "2026-10-28",
-    "title": "移除两项AI工作流示例",
-    "summary": "删除需求转矩阵与截图转说明两个页面，清理目录、搜索、相关推荐及提示词模块。AI工作流保留品牌视觉系统和UI设计系统图组。",
-    "articleSlugs": [],
-    "changes": [
-      {
-        "id": "remove-abstract-workflows",
-        "title": "删除两项工作流与页面模块",
-        "description": "删除需求转字段与状态矩阵、截图转案例说明，以及对应的示例输入、输出和提示词模块；目录与搜索不再列出这两项。",
-        "location": "AI 工作流 · 目录、搜索与详情",
-        "href": "/ai-workflows",
-        "linkLabel": "查看保留的图组"
-      },
-      {
-        "id": "remove-workflow-backlinks",
-        "title": "清理文章与主题中的相关入口",
-        "description": "移除验收说明、证据记录与后台主题里的相关链接，历史更新注明两项工作流已删除。",
-        "location": "上线验收文章 · 后台主题 · 历史更新",
-        "href": "/articles/launch-checklist",
-        "linkLabel": "查看验收图解"
-      }
-    ]
+    "title": "客服处理与角色权限界面对照",
+    "summary": "两篇现有文章增加八组界面图解，展示用户咨询、内部备注、补充资料、回复结果，以及客服申请、财务审核与原退款结果；配现有后台截图对照。",
+    "articleSlugs": [
+      "notification-support-tickets-v29",
+      "access-approval-audit-v29"
+    ],
+    "changes": []
   },
   "history": [
+    {
+      "version": 28,
+      "title": "移除两项AI工作流示例",
+      "summary": "删除需求转矩阵与截图转说明两个页面，清理目录、搜索、相关推荐及提示词模块。AI工作流保留品牌视觉系统和UI设计系统图组。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "remove-abstract-workflows",
+          "title": "删除两项工作流与页面模块",
+          "description": "删除需求转字段与状态矩阵、截图转案例说明，以及对应的示例输入、输出和提示词模块；目录与搜索不再列出这两项。",
+          "location": "AI 工作流 · 目录、搜索与详情",
+          "href": "/ai-workflows",
+          "linkLabel": "查看保留的图组"
+        },
+        {
+          "id": "remove-workflow-backlinks",
+          "title": "清理文章与主题中的相关入口",
+          "description": "移除验收说明、证据记录与后台主题里的相关链接，历史更新注明两项工作流已删除。",
+          "location": "上线验收文章 · 后台主题 · 历史更新",
+          "href": "/articles/launch-checklist",
+          "linkLabel": "查看验收图解"
+        }
+      ],
+      "publishedAt": "2026-10-28T08:59:43.203864+00:00",
+      "githubCommit": "152e3f86a7b9f266b15bdf16264a408baf3f0736"
+    },
     {
       "version": 27,
       "title": "验收证据与两个实用AI工作流",

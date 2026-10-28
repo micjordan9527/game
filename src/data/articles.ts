@@ -316,7 +316,7 @@ export const articles: Article[] = [
   {
       slug: "access-approval-audit",
       title: "权限、审批与审计记录",
-      description: "区分身份权限、数据范围、独立审批和执行结果，用虚构退款场景核对操作边界与审计证据。",
+      description: "用同一笔退款对照客服申请、财务审核、权限限制和执行结果，说明谁能做什么，以及批准后还要核对什么。",
       category: "devops-risk",
       tags: [
         "权限",
@@ -327,18 +327,20 @@ export const articles: Article[] = [
       ],
       audience: [
         "产品",
+        "客服",
+        "财务",
         "技术",
         "测试",
         "运营"
       ],
       difficulty: "进阶",
       date: "2026-10-26",
-      updatedAt: "2026-10-26"
+      updatedAt: "2026-10-28"
   },
   {
       slug: "notification-support-tickets",
       title: "消息通知与客服工单",
-      description: "区分事件通知、送达状态和问题处理，用工单字段与状态说明受理、转派、解决和用户确认。",
+      description: "用四组界面对照用户咨询、客服内部备注、补充资料和回复结果，说明哪些内容用户可见、由谁继续处理。",
       category: "operation",
       tags: [
         "客服",
@@ -355,7 +357,7 @@ export const articles: Article[] = [
       ],
       difficulty: "进阶",
       date: "2026-10-26",
-      updatedAt: "2026-10-26"
+      updatedAt: "2026-10-28"
   },
   {
       slug: "api-idempotency-compensation",

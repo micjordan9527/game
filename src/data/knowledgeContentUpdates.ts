@@ -345,5 +345,29 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/launch-checklist#acceptance-evidence",
     "visualType": "界面图解",
     "location": "运维风控 · 验收证据图解与对照"
+  },
+  {
+    "slug": "notification-support-tickets-v29",
+    "articleSlug": "notification-support-tickets",
+    "title": "消息通知与客服工单",
+    "description": "四组界面对照用户咨询、客服内部备注、补充资料和结果回复，分别标明处理进度、用户可见范围及通知失败；复用现有会员查询截图。",
+    "kind": "补充",
+    "href": "/articles/notification-support-tickets",
+    "detailHref": "/articles/notification-support-tickets#visual-guide",
+    "relatedHref": "/articles/access-approval-audit#visual-guide",
+    "visualType": "界面图解",
+    "location": "知识图解 · 消息通知与客服工单 · 顶部四组界面对照"
+  },
+  {
+    "slug": "access-approval-audit-v29",
+    "articleSlug": "access-approval-audit",
+    "title": "权限、审批与审计记录",
+    "description": "用同一笔100.00 DEMO退款对照客服申请、财务审核、权限限制及执行结果，区分改金额重新审核与原退款查询；复用充值列表和详情截图。",
+    "kind": "补充",
+    "href": "/articles/access-approval-audit",
+    "detailHref": "/articles/access-approval-audit#visual-guide",
+    "relatedHref": "/articles/notification-support-tickets#visual-guide",
+    "visualType": "界面图解",
+    "location": "知识图解 · 权限、审批与审计记录 · 顶部四组界面对照"
   }
 ]
