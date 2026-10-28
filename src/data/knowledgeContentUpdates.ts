@@ -262,5 +262,53 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/admin-bulk-actions#bulk-action-demo",
     "visualType": "界面演示",
     "location": "知识图解 · 导出任务演示"
+  },
+  {
+    "slug": "admin-information-hierarchy-v25",
+    "articleSlug": "admin-information-hierarchy",
+    "title": "复杂后台页面怎样安排信息层级？",
+    "description": "用同一笔示例订单对照信息堆叠与分层布局，标出列表、详情、操作与记录各放什么，并查看实际后台截图。",
+    "kind": "补充",
+    "href": "/articles/admin-information-hierarchy",
+    "detailHref": "/articles/admin-information-hierarchy#visual-guide",
+    "relatedHref": "/articles/admin-information-hierarchy#scenario",
+    "visualType": "界面图解",
+    "location": "设计体验 · 界面信息图"
+  },
+  {
+    "slug": "admin-filter-list-states-v25",
+    "articleSlug": "admin-filter-list-states",
+    "title": "后台筛选与列表状态：从查询到详情返回",
+    "description": "用四幅界面图对照查询前后、无匹配与失败、详情返回，再操作八条虚构工单观察变化。",
+    "kind": "补充",
+    "href": "/articles/admin-filter-list-states",
+    "detailHref": "/articles/admin-filter-list-states#visual-guide",
+    "relatedHref": "/articles/admin-filter-list-states#list-demo",
+    "visualType": "界面图解",
+    "location": "设计体验 · 界面信息图"
+  },
+  {
+    "slug": "form-validation-submit-feedback-v25",
+    "articleSlug": "form-validation-submit-feedback",
+    "title": "表单校验与提交反馈：从字段错误到未知结果",
+    "description": "用六种表单界面对照错误、提交中、未受理、结果未知、原申请查询与已受理，标明每种状态下的允许动作。",
+    "kind": "补充",
+    "href": "/articles/form-validation-submit-feedback",
+    "detailHref": "/articles/form-validation-submit-feedback#visual-guide",
+    "relatedHref": "/articles/form-validation-submit-feedback#form-demo",
+    "visualType": "界面图解",
+    "location": "设计体验 · 界面信息图"
+  },
+  {
+    "slug": "admin-bulk-actions-v25",
+    "articleSlug": "admin-bulk-actions",
+    "title": "后台批量操作：范围确认与部分失败",
+    "description": "用八条虚构工单画清当前页与全部匹配、确认范围、四条成功一条失败三条跳过，以及只处理失败项。",
+    "kind": "补充",
+    "href": "/articles/admin-bulk-actions",
+    "detailHref": "/articles/admin-bulk-actions#visual-guide",
+    "relatedHref": "/articles/admin-bulk-actions#bulk-action-demo",
+    "visualType": "界面图解",
+    "location": "设计体验 · 界面信息图"
   }
 ]

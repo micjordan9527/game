@@ -33,6 +33,11 @@ Knowledge navigation (accepted 2026-10-27):
 - Homepage “按角色看图解” links to /articles?role=<work-role-slug> and selects that role across the full article library. Keep legacy /roles pages for curated mixed resources and their existing URLs.
 - Library role/tag filters belong in the URL and preserve their selected state, filter disclosure state and reading position when returning from an article. Reset or 全部图解 clears the filters. Reuse resourceAudiences for role membership.
 
+Knowledge presentation preference (2026-10-28):
+- New and revised knowledge articles must explain the main idea with information graphics before detailed prose. Show actual fields, controls, changes and outcomes; text-only cards with arrows are insufficient.
+- Prefer annotated existing interfaces and concrete examples. Use GPT Image for missing explanatory illustrations when useful, label generated schematics honestly and check their text, numbers and logic.
+- Split complex topics into focused scenes readable at 390px. Keep necessary detailed rules expanded by default, while reducing repeated prose. Preserve existing article URLs and section anchors.
+
 Image viewing preference (2026-10-25):
 - For BM/U8, “适应屏幕” fits the available width and preserves the image aspect ratio; long images scroll vertically without horizontal scrolling. Do not shrink the image to fit the viewport height.
 - Keep reading position when changing display scale and restore the page position when closing the viewer.

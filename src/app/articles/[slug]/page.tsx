@@ -15,6 +15,7 @@ import { Children, isValidElement, type ReactNode } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { ArticleHero } from "@/components/article/ArticleHero"
+import { DesignArticleGuide, designArticleGuides } from "@/components/article/DesignArticleGuide"
 import { ArticleVisualBrief } from "@/components/article/ArticleVisualBrief"
 import { FeatureFlow } from "@/components/common/FeatureFlow"
 import { articleFlows } from "@/data/articleFlows"
@@ -117,6 +118,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const articleData = articles.find((item) => item.slug === article.slug)
   const visuals = getImagePromptsForArticle(article.slug)
   const flow = articleFlows[article.slug]
+  const designGuide = designArticleGuides[article.slug]
   const navigation = articleData ? getArticleReadingNavigation(articleData) : undefined
   const excludedTermIds = article.slug === "wallet-payment-reconciliation" ? ["turnover"] : []
   const relatedTerms = articleData
@@ -128,13 +130,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {articleData ? <ArticleJsonLd article={articleData} /> : null}
       <ReadingProgress slug={article.slug} title={article.meta.title} />
       <ArticleHero {...article.meta} audience={resourceAudiences(`/articles/${slug}`, article.meta.audience)} />
-      <div className="container-shell max-w-6xl pb-8">
+      {designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
         {visuals.length ? (
           <ArticleVisualBrief imagePrompts={visuals} />
         ) : flow ? (
           <FeatureFlow {...flow} caption="功能关系示意" />
         ) : null}
-      </div>
+      </div>}
       {slug === "admin-bulk-actions" ? <BulkActionDemo /> : null}
       {slug === "export-masking-audit" ? <ExportTaskDemo /> : null}
       {slug === "admin-filter-list-states" ? <AdminListDemo /> : null}
@@ -151,6 +153,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             id="article-content"
             className="article-body prose prose-slate min-w-0 max-w-none prose-headings:scroll-mt-24 prose-headings:tracking-normal prose-p:leading-8 prose-li:leading-8 prose-a:text-brand-700 prose-code:rounded prose-code:bg-paper prose-code:px-1 prose-code:py-0.5 prose-code:text-ink"
           >
+            {designGuide && visuals.length ? <div className="not-prose mb-8"><h2 className="mb-4 text-lg font-semibold">概念总览图</h2><ArticleVisualBrief imagePrompts={visuals} /></div> : null}
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{

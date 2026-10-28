@@ -1,29 +1,43 @@
 {
   "current": {
-    "version": 24,
-    "date": "2026-10-27",
-    "title": "批量操作与导出任务演示",
-    "summary": "新增批量操作图解，补充导出任务全过程；用虚构记录观察范围确认、部分失败、固定筛选、权限变化与脱敏文件下载。",
+    "version": 25,
+    "date": "2026-10-28",
+    "title": "四篇设计文章改为界面信息图",
+    "summary": "用具体字段、按钮状态与结果对照讲解信息层级、筛选列表、表单反馈和批量操作；手机逐幅阅读，图解后可直接操作演示，详细规则默认展开。",
     "articleSlugs": [
-      "admin-bulk-actions",
-      "export-masking-audit-v24"
+      "admin-information-hierarchy-v25",
+      "admin-filter-list-states-v25",
+      "form-validation-submit-feedback-v25",
+      "admin-bulk-actions-v25"
     ],
-    "changes": [
-      {
-        "id": "bulk-export-directory",
-        "title": "演示目录增加两个直接入口",
-        "description": "批量操作归入界面设计，导出任务归入业务流程，共14项演示；两篇可从角色筛选、后台主题和全文搜索进入。",
-        "location": "功能演示目录 · 界面设计与业务流程",
-        "href": "/updates/demonstrations",
-        "linkLabel": "查看14项演示",
-        "related": {
-          "href": "/articles?role=interaction",
-          "label": "查看交互角色图解"
-        }
-      }
-    ]
+    "changes": []
   },
   "history": [
+    {
+      "version": 24,
+      "title": "批量操作与导出任务演示",
+      "summary": "新增批量操作图解，补充导出任务全过程；用虚构记录观察范围确认、部分失败、固定筛选、权限变化与脱敏文件下载。",
+      "articleSlugs": [
+        "admin-bulk-actions",
+        "export-masking-audit-v24"
+      ],
+      "changes": [
+        {
+          "id": "bulk-export-directory",
+          "title": "演示目录增加两个直接入口",
+          "description": "批量操作归入界面设计，导出任务归入业务流程，共14项演示；两篇可从角色筛选、后台主题和全文搜索进入。",
+          "location": "功能演示目录 · 界面设计与业务流程",
+          "href": "/updates/demonstrations",
+          "linkLabel": "查看14项演示",
+          "related": {
+            "href": "/articles?role=interaction",
+            "label": "查看交互角色图解"
+          }
+        }
+      ],
+      "publishedAt": "2026-10-27T14:18:15.176955+00:00",
+      "githubCommit": "2b7683b113fd2489c74fff16a0918944d84c8175"
+    },
     {
       "version": 23,
       "title": "平台职责与钱包模式说明",

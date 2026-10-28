@@ -15,19 +15,19 @@ export const articles: Article[] = [
   {
     slug: "admin-bulk-actions",
     title: "后台批量操作：范围确认与部分失败",
-    description: "用虚构工单演示当前页与全部匹配记录、执行前确认、状态变化、部分失败和仅处理失败项，说明批次与单条结果的区别。",
+    description: "用八条虚构工单画清当前页与全部匹配、确认范围、四条成功一条失败三条跳过，以及只处理失败项。",
     category: "design",
     tags: ["后台设计", "批量操作", "范围确认", "部分失败", "审计"],
     audience: ["交互", "设计", "产品", "开发", "运营", "测试"],
     difficulty: "进阶",
     date: "2026-10-27",
-    updatedAt: "2026-10-27",
+    updatedAt: "2026-10-28",
   },
 
   {
     slug: "admin-filter-list-states",
     title: "后台筛选与列表状态：从查询到详情返回",
-    description: "用可操作的虚构工单列表区分输入条件与已应用条件，说明加载、无结果、失败、分页和详情返回。",
+    description: "用四幅界面图对照查询前后、无匹配与失败、详情返回，再操作八条虚构工单观察变化。",
     category: "design",
     tags: [
       "后台设计",
@@ -46,12 +46,12 @@ export const articles: Article[] = [
     ],
     difficulty: "进阶",
     date: "2026-10-27",
-    updatedAt: "2026-10-27"
+    updatedAt: "2026-10-28"
   },
   {
     slug: "form-validation-submit-feedback",
     title: "表单校验与提交反馈：从字段错误到未知结果",
-    description: "用公告申请演示字段错误、提交中、明确未受理、未知结果和原申请查询，区分前端校验与业务受理。",
+    description: "用六种表单界面对照错误、提交中、未受理、结果未知、原申请查询与已受理，标明每种状态下的允许动作。",
     category: "design",
     tags: [
       "交互设计",
@@ -69,7 +69,7 @@ export const articles: Article[] = [
     ],
     difficulty: "进阶",
     date: "2026-10-27",
-    updatedAt: "2026-10-27"
+    updatedAt: "2026-10-28"
   },
   {
     slug: "member-account-states",
@@ -239,13 +239,13 @@ export const articles: Article[] = [
   {
     slug: "admin-information-hierarchy",
     title: "复杂后台页面怎样安排信息层级？",
-    description: "用列表、详情、状态反馈和危险操作四个角度，建立可判断、可处理的后台页面。",
+    description: "用同一笔示例订单对照信息堆叠与分层布局，标出列表、详情、操作与记录各放什么，并查看实际后台截图。",
     category: "design",
     tags: ["后台设计", "信息层级", "状态反馈", "体验评审"],
     audience: ["设计师", "产品", "前端", "运营"],
     difficulty: "进阶",
     date: "2026-09-10",
-    updatedAt: "2026-10-26",
+    updatedAt: "2026-10-28",
   },
   {
     slug: "risk-rule-basic",
