@@ -1,40 +1,51 @@
 {
   "current": {
-    "version": 35,
+    "version": 36,
     "date": "2026-10-29",
-    "title": "TG推送图解与运营场景入口",
-    "summary": "新增TG消息媒体、正文与按钮的场景图解，支持静态封面、视频播放和放大；运营角色与主题提供四个实际场景入口，代理素材复用同一视频并链接正文。",
+    "title": "TG视频默认展示与频道排版修正",
+    "summary": "TG文章默认显示视频，进入可见区时静音播放，手动暂停后不被滚动重启；频道名称和五个按钮按参考推送排列，撤去自拟活动正文，明确区分不同主题的原帖与视频替换预览。",
     "articleSlugs": [
-      "tg-message-media"
+      "tg-message-media-v36"
     ],
-    "changes": [
-      {
-        "id": "operation-scenarios",
-        "title": "运营角色按实际场景查看产出",
-        "description": "运营入口展示TG推送、公告发布、活动规则和报表核对，分别连接消息预览、发布界面、规则示例与报表明细；运营主题显示为运营场景，保留原网址。",
-        "location": "知识图解 · 运营角色／运营场景主题",
-        "href": "/articles?role=operation",
-        "linkLabel": "查看运营场景与图解",
-        "related": {
-          "href": "/operation",
-          "label": "打开运营场景主题"
-        }
-      },
-      {
-        "id": "tg-shared-materials",
-        "title": "TG素材提供视频与场景文章入口",
-        "description": "TG推送素材保留原静态素材和源稿入口，增加视频播放、文件下载及知识图解回链；正文与素材页共用同一视频。",
-        "location": "代理素材 · 运营活动 · TG推送素材",
-        "href": "/design/material-standards?module=tg-assets",
-        "linkLabel": "查看TG推送素材",
-        "related": {
-          "href": "/articles/tg-message-media#tg-materials",
-          "label": "查看视频规格与素材入口"
-        }
-      }
-    ]
+    "changes": []
   },
   "history": [
+    {
+      "version": 35,
+      "title": "TG推送图解与运营场景入口",
+      "summary": "新增TG消息媒体、正文与按钮的场景图解，支持静态封面、视频播放和放大；运营角色与主题提供四个实际场景入口，代理素材复用同一视频并链接正文。",
+      "articleSlugs": [
+        "tg-message-media"
+      ],
+      "changes": [
+        {
+          "id": "operation-scenarios",
+          "title": "运营角色按实际场景查看产出",
+          "description": "运营入口展示TG推送、公告发布、活动规则和报表核对，分别连接消息预览、发布界面、规则示例与报表明细；运营主题显示为运营场景，保留原网址。",
+          "location": "知识图解 · 运营角色／运营场景主题",
+          "href": "/articles?role=operation",
+          "linkLabel": "查看运营场景与图解",
+          "related": {
+            "href": "/operation",
+            "label": "打开运营场景主题"
+          }
+        },
+        {
+          "id": "tg-shared-materials",
+          "title": "TG素材提供视频与场景文章入口",
+          "description": "TG推送素材保留原静态素材和源稿入口，增加视频播放、文件下载及知识图解回链；正文与素材页共用同一视频。",
+          "location": "代理素材 · 运营活动 · TG推送素材",
+          "href": "/design/material-standards?module=tg-assets",
+          "linkLabel": "查看TG推送素材",
+          "related": {
+            "href": "/articles/tg-message-media#tg-materials",
+            "label": "查看视频规格与素材入口"
+          }
+        }
+      ],
+      "publishedAt": "2026-10-29T09:13:45.579700+00:00",
+      "githubCommit": "0182b67ee00ad1eba8ca1920330612e7c56eb28d"
+    },
     {
       "version": 34,
       "title": "四篇设计图解补充界面封面",

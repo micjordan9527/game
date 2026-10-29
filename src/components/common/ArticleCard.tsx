@@ -50,7 +50,7 @@ export function ArticleCard({ article }: { article: Article }) {
           {isTgGuide ? (
             <div className="mb-3 flex flex-wrap items-center gap-2 text-xs font-semibold">
               <span className="rounded-full bg-brand-50 px-2.5 py-1 text-brand-700">视频示例</span>
-              <span className="text-muted">约9秒 · TG消息预览</span>
+              <span className="text-muted">约9秒 · 视频替换预览</span>
             </div>
           ) : null}
           <h3 className="text-lg font-semibold leading-7 text-ink">{article.title}</h3>

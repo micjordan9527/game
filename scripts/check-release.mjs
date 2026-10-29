@@ -7,9 +7,10 @@ const save = () => { fs.mkdirSync(".openai", { recursive: true }); fs.writeFileS
 const npm = process.platform === "win32" ? "npm.cmd" : "npm"
 try {
   const { chromium } = await import(env.PLAYWRIGHT_MODULE ?? "playwright-core")
-  const executable = env.CHROMIUM_EXECUTABLE ?? ["/usr/bin/chromium", "/usr/bin/google-chrome", "/usr/bin/google-chrome-stable", chromium.executablePath()].find((file) => fs.existsSync(file))
+  const executable = env.CHROMIUM_EXECUTABLE ?? ["/usr/bin/google-chrome", "/usr/bin/google-chrome-stable", "/usr/bin/chromium", chromium.executablePath()].find((file) => fs.existsSync(file))
   if (!executable || !fs.existsSync(executable)) throw new Error("Browser verification requires Chromium/Chrome. Install with npx playwright-core install --with-deps chromium, or set CHROMIUM_EXECUTABLE to an existing browser.")
   env.CHROMIUM_EXECUTABLE = executable
+  console.log("Release browser:", executable)
   for (const [name, command, args] of [["content", npm, ["run", "check:content"]], ["production-build", npm, ["run", "build"]], ["export-integrity", process.execPath, ["scripts/check-release-integrity.mjs"]], ["browser-regression", process.execPath, ["scripts/check-browser.mjs"]]]) {
     const started = Date.now()
     const result = spawnSync(command, args, { env, stdio: "inherit" })

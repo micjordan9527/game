@@ -427,5 +427,17 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/tg-message-media#tg-materials",
     "visualType": "界面图解",
     "location": "知识图解 · 运营场景 · TG推送预览"
+  },
+  {
+    "slug": "tg-message-media-v36",
+    "articleSlug": "tg-message-media",
+    "title": "TG频道推送：视频默认展示与按钮排列",
+    "description": "默认显示视频并在可见区静音播放；保留手动暂停，按参考推送显示频道与五按钮2＋2＋1布局，删除自拟活动正文。",
+    "kind": "补充",
+    "href": "/articles/tg-message-media",
+    "detailHref": "/articles/tg-message-media#tg-message-demo",
+    "relatedHref": "/articles/tg-message-media#tg-materials",
+    "visualType": "界面图解",
+    "location": "知识图解 · 运营场景 · 视频替换预览"
   }
 ]

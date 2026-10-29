@@ -23,11 +23,13 @@ try {
     }
     const channel = clone("channel")
     const media = clone("media")
-    const body = clone("messageBody")
+    const note = document.createElement("div")
+    note.className = "cover-preview-note"
+    note.innerHTML = '<strong>2＋2＋1 排列</strong><p>频道名与按钮依据参考截图。视频只演示顶部媒体位的替换。</p>'
     const buttons = clone("messageButtons")
     const root = document.createElement("div")
     root.id = "tg-cover-canvas"
-    root.innerHTML = '<div class="cover-top"><span>知识图解 · 运营场景</span><span>视频示例</span></div><h1>TG推送：静态与动态</h1><p class="cover-subtitle">在同一条消息里核对媒体、正文与按钮</p><div class="cover-layout"><div class="cover-media-panel"></div><div class="cover-copy-panel"><h2>2 · 正文</h2></div></div><div class="cover-foot"><span>正文界面节选 · 消息结构示意</span><span>包网知识库</span></div>'
+    root.innerHTML = '<div class="cover-top"><span>知识图解 · 运营场景</span><span>视频示例</span></div><h1>TG频道推送：图片与视频</h1><p class="cover-subtitle">默认展示视频 · 顶部媒体替换预览</p><div class="cover-layout"><div class="cover-media-panel"></div><div class="cover-copy-panel"><h2>原帖的五个按钮</h2></div></div><div class="cover-foot"><span>视频替换预览 · 与原帖活动主题不同</span><span>包网知识库</span></div>'
     const mediaPanel = root.querySelector(".cover-media-panel")
     const copyPanel = root.querySelector(".cover-copy-panel")
     const mediaFooter = document.createElement("div")
@@ -39,9 +41,7 @@ try {
     play.textContent = "▶"
     media.append(play)
     mediaPanel.append(channel, media, mediaFooter)
-    const buttonHeading = document.createElement("h2")
-    buttonHeading.textContent = "3 · 按钮区"
-    copyPanel.append(body, buttonHeading, buttons)
+    copyPanel.append(buttons, note)
     document.body.append(root)
     const style = document.createElement("style")
     style.textContent = `
@@ -70,6 +70,9 @@ try {
       .cover-copy-panel [class*="_messageButtons__"] { gap:10px;padding:20px 22px; }
       .cover-copy-panel [class*="_messageButtons__"] button { min-height:58px;padding:12px 14px;color:#f4f8fa;background:#2e4859;font-size:22px;line-height:1.4; }
       .cover-copy-panel [class*="_messageButtons__"] svg { width:22px;height:22px; }
+      .cover-preview-note { padding:18px 24px;color:#36575a;font-size:25px;line-height:1.65; }
+      .cover-preview-note strong { display:block;font-size:34px;font-weight:700; }
+      .cover-preview-note p { margin-top:12px; }
       .cover-foot { display:flex;justify-content:space-between;margin-top:18px;font-size:22px;line-height:1.3;color:#59706f; }
     `
     document.head.append(style)

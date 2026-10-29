@@ -12,7 +12,7 @@ export const operationScenes: OperationScene[] = [
     slug: "tg-message",
     title: "TG推送",
     output: "消息预览",
-    description: "对照同一条消息的静态图与视频，查看正文和按钮的位置。",
+    description: "查看顶部视频替换位置，对照原推送中的正文与按钮排布。",
     href: "/articles/tg-message-media#tg-message-demo",
     image: { src: "/images/operations/tg-message-poster.jpg", alt: "TG推送视频的静态画面", width: 1280, height: 720 },
   },

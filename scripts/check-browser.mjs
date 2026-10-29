@@ -107,12 +107,13 @@ try {
   base = base.replace(/\/$/, "")
   const executablePath =
     process.env.CHROMIUM_EXECUTABLE ??
-    ["/usr/bin/chromium", "/usr/bin/google-chrome", "/usr/bin/google-chrome-stable", chromium.executablePath()].find((candidate) =>
+    ["/usr/bin/google-chrome", "/usr/bin/google-chrome-stable", "/usr/bin/chromium", chromium.executablePath()].find((candidate) =>
       fs.existsSync(candidate)
     )
   assert(executablePath, "Set CHROMIUM_EXECUTABLE to an installed Chromium or Chrome browser")
   const proxy = process.env.BROWSER_PROXY ? { server: process.env.BROWSER_PROXY } : undefined
   browser = await chromium.launch({ executablePath, headless: true, args: ["--no-sandbox"], proxy })
+  console.log("Browser verification:", executablePath, await browser.version())
   const errors = []
   for (const width of [1440, 390]) {
     const context = await browser.newContext({

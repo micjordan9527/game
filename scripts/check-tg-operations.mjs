@@ -13,12 +13,44 @@ export async function checkTgOperations(page, base, prefix, width) {
     assert(await image.evaluate(async (node) => { await node.decode(); return node.naturalWidth > 0 && node.naturalHeight > 0 }), "Poster loads")
     assert.equal(new URL(await image.getAttribute("src"), base).pathname, prefix + posterPath)
   }
+  const originalImageLoaded = async (image, expected) => {
+    assert.equal(await image.count(), 1, "The original-post section has one actual image")
+    await image.scrollIntoViewIfNeeded()
+    const actual = await image.evaluate(async (node) => {
+      await node.decode()
+      return { src: node.currentSrc, width: node.naturalWidth, height: node.naturalHeight, declaredWidth: Number(node.getAttribute("width")), declaredHeight: Number(node.getAttribute("height")) }
+    })
+    const url = new URL(actual.src)
+    assert.equal(url.origin, new URL(base).origin, "The supplied original screenshot is a local asset")
+    assert(url.pathname.startsWith(prefix + "/"), "The original screenshot respects the site base path")
+    assert.equal(new URL(await image.getAttribute("src"), base).href, actual.src, "The displayed image uses its actual source")
+    assert(/\.(?:png|jpe?g|webp|avif)$/i.test(url.pathname), "The original is an image file")
+    assert(!/\/tg-message-(?:poster|cover)\./i.test(url.pathname), "A video frame or generated cover cannot stand in for the original post")
+    assert(actual.width > 0 && actual.height > 0, "The original image decodes")
+    assert.deepEqual([actual.width, actual.height], [actual.declaredWidth, actual.declaredHeight], "Original dimensions match the supplied file")
+    const result = { src: actual.src, width: actual.width, height: actual.height }
+    if (expected) assert.deepEqual(result, expected, "Enlargement uses the same original file")
+    return result
+  }
   const videoLoaded = async (video) => {
-    await video.scrollIntoViewIfNeeded()
+    await video.evaluate((node) => node.scrollIntoView({ block: "center", behavior: "instant" }))
     const handle = await video.elementHandle()
     const owner = await handle.ownerFrame()
     try {
-      await owner.waitForFunction((node) => node.readyState >= 1 && node.videoWidth > 0, handle)
+      try {
+        await owner.waitForFunction((node) => node.readyState >= 1 && node.videoWidth > 0, handle)
+      } catch (error) {
+        const diagnostics = await video.evaluate((node) => ({
+          readyState: node.readyState,
+          networkState: node.networkState,
+          currentSrc: node.currentSrc,
+          errorCode: node.error?.code ?? null,
+          errorMessage: node.error?.message ?? null,
+          canPlayType: node.canPlayType('video/mp4; codecs="avc1.64001f, mp4a.40.2"'),
+          userAgent: navigator.userAgent,
+        })).catch((diagnosticError) => ({ diagnosticError: String(diagnosticError) }))
+        throw new Error("TG video metadata timeout: " + JSON.stringify(diagnostics), { cause: error })
+      }
       const metadata = await video.evaluate((node) => ({ src: node.currentSrc, poster: node.poster, width: node.videoWidth, height: node.videoHeight, duration: node.duration, controls: node.controls }))
       assert.equal(new URL(metadata.src).pathname, prefix + mediaPath)
       assert.equal(new URL(metadata.poster).pathname, prefix + posterPath)
@@ -29,21 +61,41 @@ export async function checkTgOperations(page, base, prefix, width) {
       await handle.dispose()
     }
   }
-  const playAndPause = async (video) => {
-    await videoLoaded(video)
-    await video.evaluate((node) => { node.pause(); node.currentTime = 0 })
+  const progress = async (video) => {
     const handle = await video.elementHandle()
     const owner = await handle.ownerFrame()
     try {
-      // Space uses the native media control, including inside the material iframe.
-      await video.press("Space")
-      await owner.waitForFunction((node) => !node.paused && node.currentTime > .25, handle)
-      await video.press("Space")
-      await owner.waitForFunction((node) => node.paused, handle)
-      const pausedAt = await video.evaluate((node) => node.currentTime)
-      await page.waitForTimeout(300)
-      assert(await video.evaluate((node) => node.paused), "Manual pause remains paused")
-      assert(Math.abs(await video.evaluate((node) => node.currentTime) - pausedAt) < .08, "Paused video stops advancing")
+      const before = await video.evaluate((node) => node.currentTime)
+      await owner.waitForFunction(({ node, before }) => !node.paused && Math.abs(node.currentTime - before) > .2, { node: handle, before })
+    } finally {
+      await handle.dispose()
+    }
+  }
+  const staysPaused = async (video) => {
+    const pausedAt = await video.evaluate((node) => node.currentTime)
+    await page.waitForTimeout(300)
+    assert(await video.evaluate((node) => node.paused), "Paused video is not restarted")
+    assert(Math.abs(await video.evaluate((node) => node.currentTime) - pausedAt) < .08, "Paused video stops advancing")
+  }
+  const playAndPause = async (video) => {
+    await videoLoaded(video)
+    // Space uses the native media control, including inside the material iframe.
+    if (!(await video.evaluate((node) => node.paused))) await video.press("Space")
+    await video.press("Space")
+    await progress(video)
+    await video.press("Space")
+    await staysPaused(video)
+  }
+  const scrollAwayAndBack = async (video) => {
+    const handle = await video.elementHandle()
+    try {
+      await page.evaluate(() => scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" }))
+      await page.waitForFunction((node) => {
+        const box = node.getBoundingClientRect()
+        return (box.bottom <= 0 || box.top >= innerHeight) && node.paused
+      }, handle)
+      await video.evaluate((node) => node.scrollIntoView({ block: "center", behavior: "instant" }))
+      await staysPaused(video)
     } finally {
       await handle.dispose()
     }
@@ -56,6 +108,7 @@ export async function checkTgOperations(page, base, prefix, width) {
     assert.equal(await scenes.locator(`a[href="${prefix}${articlePath}#tg-message-demo"]`).count(), 1)
     return scenes
   }
+  await page.emulateMedia({ reducedMotion: "no-preference" })
   await page.goto(base, { waitUntil: "networkidle" })
   await page.getByRole("navigation", { name: "按角色看图解", exact: true }).getByRole("link", { name: "运营", exact: true }).click()
   await page.waitForURL((url) => url.pathname === prefix + "/articles" && url.searchParams.get("role") === "operation")
@@ -81,18 +134,38 @@ export async function checkTgOperations(page, base, prefix, width) {
   await heading.click()
   await page.waitForURL((url) => url.pathname === prefix + articlePath)
   await page.locator("#article-details[open]").waitFor()
-  assert(!/豆包|生成工具/.test(await page.locator("main").innerText()), "Public copy describes the content without generation-tool labels")
+  const articleText = await page.locator("main").innerText()
+  assert(!/豆包|生成工具/.test(articleText), "Public copy describes the content without generation-tool labels")
+  assert(!/运营素材示例|海洋主题素材更新|三份运营产出/.test(articleText), "The invented channel, message and output copy has been removed")
 
   const demo = page.locator("#tg-message-demo")
   const modes = demo.getByRole("group", { name: "媒体展示方式", exact: true })
   const still = modes.getByRole("button", { name: "静态封面", exact: true })
   const dynamic = modes.getByRole("button", { name: "动态视频", exact: true })
-  assert.equal(await still.getAttribute("aria-pressed"), "true")
-  await imageLoaded(demo.locator(`img[src="${prefix}${posterPath}"]`))
+  assert.equal(await dynamic.getAttribute("aria-pressed"), "true", "Video is the default media mode")
+  assert.equal(await demo.getByText("U Game｜官方频道", { exact: true }).count(), 1)
+  const messageButtons = demo.locator('[aria-label="原截图的五个按钮"]').getByRole("button")
+  assert.equal(await messageButtons.count(), 5)
+  const buttonNames = await messageButtons.allTextContents()
+  assert.deepEqual(buttonNames.map((text) => text.trim()), ["🌐 官方网址", "💌 官方客服", "📱 APP下载", "🤝 官方代理", "🤖 官方飞投"])
+  const buttonBoxes = await messageButtons.evaluateAll((nodes) => nodes.map((node) => {
+    const box = node.getBoundingClientRect()
+    return { top: box.top, bottom: box.bottom, left: box.left, right: box.right, width: box.width }
+  }))
+  assert(Math.abs(buttonBoxes[0].top - buttonBoxes[1].top) < 2 && Math.abs(buttonBoxes[2].top - buttonBoxes[3].top) < 2, "The first two button rows each contain two buttons")
+  assert(buttonBoxes[2].top >= buttonBoxes[0].bottom && buttonBoxes[4].top >= buttonBoxes[2].bottom, "The five buttons occupy three rows")
+  assert(Math.abs(buttonBoxes[4].left - buttonBoxes[0].left) < 2 && Math.abs(buttonBoxes[4].right - buttonBoxes[1].right) < 2, "The last button spans the full row")
+  const video = demo.getByLabel("TG推送动态视频示例", { exact: true })
+  await videoLoaded(video)
+  assert(await video.evaluate((node) => node.muted), "First-visible playback is muted")
+  // Scrolling the default player into view must start the real clip without a play call.
+  await progress(video)
+  await scrollAwayAndBack(video)
+  await playAndPause(video)
+  await scrollAwayAndBack(video)
 
   const enlarged = page.getByRole("dialog", { name: "TG素材放大预览", exact: true })
-  const checkViewer = async (isVideo) => {
-    const trigger = demo.getByRole("button", { name: "放大查看", exact: true })
+  const checkViewer = async (isVideo, trigger = demo.getByRole("button", { name: "放大查看", exact: true }), checkImage = imageLoaded) => {
     await trigger.evaluate((node) => node.scrollIntoView({ block: "center", behavior: "instant" }))
     await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
     const top = await page.evaluate(() => scrollY)
@@ -101,7 +174,7 @@ export async function checkTgOperations(page, base, prefix, width) {
       await trigger.click()
       await enlarged.waitFor({ state: "visible" })
       if (isVideo) await videoLoaded(enlarged.locator("video"))
-      else await imageLoaded(enlarged.locator("img"))
+      else await checkImage(enlarged.locator("img"))
       assert(await enlarged.evaluate((node) => { const box = node.getBoundingClientRect(); return box.left >= -1 && box.right <= innerWidth + 1 && node.scrollWidth <= node.clientWidth + 1 }), "Enlarged media fits the viewport")
       await noOverflow()
       if (isVideo) await page.keyboard.press("Escape")
@@ -112,23 +185,40 @@ export async function checkTgOperations(page, base, prefix, width) {
       await button.dispose()
     }
   }
-  await checkViewer(false)
-  await dynamic.click()
-  assert.equal(await dynamic.getAttribute("aria-pressed"), "true")
-  const video = demo.getByLabel("TG推送动态视频示例", { exact: true })
-  await playAndPause(video)
   await checkViewer(true)
   assert(await video.evaluate((node) => node.paused), "Closing enlargement does not restart the main player")
   await still.click()
+  assert.equal(await still.getAttribute("aria-pressed"), "true")
   await imageLoaded(demo.locator(`img[src="${prefix}${posterPath}"]`))
   assert.equal(await demo.locator("video").count(), 0, "Static mode replaces the player with the poster")
+  await checkViewer(false)
+  await dynamic.click()
+  assert.equal(await dynamic.getAttribute("aria-pressed"), "true")
+  await videoLoaded(video)
   await noOverflow()
   await demo.screenshot({ path: `/tmp/tg-message-demo-${width}.png`, style: "body > header { visibility: hidden !important; }" })
-  for (const id of ["tg-check-points", "tg-output-examples", "tg-materials"]) {
+  for (const id of ["tg-output-examples", "tg-check-points", "tg-materials"]) {
     await page.locator("#" + id).scrollIntoViewIfNeeded()
     await noOverflow()
   }
   await imageLoaded(page.locator(`#tg-output-examples img[src="${prefix}${posterPath}"]`))
+  const originalPost = page.locator("#tg-original-post")
+  let originalScreenshot = null
+  if (await originalPost.count()) {
+    assert.equal(await originalPost.count(), 1)
+    originalScreenshot = await originalImageLoaded(originalPost.locator("img"))
+    await checkViewer(false, originalPost.getByRole("button", { name: "放大原TG截图", exact: true }), async (image) => {
+      await originalImageLoaded(image, originalScreenshot)
+      assert(await image.evaluate((node) => {
+        const box = node.getBoundingClientRect()
+        const dialog = node.closest("dialog")
+        return Math.abs(box.width - dialog.clientWidth) < 4 && Math.abs(box.height / box.width - node.naturalHeight / node.naturalWidth) < .01
+      }), "The original fits the viewer width while preserving its full aspect ratio")
+    })
+    await noOverflow()
+  } else {
+    console.log(`PENDING TG original screenshot ${width}px: no supplied original image; source, dimensions and enlargement have not been verified`)
+  }
 
   await page.goBack({ waitUntil: "networkidle" })
   const returned = new URL(page.url())
@@ -202,5 +292,6 @@ export async function checkTgOperations(page, base, prefix, width) {
   await page.waitForURL((url) => url.pathname === prefix + articlePath && url.hash === "#tg-message-demo")
   await page.locator("#article-details[open]").waitFor()
   await noOverflow()
-  console.log(`PASS TG operations ${width}px: static/video switching, original metadata and real playback/pause, both viewer close paths with focus/position return, role/tag return, unique scenes/topics and shared material video/backlink`)
+  console.log(`PASS TG functional checks ${width}px: default video and first-visible playback, offscreen/manual pause retention, static/video switching, viewer focus/position return, role/tag return, scenes/topics and shared material video/backlink; original screenshot ${originalScreenshot ? "VERIFIED" : "PENDING"}`)
+  return { functional: true, originalScreenshot: originalScreenshot ? { status: "verified", ...originalScreenshot } : { status: "missing" } }
 }

@@ -55,3 +55,4 @@ Operations content preference (2026-10-29):
 - Show concrete operational scenarios and deliverables in knowledge articles and the operations role view; material specifications are a linked resource, not the only content destination.
 - Do not add generation-tool names to public article titles, labels, captions or descriptions. Name the content itself (video example, message preview, interface comparison).
 - Reuse one media file across the article and material center. Label reconstructed messaging layouts as previews, and do not imply that a local preview has published a real message.
+- TG articles should show video by default. Keep the supplied original post screenshot visible as evidence; do not replace it with a recreated layout or invented campaign text. Use the original channel and 2+2+1 button arrangement when explaining positions. Different-theme video and post text must not be presented as one published message.

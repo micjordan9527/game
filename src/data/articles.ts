@@ -14,8 +14,8 @@ export type Article = {
 export const articles: Article[] = [
   {
     slug: "tg-message-media",
-    title: "TG推送：消息结构与静态、动态展示",
-    description: "在同一条消息中切换静态封面与视频，查看媒体、正文和按钮的位置，对照运营需要交付的内容与素材规格。",
+    title: "TG频道推送：图片与视频展示",
+    description: "按参考推送的频道名称与五个按钮布局，默认查看顶部视频替换预览，区分双狮主题原帖与海洋主题视频。",
     cover: "/images/operations/tg-message-cover.jpg",
     category: "operation",
     tags: ["TG推送", "内容发布", "动态素材"],
