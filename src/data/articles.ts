@@ -13,6 +13,17 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "electronic-gaming-machine",
+    title: "电子游艺机主要部件与工作过程",
+    description: "点击通用机柜里的七组部件，逐步观察纸币识别、余额入账、固定示例结果、结算与出票，并对照纸币退回和出票缺纸。",
+    category: "industry",
+    tags: ["电子游艺机", "设备结构", "纸币识别器", "票据打印机", "余额", "RNG"],
+    audience: ["新人", "产品", "设计", "开发", "运营", "客服", "测试"],
+    difficulty: "入门",
+    date: "2026-10-29",
+    updatedAt: "2026-10-29",
+  },
+  {
     slug: "mobile-page-layout",
     title: "手机页面布局：列表、表单与底部操作",
     description: "用六幅手机界面图讲清列表卡片、长表单、底部留白、键盘可见区域、详情返回与账号资产分组，并对照BM和U8材料。",

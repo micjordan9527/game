@@ -4,6 +4,10 @@ import { AcceptanceEvidenceExplorer } from "@/components/enrichment/AcceptanceEv
 import { AcceptanceVisualGuide } from "@/components/article/AcceptanceVisualGuide"
 import { SupportPermissionGuide, hasSupportPermissionGuide } from "@/components/article/SupportPermissionGuide"
 import { ReportCatalogGuide, hasReportCatalogGuide } from "@/components/article/ReportCatalogGuide"
+import { GamingMachineArt } from "@/components/article/GamingMachineArt"
+import { GamingMachineExplorer } from "@/components/article/GamingMachineExplorer"
+import { machineGuides } from "@/data/gamingMachine"
+import machineGeometry from "@/data/gamingMachineGeometry.json"
 import { ResponsivePriorityDemo } from "@/components/design/ResponsivePriorityDemo"
 import { ExportTaskDemo } from "@/components/enrichment/ExportTaskDemo"
 import { AdminListDemo } from "@/components/enrichment/AdminListDemo"
@@ -130,6 +134,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const acceptanceGuide = article.slug === "launch-checklist"
   const supportPermissionGuide = hasSupportPermissionGuide(article.slug)
   const reportCatalogGuide = hasReportCatalogGuide(article.slug)
+  const machineGuide = machineGuides[article.slug]
   const navigation = articleData ? getArticleReadingNavigation(articleData) : undefined
   const excludedTermIds = article.slug === "wallet-payment-reconciliation" ? ["turnover"] : []
   const relatedTerms = articleData
@@ -141,7 +146,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {articleData ? <ArticleJsonLd article={articleData} /> : null}
       <ReadingProgress slug={article.slug} title={article.meta.title} />
       <ArticleHero {...article.meta} audience={resourceAudiences(`/articles/${slug}`, article.meta.audience)} />
-      {reportCatalogGuide ? <ReportCatalogGuide slug={article.slug} /> : supportPermissionGuide ? <SupportPermissionGuide slug={article.slug} /> : acceptanceGuide ? <AcceptanceVisualGuide /> : platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
+      {machineGuide ? <GamingMachineExplorer art={<GamingMachineArt key="machine-art" />} zoom={machineGeometry.zoom} /> : reportCatalogGuide ? <ReportCatalogGuide slug={article.slug} /> : supportPermissionGuide ? <SupportPermissionGuide slug={article.slug} /> : acceptanceGuide ? <AcceptanceVisualGuide /> : platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
         {visuals.length ? (
           <ArticleVisualBrief imagePrompts={visuals} />
         ) : flow ? (

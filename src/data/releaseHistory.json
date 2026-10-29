@@ -1,38 +1,49 @@
 {
   "current": {
-    "version": 31,
-    "date": "2026-10-28",
-    "title": "BM与U8局部对照可分别放大",
-    "summary": "两页六组局部拆成原界面与方案单独对照，补充具体图注和原型入口；支持按宽度查看局部、切换原尺寸、上下张与缩略图，并保留选择和关闭后的阅读位置。",
-    "articleSlugs": [],
-    "changes": [
-      {
-        "id": "bm-local-comparisons",
-        "title": "BM：分类、状态与详情操作区",
-        "description": "三组原界面／生成式方案局部可分别放大，图注标明入口、比分分组和底部区域；说明方案中仍存在的悬浮图标，并连接原有手机原型。",
-        "location": "案例 · BM优化 · BM局部对照",
-        "href": "/cases/bm-optimization?focus=categories#case-focus",
-        "linkLabel": "查看BM三组局部",
-        "related": {
-          "href": "/cases/bm-optimization#bm-mobile-prototype",
-          "label": "操作BM手机原型"
-        }
-      },
-      {
-        "id": "u8-local-comparisons",
-        "title": "U8：首页入口、分组与个人中心",
-        "description": "三组局部单独呈现材料中的原界面与改版示意，核对登录入口、底部浮条、钱包和服务分组；标签选择可通过链接恢复，并连接既有个人中心原型。",
-        "location": "案例 · 竞品分析 · U8重点位置",
-        "href": "/cases/competitor-analysis?focus=profile#case-focus",
-        "linkLabel": "查看U8个人中心局部",
-        "related": {
-          "href": "/cases/competitor-analysis#u8-profile-prototype",
-          "label": "操作U8个人中心原型"
-        }
-      }
-    ]
+    "version": 32,
+    "date": "2026-10-29",
+    "title": "电子游艺机部件与工作过程图解",
+    "summary": "新增一篇通用设备交互图解：七组部件可选择和放大，八步过程同步显示余额与票据，另有纸币退回和出票缺纸对照。",
+    "articleSlugs": [
+      "electronic-gaming-machine"
+    ],
+    "changes": []
   },
   "history": [
+    {
+      "version": 31,
+      "title": "BM与U8局部对照可分别放大",
+      "summary": "两页六组局部拆成原界面与方案单独对照，补充具体图注和原型入口；支持按宽度查看局部、切换原尺寸、上下张与缩略图，并保留选择和关闭后的阅读位置。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "bm-local-comparisons",
+          "title": "BM：分类、状态与详情操作区",
+          "description": "三组原界面／生成式方案局部可分别放大，图注标明入口、比分分组和底部区域；说明方案中仍存在的悬浮图标，并连接原有手机原型。",
+          "location": "案例 · BM优化 · BM局部对照",
+          "href": "/cases/bm-optimization?focus=categories#case-focus",
+          "linkLabel": "查看BM三组局部",
+          "related": {
+            "href": "/cases/bm-optimization#bm-mobile-prototype",
+            "label": "操作BM手机原型"
+          }
+        },
+        {
+          "id": "u8-local-comparisons",
+          "title": "U8：首页入口、分组与个人中心",
+          "description": "三组局部单独呈现材料中的原界面与改版示意，核对登录入口、底部浮条、钱包和服务分组；标签选择可通过链接恢复，并连接既有个人中心原型。",
+          "location": "案例 · 竞品分析 · U8重点位置",
+          "href": "/cases/competitor-analysis?focus=profile#case-focus",
+          "linkLabel": "查看U8个人中心局部",
+          "related": {
+            "href": "/cases/competitor-analysis#u8-profile-prototype",
+            "label": "操作U8个人中心原型"
+          }
+        }
+      ],
+      "publishedAt": "2026-10-28T10:57:41.265792+00:00",
+      "githubCommit": "e0b0807e82d2f1f21866f9539b65f2e34a8e46eb"
+    },
     {
       "version": 30,
       "title": "报表金额与游戏可用状态图解",

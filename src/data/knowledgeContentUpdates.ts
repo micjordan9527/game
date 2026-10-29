@@ -393,5 +393,16 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/member-account-states#account-recovery-case",
     "visualType": "界面图解",
     "location": "知识图解 · 游戏目录 · 顶部四种可用状态对照"
+  },
+  {
+    "slug": "electronic-gaming-machine",
+    "title": "电子游艺机主要部件与工作过程",
+    "description": "七组部件可点击与放大，八步过程同步核对余额和原票据；包含纸币退回、出票缺纸及补纸后处理原票据。图形和数值均为通用讲解示意。",
+    "kind": "新增",
+    "href": "/articles/electronic-gaming-machine",
+    "detailHref": "/articles/electronic-gaming-machine#machine-demo",
+    "relatedHref": "/articles/electronic-gaming-machine#machine-boundaries",
+    "visualType": "交互图解",
+    "location": "知识图解 · 行业入门 · 部件与工作过程"
   }
 ]

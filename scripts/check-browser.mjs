@@ -22,6 +22,7 @@ import { checkEvidenceAi } from "./check-evidence-ai.mjs"
 import { checkSupportPermissions } from "./check-support-permissions.mjs"
 import { checkReportCatalog } from "./check-report-catalog.mjs"
 import { checkBmU8Details } from "./check-bm-u8-details.mjs"
+import { checkGamingMachine, checkGamingMachineModel } from "./check-gaming-machine.mjs"
 import { checkFoundationGuides } from "./check-foundation-guides.mjs"
 import { checkInteractionGuides } from "./check-interaction-guides.mjs"
 import { checkRoleLibrary } from "./check-role-library.mjs"
@@ -30,7 +31,7 @@ const root = path.resolve("out")
 const prefix = process.env.TEST_BASE_PATH ?? ""
 const rounds = Number(process.env.REFRESH_ROUNDS ?? 2)
 const scope = process.env.CHECK_SCOPE ?? "all"
-assert(["all", "home", "site-update", "content", "account", "business", "mobile", "completion", "knowledge", "updates", "case-reading", "navigation", "role-library", "interaction", "foundation", "bulk-export", "design-visual", "publication-mobile", "evidence-ai", "support-permissions", "report-catalog", "bm-u8-details"].includes(scope), "Unsupported CHECK_SCOPE")
+assert(["all", "home", "site-update", "content", "account", "business", "mobile", "completion", "knowledge", "updates", "case-reading", "navigation", "role-library", "interaction", "foundation", "bulk-export", "design-visual", "publication-mobile", "evidence-ai", "support-permissions", "report-catalog", "bm-u8-details", "gaming-machine"].includes(scope), "Unsupported CHECK_SCOPE")
 assert(Number.isInteger(rounds) && rounds > 0 && rounds <= 50, "REFRESH_ROUNDS must be between 1 and 50")
 const contentTypes = {
   ".html": "text/html",
@@ -141,6 +142,7 @@ try {
     })
     const page = await context.newPage()
     await checkHomepage(page, base, prefix, width)
+    if (scope === "gaming-machine" || scope === "all") { await checkGamingMachineModel(); await checkGamingMachine(page, base, prefix, width) }
     if (scope === "bm-u8-details" || scope === "all") await checkBmU8Details(page, base, prefix, width)
     if (scope === "report-catalog" || scope === "all") await checkReportCatalog(page, base, prefix, width)
     if (scope === "support-permissions" || scope === "all") await checkSupportPermissions(page, base, prefix, width)
