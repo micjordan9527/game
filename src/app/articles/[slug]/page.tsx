@@ -7,6 +7,7 @@ import { ReportCatalogGuide, hasReportCatalogGuide } from "@/components/article/
 import { GamingMachineArt } from "@/components/article/GamingMachineArt"
 import { GamingMachineExplorer } from "@/components/article/GamingMachineExplorer"
 import { TgPushGuide } from "@/components/article/TgPushGuide"
+import { TgCaseDetails } from "@/components/article/TgCaseDetails"
 import { machineGuides } from "@/data/gamingMachine"
 import machineGeometry from "@/data/gamingMachineGeometry.json"
 import { ResponsivePriorityDemo } from "@/components/design/ResponsivePriorityDemo"
@@ -174,6 +175,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             className="article-body prose prose-slate min-w-0 max-w-none prose-headings:scroll-mt-24 prose-headings:tracking-normal prose-p:leading-8 prose-li:leading-8 prose-a:text-brand-700 prose-code:rounded prose-code:bg-paper prose-code:px-1 prose-code:py-0.5 prose-code:text-ink"
           >
             {(designGuide || platformGuide || acceptanceGuide || supportPermissionGuide || reportCatalogGuide) && visuals.length ? <div className="not-prose mb-8"><h2 className="mb-4 text-lg font-semibold">概念总览图</h2><ArticleVisualBrief imagePrompts={visuals} /></div> : null}
+            {slug === "tg-message-media" ? <TgCaseDetails /> : null}
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{

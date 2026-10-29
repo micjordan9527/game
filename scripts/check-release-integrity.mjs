@@ -27,7 +27,7 @@ for (const file of pages) {
   assert(canonical, `${file}: canonical missing`)
   assert.equal(new URL(canonical[1]).origin, origin, `${file}: canonical origin`)
 }
-for (const manifestPath of ["public/images/enrichment/provenance.json", "public/images/official-comparison/manifest.json", "public/images/knowledge-20261026/manifest.json", "public/images/platform-wallet-20261027/manifest.json", "public/videos/operations/provenance.json"]) {
+for (const manifestPath of ["public/images/enrichment/provenance.json", "public/images/official-comparison/manifest.json", "public/images/knowledge-20261026/manifest.json", "public/images/platform-wallet-20261027/manifest.json", "public/videos/operations/provenance.json", "public/images/operations/tg-material-reference-provenance.json"]) {
   const items = JSON.parse(fs.readFileSync(manifestPath, "utf8"))
   for (const item of items) {
     const file = item.path ? path.join("public", item.path) : path.join(path.dirname(manifestPath), item.file)

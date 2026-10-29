@@ -1,0 +1,13 @@
+[
+  {
+    "path": "/images/operations/tg-material-message-reference.webp",
+    "width": 896,
+    "height": 1280,
+    "sizeBytes": 82824,
+    "source": "public/case-assets/material-standards/index.html :: const tgPreviewImage",
+    "sourceHref": "/design/material-standards?module=tg-assets",
+    "materialType": "现有素材中心TG群消息截图，原始字节提取",
+    "sha256": "721273e03a7c89d195d84614216fbc23bc297b833d24951237ef89b23f721433",
+    "note": "另一个现有素材案例，不是用户提供的双狮官方频道截图；截图含相邻两条消息，按钮归属须分别判断。"
+  }
+]

@@ -118,7 +118,7 @@ export function TgPushGuide({ originalScreenshot }: { originalScreenshot?: Origi
       <p>视频放在原帖顶部图片的位置。这里单独展示媒体替换预览，频道名和五个按钮按原截图排列，不把视频与原帖活动正文合成一条已发布消息。</p>
     </div>
     <nav className={styles.readingNav} aria-label="本文阅读入口">
-      <a href="#tg-message-demo">看视频替换预览</a>{original ? <a href="#tg-original-post">查看原TG截图</a> : null}<a href="#tg-output-examples">看推送位置对照</a><a href="#tg-check-points">查看核对位置</a><a href="#tg-materials">查看素材规格</a><a href="#article-details">查看详细说明</a>
+      <a href="#tg-message-demo">看视频替换预览</a>{original ? <a href="#tg-original-post">查看原TG截图</a> : null}<a href="#tg-output-examples">看推送位置对照</a><a href="#tg-check-points">查看核对位置</a><a href="#tg-materials">查看素材规格</a><a href="#tg-case-details">看案例截图与说明</a>
     </nav>
 
     <section id="tg-message-demo" className={styles.demo} aria-labelledby="tg-message-title">

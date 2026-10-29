@@ -439,5 +439,17 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/tg-message-media#tg-materials",
     "visualType": "界面图解",
     "location": "知识图解 · 运营场景 · 视频替换预览"
+  },
+  {
+    "slug": "tg-message-media-v37",
+    "articleSlug": "tg-message-media",
+    "title": "TG推送：用现有截图说明实际消息",
+    "description": "在默认展开的详细说明中加入现有TG群消息截图与媒体、正文、上一条按钮局部，区分图片内文案和TG按钮，避免把相邻消息混为一条。",
+    "kind": "补充",
+    "href": "/articles/tg-message-media",
+    "detailHref": "/articles/tg-message-media#tg-case-details",
+    "relatedHref": "/articles/tg-message-media#tg-materials",
+    "visualType": "界面图解",
+    "location": "知识图解 · 运营场景 · 详细说明中的截图案例"
   }
 ]
