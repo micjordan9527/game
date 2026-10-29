@@ -13,6 +13,18 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "tg-message-media",
+    title: "TG推送：消息结构与静态、动态展示",
+    description: "在同一条消息中切换静态封面与视频，查看媒体、正文和按钮的位置，对照运营需要交付的内容与素材规格。",
+    cover: "/images/operations/tg-message-cover.jpg",
+    category: "operation",
+    tags: ["TG推送", "内容发布", "动态素材"],
+    audience: ["运营", "设计", "产品"],
+    difficulty: "入门",
+    date: "2026-10-29",
+    updatedAt: "2026-10-29",
+  },
+  {
     slug: "electronic-gaming-machine",
     title: "电子游艺机主要部件与工作过程",
     description: "点击部件看作用，分步查看识钞、余额与出票。",

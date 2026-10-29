@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { Filter, RotateCcw } from "lucide-react"
 import type { Article } from "@/data/articles"
 import { ArticleCard } from "@/components/common/ArticleCard"
+import { OperationScenes } from "@/components/operation/OperationScenes"
 import { resourceAudiences } from "@/lib/work-audiences"
 import { libraryAudience, libraryRoleParam } from "@/lib/article-library-filters"
 
@@ -121,6 +122,7 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
       </aside>
 
       <section id="article-results" aria-label="文章列表" data-selected-role={audience} data-selected-tag={tag}>
+        {audience === "运营" && tag === allOption ? <OperationScenes /> : null}
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <p role="status" data-library-summary className="text-sm leading-7 text-muted">
             <span className="mr-3 font-semibold text-brand-700">角色：{audience}</span>

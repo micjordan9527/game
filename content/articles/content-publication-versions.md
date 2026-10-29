@@ -67,4 +67,6 @@ flowchart TD
 
 ## 关联现有资料
 
+TG消息中的媒体、正文与按钮可在[TG推送场景](/articles/tg-message-media#tg-message-demo)直接对照；内容版本与频道里的实际发布结果分别核对。
+
 [多租户与站点配置](/articles/multi-tenant-site-config#一次配置变更的路径)解释范围与配置版本；[官网案例](/cases/white-label-official#case-reading-guide)提供内容与反馈材料；[版本验收](/articles/requirements-release-acceptance#验收矩阵)说明核对证据。

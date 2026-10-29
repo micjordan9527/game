@@ -11,16 +11,17 @@ export type WorkRole = {
 
 export const workRoles: WorkRole[] = [
   {
-    slug: "operation", title: "运营", summary: "复核规则与数据，整理有依据的业务问题。",
-    goal: "把规则、数据和用户反馈组织成可追踪的问题与复盘记录。",
+    slug: "operation", title: "运营", summary: "查看推送消息、公告版本、活动规则与报表明细。",
+    goal: "对照实际消息与界面，核对运营素材、发布内容、活动规则和报表口径。",
     steps: [
+      { title: "查看 TG 推送消息", description: "对照消息顶部的静态图与动态视频，核对正文、链接和按钮的完整展示。", href: "/articles/tg-message-media", kind: "文章" },
       { title: "明确运营问题", description: "区分流量来源、页面承接、业务路径与数据复盘，先确定问题范围。", href: "/articles/operation-product-conversion-model", kind: "文章" },
       { title: "检查活动规则", description: "核对参与条件、数据口径、审批和异常处理。", href: "/articles/campaign-risk-review", kind: "文章" },
       { title: "对照后台角色任务", description: "从本地原型观察查询与异常入口，区分演示内容和待验证能力。", href: "/cases/admin-optimization", kind: "案例" },
       { title: "整理活动需求", description: "使用活动 PRD 的规则与风险字段，补充适用范围和负责人。", href: "/templates/promotion-system-prd", kind: "模板" },
       { title: "形成可核对的报表口径", description: "写清周期、来源、筛选与排除规则，作为复盘依据。", href: "/templates/data-report-spec", kind: "模板" },
     ],
-    outputs: ["业务问题与证据清单", "活动规则评审记录", "统一的数据口径"],
+    outputs: ["推送消息预览", "公告版本界面", "活动规则示例", "报表汇总与明细"],
     nextRole: "product", handoff: "向产品交付问题背景、受影响角色、证据、优先级与期望结果。",
   },
   {

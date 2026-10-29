@@ -1,0 +1,14 @@
+[
+  {
+    "path": "/videos/operations/tg-message-demo.mp4",
+    "source": "用户提供的视频素材",
+    "materialType": "TG顶部媒体位视频示例",
+    "width": 1280,
+    "height": 720,
+    "durationSeconds": 9.056009,
+    "sizeBytes": 1616197,
+    "codec": "H.264 / AAC",
+    "poster": "/images/operations/tg-message-poster.jpg",
+    "posterSource": "同一视频首帧"
+  }
+]

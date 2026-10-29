@@ -72,7 +72,7 @@ export function buildSearchIndex(): SearchRecord[] {
         title: article.title,
         description: article.description,
         href: `/articles/${article.slug}`,
-        previewImage: getImagePromptsForArticle(article.slug)[0]?.imageSrc,
+        previewImage: article.cover ?? getImagePromptsForArticle(article.slug)[0]?.imageSrc,
         tags: Array.from(
           new Set([
             ...article.tags,

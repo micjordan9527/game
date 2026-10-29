@@ -50,3 +50,8 @@ Accepted usability requirements (2026-10-29):
 - Interactive figures must keep the part selector, figure, current explanation and previous/next controls visible together at common desktop and phone heights. Validate viewport visibility during normal and exception steps, not only overflow or button functionality.
 - Interactive article cards need an actual preview of their content and a clear interaction label; reuse existing art rather than showing an empty generic cover.
 - Agent materials is an independent tool section. Keep its own material directory and old module links, and do not restore an outer knowledge sidebar or design-topic links on its workspace page.
+
+Operations content preference (2026-10-29):
+- Show concrete operational scenarios and deliverables in knowledge articles and the operations role view; material specifications are a linked resource, not the only content destination.
+- Do not add generation-tool names to public article titles, labels, captions or descriptions. Name the content itself (video example, message preview, interface comparison).
+- Reuse one media file across the article and material center. Label reconstructed messaging layouts as previews, and do not imply that a local preview has published a real message.

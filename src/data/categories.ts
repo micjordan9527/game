@@ -30,8 +30,8 @@ export const categories: Category[] = [
   },
   {
     slug: "operation",
-    title: "运营治理",
-    description: "从流量、产品载体、用户路径、数据口径和异常复盘理解运营目标如何落到系统里。",
+    title: "运营场景",
+    description: "查看推送消息、公告发布、活动规则和报表核对的实际界面与工作产出。",
   },
   {
     slug: "design",

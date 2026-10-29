@@ -25,6 +25,7 @@ import { checkBmU8Details } from "./check-bm-u8-details.mjs"
 import { checkGamingMachine, checkGamingMachineModel } from "./check-gaming-machine.mjs"
 import { checkMachineCover } from "./check-machine-cover.mjs"
 import { checkInterfaceCovers } from "./check-interface-covers.mjs"
+import { checkTgOperations } from "./check-tg-operations.mjs"
 import { checkAgentMaterials } from "./check-agent-materials.mjs"
 import { checkFoundationGuides } from "./check-foundation-guides.mjs"
 import { checkInteractionGuides } from "./check-interaction-guides.mjs"
@@ -34,7 +35,7 @@ const root = path.resolve("out")
 const prefix = process.env.TEST_BASE_PATH ?? ""
 const rounds = Number(process.env.REFRESH_ROUNDS ?? 2)
 const scope = process.env.CHECK_SCOPE ?? "all"
-assert(["all", "home", "site-update", "content", "account", "business", "mobile", "completion", "knowledge", "updates", "case-reading", "navigation", "role-library", "interaction", "foundation", "bulk-export", "design-visual", "publication-mobile", "evidence-ai", "support-permissions", "report-catalog", "bm-u8-details", "gaming-machine", "usability-batch", "interface-covers"].includes(scope), "Unsupported CHECK_SCOPE")
+assert(["all", "home", "site-update", "content", "account", "business", "mobile", "completion", "knowledge", "updates", "case-reading", "navigation", "role-library", "interaction", "foundation", "bulk-export", "design-visual", "publication-mobile", "evidence-ai", "support-permissions", "report-catalog", "bm-u8-details", "gaming-machine", "usability-batch", "interface-covers", "tg-operations"].includes(scope), "Unsupported CHECK_SCOPE")
 assert(Number.isInteger(rounds) && rounds > 0 && rounds <= 50, "REFRESH_ROUNDS must be between 1 and 50")
 const contentTypes = {
   ".html": "text/html",
@@ -47,6 +48,7 @@ const contentTypes = {
   ".jpeg": "image/jpeg",
   ".avif": "image/avif",
   ".webp": "image/webp",
+  ".mp4": "video/mp4",
   ".woff2": "font/woff2",
 }
 
@@ -137,7 +139,7 @@ try {
       page.on("response", (response) => {
         if (
           new URL(response.url()).origin === new URL(base).origin &&
-          ["script", "image"].includes(response.request().resourceType()) &&
+          ["script", "image", "media"].includes(response.request().resourceType()) &&
           response.status() >= 400
         )
           errors.push({ url: response.url(), message: `Asset HTTP ${response.status()}` })
@@ -148,6 +150,7 @@ try {
     if (scope === "gaming-machine" || scope === "usability-batch" || scope === "all") { await checkGamingMachineModel(); await checkGamingMachine(page, base, prefix, width) }
     if (scope === "usability-batch" || scope === "all") await checkMachineCover(page, base, prefix, width)
     if (scope === "interface-covers" || scope === "all") await checkInterfaceCovers(page, base, prefix, width)
+    if (scope === "tg-operations" || scope === "all") await checkTgOperations(page, base, prefix, width)
     if (scope === "usability-batch" || scope === "all") await checkAgentMaterials(page, base, prefix, width)
     if (scope === "bm-u8-details" || scope === "all") await checkBmU8Details(page, base, prefix, width)
     if (scope === "report-catalog" || scope === "all") await checkReportCatalog(page, base, prefix, width)

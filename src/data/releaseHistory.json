@@ -1,62 +1,98 @@
 {
   "current": {
-    "version": 34,
+    "version": 35,
     "date": "2026-10-29",
-    "title": "四篇设计图解补充界面封面",
-    "summary": "手机布局、批量操作、后台筛选和表单校验使用正文界面制作封面；图解库、设计主题与相关阅读显示相同预览，正文与操作演示保持原有内容。",
-    "articleSlugs": [],
+    "title": "TG推送图解与运营场景入口",
+    "summary": "新增TG消息媒体、正文与按钮的场景图解，支持静态封面、视频播放和放大；运营角色与主题提供四个实际场景入口，代理素材复用同一视频并链接正文。",
+    "articleSlugs": [
+      "tg-message-media"
+    ],
     "changes": [
       {
-        "id": "mobile-page-layout-cover",
-        "title": "手机页面布局封面",
-        "description": "列表卡片保留编号、状态和时间；详情预览展示正文留白与底部操作。",
-        "location": "知识图解 · 设计体验 · 手机页面布局",
-        "href": "/articles?tag=手机布局",
-        "linkLabel": "查看手机页面布局封面",
+        "id": "operation-scenarios",
+        "title": "运营角色按实际场景查看产出",
+        "description": "运营入口展示TG推送、公告发布、活动规则和报表核对，分别连接消息预览、发布界面、规则示例与报表明细；运营主题显示为运营场景，保留原网址。",
+        "location": "知识图解 · 运营角色／运营场景主题",
+        "href": "/articles?role=operation",
+        "linkLabel": "查看运营场景与图解",
         "related": {
-          "href": "/articles/mobile-page-layout#visual-guide",
-          "label": "打开正文界面图"
+          "href": "/operation",
+          "label": "打开运营场景主题"
         }
       },
       {
-        "id": "admin-bulk-actions-cover",
-        "title": "后台批量操作封面",
-        "description": "预览全部匹配8条的确认窗口，以及4条成功、1条失败、3条跳过的结果节选。",
-        "location": "知识图解 · 设计体验 · 后台批量操作",
-        "href": "/articles?tag=批量操作",
-        "linkLabel": "查看后台批量操作封面",
+        "id": "tg-shared-materials",
+        "title": "TG素材提供视频与场景文章入口",
+        "description": "TG推送素材保留原静态素材和源稿入口，增加视频播放、文件下载及知识图解回链；正文与素材页共用同一视频。",
+        "location": "代理素材 · 运营活动 · TG推送素材",
+        "href": "/design/material-standards?module=tg-assets",
+        "linkLabel": "查看TG推送素材",
         "related": {
-          "href": "/articles/admin-bulk-actions#visual-guide",
-          "label": "打开正文界面图"
-        }
-      },
-      {
-        "id": "admin-filter-list-states-cover",
-        "title": "后台筛选与列表状态封面",
-        "description": "并列显示点击查询前的全部8条与查询后的已关闭3条，区分待查询条件和已应用条件。",
-        "location": "知识图解 · 设计体验 · 后台筛选与列表状态",
-        "href": "/articles?tag=筛选",
-        "linkLabel": "查看后台筛选与列表状态封面",
-        "related": {
-          "href": "/articles/admin-filter-list-states#visual-guide",
-          "label": "打开正文界面图"
-        }
-      },
-      {
-        "id": "form-validation-submit-feedback-cover",
-        "title": "表单校验与提交反馈封面",
-        "description": "并列显示字段错误和结果未知：一侧在输入框旁提示错误，另一侧保留原申请号与查询入口。",
-        "location": "知识图解 · 设计体验 · 表单校验与提交反馈",
-        "href": "/articles?tag=字段校验",
-        "linkLabel": "查看表单校验与提交反馈封面",
-        "related": {
-          "href": "/articles/form-validation-submit-feedback#visual-guide",
-          "label": "打开正文界面图"
+          "href": "/articles/tg-message-media#tg-materials",
+          "label": "查看视频规格与素材入口"
         }
       }
     ]
   },
   "history": [
+    {
+      "version": 34,
+      "title": "四篇设计图解补充界面封面",
+      "summary": "手机布局、批量操作、后台筛选和表单校验使用正文界面制作封面；图解库、设计主题与相关阅读显示相同预览，正文与操作演示保持原有内容。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "mobile-page-layout-cover",
+          "title": "手机页面布局封面",
+          "description": "列表卡片保留编号、状态和时间；详情预览展示正文留白与底部操作。",
+          "location": "知识图解 · 设计体验 · 手机页面布局",
+          "href": "/articles?tag=手机布局",
+          "linkLabel": "查看手机页面布局封面",
+          "related": {
+            "href": "/articles/mobile-page-layout#visual-guide",
+            "label": "打开正文界面图"
+          }
+        },
+        {
+          "id": "admin-bulk-actions-cover",
+          "title": "后台批量操作封面",
+          "description": "预览全部匹配8条的确认窗口，以及4条成功、1条失败、3条跳过的结果节选。",
+          "location": "知识图解 · 设计体验 · 后台批量操作",
+          "href": "/articles?tag=批量操作",
+          "linkLabel": "查看后台批量操作封面",
+          "related": {
+            "href": "/articles/admin-bulk-actions#visual-guide",
+            "label": "打开正文界面图"
+          }
+        },
+        {
+          "id": "admin-filter-list-states-cover",
+          "title": "后台筛选与列表状态封面",
+          "description": "并列显示点击查询前的全部8条与查询后的已关闭3条，区分待查询条件和已应用条件。",
+          "location": "知识图解 · 设计体验 · 后台筛选与列表状态",
+          "href": "/articles?tag=筛选",
+          "linkLabel": "查看后台筛选与列表状态封面",
+          "related": {
+            "href": "/articles/admin-filter-list-states#visual-guide",
+            "label": "打开正文界面图"
+          }
+        },
+        {
+          "id": "form-validation-submit-feedback-cover",
+          "title": "表单校验与提交反馈封面",
+          "description": "并列显示字段错误和结果未知：一侧在输入框旁提示错误，另一侧保留原申请号与查询入口。",
+          "location": "知识图解 · 设计体验 · 表单校验与提交反馈",
+          "href": "/articles?tag=字段校验",
+          "linkLabel": "查看表单校验与提交反馈封面",
+          "related": {
+            "href": "/articles/form-validation-submit-feedback#visual-guide",
+            "label": "打开正文界面图"
+          }
+        }
+      ],
+      "publishedAt": "2026-10-29T08:05:19.330894+00:00",
+      "githubCommit": "a573b295ed192b55cc498fb76aa007d0812e7295"
+    },
     {
       "version": 33,
       "title": "设备图解、封面与代理素材工作区调整",

@@ -416,5 +416,16 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/electronic-gaming-machine#article-details",
     "visualType": "交互图解",
     "location": "知识图解 · 行业入门 · 设备交互面板"
+  },
+  {
+    "slug": "tg-message-media",
+    "title": "TG推送：消息结构与静态、动态展示",
+    "description": "切换静态封面与约9秒视频，在消息结构示意中查看媒体、正文与按钮；配运营产出示例、局部问题对照和可下载素材。",
+    "kind": "新增",
+    "href": "/articles/tg-message-media",
+    "detailHref": "/articles/tg-message-media#tg-message-demo",
+    "relatedHref": "/articles/tg-message-media#tg-materials",
+    "visualType": "界面图解",
+    "location": "知识图解 · 运营场景 · TG推送预览"
   }
 ]

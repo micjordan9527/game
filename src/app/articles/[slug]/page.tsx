@@ -6,6 +6,7 @@ import { SupportPermissionGuide, hasSupportPermissionGuide } from "@/components/
 import { ReportCatalogGuide, hasReportCatalogGuide } from "@/components/article/ReportCatalogGuide"
 import { GamingMachineArt } from "@/components/article/GamingMachineArt"
 import { GamingMachineExplorer } from "@/components/article/GamingMachineExplorer"
+import { TgPushGuide } from "@/components/article/TgPushGuide"
 import { machineGuides } from "@/data/gamingMachine"
 import machineGeometry from "@/data/gamingMachineGeometry.json"
 import { ResponsivePriorityDemo } from "@/components/design/ResponsivePriorityDemo"
@@ -146,7 +147,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {articleData ? <ArticleJsonLd article={articleData} /> : null}
       <ReadingProgress slug={article.slug} title={article.meta.title} />
       <ArticleHero {...article.meta} audience={resourceAudiences(`/articles/${slug}`, article.meta.audience)} />
-      {machineGuide ? <GamingMachineExplorer art={<GamingMachineArt key="machine-art" />} zoom={machineGeometry.zoom} /> : reportCatalogGuide ? <ReportCatalogGuide slug={article.slug} /> : supportPermissionGuide ? <SupportPermissionGuide slug={article.slug} /> : acceptanceGuide ? <AcceptanceVisualGuide /> : platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
+      {slug === "tg-message-media" ? <TgPushGuide /> : machineGuide ? <GamingMachineExplorer art={<GamingMachineArt key="machine-art" />} zoom={machineGeometry.zoom} /> : reportCatalogGuide ? <ReportCatalogGuide slug={article.slug} /> : supportPermissionGuide ? <SupportPermissionGuide slug={article.slug} /> : acceptanceGuide ? <AcceptanceVisualGuide /> : platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
         {visuals.length ? (
           <ArticleVisualBrief imagePrompts={visuals} />
         ) : flow ? (

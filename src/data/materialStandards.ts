@@ -71,10 +71,10 @@ export const materialStandards = [
   },
   {
     slug: "tg-assets",
-    title: "TG 宣传图",
+    title: "TG推送素材",
     category: "运营活动",
-    description: "TG 宣传图规格与单张完整素材预览。",
-    keywords: "1448x1086 1920x1080 TG 宣传图 运营图",
+    description: "核对 TG 静态宣传图规格，预览动态视频与完整消息场景。",
+    keywords: "1448x1086 1920x1080 1280x720 TG Telegram 推送 宣传图 运营图 消息 静态 动态 视频 MP4 下载",
   },
   {
     slug: "game-cover",
