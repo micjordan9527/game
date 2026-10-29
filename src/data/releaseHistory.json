@@ -1,40 +1,98 @@
 {
   "current": {
-    "version": 33,
+    "version": 34,
     "date": "2026-10-29",
-    "title": "设备图解、封面与代理素材工作区调整",
-    "summary": "设备演示按屏幕高度安排部件选择、图形、当步说明与操作；文章封面展示机柜和识钞局部；代理素材保留内部目录，取消重复导航并兼容原模块链接。",
-    "articleSlugs": [
-      "electronic-gaming-machine-v33"
-    ],
+    "title": "四篇设计图解补充界面封面",
+    "summary": "手机布局、批量操作、后台筛选和表单校验使用正文界面制作封面；图解库、设计主题与相关阅读显示相同预览，正文与操作演示保持原有内容。",
+    "articleSlugs": [],
     "changes": [
       {
-        "id": "machine-article-cover",
-        "title": "设备图解封面显示实际内容",
-        "description": "复用正文设备图制作完整机柜与识钞器局部封面，标明可交互、七组部件和八步过程；图解列表、主题列表和相关阅读使用同一预览。",
-        "location": "知识图解 · 电子游艺机卡片",
-        "href": "/articles?tag=电子游艺机",
-        "linkLabel": "查看设备图解封面",
+        "id": "mobile-page-layout-cover",
+        "title": "手机页面布局封面",
+        "description": "列表卡片保留编号、状态和时间；详情预览展示正文留白与底部操作。",
+        "location": "知识图解 · 设计体验 · 手机页面布局",
+        "href": "/articles?tag=手机布局",
+        "linkLabel": "查看手机页面布局封面",
         "related": {
-          "href": "/articles/electronic-gaming-machine#machine-view",
-          "label": "打开设备交互面板"
+          "href": "/articles/mobile-page-layout#visual-guide",
+          "label": "打开正文界面图"
         }
       },
       {
-        "id": "agent-material-workspace",
-        "title": "代理素材使用独立工作区",
-        "description": "顶部入口改为代理素材，移除本页外层目录及大介绍卡片，保留素材中心自身菜单、搜索、图片和源稿入口；手机目录可跨分组，旧模块定位链接仍可使用。",
-        "location": "顶部 · 代理素材",
-        "href": "/design/material-standards",
-        "linkLabel": "打开代理素材工作区",
+        "id": "admin-bulk-actions-cover",
+        "title": "后台批量操作封面",
+        "description": "预览全部匹配8条的确认窗口，以及4条成功、1条失败、3条跳过的结果节选。",
+        "location": "知识图解 · 设计体验 · 后台批量操作",
+        "href": "/articles?tag=批量操作",
+        "linkLabel": "查看后台批量操作封面",
         "related": {
-          "href": "/design/material-standards?module=banner",
-          "label": "查看Banner素材规范"
+          "href": "/articles/admin-bulk-actions#visual-guide",
+          "label": "打开正文界面图"
+        }
+      },
+      {
+        "id": "admin-filter-list-states-cover",
+        "title": "后台筛选与列表状态封面",
+        "description": "并列显示点击查询前的全部8条与查询后的已关闭3条，区分待查询条件和已应用条件。",
+        "location": "知识图解 · 设计体验 · 后台筛选与列表状态",
+        "href": "/articles?tag=筛选",
+        "linkLabel": "查看后台筛选与列表状态封面",
+        "related": {
+          "href": "/articles/admin-filter-list-states#visual-guide",
+          "label": "打开正文界面图"
+        }
+      },
+      {
+        "id": "form-validation-submit-feedback-cover",
+        "title": "表单校验与提交反馈封面",
+        "description": "并列显示字段错误和结果未知：一侧在输入框旁提示错误，另一侧保留原申请号与查询入口。",
+        "location": "知识图解 · 设计体验 · 表单校验与提交反馈",
+        "href": "/articles?tag=字段校验",
+        "linkLabel": "查看表单校验与提交反馈封面",
+        "related": {
+          "href": "/articles/form-validation-submit-feedback#visual-guide",
+          "label": "打开正文界面图"
         }
       }
     ]
   },
   "history": [
+    {
+      "version": 33,
+      "title": "设备图解、封面与代理素材工作区调整",
+      "summary": "设备演示按屏幕高度安排部件选择、图形、当步说明与操作；文章封面展示机柜和识钞局部；代理素材保留内部目录，取消重复导航并兼容原模块链接。",
+      "articleSlugs": [
+        "electronic-gaming-machine-v33"
+      ],
+      "changes": [
+        {
+          "id": "machine-article-cover",
+          "title": "设备图解封面显示实际内容",
+          "description": "复用正文设备图制作完整机柜与识钞器局部封面，标明可交互、七组部件和八步过程；图解列表、主题列表和相关阅读使用同一预览。",
+          "location": "知识图解 · 电子游艺机卡片",
+          "href": "/articles?tag=电子游艺机",
+          "linkLabel": "查看设备图解封面",
+          "related": {
+            "href": "/articles/electronic-gaming-machine#machine-view",
+            "label": "打开设备交互面板"
+          }
+        },
+        {
+          "id": "agent-material-workspace",
+          "title": "代理素材使用独立工作区",
+          "description": "顶部入口改为代理素材，移除本页外层目录及大介绍卡片，保留素材中心自身菜单、搜索、图片和源稿入口；手机目录可跨分组，旧模块定位链接仍可使用。",
+          "location": "顶部 · 代理素材",
+          "href": "/design/material-standards",
+          "linkLabel": "打开代理素材工作区",
+          "related": {
+            "href": "/design/material-standards?module=banner",
+            "label": "查看Banner素材规范"
+          }
+        }
+      ],
+      "publishedAt": "2026-10-29T07:32:11.364003+00:00",
+      "githubCommit": "8cde81e4f253169f71f7e0306cec1714f7f1bc5d"
+    },
     {
       "version": 32,
       "title": "电子游艺机部件与工作过程图解",

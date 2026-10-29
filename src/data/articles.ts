@@ -26,6 +26,7 @@ export const articles: Article[] = [
   },
   {
     slug: "mobile-page-layout",
+    cover: "/images/articles/mobile-page-layout-cover.jpg",
     title: "手机页面布局：列表、表单与底部操作",
     description: "用六幅手机界面图讲清列表卡片、长表单、底部留白、键盘可见区域、详情返回与账号资产分组，并对照BM和U8材料。",
     category: "design",
@@ -37,6 +38,7 @@ export const articles: Article[] = [
   },
   {
     slug: "admin-bulk-actions",
+    cover: "/images/articles/admin-bulk-actions-cover.jpg",
     title: "后台批量操作：范围确认与部分失败",
     description: "用八条虚构工单画清当前页与全部匹配、确认范围、四条成功一条失败三条跳过，以及只处理失败项。",
     category: "design",
@@ -49,6 +51,7 @@ export const articles: Article[] = [
 
   {
     slug: "admin-filter-list-states",
+    cover: "/images/articles/admin-filter-list-states-cover.jpg",
     title: "后台筛选与列表状态：从查询到详情返回",
     description: "用四幅界面图对照查询前后、无匹配与失败、详情返回，再操作八条虚构工单观察变化。",
     category: "design",
@@ -73,6 +76,7 @@ export const articles: Article[] = [
   },
   {
     slug: "form-validation-submit-feedback",
+    cover: "/images/articles/form-validation-submit-feedback-cover.jpg",
     title: "表单校验与提交反馈：从字段错误到未知结果",
     description: "用六种表单界面对照错误、提交中、未受理、结果未知、原申请查询与已受理，标明每种状态下的允许动作。",
     category: "design",

@@ -1,0 +1,50 @@
+[
+  {
+    "path": "/images/articles/mobile-page-layout-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/articles/mobile-page-layout#visual-guide",
+    "sourceFrames": [
+      1,
+      3
+    ],
+    "materialType": "现有正文HTML界面图节选",
+    "composition": "两幅正文界面并列，保留原字段与状态"
+  },
+  {
+    "path": "/images/articles/admin-bulk-actions-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/articles/admin-bulk-actions#visual-guide",
+    "sourceFrames": [
+      2,
+      3
+    ],
+    "materialType": "现有正文HTML界面图节选",
+    "composition": "确认窗口与结果节选；完整记录保留在正文"
+  },
+  {
+    "path": "/images/articles/admin-filter-list-states-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/articles/admin-filter-list-states#visual-guide",
+    "sourceFrames": [
+      1,
+      2
+    ],
+    "materialType": "现有正文HTML界面图节选",
+    "composition": "两幅正文界面并列，保留原字段与状态"
+  },
+  {
+    "path": "/images/articles/form-validation-submit-feedback-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/articles/form-validation-submit-feedback#visual-guide",
+    "sourceFrames": [
+      1,
+      4
+    ],
+    "materialType": "现有正文HTML界面图节选",
+    "composition": "两幅正文界面并列，保留原字段与状态"
+  }
+]

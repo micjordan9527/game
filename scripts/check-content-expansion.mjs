@@ -1,5 +1,6 @@
 import assert from "node:assert/strict"
 import fs from "node:fs"
+import ts from "typescript"
 
 const subjects = ["member-account-states", "wallet-payment-reconciliation", "agent-system-design", "campaign-risk-review", "admin-information-hierarchy", "bet-ticket-status"]
 const templates = ["member-account-review", "wallet-reconciliation-checklist", "white-label-requirement-form"]
@@ -167,11 +168,15 @@ export async function checkContentExpansion(page, base, prefix, width) {
   await page.locator(`main a[href="${prefix}/articles/wallet-payment-reconciliation"]`).waitFor()
   await page.goto(base, { waitUntil: "networkidle" })
   assert.equal(await page.getByRole("navigation", { name: "业务主题导航" }).locator('a[href$="#scenario"]').count(), 6)
-  assert.equal(await page.getByRole("region", { name: "最近更新", exact: true }).locator("time").count(), 3)
   const recentUpdates = page.getByRole("region", { name: "最近更新", exact: true })
-  const imageCount = JSON.parse(fs.readFileSync("public/images/knowledge-20261026/manifest.json", "utf8")).length
-  assert((await recentUpdates.innerText()).includes(`${imageCount} 张主题配图`))
-  await recentUpdates.locator(`a[href="${prefix}/updates#knowledge-content"]`).waitFor()
+  const updateSource = ts.transpileModule(fs.readFileSync("src/data/contentUpdates.ts", "utf8"), { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText
+  const { contentUpdates } = await import("data:text/javascript;base64," + Buffer.from(updateSource).toString("base64"))
+  for (const item of contentUpdates) {
+    const link = recentUpdates.locator(`a[href="${prefix}${item.href}"]`)
+    await link.waitFor()
+    const text = await link.innerText()
+    assert(text.includes(item.title) && text.includes(item.description), "Recent updates show the current specific descriptions and direct links")
+  }
   await noOverflow(page, "Updated homepage")
   await settle(page)
   console.log(`PASS ${width}px: new content indexed, curated deep links and specific update descriptions`)
