@@ -2,10 +2,26 @@ import assert from "node:assert/strict"
 
 export async function checkTgCaseDetails(page, base, prefix, width) {
   const sourcePath = `${prefix}/images/operations/tg-material-message-reference.webp`
-  await page.goto(base + "/articles/tg-message-media#article-details", { waitUntil: "networkidle" })
+  await page.goto(base + "/articles/tg-message-media#tg-case-details", { waitUntil: "networkidle" })
   await page.getByRole("heading", { level: 1, name: "TG频道推送：图片与视频展示", exact: true }).waitFor()
-  const details = page.locator("#article-details[open] #article-content #tg-case-details")
+  const details = page.locator("#tg-case-details")
   await details.waitFor()
+  await details.getByRole("heading", { level: 2, name: "TG推送截图", exact: true }).waitFor()
+  assert(await details.evaluate((node) => node.closest("details") === null), "The screenshots are directly visible without an expandable ancestor")
+  assert.equal(await page.locator("details#article-details, main #article-content").count(), 0, "TG has no old details or Markdown module")
+  for (const name of ["推送位置对照", "核对这三个位置", "查看详细说明"]) {
+    assert.equal(await page.getByRole("heading", { name, exact: true }).count(), 0)
+  }
+  assert.equal(await page.locator("main summary").filter({ hasText: /^查看详细说明$/ }).count(), 0)
+  assert(await details.evaluate((node) => {
+    const box = node.getBoundingClientRect()
+    return document.getElementById("tg-message-demo").getBoundingClientRect().bottom <= box.top + 1 && box.bottom <= document.getElementById("tg-materials").getBoundingClientRect().top + 1
+  }), "Screenshots sit after the video preview and before materials")
+  for (const id of ["tg-output-examples", "tg-check-points", "article-details"]) {
+    const alias = page.locator("#" + id)
+    assert.equal(await alias.count(), 1)
+    assert(await alias.evaluate((node) => !node.textContent.trim() && !node.querySelector("h1,h2,h3,img,svg,video,details") && Math.abs(node.getBoundingClientRect().top - document.getElementById("tg-case-details").getBoundingClientRect().top) < 120), "A historical anchor stays near the gallery without restoring its old module")
+  }
   const gallery = details.getByRole("region", { name: "TG群消息案例原图与局部", exact: true })
   const cards = gallery.locator(":scope > article")
   assert.equal(await cards.count(), 4, "One complete reference and three source crops")
@@ -83,5 +99,7 @@ export async function checkTgCaseDetails(page, base, prefix, width) {
       await button.dispose()
     }
   }
-  console.log(`PASS TG case details ${width}px: default-open details, real 896×1280 reference and three bounded crops, source links and message-boundary captions, width-fit/scroll and close focus/position restoration; missing user-original state unchanged`)
+  await page.goto(base + "/articles/form-validation-submit-feedback", { waitUntil: "networkidle" })
+  await page.locator("#article-details[open] #article-content").waitFor()
+  console.log(`PASS TG screenshots ${width}px: direct video-to-gallery-to-materials layout, removed old modules with nearby historical anchors, real 896×1280 reference and three bounded crops, width-fit/scroll and close restoration; other article details remain open and missing user-original state is unchanged`)
 }

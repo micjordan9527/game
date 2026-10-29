@@ -45,9 +45,8 @@ const caseImages = [
 export function TgCaseDetails() {
   return <section id="tg-case-details" className={`not-prose ${styles.caseDetails}`} aria-labelledby="tg-case-details-title">
     <div className={styles.heading}>
-      <p>素材中心现有TG群消息案例</p>
-      <h2 id="tg-case-details-title">把上一条按钮、海报内文字和本条正文分开看</h2>
-      <p>这张图来自现有素材中心，群名为“Ugame飞机投注群”，显示19名成员。它是另一个群消息案例，不是双狮主题官方频道截图。</p>
+      <h2 id="tg-case-details-title">TG推送截图</h2>
+      <p>素材中心的另一个群消息案例，不是双狮主题官方频道截图。原图和局部可分别放大。</p>
     </div>
     <div className={styles.gallery}>
       <LongImageGallery label="素材中心现有TG群消息案例" groupLabel="TG群消息案例原图与局部" emptyMessage="案例截图暂时无法显示。" items={caseImages} />
@@ -56,17 +55,5 @@ export function TgCaseDetails() {
       <p>原图与三个局部均取自同一张896×1280截图。局部只改变查看区域，原文件保持不变。</p>
       <a href={assetPath(referenceSrc)} download="tg-material-message-reference.webp">下载这张案例截图</a>
     </div>
-    <section className={styles.ratio} aria-labelledby="tg-case-ratio-title">
-      <h3 id="tg-case-ratio-title">4:3图片换成16:9视频，媒体高度会变化</h3>
-      <p>用规范中的4:3图片尺寸与本页实际视频尺寸，在相同640px显示宽度下比较：</p>
-      <div className={styles.tableWrap}>
-        <table>
-          <thead><tr><th scope="col">规范示例</th><th scope="col">画幅</th><th scope="col">等比显示</th></tr></thead>
-          <tbody><tr><th scope="row">1448×1086规范图片</th><td>4:3</td><td>640×480</td></tr><tr><th scope="row">本页1280×720视频</th><td>16:9</td><td>640×360</td></tr></tbody>
-        </table>
-      </div>
-      <p className={styles.calculation}>同宽640px时，媒体区从480px变为360px，减少120px；正文应随媒体自然上移，不通过拉伸画面补齐原高度。</p>
-      <p className={styles.note}>图片一栏是规范尺寸的换算，不是对截图中海报原文件尺寸的测量。视频沿用完整画面，保留标题与边缘内容。</p>
-    </section>
   </section>
 }

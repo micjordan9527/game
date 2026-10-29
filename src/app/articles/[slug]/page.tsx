@@ -148,7 +148,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {articleData ? <ArticleJsonLd article={articleData} /> : null}
       <ReadingProgress slug={article.slug} title={article.meta.title} />
       <ArticleHero {...article.meta} audience={resourceAudiences(`/articles/${slug}`, article.meta.audience)} />
-      {slug === "tg-message-media" ? <TgPushGuide /> : machineGuide ? <GamingMachineExplorer art={<GamingMachineArt key="machine-art" />} zoom={machineGeometry.zoom} /> : reportCatalogGuide ? <ReportCatalogGuide slug={article.slug} /> : supportPermissionGuide ? <SupportPermissionGuide slug={article.slug} /> : acceptanceGuide ? <AcceptanceVisualGuide /> : platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
+      {slug === "tg-message-media" ? <TgPushGuide>
+        <span id="article-details" aria-hidden="true" className="block scroll-mt-24" />
+        <span id="tg-output-examples" aria-hidden="true" className="block scroll-mt-24" />
+        <span id="tg-check-points" aria-hidden="true" className="block scroll-mt-24" />
+        <TgCaseDetails />
+      </TgPushGuide> : machineGuide ? <GamingMachineExplorer art={<GamingMachineArt key="machine-art" />} zoom={machineGeometry.zoom} /> : reportCatalogGuide ? <ReportCatalogGuide slug={article.slug} /> : supportPermissionGuide ? <SupportPermissionGuide slug={article.slug} /> : acceptanceGuide ? <AcceptanceVisualGuide /> : platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
         {visuals.length ? (
           <ArticleVisualBrief imagePrompts={visuals} />
         ) : flow ? (
@@ -167,7 +172,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {slug === "member-account-states" ? <AccountRecoveryCase /> : null}
       {slug === "agent-system-design" ? <LinkedCaseExplorer data={settlementCase} /> : null}
       {slug === "wallet-payment-reconciliation" ? <LinkedCaseExplorer data={withdrawalCase} /> : null}
-      <details open id="article-details" className="container-shell max-w-6xl rounded-lg border-y border-line py-5">
+      {slug !== "tg-message-media" ? <details open id="article-details" className="container-shell max-w-6xl rounded-lg border-y border-line py-5">
         <summary className="cursor-pointer font-semibold text-ink">查看详细说明</summary>
         <div className="container-shell grid max-w-6xl gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-start">
           <article
@@ -175,7 +180,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             className="article-body prose prose-slate min-w-0 max-w-none prose-headings:scroll-mt-24 prose-headings:tracking-normal prose-p:leading-8 prose-li:leading-8 prose-a:text-brand-700 prose-code:rounded prose-code:bg-paper prose-code:px-1 prose-code:py-0.5 prose-code:text-ink"
           >
             {(designGuide || platformGuide || acceptanceGuide || supportPermissionGuide || reportCatalogGuide) && visuals.length ? <div className="not-prose mb-8"><h2 className="mb-4 text-lg font-semibold">概念总览图</h2><ArticleVisualBrief imagePrompts={visuals} /></div> : null}
-            {slug === "tg-message-media" ? <TgCaseDetails /> : null}
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
@@ -246,7 +250,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <ArticleToc headings={article.headings} readingMinutes={article.readingMinutes} />
           </div>
         </div>
-      </details>
+      </details> : null}
       <details className="container-shell max-w-6xl py-5">
         <summary className="cursor-pointer text-sm font-semibold text-muted">相关术语与更多图解</summary>
         <ArticleRelatedTerms terms={relatedTerms} />

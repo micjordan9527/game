@@ -43,7 +43,11 @@ export async function checkShowcase(page, base, prefix, width, rounds) {
       )
       metrics.push(`${route}=${result.visualTop}px`)
     }
-    if (route.startsWith("/articles/")) {
+    if (route === "/articles/tg-message-media") {
+      assert.equal(await page.locator("details#article-details, #article-content").count(), 0, "TG shows video and screenshots without a details module")
+      assert.equal(await page.locator("#tg-message-demo video").count(), 1, "TG defaults to video")
+      assert.equal(await page.locator("#tg-case-details").isVisible(), true, "TG screenshots are directly visible")
+    } else if (route.startsWith("/articles/")) {
       assert.notEqual(await page.locator("#article-details").getAttribute("open"), null, `${route}: article details must start expanded`)
       assert.equal(await page.locator("#article-content").isVisible(), true, `${route}: article body is hidden`)
       assert.equal(await page.locator("main h1").count(), 1, `${route}: expanded article duplicates title`)

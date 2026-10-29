@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, type ReactNode } from "react"
 import { ExternalLink, Maximize2, Pause, Play, X } from "lucide-react"
 import { assetPath } from "@/lib/assets"
 import styles from "./TgPushGuide.module.css"
@@ -13,7 +13,7 @@ export const tgArticleGuides = { "tg-message-media": { demo: "#tg-message-demo" 
 type OriginalScreenshot = { src: string; width: number; height: number }
 type PreviewTarget = "video" | "poster" | "original"
 
-export function TgPushGuide({ originalScreenshot }: { originalScreenshot?: OriginalScreenshot }) {
+export function TgPushGuide({ originalScreenshot, children }: { originalScreenshot?: OriginalScreenshot; children?: ReactNode }) {
   const [mode, setMode] = useState<"static" | "dynamic">("dynamic")
   const [previewTarget, setPreviewTarget] = useState<PreviewTarget | null>(null)
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -118,7 +118,7 @@ export function TgPushGuide({ originalScreenshot }: { originalScreenshot?: Origi
       <p>视频放在原帖顶部图片的位置。这里单独展示媒体替换预览，频道名和五个按钮按原截图排列，不把视频与原帖活动正文合成一条已发布消息。</p>
     </div>
     <nav className={styles.readingNav} aria-label="本文阅读入口">
-      <a href="#tg-message-demo">看视频替换预览</a>{original ? <a href="#tg-original-post">查看原TG截图</a> : null}<a href="#tg-output-examples">看推送位置对照</a><a href="#tg-check-points">查看核对位置</a><a href="#tg-materials">查看素材规格</a><a href="#tg-case-details">看案例截图与说明</a>
+      <a href="#tg-message-demo">看视频</a>{original ? <a href="#tg-original-post">查看原TG截图</a> : null}<a href="#tg-case-details">看截图</a><a href="#tg-materials">素材下载</a>
     </nav>
 
     <section id="tg-message-demo" className={styles.demo} aria-labelledby="tg-message-title">
@@ -162,22 +162,7 @@ export function TgPushGuide({ originalScreenshot }: { originalScreenshot?: Origi
       </div>
     </section>
 
-    <section id="tg-output-examples" className={styles.outputs} aria-labelledby="tg-output-title">
-      <h3 id="tg-output-title">推送位置对照</h3>
-      <div className={styles.positionCard}>
-        <figure><img src={assetPath(posterSrc)} width={1280} height={720} alt="与视频一致的16比9首帧，说明原帖顶部媒体的替换位置" loading="lazy" /><figcaption>替换的是顶部媒体位：静态图片改为16:9视频。</figcaption></figure>
-        <div><h4>正文与按钮仍属于消息内容</h4><p>原帖正文以实际截图为准。本页不编写新的活动正文，也不把双狮主题正文放在海洋视频下方。</p><p>五个按钮的位置保留为两列、两列、整行；名称和顺序按原截图展示。</p>{original ? <a href="#tg-original-post">回看原TG截图 →</a> : null}</div>
-      </div>
-    </section>
-
-    <section id="tg-check-points" className={styles.checks} aria-labelledby="tg-check-title">
-      <h3 id="tg-check-title">核对这三个位置</h3>
-      <div className={styles.checkGrid}>
-        <div><span>1 · 顶部媒体</span><p>1280×720画面完整显示，左侧标题、右侧主体和底部说明不被裁掉。</p></div>
-        <div><span>2 · 原帖正文</span><p>原截图是双狮主题，上传视频是海洋主题。替换效果与实际发布内容分别查看。</p></div>
-        <div><span>3 · 下方按钮</span><p>官方网址、官方客服、APP下载、官方代理、官方飞投，顺序与2＋2＋1布局保持对应。</p></div>
-      </div>
-    </section>
+    {children}
 
     <section id="tg-materials" className={styles.materials} aria-labelledby="tg-materials-title">
       <div><h3 id="tg-materials-title">视频文件与显示规格</h3><p>视频预览与下载使用同一文件。</p></div>

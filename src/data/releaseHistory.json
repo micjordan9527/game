@@ -1,15 +1,26 @@
 {
   "current": {
-    "version": 37,
+    "version": 38,
     "date": "2026-10-29",
-    "title": "TG详细说明补充实际截图案例",
-    "summary": "用素材中心现有TG群消息原图和局部讲解图片文字、消息正文与相邻消息按钮，替换重复的泛化规则和播放器说明；截图与视频示例分别标明来源。",
+    "title": "TG截图上移与页面精简",
+    "summary": "删除TG页的推送位置对照、三处核对及详细说明模块；视频下方直接展示原图与三个局部，保留短图注、放大和素材下载。",
     "articleSlugs": [
-      "tg-message-media-v37"
+      "tg-message-media-v38"
     ],
     "changes": []
   },
   "history": [
+    {
+      "version": 37,
+      "title": "TG详细说明补充实际截图案例",
+      "summary": "用素材中心现有TG群消息原图和局部讲解图片文字、消息正文与相邻消息按钮，替换重复的泛化规则和播放器说明；截图与视频示例分别标明来源。",
+      "articleSlugs": [
+        "tg-message-media-v37"
+      ],
+      "changes": [],
+      "publishedAt": "2026-10-29T10:11:25.483592+00:00",
+      "githubCommit": "d1431e3322925502b5247232dea4b22f73c1e759"
+    },
     {
       "version": 36,
       "title": "TG视频默认展示与频道排版修正",

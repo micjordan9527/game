@@ -15,7 +15,7 @@ export const articles: Article[] = [
   {
     slug: "tg-message-media",
     title: "TG频道推送：图片与视频展示",
-    description: "默认播放视频，并用现有TG群消息截图区分图片文字、消息正文和相邻消息按钮；在详细说明中查看原图与局部对照。",
+    description: "集中查看默认视频与TG推送截图，原图和三个局部可分别放大。",
     cover: "/images/operations/tg-message-cover.jpg",
     category: "operation",
     tags: ["TG推送", "内容发布", "动态素材"],

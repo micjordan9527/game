@@ -133,7 +133,7 @@ export async function checkTgOperations(page, base, prefix, width) {
   assert(returnTop > 0, "Reading-position check starts scrolled")
   await heading.click()
   await page.waitForURL((url) => url.pathname === prefix + articlePath)
-  await page.locator("#article-details[open]").waitFor()
+  await page.locator("#tg-message-demo").waitFor()
   const articleText = await page.locator("main").innerText()
   assert(!/豆包|生成工具/.test(articleText), "Public copy describes the content without generation-tool labels")
   assert(!/运营素材示例|海洋主题素材更新|三份运营产出/.test(articleText), "The invented channel, message and output copy has been removed")
@@ -197,11 +197,10 @@ export async function checkTgOperations(page, base, prefix, width) {
   await videoLoaded(video)
   await noOverflow()
   await demo.screenshot({ path: `/tmp/tg-message-demo-${width}.png`, style: "body > header { visibility: hidden !important; }" })
-  for (const id of ["tg-output-examples", "tg-check-points", "tg-materials"]) {
+  for (const id of ["tg-case-details", "tg-materials"]) {
     await page.locator("#" + id).scrollIntoViewIfNeeded()
     await noOverflow()
   }
-  await imageLoaded(page.locator(`#tg-output-examples img[src="${prefix}${posterPath}"]`))
   const originalPost = page.locator("#tg-original-post")
   let originalScreenshot = null
   if (await originalPost.count()) {
@@ -290,7 +289,7 @@ export async function checkTgOperations(page, base, prefix, width) {
   assert.equal(await articleLink.getAttribute("target"), "_top")
   await articleLink.click()
   await page.waitForURL((url) => url.pathname === prefix + articlePath && url.hash === "#tg-message-demo")
-  await page.locator("#article-details[open]").waitFor()
+  await page.locator("#tg-message-demo").waitFor()
   await noOverflow()
   console.log(`PASS TG functional checks ${width}px: default video and first-visible playback, offscreen/manual pause retention, static/video switching, viewer focus/position return, role/tag return, scenes/topics and shared material video/backlink; original screenshot ${originalScreenshot ? "VERIFIED" : "PENDING"}`)
   return { functional: true, originalScreenshot: originalScreenshot ? { status: "verified", ...originalScreenshot } : { status: "missing" } }

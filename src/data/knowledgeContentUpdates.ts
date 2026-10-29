@@ -451,5 +451,17 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/tg-message-media#tg-materials",
     "visualType": "界面图解",
     "location": "知识图解 · 运营场景 · 详细说明中的截图案例"
+  },
+  {
+    "slug": "tg-message-media-v38",
+    "articleSlug": "tg-message-media",
+    "title": "TG截图上移，删除重复说明模块",
+    "description": "移除推送位置对照、核对这三个位置和查看详细说明；截图直接放在视频下方，原图与三个局部可放大。",
+    "kind": "补充",
+    "href": "/articles/tg-message-media",
+    "detailHref": "/articles/tg-message-media#tg-case-details",
+    "relatedHref": "/articles/tg-message-media#tg-materials",
+    "visualType": "界面图解",
+    "location": "知识图解 · 运营场景 · 视频下方的截图展示"
   }
 ]
