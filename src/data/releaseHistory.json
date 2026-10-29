@@ -1,15 +1,26 @@
 {
   "current": {
-    "version": 38,
+    "version": 39,
     "date": "2026-10-29",
-    "title": "TG截图上移与页面精简",
-    "summary": "删除TG页的推送位置对照、三处核对及详细说明模块；视频下方直接展示原图与三个局部，保留短图注、放大和素材下载。",
+    "title": "TG仅保留完整推送截图",
+    "summary": "删除三张按时间、海报文字和按钮拆解的局部卡片；视频下方只保留一张完整推送截图与简短来源说明，可放大或下载。",
     "articleSlugs": [
-      "tg-message-media-v38"
+      "tg-message-media-v39"
     ],
     "changes": []
   },
   "history": [
+    {
+      "version": 38,
+      "title": "TG截图上移与页面精简",
+      "summary": "删除TG页的推送位置对照、三处核对及详细说明模块；视频下方直接展示原图与三个局部，保留短图注、放大和素材下载。",
+      "articleSlugs": [
+        "tg-message-media-v38"
+      ],
+      "changes": [],
+      "publishedAt": "2026-10-29T10:33:30.813123+00:00",
+      "githubCommit": "693bce0dbd2740d788cb4f7995d42efcf3a45998"
+    },
     {
       "version": 37,
       "title": "TG详细说明补充实际截图案例",

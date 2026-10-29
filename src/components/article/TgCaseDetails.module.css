@@ -1,12 +1,10 @@
 .caseDetails { margin: 12px 0 30px; color: #18323e; scroll-margin-top: 92px; }
 .heading h2 { margin-top: 8px; font-size: clamp(21px, 2.2vw, 28px); line-height: 1.5; font-weight: 700; }
-.heading > p:last-child { max-width: 900px; margin-top: 10px; font-size: 15px; line-height: 1.9; color: #526570; }
-.gallery :global(section[aria-label="TG群消息案例原图与局部"]) { align-items: start; }
+.gallery :global(section[aria-label="TG推送完整截图"]) { align-items: start; }
 .gallery :global(article > button > picture) { max-height: none; }
-.gallery :global(section[aria-label="TG群消息案例原图与局部"] > article:first-child) { grid-column: 1 / -1; width: 100%; max-width: 680px; justify-self: center; }
+.gallery :global(section[aria-label="TG推送完整截图"] > article:first-child) { grid-column: 1 / -1; width: 100%; max-width: 680px; justify-self: center; }
 .gallery :global(.text-xs) { font-size: 14px; line-height: 1.8; }
 .source { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 18px; margin-top: 18px; }
-.source p { flex: 1 1 360px; font-size: 14px; line-height: 1.85; color: #526570; }
 .source a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 9px 13px; border: 1px solid #b6ceca; border-radius: 7px; color: #245f59; background: #fff; font-size: 14px; font-weight: 600; }
 .source a:hover { background: #edf6f2; }
 .source a:focus-visible { outline: 3px solid #2c8477; outline-offset: 3px; }

@@ -463,5 +463,17 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/tg-message-media#tg-materials",
     "visualType": "界面图解",
     "location": "知识图解 · 运营场景 · 视频下方的截图展示"
+  },
+  {
+    "slug": "tg-message-media-v39",
+    "articleSlug": "tg-message-media",
+    "title": "TG仅保留完整推送截图",
+    "description": "删除三张局部卡片和时间、按钮拆解说明，保留完整截图、简短来源、放大和下载。",
+    "kind": "补充",
+    "href": "/articles/tg-message-media",
+    "detailHref": "/articles/tg-message-media#tg-case-details",
+    "relatedHref": "/articles/tg-message-media#tg-materials",
+    "visualType": "界面图解",
+    "location": "知识图解 · 运营场景 · 视频下方的完整截图"
   }
 ]
