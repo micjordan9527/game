@@ -79,10 +79,23 @@ export async function checkContextNavigation(page, base, prefix, width) {
     await closeMenu()
   }
   await page.goto(base + "/design/material-standards", { waitUntil: "networkidle" })
-  menu = await contextMenu()
+  assert.equal(await page.locator("aside [data-context-navigation]").count(), 0)
+  if (width < 1280) {
+    menu = await contextMenu()
+    assert.equal(await menu.locator("section").count(), 0)
+    await page.getByRole("dialog", { name: "知识库导航", exact: true }).getByRole("link", { name: "代理素材", exact: true }).waitFor()
+  }
   await sectionActive("/design/material-standards")
-  assert.equal(await menu.getByText("按主题浏览", { exact: true }).count(), 0)
   await closeMenu()
+  await page.locator("[data-material-workspace]").waitFor()
+  const materialFrame = page.frameLocator('iframe[title="代理素材规范 V1.86"]')
+  await materialFrame.locator("#material-workspace-style").waitFor({ state: "attached" })
+  if (width <= 800) {
+    await materialFrame.getByRole("button", { name: "素材目录", exact: true }).click()
+    await materialFrame.getByRole("button", { name: "品牌标识", exact: true }).click()
+    await materialFrame.getByRole("button", { name: "品牌 Logo", exact: true }).click()
+    await materialFrame.locator('.material-menu-toggle[aria-expanded="false"]').waitFor()
+  }
   await page.goto(base + "/updates", { waitUntil: "networkidle" })
   assert.equal(await page.locator("aside [data-context-navigation]").count(), 0)
   if (width < 1280) {

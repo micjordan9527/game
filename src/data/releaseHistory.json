@@ -1,15 +1,51 @@
 {
   "current": {
-    "version": 32,
+    "version": 33,
     "date": "2026-10-29",
-    "title": "电子游艺机部件与工作过程图解",
-    "summary": "新增一篇通用设备交互图解：七组部件可选择和放大，八步过程同步显示余额与票据，另有纸币退回和出票缺纸对照。",
+    "title": "设备图解、封面与代理素材工作区调整",
+    "summary": "设备演示按屏幕高度安排部件选择、图形、当步说明与操作；文章封面展示机柜和识钞局部；代理素材保留内部目录，取消重复导航并兼容原模块链接。",
     "articleSlugs": [
-      "electronic-gaming-machine"
+      "electronic-gaming-machine-v33"
     ],
-    "changes": []
+    "changes": [
+      {
+        "id": "machine-article-cover",
+        "title": "设备图解封面显示实际内容",
+        "description": "复用正文设备图制作完整机柜与识钞器局部封面，标明可交互、七组部件和八步过程；图解列表、主题列表和相关阅读使用同一预览。",
+        "location": "知识图解 · 电子游艺机卡片",
+        "href": "/articles?tag=电子游艺机",
+        "linkLabel": "查看设备图解封面",
+        "related": {
+          "href": "/articles/electronic-gaming-machine#machine-view",
+          "label": "打开设备交互面板"
+        }
+      },
+      {
+        "id": "agent-material-workspace",
+        "title": "代理素材使用独立工作区",
+        "description": "顶部入口改为代理素材，移除本页外层目录及大介绍卡片，保留素材中心自身菜单、搜索、图片和源稿入口；手机目录可跨分组，旧模块定位链接仍可使用。",
+        "location": "顶部 · 代理素材",
+        "href": "/design/material-standards",
+        "linkLabel": "打开代理素材工作区",
+        "related": {
+          "href": "/design/material-standards?module=banner",
+          "label": "查看Banner素材规范"
+        }
+      }
+    ]
   },
   "history": [
+    {
+      "version": 32,
+      "title": "电子游艺机部件与工作过程图解",
+      "summary": "新增一篇通用设备交互图解：七组部件可选择和放大，八步过程同步显示余额与票据，另有纸币退回和出票缺纸对照。",
+      "articleSlugs": [
+        "electronic-gaming-machine"
+      ],
+      "changes": [],
+      "publishedAt": "2026-10-29T06:30:46.201122+00:00",
+      "githubCommit": "ce537f86371d82c6a4a40f4d981c9f838ba9f1ef"
+    },
     {
       "version": 31,
       "title": "BM与U8局部对照可分别放大",

@@ -74,6 +74,13 @@ export async function checkInteractionGuides(page, base, prefix, width) {
   assert.equal(await form.locator("[data-submit-attempts]").innerText(), "1")
   assert((await form.getByRole("status").innerText()).includes("公告尚未发布"))
   await form.getByRole("button", { name: "重置演示", exact: true }).click()
+  // Reset restores field focus on the next animation frame. Wait for that
+  // visible reset to finish before filling, so it cannot steal the next field's focus.
+  await page.waitForFunction(() => {
+    const region = document.getElementById("form-demo")
+    const input = region?.querySelector("input")
+    return region?.querySelector("[data-form-phase]")?.getAttribute("data-form-phase") === "editing" && input?.value === "" && document.activeElement === input
+  })
   await form.getByLabel("演示响应", { exact: true }).selectOption("rejected")
   await fill(); await submit.click()
   await form.locator('[data-form-phase="rejected"]').waitFor()

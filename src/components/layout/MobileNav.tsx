@@ -26,7 +26,7 @@ const resourceLinks: NavLinkItem[] = [
   { href: "/cases", label: "案例", icon: BriefcaseBusiness },
   { href: "/articles", label: "知识图解", icon: FileText },
   { href: "/ai-workflows", label: "AI 工作流", icon: Sparkles },
-  { href: "/design/material-standards", label: "素材规范", icon: MonitorCog },
+  { href: "/design/material-standards", label: "代理素材", icon: MonitorCog },
   { href: "/templates", label: "模板库", icon: Library },
   { href: "/glossary", label: "术语库", icon: BookOpen },
 ]

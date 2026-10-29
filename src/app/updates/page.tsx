@@ -132,8 +132,9 @@ export default function UpdatesPage() {
                 ...contentChanges(content),
                 ...release.changes,
               ]
+              // Fragment navigation can natively open an uncontrolled details before hydration.
               return (
-                <details key={release.version} id={`v${release.version}`} data-release-version={release.version} data-release-kind={content.length ? "content" : "interface"} className="group scroll-mt-24 rounded-xl border border-line bg-white">
+                <details suppressHydrationWarning key={release.version} id={`v${release.version}`} data-release-version={release.version} data-release-kind={content.length ? "content" : "interface"} className="group scroll-mt-24 rounded-xl border border-line bg-white">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 md:p-5 [&::-webkit-details-marker]:hidden">
                     <span className="min-w-0">
                       <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">

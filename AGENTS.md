@@ -45,3 +45,8 @@ Image viewing preference (2026-10-25):
 Latest content preference (2026-10-28, supersedes earlier roadmap suggestions):
 - The user rejected and requested deletion of the requirement-to-field/state-matrix and screenshot-to-case-description workflows. Do not recreate them under different names or add similar abstract prompt/input/output demonstrations.
 - Prioritize concrete existing interfaces, actual cases, visual comparisons and clear functional diagrams. New content must be directly understandable and useful without studying invented framework terminology.
+
+Accepted usability requirements (2026-10-29):
+- Interactive figures must keep the part selector, figure, current explanation and previous/next controls visible together at common desktop and phone heights. Validate viewport visibility during normal and exception steps, not only overflow or button functionality.
+- Interactive article cards need an actual preview of their content and a clear interaction label; reuse existing art rather than showing an empty generic cover.
+- Agent materials is an independent tool section. Keep its own material directory and old module links, and do not restore an outer knowledge sidebar or design-topic links on its workspace page.

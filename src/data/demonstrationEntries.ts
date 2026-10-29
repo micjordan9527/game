@@ -1,5 +1,5 @@
 export const demonstrationEntries = [
-  { group: "business-process", location: "行业入门 · 电子游艺机主要部件与工作过程", title: "电子游艺机部件与过程", href: "/articles/electronic-gaming-machine#machine-demo", description: "选择七组部件并放大，逐步观察识钞、余额与票据；对照纸币退回和原票据缺纸恢复，数值均为固定虚构单位。" },
+  { group: "business-process", location: "行业入门 · 电子游艺机主要部件与工作过程", title: "电子游艺机部件与过程", href: "/articles/electronic-gaming-machine#machine-view", description: "选择七组部件并放大，逐步观察识钞、余额与票据；对照纸币退回和原票据缺纸恢复，数值均为固定虚构单位。" },
   { group: "business-process", location: "运维风控 · 上线前检查清单", title: "验收证据对照", href: "/articles/launch-checklist#acceptance-evidence", description: "切换缺少实测记录、已完成的v26历史工作流和只有截图的记录，分别查看预期、实际、证据与结论边界。" },
   { group: "business-process", location: "产品设计 · 公告、帮助内容与发布版本", title: "公告审核与发布", href: "/articles/content-publication-versions#publication-demo", description: "固定版本和站点语言，观察审核、定时、发布失败、改稿失效、前台旧版本、更正、撤回与到期。" },
   { group: "interface-design", location: "设计体验 · 手机页面布局", title: "手机布局与信息优先级", href: "/articles/mobile-page-layout#mobile-layout-demo", description: "复用响应布局演示切换桌面、平板和手机，查看默认与展开信息，并进入BM、U8原型。" },

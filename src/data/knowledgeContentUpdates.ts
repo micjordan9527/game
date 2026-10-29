@@ -404,5 +404,17 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/electronic-gaming-machine#machine-boundaries",
     "visualType": "交互图解",
     "location": "知识图解 · 行业入门 · 部件与工作过程"
+  },
+  {
+    "slug": "electronic-gaming-machine-v33",
+    "articleSlug": "electronic-gaming-machine",
+    "title": "电子游艺机：同屏查看部件、说明与操作",
+    "description": "部件选择、设备图、当步说明、余额与前后步骤放进同一面板；按可用屏幕高度显示，手机用紧凑部件选择，切换过程时操作区保持位置。详细说明继续默认展开。",
+    "kind": "补充",
+    "href": "/articles/electronic-gaming-machine",
+    "detailHref": "/articles/electronic-gaming-machine#machine-view",
+    "relatedHref": "/articles/electronic-gaming-machine#article-details",
+    "visualType": "交互图解",
+    "location": "知识图解 · 行业入门 · 设备交互面板"
   }
 ]

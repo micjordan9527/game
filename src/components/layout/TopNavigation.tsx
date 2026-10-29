@@ -9,7 +9,7 @@ const links = [
   { href: "/cases", label: "案例" },
   { href: "/articles", label: "知识图解" },
   { href: "/ai-workflows", label: "AI 工作流" },
-  { href: "/design/material-standards", label: "素材规范" },
+  { href: "/design/material-standards", label: "代理素材" },
   { href: "/glossary", label: "术语库" },
   { href: "/templates", label: "模板库" },
   { href: "/updates", label: "更新记录" },

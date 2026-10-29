@@ -42,7 +42,7 @@ export function getContentNavigation(pathname: string): ContentNavGroup[] {
       { href: "/design/mobile", label: "移动端与状态反馈" },
       { href: "/design/review", label: "界面优化图解" },
       { href: "/design/states", label: "状态对照" },
-      { href: "/design/material-standards", label: "素材规范" },
+      { href: "/design/material-standards", label: "代理素材" },
     ] })
     return groups
   }
@@ -54,11 +54,7 @@ export function getContentNavigation(pathname: string): ContentNavGroup[] {
     { href: "/templates", label: "全部模板", meta: `${templates.length} 个` },
     ...templates.map((item) => ({ href: "/templates/" + item.slug, label: item.title })),
   ] }]
-  if (pathname === "/design/material-standards") return [{ title: "素材规范", items: [
-    { href: "/design/material-standards", label: "全部素材规范" },
-    { href: "/design", label: "设计体验" },
-    { href: "/design/states", label: "状态对照" },
-  ] }]
+  if (pathname === "/design/material-standards") return []
   if (pathname === "/") return [{ title: "首页目录", items: [
     { href: "/#home-topics-title", label: "业务主题" },
     { href: "/#home-cases-title", label: "精选案例" },

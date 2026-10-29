@@ -33,14 +33,18 @@ export async function checkGamingMachine(page, base, prefix, width) {
   await page.locator("#article-details[open]").waitFor()
   assert((await page.locator("h1").innerText()).includes("电子游艺机主要部件与工作过程"))
   assert.equal(await demo.locator("[data-machine-name]").count(), 75)
-  assert.equal(await demo.getByRole("group", { name: "选择主要部件" }).getByRole("button").count(), 7)
+  assert.equal(await demo.locator("[data-part-buttons] button").count(), 7)
+  if (width < 768) assert(await demo.getByRole("combobox", { name: "选择主要部件" }).isVisible())
   assert.equal(await demo.getByRole("list", { name: "工作过程步骤" }).getByRole("button").count(), 8)
   await page.waitForFunction(() => document.querySelector("[data-machine-part][data-active='true']"))
   for (const [id, name] of [["screen", "显示屏"], ["controls", "操作按钮"], ["logic", "控制与记录"], ["validator", "纸币识别器"], ["cashbox", "纸币收纳箱"], ["printer", "票据打印机"], ["power", "电源与散热"]]) {
     const button = demo.getByRole("button", { name, exact: true })
-    await button.focus(); await page.keyboard.press("Enter")
+    if (width < 768) await demo.getByRole("combobox", { name: "选择主要部件" }).selectOption(id)
+    else { await button.focus(); await page.keyboard.press("Enter") }
     await demo.locator(`[data-part-description="${id}"]`).waitFor()
-    assert.equal(await button.getAttribute("aria-pressed"), "true")
+    assert.equal(await demo.locator("[data-machine-readout]").getAttribute("data-reader-mode"), "part")
+    assert((await demo.locator("[data-step-explanation]").innerText()).length > 12, "Part selection shows its purpose in the same panel")
+    if (width >= 768) assert.equal(await button.getAttribute("aria-pressed"), "true")
     await demo.getByRole("button", { name: "放大当前部件", exact: true }).click()
     const zoomed = await demo.locator("[data-machine-art]").getAttribute("viewBox")
     assert.notEqual(zoomed, "0 0 560 640")
@@ -53,6 +57,8 @@ export async function checkGamingMachine(page, base, prefix, width) {
   for (let step = 0; step < 8; step++) {
     await page.waitForFunction((n) => document.querySelector("#machine-demo")?.getAttribute("data-step") === String(n), step)
     assert((await demo.locator("[data-machine-available]").innerText()).startsWith(String(balances[step])))
+    if (step > 0) await checkMachinePanelVisible(page, width)
+    if (step > 0) assert.equal(await demo.locator("[data-machine-readout]").getAttribute("data-reader-mode"), "step")
     if (step === 1) assert.equal(await demo.locator(".machine-note").isVisible(), true)
     if (step === 4) assert((await demo.locator("[data-machine-readout]").innerText()).includes("尚未入账"))
     if (step === 6) { assert((await demo.locator("[data-machine-pending]").innerText()).startsWith("105")); assert((await demo.locator("[data-machine-ticket]").innerText()).includes("EGM-DEMO-T001")) }
@@ -69,6 +75,7 @@ export async function checkGamingMachine(page, base, prefix, width) {
   assert.equal(await demo.getByRole("button", { name: "本例止于退回", exact: true }).isDisabled(), true)
   await demo.getByRole("radio", { name: "出票缺纸", exact: true }).check()
   await demo.getByRole("alert").waitFor()
+  await checkMachinePanelVisible(page, width)
   assert((await demo.locator("[data-machine-pending]").innerText()).startsWith("105"))
   assert.equal(await demo.locator(".machine-ticket").isVisible(), false)
   const ticket = await demo.locator("[data-machine-ticket]").innerText()
@@ -108,8 +115,36 @@ export async function checkGamingMachine(page, base, prefix, width) {
   const row = page.locator("#electronic-gaming-machine")
   await row.waitFor(); await row.locator(`a[href="${prefix}${href}#machine-demo"]`).click(); await demo.waitFor()
   await page.goto(base + "/updates/demonstrations", { waitUntil: "networkidle" })
-  await page.locator(`a[href="${prefix}${href}#machine-demo"]`).click(); await demo.waitFor()
+  await page.locator(`a[href="${prefix}${href}#machine-view"]`).click(); await demo.waitFor()
+  const original = page.viewportSize()
+  try {
+    await page.setViewportSize({ width, height: width < 768 ? 700 : 720 })
+    await page.goto(base + href + "#machine-view", { waitUntil: "networkidle" })
+    await demo.getByRole("button", { name: "下一步：识别纸币", exact: true }).click()
+    for (let step = 1; step < 8; step++) {
+      await checkMachinePanelVisible(page, width)
+      if (step < 7) await demo.getByRole("button", { name: /^下一步：/ }).click()
+    }
+    await demo.getByRole("radio", { name: "出票缺纸", exact: true }).check()
+    await checkMachinePanelVisible(page, width)
+    const recovery = await demo.getByRole("button", { name: "补纸并重试原票据", exact: true }).boundingBox()
+    assert(recovery && recovery.y >= 64 && recovery.y + recovery.height <= page.viewportSize().height - 8, "Paper-out action stays on screen")
+    await demo.locator("[data-machine-panel]").screenshot({ path: `/tmp/machine-panel-compact-${width}.png` })
+  } finally { await page.setViewportSize(original) }
   console.log(`PASS ${width}px machine: seven parts/zoom/keyboard, eight steps, two fault branches, original ticket, finite tour/pause, reduced motion, readable layout, search return and directory links`)
+}
+
+async function checkMachinePanelVisible(page, width) {
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+  const height = page.viewportSize().height
+  const demo = page.locator("#machine-demo")
+  const critical = [demo.locator("[data-machine-art]"), demo.locator("[data-step-explanation]"), demo.locator("[data-machine-available]"), demo.locator("[data-step-controls]"), width < 768 ? demo.getByRole("combobox", { name: "选择主要部件" }) : demo.locator("[data-part-buttons]")]
+  for (const node of critical) {
+    const box = await node.boundingBox()
+    assert(box && box.y >= 64 && box.y + box.height <= height - 6, `Machine image, description, selector and controls must share viewport: ${JSON.stringify({ width, height, box })}`)
+  }
+  const panel = await demo.locator("[data-machine-panel]").boundingBox()
+  assert(panel && panel.height <= height - 80)
 }
 
 if (process.argv[1]?.endsWith("check-gaming-machine.mjs")) await checkGamingMachineModel()

@@ -48,7 +48,7 @@ export async function checkHomepage(page, base, prefix, width) {
   assert(updateBox && updateBox.y >= 0 && updateBox.y + updateBox.height <= 64, "Updates must be directly visible in the top bar")
   if (width >= 1280) {
     assert.equal(await page.getByRole("navigation", { name: "知识库导航", exact: true }).getByRole("link", { name: "更新记录", exact: true }).count(), 0)
-    assert.deepEqual(await header.getByRole("navigation", { name: "顶部导航", exact: true }).getByRole("link").allInnerTexts(), ["案例", "知识图解", "AI 工作流", "素材规范", "术语库", "模板库", "更新记录", "搜索"])
+    assert.deepEqual(await header.getByRole("navigation", { name: "顶部导航", exact: true }).getByRole("link").allInnerTexts(), ["案例", "知识图解", "AI 工作流", "代理素材", "术语库", "模板库", "更新记录", "搜索"])
   } else {
     await header.getByRole("button", { name: "打开导航", exact: true }).click()
     assert.equal(await page.getByRole("navigation", { name: "移动端知识库导航", exact: true }).getByRole("link", { name: "更新记录", exact: true }).count(), 0)

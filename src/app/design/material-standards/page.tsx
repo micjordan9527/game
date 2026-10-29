@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function MaterialStandardsPage() {
   return (
-    <Suspense fallback={<div className="container-shell py-12 text-sm text-muted">正在加载素材规范…</div>}>
+    <Suspense fallback={<div className="container-shell py-6 text-sm text-muted">正在加载代理素材…</div>}>
       <MaterialStandardsViewer />
     </Suspense>
   )
