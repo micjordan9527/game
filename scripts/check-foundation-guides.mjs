@@ -77,7 +77,7 @@ export async function checkFoundationGuides(page, base, prefix, width) {
   assert((await page.locator("#central-wallet").innerText()).includes("不等于转账式接入"))
   assert((await page.locator("#seamless-wallet").innerText()).includes("不直接证明采用Seamless接口"))
   await page.goto(base + "/articles?role=development", { waitUntil: "networkidle" })
-  for (const slug of slugs) await page.locator(`[aria-label="文章列表"] a[href="${prefix}/articles/${slug}"]`).waitFor()
+  for (const slug of slugs) await page.locator(`[aria-label="文章列表"] a[href="${prefix}/articles/${slug}"], [aria-label="文章列表"] a[href^="${prefix}/articles/${slug}?"]`).waitFor()
   await page.goto(base + "/updates#v23", { waitUntil: "networkidle" })
   await page.locator("#v23[open]").waitFor()
   const release = page.locator("#v23")

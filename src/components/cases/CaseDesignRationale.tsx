@@ -1,4 +1,5 @@
 import { LongImageGallery } from "@/components/cases/LongImageGallery"
+import { CaseRationaleHashNavigation } from "./CaseRationaleHashNavigation"
 import { bmFocus, u8Focus, type ImageFocus } from "@/data/caseEnhancements"
 import styles from "./CaseDesignRationale.module.css"
 
@@ -68,6 +69,7 @@ export function CaseDesignRationale({ kind }: { kind: CaseKind }) {
   const data = rationale[kind]
   return (
     <section id={data.id} className={styles.section} aria-labelledby={`${data.id}-title`} data-case-rationale={kind}>
+      <CaseRationaleHashNavigation id={data.id} />
       <header className={styles.header}>
         <p className={styles.eyebrow}>设计取舍 · 依据现有材料</p>
         <h2 id={`${data.id}-title`}>{data.title}</h2>

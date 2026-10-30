@@ -25,8 +25,10 @@ export async function checkWorkTools(page, base, prefix, width) {
     assert.equal(await page.locator("main ol").count(), 0)
   }
   await page.goto(`${base}/articles`, { waitUntil: "networkidle" })
+  const rolePicker = page.locator("details[data-role-picker]")
+  if (!await rolePicker.evaluate((node) => node.open)) await rolePicker.locator("summary").click()
   await page.getByRole("button", { name: /^交互/ }).click()
-  await page.locator(`main a[href="${prefix}/articles/member-account-states"]`).waitFor()
+  await page.locator(`main a[href="${prefix}/articles/member-account-states"], main a[href^="${prefix}/articles/member-account-states?"]`).waitFor()
   await page.goto(`${base}/templates`, { waitUntil: "networkidle" })
   await page.getByRole("button", { name: "交互", exact: true }).click()
   await page.locator(`main a[href="${prefix}/templates/member-account-review"]`).first().waitFor()

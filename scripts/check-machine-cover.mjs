@@ -21,7 +21,7 @@ export async function checkMachineCover(page, base, prefix, width) {
   const checkMachineCard = async () => {
     const card = machineCard()
     await checkImage(card, coverPath, [1600, 1000])
-    for (const text of ["可交互", "7组部件 · 8步工作过程", "打开交互图解 →", "点击部件看作用，分步查看识钞、余额与出票。"]) {
+    for (const text of ["可交互", "7组部件 · 8步工作过程", "打开交互图解 →", "点击部件看作用，观看进钞、退钞与出票动作，同步核对余额和同一张票据。"]) {
       assert(await card.getByText(text, { exact: true }).isVisible(), text)
     }
     return card

@@ -1,22 +1,27 @@
 {
   "current": {
-    "version": 48,
+    "version": 49,
     "date": "2026-10-30",
-    "title": "运营案例、界面动效与设备操作图解",
-    "summary": "两篇新图解、三篇运营文章补充完整界面案例，电子游艺机增加连续动作，BM与U8补充设计取舍说明。",
-    "articleSlugs": [
-      "interface-motion-feedback",
-      "device-controls-feedback",
-      "campaign-risk-review-v48",
-      "channel-quality-review-v48",
-      "community-operations-governance-v48",
-      "electronic-gaming-machine-v48"
-    ],
+    "title": "封面与案例说明定位修正",
+    "summary": "五张正文界面封面保留完整内容；BM与U8设计说明的直达链接在页面加载后定位，保留图片查看后的阅读位置。",
+    "articleSlugs": [],
     "changes": [
       {
-        "id": "case-design-rationale",
-        "title": "BM与U8的设计取舍说明",
-        "description": "用已有原界面与生成式方案局部，解释信息分组的变化、设计取舍和仍需核对的边界。",
+        "id": "practice-cover-correction",
+        "title": "五张封面展示完整界面",
+        "description": "活动、渠道、社群、界面动效与设备面板使用对应正文画面，保持16:10比例和可操作标签。",
+        "location": "知识图解 · 运营与设计资料卡片",
+        "href": "/design?object=digital&direction=motion",
+        "linkLabel": "查看界面动效封面",
+        "related": {
+          "href": "/updates#v48",
+          "label": "查看六项完整更新"
+        }
+      },
+      {
+        "id": "rationale-anchor-correction",
+        "title": "案例说明直达链接在加载后定位",
+        "description": "BM与U8设计取舍说明在分段加载后定位到标题，重复点击顶部入口也能返回对应位置。",
         "location": "案例 · BM优化／竞品分析",
         "href": "/cases/bm-optimization#bm-design-rationale",
         "linkLabel": "查看BM设计说明",
@@ -28,6 +33,36 @@
     ]
   },
   "history": [
+    {
+      "version": 48,
+      "date": "2026-10-30",
+      "title": "运营案例、界面动效与设备操作图解",
+      "summary": "两篇新图解、三篇运营文章补充完整界面案例，电子游艺机增加连续动作，BM与U8补充设计取舍说明。",
+      "articleSlugs": [
+        "interface-motion-feedback",
+        "device-controls-feedback",
+        "campaign-risk-review-v48",
+        "channel-quality-review-v48",
+        "community-operations-governance-v48",
+        "electronic-gaming-machine-v48"
+      ],
+      "changes": [
+        {
+          "id": "case-design-rationale",
+          "title": "BM与U8的设计取舍说明",
+          "description": "用已有原界面与生成式方案局部，解释信息分组的变化、设计取舍和仍需核对的边界。",
+          "location": "案例 · BM优化／竞品分析",
+          "href": "/cases/bm-optimization#bm-design-rationale",
+          "linkLabel": "查看BM设计说明",
+          "related": {
+            "href": "/cases/competitor-analysis#u8-design-rationale",
+            "label": "查看U8设计说明"
+          }
+        }
+      ],
+      "publishedAt": "2026-10-30T07:42:55.251167+00:00",
+      "githubCommit": "f4d656e5e925d190e919e938882dfbd7d9a3ef3b"
+    },
     {
       "version": 47,
       "date": "2026-10-30",

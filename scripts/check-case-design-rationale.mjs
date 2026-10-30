@@ -9,11 +9,45 @@ export async function checkCaseDesignRationale(page, base, prefix, width) {
   const onResponse = (response) => {
     if (response.url().startsWith(base) && ["image", "script"].includes(response.request().resourceType()) && response.status() >= 400) errors.push(`${response.status()} ${response.url()}`)
   }
-  const waitForAnchor = (selector) => page.waitForFunction((value) => {
-    const top = document.querySelector(value)?.getBoundingClientRect().top
-    const headerBottom = document.querySelector("body > header")?.getBoundingClientRect().bottom ?? 0
-    return top >= headerBottom - 5 && top < headerBottom + 150
-  }, selector)
+  const checkAnchor = async (selector, label) => {
+    await page.evaluate(() => document.fonts?.ready)
+    // Chromium versions differ in when fragment scrolling follows layout and media changes.
+    // Observe its settled result without scrolling the target ourselves or imposing a pixel offset.
+    const position = await page.evaluate((value) => new Promise((resolve) => {
+      let previous, stableFrames = 0, frames = 0
+      const measure = () => {
+        const target = document.querySelector(value)
+        const heading = target?.querySelector("h2")
+        const targetRect = target?.getBoundingClientRect()
+        const headingRect = heading?.getBoundingClientRect()
+        const header = document.querySelector("body > header")
+        const headerRect = header?.getBoundingClientRect()
+        const snapshot = {
+          scrollY,
+          viewportHeight: innerHeight,
+          documentHeight: document.documentElement.scrollHeight,
+          targetTop: targetRect?.top,
+          targetHeight: targetRect?.height,
+          headingTop: headingRect?.top,
+          headingBottom: headingRect?.bottom,
+          headerBottom: Math.max(0, headerRect?.bottom ?? 0),
+          headerPosition: header ? getComputedStyle(header).position : "absent",
+          scrollMarginTop: target ? getComputedStyle(target).scrollMarginTop : "absent",
+        }
+        const unchanged = previous && ["scrollY", "targetTop", "headingTop", "documentHeight", "headerBottom"].every((key) => Math.abs(snapshot[key] - previous[key]) < .5)
+        stableFrames = unchanged ? stableFrames + 1 : 0
+        previous = snapshot
+        if (stableFrames >= 8 || ++frames >= 240) resolve({ ...snapshot, stable: stableFrames >= 8 })
+        else requestAnimationFrame(measure)
+      }
+      requestAnimationFrame(measure)
+    }), selector)
+    const diagnostic = `${label}: ${JSON.stringify(position)}`
+    assert(position.stable, `Fragment scrolling and layout settle; ${diagnostic}`)
+    assert(position.headingTop >= position.headerBottom - 2, `Anchor heading clears the actual header; ${diagnostic}`)
+    assert(position.headingBottom <= position.viewportHeight + 2, `Anchor reveals the complete section heading; ${diagnostic}`)
+    return position
+  }
   const settle = () => page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
   page.on("pageerror", onPageError)
   page.on("console", onConsole)
@@ -23,21 +57,19 @@ export async function checkCaseDesignRationale(page, base, prefix, width) {
       { kind: "bm", path: "/cases/bm-optimization", id: "bm-design-rationale", focus: "status" },
       { kind: "u8", path: "/cases/competitor-analysis", id: "u8-design-rationale", focus: "profile" },
     ]) {
-      const response = await page.goto(base + prefix + path + "#" + id, { waitUntil: "networkidle" })
+      // The shared runner's base already includes any deployment prefix.
+      const response = await page.goto(base + path + "#" + id, { waitUntil: "networkidle" })
       assert.equal(response.status(), 200)
       const selector = `[data-case-rationale="${kind}"]`
       const section = page.locator(selector)
       await section.waitFor()
-      await waitForAnchor(selector)
+      await checkAnchor(selector, `Initial ${kind}/${width}px fragment`)
       assert.equal(await section.locator("ol > li").count(), 4)
       assert.equal(await section.locator("svg[data-cropped-image]").count(), 2)
       assert.equal(await section.locator("button").filter({ hasText: "放大这一局部" }).count(), 2)
       assert((await section.innerText()).includes("生成式"))
       const noOverflow = async () => assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, `No horizontal page overflow ${kind}/${width}`)
       await noOverflow()
-      const top = await section.boundingBox(), header = await page.locator("body > header").boundingBox()
-      assert(top.y >= header.y + header.height - 5, `Anchor clears sticky header ${kind}/${width}`)
-      assert(top.y < header.y + header.height + 150, `Anchor reveals section title ${kind}/${width}`)
       await section.screenshot({ path: `/tmp/six-case-rationale-${kind}-${width}.png`, animations: "disabled", style: 'body > header { visibility: hidden !important; }' })
       const trigger = section.locator("button").filter({ hasText: "放大这一局部" }).first()
       await trigger.scrollIntoViewIfNeeded()
@@ -70,7 +102,7 @@ export async function checkCaseDesignRationale(page, base, prefix, width) {
       await noOverflow()
       await page.getByRole("navigation", { name: "案例位置", exact: true }).getByRole("link", { name: /设计取舍说明/ }).click()
       await page.waitForURL((url) => url.hash === "#" + id)
-      await waitForAnchor(selector)
+      await checkAnchor(selector, `Top-navigation ${kind}/${width}px fragment`)
       console.log(`PASS ${kind} design rationale ${width}px: local images, viewer position/focus, comparison and section links`)
     }
     assert.deepEqual(errors, [], "No script, hydration or same-origin image/script loading errors")
