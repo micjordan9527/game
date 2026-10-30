@@ -475,5 +475,17 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/tg-message-media#tg-materials",
     "visualType": "界面图解",
     "location": "知识图解 · 运营场景 · 视频下方的完整截图"
+  },
+  {
+    "slug": "tg-message-media-v40",
+    "articleSlug": "tg-message-media",
+    "title": "TG推送页面精简页头",
+    "description": "删除重复标题和说明，对齐视频、截图和素材入口，隐藏无法继续的旧阅读提示。",
+    "kind": "补充",
+    "href": "/articles/tg-message-media",
+    "detailHref": "/articles/tg-message-media#tg-message-demo",
+    "relatedHref": "/articles/tg-message-media#tg-case-details",
+    "visualType": "界面图解",
+    "location": "知识图解 · 运营场景 · TG频道推送页头"
   }
 ]

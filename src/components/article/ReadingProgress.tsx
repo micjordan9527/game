@@ -26,6 +26,9 @@ export function ReadingProgress({ slug, title }: { slug: string; title: string }
     setSaved(null)
     setProgress(0)
 
+    const article = document.getElementById("article-content")
+    if (!article) return
+
     const key = READING_PROGRESS_PREFIX + slug
     try {
       const raw = window.localStorage.getItem(key)
@@ -40,9 +43,6 @@ export function ReadingProgress({ slug, title }: { slug: string; title: string }
     } catch {
       // Storage might be blocked; reading still works.
     }
-
-    const article = document.getElementById("article-content")
-    if (!article) return
 
     let frame = 0
     function measure() {

@@ -1,15 +1,14 @@
 .guide { color: #18323e; }
-.heading > p:first-child { color: #286c65; font-size: 14px; font-weight: 700; }
-.heading h2 { margin-top: 8px; font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; line-height: 1.5; }
-.heading > p:last-child { max-width: 900px; margin-top: 12px; color: #526570; font-size: 15px; line-height: 1.9; }
-.readingNav { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 24px; }
-.readingNav a, .materialLinks a { display: inline-flex; align-items: center; min-height: 44px; padding: 9px 13px; border: 1px solid #b6ceca; border-radius: 7px; color: #245f59; background: #fff; font-size: 14px; font-weight: 600; }
-.readingNav a:hover, .materialLinks a:hover { background: #edf6f2; }
+.readingNav { display: flex; flex-wrap: wrap; gap: 0 24px; margin: 4px 0 12px; }
+.readingNav a { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 2px; color: #245f59; font-size: 14px; font-weight: 600; }
+.readingNav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.materialLinks a { display: inline-flex; align-items: center; min-height: 44px; padding: 9px 13px; border: 1px solid #b6ceca; border-radius: 7px; color: #245f59; background: #fff; font-size: 14px; font-weight: 600; }
+.materialLinks a:hover { background: #edf6f2; }
 .guide button:focus-visible, .guide a:focus-visible { outline: 3px solid #2c8477; outline-offset: 3px; }
 .demo, .original, .materials { scroll-margin-top: 92px; }
 .demo { border: 1px solid #cfdddf; border-radius: 14px; overflow: hidden; background: #f2f6f6; }
 .demoTop { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 20px; border-bottom: 1px solid #cfdddf; background: #fff; }
-.demoTop h3, .materials h3 { font-size: 20px; font-weight: 700; line-height: 1.6; }
+.demoTop h2, .materials h2 { font-size: 20px; font-weight: 700; line-height: 1.6; }
 .demoTop p, .materials > div > p { margin-top: 4px; color: #526570; font-size: 14px; line-height: 1.8; }
 .modeButtons { display: flex; flex-shrink: 0; flex-wrap: wrap; gap: 8px; }
 .modeButtons button { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 9px 12px; border: 1px solid #b7cdca; border-radius: 7px; background: #fff; font-size: 14px; font-weight: 600; }

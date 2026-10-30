@@ -111,19 +111,14 @@ export function TgPushGuide({ originalScreenshot, children }: { originalScreensh
   const original = originalScreenshot
   const previewTitle = previewTarget === "original" ? "原TG截图" : previewTarget === "poster" ? "视频首帧" : "视频替换预览"
 
-  return <section className={`container-shell mb-8 max-w-6xl ${styles.guide}`} aria-label="TG频道推送展示">
-    <div className={styles.heading}>
-      <p>运营场景 · TG频道推送</p>
-      <h2>TG频道推送：图片与视频展示</h2>
-      <p>视频放在原帖顶部图片的位置。这里单独展示媒体替换预览，频道名和五个按钮按原截图排列，不把视频与原帖活动正文合成一条已发布消息。</p>
-    </div>
+  return <section className={`container-shell mb-8 max-w-4xl ${styles.guide}`} aria-label="TG频道推送展示">
     <nav className={styles.readingNav} aria-label="本文阅读入口">
-      <a href="#tg-message-demo">看视频</a>{original ? <a href="#tg-original-post">查看原TG截图</a> : null}<a href="#tg-case-details">看截图</a><a href="#tg-materials">素材下载</a>
+      <a href="#tg-message-demo">视频</a>{original ? <a href="#tg-original-post">原TG截图</a> : null}<a href="#tg-case-details">截图</a><a href="#tg-materials">素材下载</a>
     </nav>
 
     <section id="tg-message-demo" className={styles.demo} aria-labelledby="tg-message-title">
       <div className={styles.demoTop}>
-        <div><h3 id="tg-message-title">视频替换预览</h3><p>仅表示原帖顶部图片的替换位置</p></div>
+        <div><h2 id="tg-message-title">视频替换预览</h2><p>仅表示原帖顶部图片的替换位置</p></div>
         <div role="group" aria-label="媒体展示方式" className={styles.modeButtons}>
           <button type="button" aria-pressed={mode === "dynamic"} onClick={() => selectMode("dynamic")}><Play size={16} aria-hidden="true" />动态视频</button>
           <button type="button" aria-pressed={mode === "static"} onClick={() => selectMode("static")}><Pause size={16} aria-hidden="true" />静态封面</button>
@@ -165,7 +160,7 @@ export function TgPushGuide({ originalScreenshot, children }: { originalScreensh
     {children}
 
     <section id="tg-materials" className={styles.materials} aria-labelledby="tg-materials-title">
-      <div><h3 id="tg-materials-title">视频文件与显示规格</h3><p>视频预览与下载使用同一文件。</p></div>
+      <div><h2 id="tg-materials-title">视频文件与显示规格</h2><p>视频预览与下载使用同一文件。</p></div>
       <dl className={styles.specs}><div><dt>视频尺寸</dt><dd>1280×720 · 16:9</dd></div><div><dt>时长与大小</dt><dd>约9秒 · 约1.6 MB</dd></div><div><dt>文件格式</dt><dd>MP4 · H.264视频</dd></div><div><dt>网页显示</dt><dd>640×360为等比显示示例</dd></div></dl>
       <div className={styles.materialLinks}><a href={assetPath(videoSrc)} download="tg-message-demo.mp4">下载视频 MP4</a><a href={assetPath(posterSrc)} download="tg-message-poster.jpg">下载视频首帧</a><Link href="/design/material-standards?module=tg-assets">查看TG素材规范 →</Link><Link href="/articles/content-publication-versions#visual-guide">对照公告发布与版本 →</Link></div>
       <p className={styles.smallPrint}>网站播放不会发送TG消息，真实发布状态以对应频道为准。视频首次进入可见区时尝试静音播放，离屏后暂停；手动暂停后不会因滚动反复重启。</p>

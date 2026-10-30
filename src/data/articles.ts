@@ -15,14 +15,14 @@ export const articles: Article[] = [
   {
     slug: "tg-message-media",
     title: "TG频道推送：图片与视频展示",
-    description: "集中查看默认视频与完整TG推送截图，支持放大和下载。",
+    description: "查看视频预览、TG推送截图和相关素材。",
     cover: "/images/operations/tg-message-cover.jpg",
     category: "operation",
     tags: ["TG推送", "内容发布", "动态素材"],
     audience: ["运营", "设计", "产品"],
     difficulty: "入门",
     date: "2026-10-29",
-    updatedAt: "2026-10-29",
+    updatedAt: "2026-10-30",
   },
   {
     slug: "electronic-gaming-machine",

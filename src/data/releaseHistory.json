@@ -1,15 +1,26 @@
 {
   "current": {
-    "version": 39,
-    "date": "2026-10-29",
-    "title": "TG仅保留完整推送截图",
-    "summary": "删除三张按时间、海报文字和按钮拆解的局部卡片；视频下方只保留一张完整推送截图与简短来源说明，可放大或下载。",
+    "version": 40,
+    "date": "2026-10-30",
+    "title": "TG推送页面精简页头",
+    "summary": "合并重复标题与介绍，收紧角色和日期信息，对齐视频、截图与素材入口，并隐藏无法继续的旧阅读提示。",
     "articleSlugs": [
-      "tg-message-media-v39"
+      "tg-message-media-v40"
     ],
     "changes": []
   },
   "history": [
+    {
+      "version": 39,
+      "title": "TG仅保留完整推送截图",
+      "summary": "删除三张按时间、海报文字和按钮拆解的局部卡片；视频下方只保留一张完整推送截图与简短来源说明，可放大或下载。",
+      "articleSlugs": [
+        "tg-message-media-v39"
+      ],
+      "changes": [],
+      "publishedAt": "2026-10-29T11:06:16.238428+00:00",
+      "githubCommit": "59eb5c1bedd0eca5cc28848bb1f2af275e868c75"
+    },
     {
       "version": 38,
       "title": "TG截图上移与页面精简",

@@ -12,6 +12,7 @@ type ArticleHeroProps = {
   difficulty: string
   date?: string
   updatedAt?: string
+  compact?: boolean
 }
 
 export function ArticleHero({
@@ -23,12 +24,13 @@ export function ArticleHero({
   difficulty,
   date,
   updatedAt,
+  compact = false,
 }: ArticleHeroProps) {
   const categoryInfo = getCategory(category)
 
   return (
     <header className="border-b border-line bg-white">
-      <div className="container-shell max-w-4xl py-6 md:py-8">
+      <div className={`container-shell max-w-4xl ${compact ? "py-5" : "py-6 md:py-8"}`}>
         <nav aria-label="文章位置" className="mb-4 text-xs leading-6 text-muted">
           <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
             <li><Link href="/articles" className="font-semibold text-brand-700">知识图解</Link></li>
@@ -36,25 +38,34 @@ export function ArticleHero({
             <li aria-hidden="true">/</li><li className="min-w-0 max-w-full"><span aria-current="page" className="line-clamp-1">{title}</span></li>
           </ol>
         </nav>
-        <div className="flex flex-wrap gap-2">
+        {!compact ? <div className="flex flex-wrap gap-2">
           {categoryInfo ? <Badge tone="brand">{categoryInfo.title}</Badge> : null}
           {audience.map((item) => (
             <Badge key={item}>{item}</Badge>
           ))}
-        </div>
-        <h1 className="mt-5 text-3xl font-semibold leading-tight tracking-normal text-ink md:text-4xl">{title}</h1>
+        </div> : null}
+        <h1 className={`${compact ? "" : "mt-5 "}text-3xl font-semibold leading-tight tracking-normal text-ink md:text-4xl`}>{title}</h1>
         <p className="mt-3 text-sm leading-7 text-muted">{description}</p>
-        {date ? (
-          <p className="mt-4 text-sm text-muted">
-            发布于 {date}
-            {updatedAt ? ` · 更新于 ${updatedAt}` : ""}
-          </p>
-        ) : null}
-        <div className="mt-3 flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <Tag key={tag}>{tag}</Tag>
-          ))}
-        </div>
+        {compact ? (
+          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs leading-5 text-muted">
+            <span>适用角色：{audience.join("、")}</span>
+            {updatedAt || date ? <span>更新于 {updatedAt ?? date}</span> : null}
+          </div>
+        ) : (
+          <>
+            {date ? (
+              <p className="mt-4 text-sm text-muted">
+                发布于 {date}
+                {updatedAt ? ` · 更新于 ${updatedAt}` : ""}
+              </p>
+            ) : null}
+            <div className="mt-3 flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <Tag key={tag}>{tag}</Tag>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </header>
   )

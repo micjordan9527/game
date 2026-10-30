@@ -147,7 +147,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <>
       {articleData ? <ArticleJsonLd article={articleData} /> : null}
       <ReadingProgress slug={article.slug} title={article.meta.title} />
-      <ArticleHero {...article.meta} audience={resourceAudiences(`/articles/${slug}`, article.meta.audience)} />
+      <ArticleHero {...article.meta} audience={resourceAudiences(`/articles/${slug}`, article.meta.audience)} compact={slug === "tg-message-media"} />
       {slug === "tg-message-media" ? <TgPushGuide>
         <span id="article-details" aria-hidden="true" className="block scroll-mt-24" />
         <span id="tg-output-examples" aria-hidden="true" className="block scroll-mt-24" />
