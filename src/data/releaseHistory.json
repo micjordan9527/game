@@ -1,15 +1,26 @@
 {
   "current": {
-    "version": 41,
+    "version": 42,
     "date": "2026-10-30",
-    "title": "TG素材视频与推送预览并排展示",
-    "summary": "左侧播放素材视频，右侧播放TG消息预览；手机上下排列，预览可放大或下载，图解封面同步更新。",
+    "title": "TG推送页面精简相关资料",
+    "summary": "移除TG推送截图模块与下载按钮，只保留TG素材规范和后台公告发布演示入口。",
     "articleSlugs": [
-      "tg-message-media-v41"
+      "tg-message-media-v42"
     ],
     "changes": []
   },
   "history": [
+    {
+      "version": 41,
+      "title": "TG素材视频与推送预览并排展示",
+      "summary": "左侧播放素材视频，右侧播放TG消息预览；手机上下排列，预览可放大或下载，图解封面同步更新。",
+      "articleSlugs": [
+        "tg-message-media-v41"
+      ],
+      "changes": [],
+      "publishedAt": "2026-10-30T02:54:02.802922+00:00",
+      "githubCommit": "7205ea39e6b542ad0284e961ed8568108d2431e1"
+    },
     {
       "version": 40,
       "title": "TG推送页面精简页头",

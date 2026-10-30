@@ -499,5 +499,17 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/tg-message-media#tg-materials",
     "visualType": "界面图解",
     "location": "知识图解 · 运营场景 · 视频与TG推送预览"
+  },
+  {
+    "slug": "tg-message-media-v42",
+    "articleSlug": "tg-message-media",
+    "title": "TG推送页面精简相关资料",
+    "description": "移除截图模块和下载按钮，保留TG素材规范及后台公告发布演示入口。",
+    "kind": "补充",
+    "href": "/articles/tg-message-media",
+    "detailHref": "/articles/tg-message-media#tg-materials",
+    "relatedHref": "/articles/content-publication-versions#publication-demo",
+    "visualType": "界面图解",
+    "location": "知识图解 · 运营场景 · 视频下方的相关资料"
   }
 ]

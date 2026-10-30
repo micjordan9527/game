@@ -15,7 +15,7 @@ export const articles: Article[] = [
   {
     slug: "tg-message-media",
     title: "TG频道推送：图片与视频展示",
-    description: "查看素材视频、TG推送预览和案例截图。",
+    description: "查看素材视频、TG推送预览与相关资料。",
     cover: "/images/operations/tg-message-cover.jpg",
     category: "operation",
     tags: ["TG推送", "内容发布", "动态素材"],

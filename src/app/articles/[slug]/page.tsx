@@ -7,7 +7,6 @@ import { ReportCatalogGuide, hasReportCatalogGuide } from "@/components/article/
 import { GamingMachineArt } from "@/components/article/GamingMachineArt"
 import { GamingMachineExplorer } from "@/components/article/GamingMachineExplorer"
 import { TgPushGuide } from "@/components/article/TgPushGuide"
-import { TgCaseDetails } from "@/components/article/TgCaseDetails"
 import { machineGuides } from "@/data/gamingMachine"
 import machineGeometry from "@/data/gamingMachineGeometry.json"
 import { ResponsivePriorityDemo } from "@/components/design/ResponsivePriorityDemo"
@@ -152,7 +151,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <span id="article-details" aria-hidden="true" className="block scroll-mt-24" />
         <span id="tg-output-examples" aria-hidden="true" className="block scroll-mt-24" />
         <span id="tg-check-points" aria-hidden="true" className="block scroll-mt-24" />
-        <TgCaseDetails />
+        <span id="tg-case-details" aria-hidden="true" className="block scroll-mt-24" />
       </TgPushGuide> : machineGuide ? <GamingMachineExplorer art={<GamingMachineArt key="machine-art" />} zoom={machineGeometry.zoom} /> : reportCatalogGuide ? <ReportCatalogGuide slug={article.slug} /> : supportPermissionGuide ? <SupportPermissionGuide slug={article.slug} /> : acceptanceGuide ? <AcceptanceVisualGuide /> : platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
         {visuals.length ? (
           <ArticleVisualBrief imagePrompts={visuals} />

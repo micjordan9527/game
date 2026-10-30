@@ -5,7 +5,7 @@
 .materialLinks a { display: inline-flex; align-items: center; min-height: 44px; padding: 9px 13px; border: 1px solid #b6ceca; border-radius: 7px; color: #245f59; background: #fff; font-size: 14px; font-weight: 600; }
 .materialLinks a:hover { background: #edf6f2; }
 .guide button:focus-visible, .guide a:focus-visible { outline: 3px solid #2c8477; outline-offset: 3px; }
-.demo, .original, .materials { scroll-margin-top: 92px; }
+.demo, .materials { scroll-margin-top: 92px; }
 .demo { border: 1px solid #cfdddf; border-radius: 14px; overflow: hidden; background: #f2f6f6; }
 .demoTop { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 20px; border-bottom: 1px solid #cfdddf; background: #fff; }
 .demoTop h2, .materials h2 { font-size: 20px; font-weight: 700; line-height: 1.6; }
@@ -25,13 +25,6 @@
 .inlineNote { padding: 0 12px 12px; color: #526570; font-size: 14px; line-height: 1.7; }
 .error { padding: 12px; color: #8a3027; background: #fff2ef; font-size: 14px; line-height: 1.8; }
 .mediaCard > figcaption { padding: 10px 12px; color: #526570; font-size: 13px; line-height: 1.7; }
-.original figcaption { margin-top: 12px; color: #526570; font-size: 14px; line-height: 1.85; }
-.original { min-width: 0; margin: 0 20px 20px; padding: 16px; border: 1px solid #cfdddf; border-radius: 10px; background: #fff; }
-.originalHeader { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-.originalHeader h3 { font-size: 18px; font-weight: 700; line-height: 1.6; }
-.originalHeader p { margin-top: 3px; color: #526570; font-size: 14px; line-height: 1.7; }
-.originalHeader button { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; gap: 5px; min-height: 44px; border: 1px solid #b6ceca; border-radius: 6px; padding: 8px 10px; color: #245f59; font-size: 14px; }
-.original figure > img { display: block; width: 100%; height: auto; border: 1px solid #d3e0e1; border-radius: 7px; }
 .materials { margin-top: 30px; border: 1px solid #cfdddf; border-radius: 12px; padding: 22px; background: #fff; }
 .specs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
 .specs > div { padding: 12px; border: 1px solid #dce5e7; border-radius: 6px; background: #f5f8f8; font-size: 14px; line-height: 1.8; }
@@ -49,7 +42,6 @@
 .dialogActions { display: flex; flex-shrink: 0; gap: 8px; }
 .dialogHeader button { display: inline-flex; gap: 5px; align-items: center; justify-content: center; flex-shrink: 0; min-height: 44px; padding: 8px 12px; border: 1px solid #8aadae; border-radius: 6px; font-size: 14px; }
 .dialogPanel > img, .dialogPanel > video { display: block; width: 100%; max-height: calc(100dvh - 130px); height: auto; object-fit: contain; background: #0c1820; }
-.dialogPanel > img.originalExpanded { width: 100%; max-height: none; height: auto; }
 .dialogPanel > video.channelExpanded { width: min(100%, 736px); max-height: none; height: auto; margin: 0 auto; }
 @media (max-width: 700px) {
   .previewLayout { grid-template-columns: minmax(0, 1fr); }
@@ -59,8 +51,6 @@
   .modeButtons { width: 100%; }
   .modeButtons button { flex: 1; justify-content: center; }
   .previewLayout { padding: 12px; gap: 16px; }
-  .original { margin: 0 12px 12px; padding: 12px; }
-  .originalHeader { align-items: flex-start; flex-direction: column; gap: 9px; }
   .materials { padding: 16px; }
   .specs { grid-template-columns: minmax(0, 1fr); }
   .dialog, .channelDialog { width: calc(100vw - 16px); max-height: calc(100dvh - 16px); }

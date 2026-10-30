@@ -14,25 +14,6 @@ export async function checkTgOperations(page, base, prefix, width) {
     assert(await image.evaluate(async (node) => { await node.decode(); return node.naturalWidth > 0 && node.naturalHeight > 0 }), "Poster loads")
     assert.equal(new URL(await image.getAttribute("src"), base).pathname, prefix + posterPath)
   }
-  const originalImageLoaded = async (image, expected) => {
-    assert.equal(await image.count(), 1, "The original-post section has one actual image")
-    await image.scrollIntoViewIfNeeded()
-    const actual = await image.evaluate(async (node) => {
-      await node.decode()
-      return { src: node.currentSrc, width: node.naturalWidth, height: node.naturalHeight, declaredWidth: Number(node.getAttribute("width")), declaredHeight: Number(node.getAttribute("height")) }
-    })
-    const url = new URL(actual.src)
-    assert.equal(url.origin, new URL(base).origin, "The supplied original screenshot is a local asset")
-    assert(url.pathname.startsWith(prefix + "/"), "The original screenshot respects the site base path")
-    assert.equal(new URL(await image.getAttribute("src"), base).href, actual.src, "The displayed image uses its actual source")
-    assert(/\.(?:png|jpe?g|webp|avif)$/i.test(url.pathname), "The original is an image file")
-    assert(!/\/tg-message-(?:poster|cover)\./i.test(url.pathname), "A video frame or generated cover cannot stand in for the original post")
-    assert(actual.width > 0 && actual.height > 0, "The original image decodes")
-    assert.deepEqual([actual.width, actual.height], [actual.declaredWidth, actual.declaredHeight], "Original dimensions match the supplied file")
-    const result = { src: actual.src, width: actual.width, height: actual.height }
-    if (expected) assert.deepEqual(result, expected, "Enlargement uses the same original file")
-    return result
-  }
   const videoLoaded = async (video) => {
     await video.evaluate((node) => node.scrollIntoView({ block: "center", behavior: "instant" }))
     const handle = await video.elementHandle()
@@ -243,27 +224,10 @@ export async function checkTgOperations(page, base, prefix, width) {
   } finally { await fresh.close() }
   await noOverflow()
   await demo.screenshot({ path: `/tmp/tg-message-demo-${width}.png`, style: "body > header { visibility: hidden !important; }" })
-  for (const id of ["tg-case-details", "tg-materials"]) {
-    await page.locator("#" + id).scrollIntoViewIfNeeded()
-    await noOverflow()
-  }
-  const originalPost = page.locator("#tg-original-post")
-  let originalScreenshot = null
-  if (await originalPost.count()) {
-    assert.equal(await originalPost.count(), 1)
-    originalScreenshot = await originalImageLoaded(originalPost.locator("img"))
-    await checkViewer(false, originalPost.getByRole("button", { name: "放大原TG截图", exact: true }), async (image) => {
-      await originalImageLoaded(image, originalScreenshot)
-      assert(await image.evaluate((node) => {
-        const box = node.getBoundingClientRect()
-        const dialog = node.closest("dialog")
-        return Math.abs(box.width - dialog.clientWidth) < 4 && Math.abs(box.height / box.width - node.naturalHeight / node.naturalWidth) < .01
-      }), "The original fits the viewer width while preserving its full aspect ratio")
-    })
-    await noOverflow()
-  } else {
-    console.log(`PENDING TG original screenshot ${width}px: no supplied original image; source, dimensions and enlargement have not been verified`)
-  }
+  await page.locator("#tg-materials").scrollIntoViewIfNeeded()
+  await noOverflow()
+  assert.equal(await page.locator('#tg-case-details[aria-hidden="true"]').count(), 1, "The historical screenshot link remains an empty anchor")
+  assert.equal(await page.getByRole("heading", { name: "TG推送截图", exact: true }).count(), 0, "The screenshot module is removed")
 
   await page.goBack({ waitUntil: "networkidle" })
   const returned = new URL(page.url())
@@ -337,6 +301,6 @@ export async function checkTgOperations(page, base, prefix, width) {
   await page.waitForURL((url) => url.pathname === prefix + articlePath && url.hash === "#tg-message-demo")
   await page.locator("#tg-message-demo").waitFor()
   await noOverflow()
-  console.log(`PASS TG functional checks ${width}px: default video and first-visible playback, offscreen/manual pause retention, static/video switching, viewer focus/position return, role/tag return, scenes/topics and shared material video/backlink; original screenshot ${originalScreenshot ? "VERIFIED" : "PENDING"}`)
-  return { functional: true, originalScreenshot: originalScreenshot ? { status: "verified", ...originalScreenshot } : { status: "missing" } }
+  console.log(`PASS TG functional checks ${width}px: default video and first-visible playback, offscreen/manual pause retention, static/video switching, viewer focus/position return, role/tag return, scenes/topics and shared material video/backlink; screenshot module removed`)
+  return { functional: true }
 }
