@@ -1,6 +1,6 @@
 ---
 title: TG频道推送：图片与视频展示
-description: 查看视频预览、TG推送截图和相关素材。
+description: 查看素材视频、TG推送预览和案例截图。
 category: operation
 tags: [TG推送, 内容发布, 动态素材]
 audience: [运营, 设计, 产品]

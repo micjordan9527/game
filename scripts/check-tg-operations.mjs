@@ -4,6 +4,7 @@ export async function checkTgOperations(page, base, prefix, width) {
   const articlePath = "/articles/tg-message-media"
   const mediaPath = "/videos/operations/tg-message-demo.mp4"
   const posterPath = "/images/operations/tg-message-poster.jpg"
+  const channelPath = "/videos/operations/tg-channel-preview.mp4"
   const articleCard = () => page.locator("#article-results article").filter({ has: page.locator(`a[href="${prefix}${articlePath}"]`) })
   const noOverflow = async () => {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, page.url())
@@ -139,22 +140,20 @@ export async function checkTgOperations(page, base, prefix, width) {
   assert(!/运营素材示例|海洋主题素材更新|三份运营产出/.test(articleText), "The invented channel, message and output copy has been removed")
 
   const demo = page.locator("#tg-message-demo")
+  const sourceCard = demo.locator("[data-tg-source-video]")
+  const channelCard = demo.locator("[data-tg-channel-preview]")
+  const [sourceBox, channelBox] = await Promise.all([sourceCard.boundingBox(), channelCard.boundingBox()])
+  if (width >= 700) {
+    assert(sourceBox.x < channelBox.x && Math.abs(sourceBox.y - channelBox.y) < 2, "The source video is left of the TG preview")
+  } else {
+    assert(sourceBox.y + sourceBox.height <= channelBox.y + 1, "On phones the TG preview follows the source video")
+  }
   const modes = demo.getByRole("group", { name: "媒体展示方式", exact: true })
   const still = modes.getByRole("button", { name: "静态封面", exact: true })
   const dynamic = modes.getByRole("button", { name: "动态视频", exact: true })
   assert.equal(await dynamic.getAttribute("aria-pressed"), "true", "Video is the default media mode")
-  assert.equal(await demo.getByText("U Game｜官方频道", { exact: true }).count(), 1)
-  const messageButtons = demo.locator('[aria-label="原截图的五个按钮"]').getByRole("button")
-  assert.equal(await messageButtons.count(), 5)
-  const buttonNames = await messageButtons.allTextContents()
-  assert.deepEqual(buttonNames.map((text) => text.trim()), ["🌐 官方网址", "💌 官方客服", "📱 APP下载", "🤝 官方代理", "🤖 官方飞投"])
-  const buttonBoxes = await messageButtons.evaluateAll((nodes) => nodes.map((node) => {
-    const box = node.getBoundingClientRect()
-    return { top: box.top, bottom: box.bottom, left: box.left, right: box.right, width: box.width }
-  }))
-  assert(Math.abs(buttonBoxes[0].top - buttonBoxes[1].top) < 2 && Math.abs(buttonBoxes[2].top - buttonBoxes[3].top) < 2, "The first two button rows each contain two buttons")
-  assert(buttonBoxes[2].top >= buttonBoxes[0].bottom && buttonBoxes[4].top >= buttonBoxes[2].bottom, "The five buttons occupy three rows")
-  assert(Math.abs(buttonBoxes[4].left - buttonBoxes[0].left) < 2 && Math.abs(buttonBoxes[4].right - buttonBoxes[1].right) < 2, "The last button spans the full row")
+  assert.equal(await demo.locator("video").count(), 2, "Both supplied videos are visible by default")
+  assert((await channelCard.innerText()).includes("频道消息效果示意，视频与正文来自不同素材。"))
   const video = demo.getByLabel("TG推送动态视频示例", { exact: true })
   await videoLoaded(video)
   assert(await video.evaluate((node) => node.muted), "First-visible playback is muted")
@@ -165,7 +164,7 @@ export async function checkTgOperations(page, base, prefix, width) {
   await scrollAwayAndBack(video)
 
   const enlarged = page.getByRole("dialog", { name: "TG素材放大预览", exact: true })
-  const checkViewer = async (isVideo, trigger = demo.getByRole("button", { name: "放大查看", exact: true }), checkImage = imageLoaded) => {
+  const checkViewer = async (isVideo, trigger = demo.getByRole("button", { name: "放大素材视频", exact: true }), checkImage = imageLoaded) => {
     await trigger.evaluate((node) => node.scrollIntoView({ block: "center", behavior: "instant" }))
     await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
     const top = await page.evaluate(() => scrollY)
@@ -190,11 +189,58 @@ export async function checkTgOperations(page, base, prefix, width) {
   await still.click()
   assert.equal(await still.getAttribute("aria-pressed"), "true")
   await imageLoaded(demo.locator(`img[src="${prefix}${posterPath}"]`))
-  assert.equal(await demo.locator("video").count(), 0, "Static mode replaces the player with the poster")
+  assert.equal(await sourceCard.locator("video").count(), 0, "Static mode replaces the source player with the poster")
+  assert.equal(await channelCard.locator("video").count(), 1, "The channel preview remains available")
   await checkViewer(false)
   await dynamic.click()
   assert.equal(await dynamic.getAttribute("aria-pressed"), "true")
   await videoLoaded(video)
+
+  const channelVideo = channelCard.getByLabel("TG推送消息预览视频", { exact: true })
+  await channelVideo.evaluate((node) => node.scrollIntoView({ block: "center", behavior: "instant" }))
+  const channelHandle = await channelVideo.elementHandle()
+  try {
+    await page.waitForFunction((node) => node.readyState >= 1 && node.videoWidth > 0, channelHandle)
+    const info = await channelVideo.evaluate((node) => ({ src: node.currentSrc, width: node.videoWidth, height: node.videoHeight, duration: node.duration, controls: node.controls, muted: node.muted }))
+    assert.equal(new URL(info.src).pathname, prefix + channelPath)
+    assert.deepEqual([info.width, info.height], [736, 1624])
+    assert(Math.abs(info.duration - 7.833) < .15 && info.controls && info.muted)
+    if (await channelVideo.evaluate((node) => node.paused)) await channelVideo.press("Space")
+    await progress(channelVideo)
+    await channelVideo.press("Space")
+    await staysPaused(channelVideo)
+    await scrollAwayAndBack(channelVideo)
+  } finally { await channelHandle.dispose() }
+
+  const channelTrigger = channelCard.getByRole("button", { name: "放大TG推送预览", exact: true })
+  await channelTrigger.evaluate((node) => node.scrollIntoView({ block: "center", behavior: "instant" }))
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+  const channelTop = await page.evaluate(() => scrollY)
+  const channelButton = await channelTrigger.elementHandle()
+  try {
+    await channelTrigger.click()
+    await enlarged.waitFor({ state: "visible" })
+    const large = enlarged.getByLabel("放大的TG推送预览视频", { exact: true })
+    const largeHandle = await large.elementHandle()
+    try { await page.waitForFunction((node) => node.readyState >= 1 && node.videoWidth === 736 && node.videoHeight === 1624, largeHandle) } finally { await largeHandle.dispose() }
+    assert(await enlarged.evaluate((node) => node.scrollHeight > node.clientHeight && node.scrollWidth <= node.clientWidth + 1), "The portrait preview scrolls vertically without horizontal overflow")
+    await enlarged.getByRole("button", { name: "暂停", exact: true }).click()
+    assert(await large.evaluate((node) => node.paused))
+    await enlarged.getByRole("button", { name: "播放", exact: true }).click()
+    await progress(large)
+    await enlarged.evaluate((node) => { node.scrollTop = 200 })
+    await enlarged.getByRole("button", { name: "关闭放大预览", exact: true }).click()
+    await enlarged.waitFor({ state: "hidden" })
+    await page.waitForFunction(({ button, top }) => document.activeElement === button && Math.abs(scrollY - top) < 8, { button: channelButton, top: channelTop })
+  } finally { await channelButton.dispose() }
+  assert(await channelVideo.evaluate((node) => node.paused), "Closing enlargement keeps the channel player paused")
+  const fresh = await page.context().newPage()
+  try {
+    await fresh.goto(base + articlePath, { waitUntil: "networkidle" })
+    const firstPreview = fresh.getByLabel("TG推送消息预览视频", { exact: true })
+    await firstPreview.evaluate((node) => node.scrollIntoView({ block: "center", behavior: "instant" }))
+    await progress(firstPreview)
+  } finally { await fresh.close() }
   await noOverflow()
   await demo.screenshot({ path: `/tmp/tg-message-demo-${width}.png`, style: "body > header { visibility: hidden !important; }" })
   for (const id of ["tg-case-details", "tg-materials"]) {

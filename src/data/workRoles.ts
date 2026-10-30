@@ -14,7 +14,7 @@ export const workRoles: WorkRole[] = [
     slug: "operation", title: "运营", summary: "查看推送消息、公告版本、活动规则与报表明细。",
     goal: "对照实际消息与界面，核对运营素材、发布内容、活动规则和报表口径。",
     steps: [
-      { title: "查看 TG 推送消息", description: "对照消息顶部的静态图与动态视频，核对正文、链接和按钮的完整展示。", href: "/articles/tg-message-media", kind: "文章" },
+      { title: "查看 TG 推送消息", description: "查看素材视频和TG消息预览，了解视频在消息中的展示。", href: "/articles/tg-message-media", kind: "文章" },
       { title: "明确运营问题", description: "区分流量来源、页面承接、业务路径与数据复盘，先确定问题范围。", href: "/articles/operation-product-conversion-model", kind: "文章" },
       { title: "检查活动规则", description: "核对参与条件、数据口径、审批和异常处理。", href: "/articles/campaign-risk-review", kind: "文章" },
       { title: "对照后台角色任务", description: "从本地原型观察查询与异常入口，区分演示内容和待验证能力。", href: "/cases/admin-optimization", kind: "案例" },

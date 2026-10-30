@@ -487,5 +487,17 @@ export const knowledgeContentUpdates = [
     "relatedHref": "/articles/tg-message-media#tg-case-details",
     "visualType": "界面图解",
     "location": "知识图解 · 运营场景 · TG频道推送页头"
+  },
+  {
+    "slug": "tg-message-media-v41",
+    "articleSlug": "tg-message-media",
+    "title": "素材视频与TG推送预览并排展示",
+    "description": "查看横版素材视频与竖屏TG消息预览，支持播放、放大和下载；手机上下排列，图解封面同步更新。",
+    "kind": "补充",
+    "href": "/articles/tg-message-media",
+    "detailHref": "/articles/tg-message-media#tg-message-demo",
+    "relatedHref": "/articles/tg-message-media#tg-materials",
+    "visualType": "界面图解",
+    "location": "知识图解 · 运营场景 · 视频与TG推送预览"
   }
 ]

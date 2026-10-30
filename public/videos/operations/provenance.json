@@ -10,5 +10,21 @@
     "codec": "H.264 / AAC",
     "poster": "/images/operations/tg-message-poster.jpg",
     "posterSource": "同一视频首帧"
+  },
+  {
+    "path": "/videos/operations/tg-channel-preview.mp4",
+    "source": "用户提供的TG消息预览视频",
+    "materialType": "TG推送竖屏预览",
+    "width": 736,
+    "height": 1624,
+    "durationSeconds": 7.833333,
+    "sizeBytes": 3379461,
+    "codec": "H.264，无音轨",
+    "poster": "/images/operations/tg-channel-preview-poster.jpg",
+    "posterSource": "同一预览视频首帧",
+    "sourceSha256": "291a9cae615402385f2144bb2c7df47d3a6222fbea354c8c6cce3c28e2d5630e",
+    "sha256": "0784b0937617d2452426a14897cdcee6a98b7b8bd2f834df6f9185a09415afa8",
+    "videoStreamSha256": "fed966c768e572fd11c204ac9f6062ef8cc0f9acbf16fc861a16224d41bfb2c7",
+    "processing": "为网页加载重新封装，视频流未转码"
   }
 ]

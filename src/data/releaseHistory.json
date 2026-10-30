@@ -1,15 +1,26 @@
 {
   "current": {
-    "version": 40,
+    "version": 41,
     "date": "2026-10-30",
-    "title": "TG推送页面精简页头",
-    "summary": "合并重复标题与介绍，收紧角色和日期信息，对齐视频、截图与素材入口，并隐藏无法继续的旧阅读提示。",
+    "title": "TG素材视频与推送预览并排展示",
+    "summary": "左侧播放素材视频，右侧播放TG消息预览；手机上下排列，预览可放大或下载，图解封面同步更新。",
     "articleSlugs": [
-      "tg-message-media-v40"
+      "tg-message-media-v41"
     ],
     "changes": []
   },
   "history": [
+    {
+      "version": 40,
+      "title": "TG推送页面精简页头",
+      "summary": "合并重复标题与介绍，收紧角色和日期信息，对齐视频、截图与素材入口，并隐藏无法继续的旧阅读提示。",
+      "articleSlugs": [
+        "tg-message-media-v40"
+      ],
+      "changes": [],
+      "publishedAt": "2026-10-30T02:28:55.117482+00:00",
+      "githubCommit": "9ff3ba27889cab9d9797eaab70478688facaee68"
+    },
     {
       "version": 39,
       "title": "TG仅保留完整推送截图",

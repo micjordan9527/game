@@ -45,7 +45,7 @@ export async function checkShowcase(page, base, prefix, width, rounds) {
     }
     if (route === "/articles/tg-message-media") {
       assert.equal(await page.locator("details#article-details, #article-content").count(), 0, "TG shows video and screenshots without a details module")
-      assert.equal(await page.locator("#tg-message-demo video").count(), 1, "TG defaults to video")
+      assert.equal(await page.locator("#tg-message-demo video").count(), 2, "TG shows the source and channel preview videos by default")
       assert.equal(await page.locator("#tg-case-details").isVisible(), true, "TG screenshots are directly visible")
     } else if (route.startsWith("/articles/")) {
       assert.notEqual(await page.locator("#article-details").getAttribute("open"), null, `${route}: article details must start expanded`)
