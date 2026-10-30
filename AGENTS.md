@@ -59,3 +59,8 @@ Operations content preference (2026-10-29):
 - Latest TG exception: remove the tg-message-media page's screenshot module, “推送位置对照”, “核对这三个位置” and “查看详细说明” blocks. Do not restore cropped cards, button-position breakdowns, or image-text analysis unless the user explicitly requests them. Other articles keep their detailed explanations expanded by default.
 - In the TG article's related links, keep only the TG material standards and the backend announcement publication demo; do not restore video or poster download buttons without a new request.
 - The user supplied a separate portrait TG message preview video. Show the original landscape video beside it on desktop and stacked on phones, label the message as a preview, and keep the image and text from different campaign themes distinct. This preview is not the missing original double-lion screenshot.
+
+Operations browsing preference (2026-10-30):
+- Organize operations into 网站运营、用户运营、流量运营、活动运营、数据运营 with one primary group and a fixed article order. Reuse existing article URLs across topics; related foundations belong in 相关参考.
+- The operation topic and operations role view share the grouping and order. Preserve role/tag/group filters, disclosure state and reading position on browser return and the explicit return-to-directory link.
+- Articles opened from an operations directory keep its group in breadcrumbs, sidebar and previous/next links. Direct visits from other topics retain their original topic. Do not introduce courses, tasks or empty process steps.

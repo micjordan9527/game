@@ -6,7 +6,9 @@ import { absoluteUrl } from "@/lib/seo"
 import { ArticleCard } from "@/components/common/ArticleCard"
 import { DesignExperienceHub } from "@/components/design/DesignExperienceHub"
 import { FeatureFlow } from "@/components/common/FeatureFlow"
-import { OperationScenes } from "@/components/operation/OperationScenes"
+import { Suspense } from "react"
+import { OperationDirectory } from "@/components/operation/OperationDirectory"
+import { operationTopicArticles } from "@/lib/operation-navigation"
 import SportsPage from "@/app/sports/page"
 const maps: Record<string, string[]> = {
   industry: ["会员与代理", "游戏与内容", "支付与钱包", "后台与风控"],
@@ -36,7 +38,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
     <div className="container-shell py-8">
       <h1 className="text-3xl font-semibold text-ink">{category.title}</h1>
       <p className="mt-3 text-sm leading-7 text-muted">{category.description}</p>
-      {slug === "operation" ? <OperationScenes /> : <FeatureFlow
+      {slug === "operation" ? <Suspense fallback={<p className="py-6 text-sm text-muted">正在读取运营目录…</p>}><OperationDirectory articles={operationTopicArticles()} /></Suspense> : <FeatureFlow
         title={`${category.title}全景`}
         caption="选择下面的图解或原型查看具体内容。"
         steps={(maps[slug] ?? []).map((title, index) => ({
@@ -45,14 +47,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         }))}
       />}
       {slug === "design" ? <DesignExperienceHub /> : null}
-      <section className="mt-6" aria-label="栏目图解">
+      {slug !== "operation" ? <section className="mt-6" aria-label="栏目图解">
         <h2 className="mb-5 text-xl font-semibold text-ink">本主题图解</h2>
         <div className="grid gap-5 md:grid-cols-2">
           {articles.map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}
         </div>
-      </section>
+      </section> : null}
       <div className="mt-8 flex flex-wrap gap-3 border-t border-line pt-5">
         <Link href="/cases" className="text-sm font-semibold text-brand-700">
           查看案例 →

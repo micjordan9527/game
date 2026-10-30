@@ -2,7 +2,7 @@ import Link from "next/link"
 import { ArrowLeft, ArrowRight, List } from "lucide-react"
 import type { ArticleReadingNavigation } from "@/lib/reading-order"
 
-export function ArticlePager({ navigation }: { navigation: ArticleReadingNavigation }) {
+export function ArticlePager({ navigation, previousHref, nextHref, returnLabel }: { navigation: ArticleReadingNavigation; previousHref?: string; nextHref?: string; returnLabel?: string }) {
   const { previous, next, pathHref, pathTitle, position, total } = navigation
 
   return (
@@ -18,14 +18,14 @@ export function ArticlePager({ navigation }: { navigation: ArticleReadingNavigat
           href={pathHref}
           className="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:underline"
         >
-          <List className="h-4 w-4" aria-hidden="true" /> 查看专题目录
+          <List className="h-4 w-4" aria-hidden="true" /> {returnLabel ?? "查看专题目录"}
         </Link>
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2">
         {previous ? (
           <Link
-            href={"/articles/" + previous.slug}
+            href={previousHref ?? "/articles/" + previous.slug}
             className="rounded-lg border border-line bg-white p-5 hover:border-brand-200 hover:shadow-soft"
           >
             <div className="flex items-center gap-2 text-sm font-medium text-muted">
@@ -39,7 +39,7 @@ export function ArticlePager({ navigation }: { navigation: ArticleReadingNavigat
 
         {next ? (
           <Link
-            href={"/articles/" + next.slug}
+            href={nextHref ?? "/articles/" + next.slug}
             className="rounded-lg border border-brand-100 bg-brand-50 p-5 text-right hover:border-brand-200 hover:shadow-soft"
           >
             <div className="flex items-center justify-end gap-2 text-sm font-semibold text-brand-700">
@@ -53,9 +53,9 @@ export function ArticlePager({ navigation }: { navigation: ArticleReadingNavigat
             className="rounded-lg border border-brand-100 bg-brand-50 p-5 text-right hover:shadow-soft"
           >
             <div className="flex items-center justify-end gap-2 text-sm font-semibold text-brand-700">
-              返回专题 <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              {returnLabel ?? "返回专题"} <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </div>
-            <div className="mt-2 font-semibold leading-7 text-ink">查看本专题全部图解</div>
+            <div className="mt-2 font-semibold leading-7 text-ink">{returnLabel ? "查看相关分类与图解" : "查看本专题全部图解"}</div>
           </Link>
         )}
       </div>

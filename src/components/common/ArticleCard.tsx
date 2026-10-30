@@ -3,7 +3,7 @@ import type { Article } from "@/data/articles"
 import { getImagePromptsForArticle } from "@/data/imagePrompts"
 import { articleFlows } from "@/data/articleFlows"
 import { assetPath } from "@/lib/assets"
-export function ArticleCard({ article }: { article: Article }) {
+export function ArticleCard({ article, href, stepLabel }: { article: Article; href?: string; stepLabel?: string }) {
   const image = getImagePromptsForArticle(article.slug)[0]
   const flow = articleFlows[article.slug]
   const cover = article.cover ?? image?.imageSrcAvif ?? image?.imageSrcWebp ?? image?.imageSrc
@@ -11,7 +11,7 @@ export function ArticleCard({ article }: { article: Article }) {
   const isTgGuide = article.slug === "tg-message-media"
   return (
     <article className="min-w-0 overflow-hidden rounded-xl border border-line bg-white transition hover:border-brand-200 hover:shadow-soft">
-      <Link href={`/articles/${article.slug}`} className="block">
+      <Link href={href ?? `/articles/${article.slug}`} className="block">
         {cover ? (
           <div className="aspect-[16/10] overflow-hidden bg-paper">
             <img
@@ -41,6 +41,7 @@ export function ArticleCard({ article }: { article: Article }) {
           </div>
         )}
         <div className="p-5">
+          {stepLabel ? <p className="mb-3 text-xs font-semibold text-brand-700">{stepLabel}</p> : null}
           {isMachineGuide ? (
             <div className="mb-3 flex flex-wrap items-center gap-2 text-xs font-semibold">
               <span className="rounded-full bg-brand-50 px-2.5 py-1 text-brand-700">可交互</span>

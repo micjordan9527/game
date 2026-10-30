@@ -25,6 +25,7 @@ import { showcaseItems } from "@/data/showcase"
 import { getImagePromptsForArticle } from "@/data/imagePrompts"
 import { workRoles } from "@/data/workRoles"
 import { resourceAudiences } from "@/lib/work-audiences"
+import { operationGroups } from "@/data/operationGroups"
 
 export type SearchKind =
   | "文章"
@@ -62,6 +63,7 @@ export function buildSearchIndex(): SearchRecord[] {
   add({ id: "knowledge:demonstrations", kind: "知识栏目", title: "功能演示目录", description: `按六个业务问题找说明与演示，或按业务流程、界面设计、浏览与查找定位${demonstrationEntries.length}个已有演示。`, href: "/updates/demonstrations", tags: ["功能", "演示", "目录", "案例", ...demonstrationGroups.map((group) => group.title)] }, JSON.stringify({ entries: demonstrationEntries, groups: demonstrationGroups, questions: businessQuestions }))
   businessQuestions.forEach((item) => add({ id: `question:${item.id}`, kind: "知识栏目", title: item.title, description: item.summary, href: `/updates/demonstrations#question-${item.id}`, tags: [...item.keywords, "业务问题", "排查", "演示"] }, JSON.stringify(item)))
   add({ id: "design:states", kind: "设计专题", title: "界面状态对照", description: "加载、空结果、失败、受限、处理中与未知结果的界面反馈及实际演示入口。", href: "/design/states", tags: ["界面", "状态", "设计", "产品", "前端"] }, JSON.stringify(stateExamples))
+  operationGroups.forEach((group) => add({ id: `operation:${group.slug}`, kind: "知识栏目", title: group.title, description: group.description, href: `/operation?group=${group.slug}`, tags: ["运营场景", "运营", group.title] }, JSON.stringify(group.entries)))
 
   articles.forEach((article) => {
     const markdown = getMarkdownArticle(article.slug)

@@ -5,9 +5,10 @@ import { useSearchParams } from "next/navigation"
 import { Filter, RotateCcw } from "lucide-react"
 import type { Article } from "@/data/articles"
 import { ArticleCard } from "@/components/common/ArticleCard"
-import { OperationScenes } from "@/components/operation/OperationScenes"
+import { OperationDirectory } from "@/components/operation/OperationDirectory"
 import { resourceAudiences } from "@/lib/work-audiences"
 import { libraryAudience, libraryRoleParam } from "@/lib/article-library-filters"
+import { getOperationGroup } from "@/lib/operation-navigation"
 
 const allOption = "全部"
 const allOptionLabel = "全部"
@@ -52,6 +53,9 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
       }),
     [articles, audience, tag]
   )
+  const operationGroup = audience === "运营" ? getOperationGroup(searchParams.get("group")) : undefined
+  const groupCount = operationGroup ? filteredArticles.filter((article) => operationGroup.entries.some((entry) => entry.slug === article.slug)).length : 0
+  const visibleCount = groupCount || filteredArticles.length
 
   function rememberPosition() {
     window.history.replaceState({ ...window.history.state, knowledgeArticleLibraryReturn: {
@@ -65,6 +69,8 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
     else params.set("role", libraryRoleParam(nextAudience))
     if (nextTag === allOption) params.delete("tag")
     else params.set("tag", nextTag)
+    if (nextAudience !== audience || nextTag !== tag || nextAudience === allOption) params.delete("group")
+    params.delete("resume")
     const url = window.location.pathname + (params.size ? "?" + params : "")
     if (url === window.location.pathname + window.location.search) return
     rememberPosition()
@@ -122,21 +128,20 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
       </aside>
 
       <section id="article-results" aria-label="文章列表" data-selected-role={audience} data-selected-tag={tag}>
-        {audience === "运营" && tag === allOption ? <OperationScenes /> : null}
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <p role="status" data-library-summary className="text-sm leading-7 text-muted">
             <span className="mr-3 font-semibold text-brand-700">角色：{audience}</span>
             {tag !== allOption ? <span className="mr-3">标签：{tag}</span> : null}
-            共 <span className="font-semibold text-ink">{filteredArticles.length}</span> 篇图解
+            共 <span className="font-semibold text-ink">{visibleCount}</span> 篇图解
           </p>
           <p className="text-xs text-muted">按主题与角色查找图解</p>
         </div>
-        <div className="grid gap-4 md:grid-cols-2">
+        {audience === "运营" ? <OperationDirectory articles={filteredArticles} source="library" /> : <div className="grid gap-4 md:grid-cols-2">
           {filteredArticles.map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}
-        </div>
-        {filteredArticles.length === 0 ? (
+        </div>}
+        {filteredArticles.length === 0 && audience !== "运营" ? (
           <div className="rounded-lg border border-line bg-white p-8 text-center text-sm text-muted">
             没有符合筛选条件的文章。
           </div>

@@ -22,7 +22,7 @@ import { topicScenarios } from "@/data/topicScenarios"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
-import { Children, isValidElement, type ReactNode } from "react"
+import { Children, isValidElement, Suspense, type ReactNode } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { ArticleHero } from "@/components/article/ArticleHero"
@@ -35,6 +35,7 @@ import { getImagePromptsForArticle } from "@/data/imagePrompts"
 import { resourceAudiences } from "@/lib/work-audiences"
 import { ArticleJsonLd } from "@/components/article/ArticleJsonLd"
 import { ArticlePager } from "@/components/article/ArticlePager"
+import { OperationArticlePager } from "@/components/article/OperationArticleNavigation"
 import { ArticleRelatedTerms } from "@/components/article/ArticleRelatedTerms"
 import { ArticleToc } from "@/components/article/ArticleToc"
 import { MermaidDiagram } from "@/components/article/MermaidDiagram"
@@ -146,7 +147,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <>
       {articleData ? <ArticleJsonLd article={articleData} /> : null}
       <ReadingProgress slug={article.slug} title={article.meta.title} />
-      <ArticleHero {...article.meta} audience={resourceAudiences(`/articles/${slug}`, article.meta.audience)} compact={slug === "tg-message-media"} />
+      <ArticleHero {...article.meta} articleSlug={article.slug} audience={resourceAudiences(`/articles/${slug}`, article.meta.audience)} compact={slug === "tg-message-media"} />
       {slug === "tg-message-media" ? <TgPushGuide>
         <span id="article-details" aria-hidden="true" className="block scroll-mt-24" />
         <span id="tg-output-examples" aria-hidden="true" className="block scroll-mt-24" />
@@ -265,7 +266,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           )}
         />
       </details>
-      {navigation ? <ArticlePager navigation={navigation} /> : null}
+      {navigation ? <Suspense fallback={<ArticlePager navigation={navigation} />}><OperationArticlePager articleSlug={article.slug} category={article.meta.category} navigation={navigation} /></Suspense> : null}
     </>
   )
 }

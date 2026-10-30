@@ -1,9 +1,12 @@
 import { getCategory } from "@/lib/site"
 import { Badge } from "@/components/common/Badge"
 import { Tag } from "@/components/common/Tag"
-import Link from "next/link"
+import { Suspense } from "react"
+import { ArticleBreadcrumbs } from "./ArticleBreadcrumbs"
+import { OperationArticleBreadcrumbs } from "./OperationArticleNavigation"
 
 type ArticleHeroProps = {
+  articleSlug: string
   title: string
   description: string
   category: string
@@ -16,6 +19,7 @@ type ArticleHeroProps = {
 }
 
 export function ArticleHero({
+  articleSlug,
   title,
   description,
   category,
@@ -31,13 +35,9 @@ export function ArticleHero({
   return (
     <header className="border-b border-line bg-white">
       <div className={`container-shell max-w-4xl ${compact ? "py-5" : "py-6 md:py-8"}`}>
-        <nav aria-label="文章位置" className="mb-4 text-xs leading-6 text-muted">
-          <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <li><Link href="/articles" className="font-semibold text-brand-700">知识图解</Link></li>
-            {categoryInfo ? <><li aria-hidden="true">/</li><li><Link href={`/${categoryInfo.slug}`} className="font-semibold text-brand-700">{categoryInfo.title}</Link></li></> : null}
-            <li aria-hidden="true">/</li><li className="min-w-0 max-w-full"><span aria-current="page" className="line-clamp-1">{title}</span></li>
-          </ol>
-        </nav>
+        <Suspense fallback={<ArticleBreadcrumbs title={title} parents={[{ href: "/articles", label: "知识图解" }, ...(categoryInfo ? [{ href: "/" + categoryInfo.slug, label: categoryInfo.title }] : [])]} />}>
+          <OperationArticleBreadcrumbs articleSlug={articleSlug} title={title} category={categoryInfo} />
+        </Suspense>
         {!compact ? <div className="flex flex-wrap gap-2">
           {categoryInfo ? <Badge tone="brand">{categoryInfo.title}</Badge> : null}
           {audience.map((item) => (

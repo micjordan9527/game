@@ -5,7 +5,7 @@ export async function checkTgOperations(page, base, prefix, width) {
   const mediaPath = "/videos/operations/tg-message-demo.mp4"
   const posterPath = "/images/operations/tg-message-poster.jpg"
   const channelPath = "/videos/operations/tg-channel-preview.mp4"
-  const articleCard = () => page.locator("#article-results article").filter({ has: page.locator(`a[href="${prefix}${articlePath}"]`) })
+  const articleCard = () => page.locator("#article-results article").filter({ has: page.locator(`a[href^="${prefix}${articlePath}?"]`) })
   const noOverflow = async () => {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, page.url())
   }
@@ -83,11 +83,11 @@ export async function checkTgOperations(page, base, prefix, width) {
     }
   }
   const uniqueScenes = async () => {
-    const scenes = page.locator("section[data-operation-scenes]")
+    const scenes = page.locator("section[data-operation-directory]")
     assert.equal(await scenes.count(), 1, "One operation-scene entry section")
-    const hrefs = await scenes.locator("a[href]").evaluateAll((links) => links.map((link) => link.getAttribute("href")))
-    assert.equal(new Set(hrefs).size, hrefs.length, "Each operation scene has one entry")
-    assert.equal(await scenes.locator(`a[href="${prefix}${articlePath}#tg-message-demo"]`).count(), 1)
+    const hrefs = await scenes.locator("article a[href]").evaluateAll((links) => links.map((link) => link.getAttribute("href")))
+    assert.equal(new Set(hrefs).size, hrefs.length, "Each operation article has one card")
+    assert.equal(await scenes.locator(`article a[href^="${prefix}${articlePath}?"]`).count(), 1)
     return scenes
   }
   await page.emulateMedia({ reducedMotion: "no-preference" })
@@ -236,7 +236,12 @@ export async function checkTgOperations(page, base, prefix, width) {
   assert.equal(returned.searchParams.get("tag"), "TG推送")
   await page.locator(filtered).waitFor()
   assert.equal(await page.getByRole("group", { name: "角色筛选", exact: true }).locator('button[data-filter-value="运营"]').getAttribute("aria-pressed"), "true")
-  await page.waitForFunction((top) => Math.abs(scrollY - top) < 8 && document.querySelector("details[data-article-tags]")?.open === true, returnTop)
+  try {
+    await page.waitForFunction((top) => Math.abs(scrollY - top) < 8 && document.querySelector("details[data-article-tags]")?.open === true, returnTop)
+  } catch (error) {
+    const actual = await page.evaluate(() => ({ top: scrollY, height: document.documentElement.scrollHeight, viewport: innerHeight, tagsOpen: document.querySelector("details[data-article-tags]")?.open, saved: history.state?.operationDirectoryReturn, librarySaved: history.state?.knowledgeArticleLibraryReturn }))
+    throw new Error("TG library return mismatch: " + JSON.stringify({ expectedTop: returnTop, actual }), { cause: error })
+  }
 
   let directory
   if (width < 1280) {
@@ -255,7 +260,7 @@ export async function checkTgOperations(page, base, prefix, width) {
   if (width < 1280) await page.getByRole("dialog", { name: "知识库导航", exact: true }).waitFor({ state: "hidden" })
   const scenes = await uniqueScenes()
   await noOverflow()
-  await scenes.locator(`a[href="${prefix}${articlePath}#tg-message-demo"]`).click()
+  await scenes.locator(`article a[href^="${prefix}${articlePath}?"]`).click()
   await page.locator("#tg-message-demo").waitFor()
   await page.locator(`#tg-materials a[href="${prefix}/design/material-standards?module=tg-assets"]`).click()
 

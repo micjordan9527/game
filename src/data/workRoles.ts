@@ -11,7 +11,7 @@ export type WorkRole = {
 
 export const workRoles: WorkRole[] = [
   {
-    slug: "operation", title: "运营", summary: "查看推送消息、公告版本、活动规则与报表明细。",
+    slug: "operation", title: "运营", summary: "按网站、用户、流量、活动和数据运营查看相关图解。",
     goal: "对照实际消息与界面，核对运营素材、发布内容、活动规则和报表口径。",
     steps: [
       { title: "查看 TG 推送消息", description: "查看素材视频和TG消息预览，了解视频在消息中的展示。", href: "/articles/tg-message-media", kind: "文章" },

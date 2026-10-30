@@ -31,7 +31,7 @@ export const categories: Category[] = [
   {
     slug: "operation",
     title: "运营场景",
-    description: "查看推送消息、公告发布、活动规则和报表核对的实际界面与工作产出。",
+    description: "按网站、用户、流量、活动和数据运营，依次查看相关图解、界面与演示。",
   },
   {
     slug: "design",

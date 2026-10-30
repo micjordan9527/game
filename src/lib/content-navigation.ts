@@ -4,6 +4,8 @@ import { caseItems } from "@/data/cases"
 import { aiWorkflows } from "@/data/aiWorkflowLibrary"
 import { templates } from "@/data/templates"
 import { sportsModules } from "@/data/sports"
+import type { OperationGroup } from "@/data/operationGroups"
+import { operationArticleHref, operationTopicArticles } from "@/lib/operation-navigation"
 
 export type ContentNavItem = { href: string; label: string; meta?: string; children?: ContentNavItem[] }
 export type ContentNavGroup = { title: string; items: ContentNavItem[] }
@@ -20,19 +22,21 @@ export function isNavigationSectionActive(pathname: string, href: string) {
   return pathname === href || (href !== "/" && pathname.startsWith(href + "/"))
 }
 
-export function getContentNavigation(pathname: string): ContentNavGroup[] {
+export function getContentNavigation(pathname: string, operation?: { group?: OperationGroup; returnTo: string }): ContentNavGroup[] {
   if (isNavigationSectionActive(pathname, "/cases")) return [{ title: "案例目录", items: [
     { href: "/cases", label: "全部案例", meta: `${caseItems.length} 个` },
     ...caseItems.map((item) => ({ href: item.href, label: item.title })),
   ] }]
   if (isNavigationSectionActive(pathname, "/articles")) {
-    const active = knowledgeCategory(pathname)
+    const active = operation ? "operation" : knowledgeCategory(pathname)
     const groups: ContentNavGroup[] = [
       { title: "知识图解", items: [{ href: "/articles", label: "全部图解", meta: `${articles.length} 篇` }] },
       { title: "按主题浏览", items: categories.map((category) => {
-        const items = articles.filter((item) => item.category === category.slug)
+        const items = category.slug === "operation" ? operationTopicArticles() : articles.filter((item) => item.category === category.slug)
+        const reference = operation && !operation.group ? articles.find((item) => pathname === "/articles/" + item.slug) : undefined
+        const visible = category.slug === "operation" && operation?.group ? operation.group.entries.map((entry) => articles.find((item) => item.slug === entry.slug)!) : category.slug === "operation" && reference ? [reference] : items
         return { href: "/" + category.slug, label: category.title, meta: items.length ? `${items.length} 篇` : undefined,
-          children: active === category.slug ? items.map((item) => ({ href: "/articles/" + item.slug, label: item.title })) : undefined }
+          children: active === category.slug ? visible.map((item) => ({ href: category.slug === "operation" ? operationArticleHref(item.slug, operation?.returnTo ?? "/operation") : "/articles/" + item.slug, label: item.title })) : undefined }
       }) },
     ]
     if (active === "sportsbook") groups.push({ title: "体育专题", items: sportsModules.map((item) => ({ href: item.href, label: item.title })) })
