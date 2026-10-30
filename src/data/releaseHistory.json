@@ -1,38 +1,69 @@
 {
   "current": {
-    "version": 50,
+    "version": 51,
     "date": "2026-10-30",
-    "title": "BM赛事列表的材料标注与布局说明",
-    "summary": "从现有截图的三处标注出发，使用相同演示内容比较两种布局，说明盘口选项关系、长队名与放大文字的空间取舍。",
+    "title": "BM案例先展示首页与详情页整体",
+    "summary": "标题下先看两张界面总览，手机通过首页／详情页切换，再继续阅读局部标注和布局取舍。",
     "articleSlugs": [],
     "changes": [
       {
-        "id": "bm-case-study",
-        "title": "BM赛事列表：从原材料读到布局取舍",
-        "description": "原截图与生成提案分别标注队名、时间或阶段、盘口；同内容示意保持球队、赛况和数值一致，直接展示分区与留白。",
-        "location": "案例 · BM优化",
-        "href": "/cases/bm-optimization#bm-design-rationale",
-        "linkLabel": "查看BM案例说明",
+        "id": "bm-overview-first",
+        "title": "首页与详情页总览移到案例头部",
+        "description": "桌面并排展示两页；手机默认首页并支持切换。每张卡保留一个放大入口，继续支持适应屏幕、原尺寸、上下张及阅读位置恢复。",
+        "location": "案例 · BM手机端界面对照 · 头部",
+        "href": "/cases/bm-optimization#case-materials",
+        "linkLabel": "查看整体界面",
         "related": {
-          "href": "/cases/bm-optimization#bm-layout-study",
-          "label": "查看同内容布局示意"
+          "href": "/cases/bm-optimization#bm-design-rationale",
+          "label": "继续看局部拆解"
         }
       },
       {
-        "id": "bm-readable-layout",
-        "title": "长队名、大字号与独立交互原型",
-        "description": "同时切换长队名与18px文字，查看完整文字的换行及卡片高度；分类、状态与详情返回继续使用独立原型。资料卡封面改用本页标明来源的结构示意。",
-        "location": "BM案例 · 布局示意与手机原型",
-        "href": "/cases/bm-optimization#bm-layout-study",
-        "linkLabel": "查看文字与布局变化",
-        "related": {
-          "href": "/cases/bm-optimization#bm-mobile-prototype",
-          "label": "操作分类与返回原型"
-        }
+        "id": "bm-overview-copy",
+        "title": "整体预览使用中性图注",
+        "description": "保留既有界面局部，重新编排首页入口、赛事区、详情分类与底栏的位置说明；原始来源文件保留在页面底部。",
+        "location": "BM案例 · 首页与详情页对照",
+        "href": "/cases/bm-optimization",
+        "linkLabel": "查看BM案例"
       }
     ]
   },
   "history": [
+    {
+      "version": 50,
+      "date": "2026-10-30",
+      "title": "BM赛事列表的材料标注与布局说明",
+      "summary": "从现有截图的三处标注出发，使用相同演示内容比较两种布局，说明盘口选项关系、长队名与放大文字的空间取舍。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "bm-case-study",
+          "title": "BM赛事列表：从原材料读到布局取舍",
+          "description": "原截图与生成提案分别标注队名、时间或阶段、盘口；同内容示意保持球队、赛况和数值一致，直接展示分区与留白。",
+          "location": "案例 · BM优化",
+          "href": "/cases/bm-optimization#bm-design-rationale",
+          "linkLabel": "查看BM案例说明",
+          "related": {
+            "href": "/cases/bm-optimization#bm-layout-study",
+            "label": "查看同内容布局示意"
+          }
+        },
+        {
+          "id": "bm-readable-layout",
+          "title": "长队名、大字号与独立交互原型",
+          "description": "同时切换长队名与18px文字，查看完整文字的换行及卡片高度；分类、状态与详情返回继续使用独立原型。资料卡封面改用本页标明来源的结构示意。",
+          "location": "BM案例 · 布局示意与手机原型",
+          "href": "/cases/bm-optimization#bm-layout-study",
+          "linkLabel": "查看文字与布局变化",
+          "related": {
+            "href": "/cases/bm-optimization#bm-mobile-prototype",
+            "label": "操作分类与返回原型"
+          }
+        }
+      ],
+      "publishedAt": "2026-10-30T10:03:48.382143+00:00",
+      "githubCommit": "457e8dfa5bb6631266a7ee85a1b6e5ec140fccfb"
+    },
     {
       "version": 49,
       "date": "2026-10-30",

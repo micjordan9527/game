@@ -54,7 +54,7 @@ export function BmCaseStudy() {
       <nav aria-label="BM样板相关位置">
         <a href="?focus=status#case-focus">查看状态层级原局部 ↓</a>
         <a href="#bm-mobile-prototype">操作分类、状态与返回原型 ↓</a>
-        <a href="#case-materials">查看两张完整原材料 ↓</a>
+        <a href="#case-materials">回到首页与详情页总览 ↑</a>
       </nav>
     </footer>
   </section>

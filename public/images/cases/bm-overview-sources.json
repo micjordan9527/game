@@ -1,0 +1,50 @@
+[
+  {
+    "path": "images/cases/bm-home-overview.jpg",
+    "width": 1600,
+    "height": 1160,
+    "type": "既有界面局部与中性位置图注的图文编排",
+    "source": "/case-assets/bm-optimization/bm-home-optimization.png",
+    "sourceSha256": "cee24d214fe65a9274ea9ee98cfc275020f837934290e85d47667ecf753eb7e7",
+    "crops": [
+      {
+        "x": 91,
+        "y": 264,
+        "width": 345,
+        "height": 714
+      },
+      {
+        "x": 846,
+        "y": 264,
+        "width": 345,
+        "height": 714
+      }
+    ],
+    "note": "源文件未更改；右侧为原材料中的视觉提案，不作上线结果。",
+    "script": "scripts/capture-bm-overviews.mjs"
+  },
+  {
+    "path": "images/cases/bm-detail-overview.jpg",
+    "width": 1600,
+    "height": 1160,
+    "type": "既有界面局部与中性位置图注的图文编排",
+    "source": "/case-assets/bm-optimization/bm-detail-optimization.png",
+    "sourceSha256": "58f39c6ac5c99fd47fe2f398456c6972ed181169c48a281cb1815b87fd427124",
+    "crops": [
+      {
+        "x": 91,
+        "y": 264,
+        "width": 345,
+        "height": 714
+      },
+      {
+        "x": 846,
+        "y": 264,
+        "width": 345,
+        "height": 714
+      }
+    ],
+    "note": "源文件未更改；右侧为原材料中的视觉提案，不作上线结果。",
+    "script": "scripts/capture-bm-overviews.mjs"
+  }
+]

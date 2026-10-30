@@ -39,10 +39,16 @@ type LongImageGalleryProps = {
   emptyMessage: string
   label?: string
   groupLabel?: string
+  mobileLabels?: string[]
+  compactPreview?: boolean
+  previewLabel?: string
 }
 
-export function LongImageGallery({ items, emptyMessage, label = "案例长图", groupLabel = "案例长图组" }: LongImageGalleryProps) {
+export function LongImageGallery({ items, emptyMessage, label = "案例长图", groupLabel = "案例长图组", mobileLabels, compactPreview = false, previewLabel }: LongImageGalleryProps) {
   const titleId = useId()
+  const [previewIndex, setPreviewIndex] = useState(0)
+  const previewTabsRef = useRef<Array<HTMLButtonElement | null>>([])
+  const hasMobileTabs = !!mobileLabels && mobileLabels.length === items.length
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const activeItem = activeIndex === null ? null : items[activeIndex] ?? null
   const activeWidth = activeItem?.crop?.width ?? activeItem?.width
@@ -143,24 +149,50 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
 
   return (
     <>
-      <section className="mt-6 grid gap-6 lg:grid-cols-2" aria-label={groupLabel}>
+      {hasMobileTabs ? <div role="tablist" aria-label="切换页面预览" className="mt-4 flex gap-1 rounded-lg border border-line bg-paper p-1 lg:hidden">
+        {mobileLabels.map((tabLabel, index) => <button
+          ref={(node) => { previewTabsRef.current[index] = node }}
+          key={items[index].id}
+          id={`${titleId}-preview-tab-${index}`}
+          role="tab"
+          type="button"
+          aria-selected={previewIndex === index}
+          aria-controls={`${titleId}-preview-panel-${index}`}
+          tabIndex={previewIndex === index ? 0 : -1}
+          onClick={() => setPreviewIndex(index)}
+          onKeyDown={(event) => {
+            let next = index
+            if (event.key === "ArrowRight") next = (index + 1) % items.length
+            else if (event.key === "ArrowLeft") next = (index + items.length - 1) % items.length
+            else if (event.key === "Home") next = 0
+            else if (event.key === "End") next = items.length - 1
+            else return
+            event.preventDefault()
+            setPreviewIndex(next)
+            previewTabsRef.current[next]?.focus({ preventScroll: true })
+          }}
+          className={`min-h-11 flex-1 rounded-md px-4 py-2 text-sm font-semibold ${previewIndex === index ? "bg-white text-brand-700 shadow-sm" : "text-muted hover:text-ink"}`}
+        >{tabLabel}</button>)}
+      </div> : null}
+      <section className={`${hasMobileTabs ? "mt-4" : "mt-6"} grid gap-6 lg:grid-cols-2`} aria-label={groupLabel}>
         {items.map((item, index) => (
-          <article key={item.id} className="overflow-hidden rounded-lg border border-line bg-white shadow-sm">
-            <div className="border-b border-line p-5">
-              <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">{label}</p>
-              <h3 className="mt-2 text-xl font-semibold tracking-normal text-ink">{item.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-muted">{item.description}</p>
+          <article key={item.id} id={hasMobileTabs ? `${titleId}-preview-panel-${index}` : undefined} role={hasMobileTabs ? "tabpanel" : undefined} aria-labelledby={hasMobileTabs ? `${titleId}-preview-tab-${index}` : undefined} className={`${hasMobileTabs && previewIndex !== index ? "hidden lg:block" : ""} overflow-hidden rounded-lg border border-line bg-white shadow-sm`}>
+            <div className={`border-b border-line ${compactPreview ? "px-4 py-3" : "p-5"}`}>
+              {!compactPreview ? <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">{label}</p> : null}
+              <h3 className={`${compactPreview ? "text-lg" : "mt-2 text-xl"} font-semibold tracking-normal text-ink`}>{item.title}</h3>
+              {item.description ? <p className="mt-2 text-sm leading-6 text-muted">{item.description}</p> : null}
             </div>
             <button
               className="group relative block w-full cursor-zoom-in bg-paper p-3 text-left"
               onClick={(event) => {
                 triggerRef.current = event.currentTarget
+                if (hasMobileTabs) setPreviewIndex(index)
                 setViewMode("fit")
                 setActiveIndex(index)
               }}
               type="button"
             >
-              {item.crop ? <div className="mx-auto block overflow-hidden rounded-md" style={item.maxPreviewWidth ? { maxWidth: item.maxPreviewWidth } : undefined}><CroppedImage item={item} className="mx-auto block h-auto w-full rounded-md bg-white shadow-sm" /></div> : <picture className="block max-h-80 overflow-hidden rounded-md sm:max-h-[28rem]">
+              {item.crop ? <div className="mx-auto block overflow-hidden rounded-md" style={item.maxPreviewWidth ? { maxWidth: item.maxPreviewWidth } : undefined}><CroppedImage item={item} className="mx-auto block h-auto w-full rounded-md bg-white shadow-sm" /></div> : <picture className={compactPreview ? "block rounded-md" : "block max-h-80 overflow-hidden rounded-md sm:max-h-[28rem]"}>
                 {item.srcAvif ? <source srcSet={assetPath(item.srcAvif)} type="image/avif" /> : null}
                 {item.srcWebp ? <source srcSet={assetPath(item.srcWebp)} type="image/webp" /> : null}
                 <Image
@@ -171,12 +203,12 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
                   height={item.height}
                   sizes="(max-width: 1023px) 100vw, (min-width: 1024px) 520px"
                   className="mx-auto h-auto w-full rounded-md bg-white shadow-sm"
-                  loading="lazy"
+                  loading={compactPreview && index === 0 ? "eager" : "lazy"}
                 />
               </picture>}
               <span className={`mt-3 flex items-center justify-center gap-2 rounded-md border border-line bg-white px-3 py-2 ${item.crop ? "text-sm" : "text-xs"} font-semibold text-brand-700 group-hover:border-brand-200`}>
                 <Maximize2 className="h-4 w-4" aria-hidden="true" />
-                {item.crop ? "放大这一局部" : "查看完整长图"}
+                {item.crop ? "放大这一局部" : previewLabel ?? "查看完整长图"}
               </span>
             </button>
             {item.annotationLegend ? <p className="border-t border-line px-4 py-3 text-sm leading-7 text-muted">{item.annotationLegend}</p> : null}

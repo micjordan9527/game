@@ -77,9 +77,9 @@ export async function checkShowcase(page, base, prefix, width, rounds) {
   await page.goto(`${base}/cases/bm-optimization`, { waitUntil: "networkidle" })
   await page.getByRole("region", { name: "案例长图组" }).locator("article button").first().click()
   const dialog = page.getByRole("dialog")
-  await dialog.getByRole("heading", { name: "BM 首页优化信息图" }).waitFor()
+  await dialog.getByRole("heading", { name: "BM 首页界面对照" }).waitFor()
   await dialog.getByRole("button", { name: "下一张", exact: true }).click()
-  await dialog.getByRole("heading", { name: "BM 详情页优化信息图" }).waitFor()
+  await dialog.getByRole("heading", { name: "BM 详情页界面对照" }).waitFor()
   await page.keyboard.press("Escape")
   await dialog.waitFor({ state: "hidden" })
 
