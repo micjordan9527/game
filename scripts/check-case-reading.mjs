@@ -10,7 +10,7 @@ export async function checkCaseReading(page, base, prefix, width) {
   for (const [slug, data] of Object.entries(caseReadingGuides)) {
     await page.goto(base + "/cases/" + slug, { waitUntil: "networkidle" })
     assert.equal(await page.locator("main h1").count(), 1)
-    const firstVisual = await page.locator("main").evaluate((node) => node.querySelector("img,iframe")?.getBoundingClientRect().top)
+    const firstVisual = await page.locator("main").evaluate((node) => node.querySelector('img,iframe,svg[role="img"]')?.getBoundingClientRect().top)
     assert(firstVisual < 760, slug + ": original material remains near the top")
     await page.locator('main a[href="#case-reading-guide"]').click()
     const guide = page.getByRole("region", { name: "界面阅读说明", exact: true })

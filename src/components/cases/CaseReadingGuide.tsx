@@ -10,9 +10,9 @@ export function CaseReadingGuide({ slug }: { slug: string }) {
       <h2 id="case-reading-title" className="text-xl font-semibold text-ink">界面阅读说明</h2>
       <p className="mt-2 text-sm font-semibold leading-7 text-ink">{guide.title}</p>
       <p className="mt-2 text-xs leading-6 text-muted">{guide.material}</p>
-      <ol className="mt-5 grid gap-4 lg:grid-cols-3">
+      <ol className={slug === "bm-optimization" ? "mt-5 grid gap-0" : "mt-5 grid gap-4 lg:grid-cols-3"}>
         {guide.steps.map((step, index) => (
-          <li key={step.title} className="min-w-0 rounded-lg border border-line bg-paper p-4">
+          <li key={step.title} className={slug === "bm-optimization" ? "min-w-0 border-t border-line py-4" : "min-w-0 rounded-lg border border-line bg-paper p-4"}>
             <p className="text-xs font-semibold text-brand-700">{String(index + 1).padStart(2, "0")}</p>
             <h3 className="mt-2 font-semibold leading-7 text-ink">{step.title}</h3>
             <p className="mt-2 text-xs leading-6 text-muted">位置：{step.where}</p>

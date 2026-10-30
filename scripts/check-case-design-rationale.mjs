@@ -64,7 +64,73 @@ export async function checkCaseDesignRationale(page, base, prefix, width) {
       const section = page.locator(selector)
       await section.waitFor()
       await checkAnchor(selector, `Initial ${kind}/${width}px fragment`)
-      assert.equal(await section.locator("ol > li").count(), 4)
+      if (kind === "bm") {
+        const evidence = section.locator("#bm-source-evidence")
+        assert.equal(await evidence.locator("ol > li").count(), 3, "BM source observations correspond to the three numbered annotations")
+        const sourceImages = evidence.locator("svg[data-cropped-image]")
+        assert.equal(await sourceImages.count(), 2)
+        for (const sourceImage of await sourceImages.all()) {
+          assert.equal(await sourceImage.locator("rect").count(), 3, "Each source crop retains all three annotation frames")
+          assert.deepEqual(await sourceImage.locator("text").allTextContents(), ["1", "2", "3"])
+          assert.equal(await sourceImage.locator("image").getAttribute("width"), "1600", "Annotations do not resize or replace the original source image")
+          assert.equal(await sourceImage.locator("image").getAttribute("height"), "1160")
+          assert((await sourceImage.locator("image").getAttribute("href")).includes("/case-assets/bm-optimization/bm-home-optimization.avif"))
+        }
+        const study = section.locator("#bm-layout-study")
+        const cards = study.locator("article[data-layout]")
+        assert.equal(await cards.count(), 2)
+        const snapshot = () => cards.evaluateAll((nodes) => nodes.map((card) => ({
+          layout: card.dataset.layout,
+          fixture: card.dataset.fixture,
+          fields: Object.fromEntries([...card.querySelectorAll("[data-field]")].map((field) => [field.dataset.field, field.textContent.trim()])),
+          markets: [...card.querySelectorAll('[aria-label="同一组盘口示例"] > div')].map((market) => ({
+            title: market.querySelector("h5").textContent.trim(),
+            options: [...market.querySelectorAll("li")].map((option) => ({ label: option.querySelector("span").textContent.trim(), value: option.querySelector("strong").textContent.trim() })),
+          })),
+          fontSizes: [...card.querySelectorAll('[data-field="home"], h5, li span, li strong')].map((field) => parseFloat(getComputedStyle(field).fontSize)),
+          width: card.getBoundingClientRect().width,
+          height: card.getBoundingClientRect().height,
+          overflow: card.scrollWidth > card.clientWidth + 1,
+          clipped: [...card.querySelectorAll("[data-field], h5, li span, li strong")].some((field) => {
+            const rect = field.getBoundingClientRect(), parent = card.getBoundingClientRect()
+            return rect.left < parent.left - 1 || rect.right > parent.right + 1 || field.scrollWidth > field.clientWidth + 1
+          }),
+        })))
+        const assertSameContent = (states, label) => {
+          assert.deepEqual(states.map((state) => state.layout), ["continuous", "grouped"])
+          assert.deepEqual(states.map((state) => state.fixture), ["MATCH-DEMO-001", "MATCH-DEMO-001"])
+          assert.deepEqual(states[0].fields, states[1].fields, `${label}: both layouts show the same teams and score`)
+          assert.deepEqual(states[0].markets, states[1].markets, `${label}: market titles, option labels and values remain identical`)
+          assert.deepEqual(states[0].markets.map((market) => market.title), ["让球", "大小", "独赢"])
+          assert.deepEqual(states[0].markets.map((market) => market.options.length), [2, 2, 3], "Three-way outcome options are not forced into a two-team relationship")
+          assert.deepEqual(states[0].markets[2].options.map((option) => option.label), ["主", "平", "客"])
+          assert(states.every((state) => !state.overflow && !state.clipped), `${label}: complete fields fit both cards at ${width}px`)
+        }
+        const standard = await snapshot()
+        assertSameContent(standard, "Default layout")
+        const sizeControl = study.getByRole("checkbox", { name: "查看长队名与放大文字", exact: true })
+        assert.equal(await sizeControl.isChecked(), false)
+        await sizeControl.check()
+        await settle()
+        const expanded = await snapshot()
+        assertSameContent(expanded, "Long names and larger text")
+        assert.deepEqual(expanded[0].fields, { home: "示例北方城市联合足球俱乐部青年竞技队", away: "示例海岸联合竞技足球俱乐部城市代表队", score: standard[0].fields.score })
+        assert.deepEqual(expanded[0].markets, standard[0].markets, "The readability control does not change market content")
+        for (let index = 0; index < expanded.length; index++) {
+          assert(expanded[index].fontSizes.every((size, field) => size > standard[index].fontSizes[field]), "Both cards enlarge names, market labels and values")
+          assert(expanded[index].height > standard[index].height, "Long names and larger type are allowed additional vertical space")
+        }
+        assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, `No horizontal overflow with larger BM text at ${width}px`)
+        await study.screenshot({ path: `/tmp/bm-layout-expanded-${width}.png`, animations: "disabled" })
+        await sizeControl.uncheck()
+        await settle()
+        const restored = await snapshot()
+        assertSameContent(restored, "Restored layout")
+        for (let index = 0; index < restored.length; index++) {
+          assert.deepEqual(restored[index].fields, standard[index].fields, "Clearing the control restores both original team names")
+          assert.deepEqual(restored[index].fontSizes, standard[index].fontSizes, "Clearing the control restores both original text sizes")
+        }
+      } else assert.equal(await section.locator("ol > li").count(), 4)
       assert.equal(await section.locator("svg[data-cropped-image]").count(), 2)
       assert.equal(await section.locator("button").filter({ hasText: "放大这一局部" }).count(), 2)
       assert((await section.innerText()).includes("生成式"))

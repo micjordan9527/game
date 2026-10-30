@@ -15,12 +15,12 @@ export const caseReadingGuides: Record<string, CaseReadingGuideData> = {
     ],
   },
   "bm-optimization": {
-    title: "BM：分开阅读视觉方案与手机交互",
-    material: "两张原界面／生成式方案对照图、三组可分别放大的局部对照，以及独立的虚构记录手机原型。",
+    title: "BM：三类材料分别能说明什么",
+    material: "来源局部用于观察，同内容结构示意用于比较布局，独立原型用于查看分类与返回。",
     steps: [
-      { title: "确认两张对照图的范围", where: "案例长图组 · 首页与详情页", observation: "首页比较分类与状态分层，详情页比较头区、内容块和底部操作区。图片左右两侧的材料性质不同。", boundary: "生成式视觉方向不能证明吸顶、触控、实时状态或服务端操作已经实现。", href: "#case-materials", linkLabel: "查看首页与详情对照图" },
-      { title: "分别核对分类、状态与操作区", where: "BM局部对照 · 首页分类／状态层级／详情操作区", observation: "每组将原界面与生成式方案单独展示，可分别放大；配图注核对顶部入口、比分分组和详情底栏。", boundary: "方案中仍有悬浮图标，是否遮挡与固定需要实际操作核对；颜色和数字大小不能代替业务状态。", href: "#case-focus", linkLabel: "查看三组局部对照" },
-      { title: "在原型中验证返回和反馈", where: "BM手机原型 · 筛选、详情、底部栏", observation: "切换运动与赛事状态，打开详情再返回，观察筛选是否保留，底部反馈是否仍指向当前记录。", boundary: "原型使用虚构赛事，不连接交易；它与静态视觉方案应分别判断。", href: "#bm-mobile-prototype", linkLabel: "打开手机交互原型" },
+      { title: "原截图与生成提案", where: "原材料观察 · 两张编号局部", observation: "观察实际可见的队名、时间、阶段与盘口标题。", boundary: "两侧赛事不同；源图分辨率有限，不作为同场改版效果。", href: "#bm-source-evidence", linkLabel: "回到原材料标注" },
+      { title: "同内容结构示意", where: "布局示意 · 同一演示记录", observation: "保持内容一致，只比较分组；切换长队名和放大文字查看高度代价。", boundary: "这是重新绘制的解释图，不是原版还原或上线方案。", href: "#bm-layout-study", linkLabel: "回到同内容示意" },
+      { title: "分类与状态原型", where: "BM手机原型 · 列表与详情", observation: "切换球类和状态，打开记录再返回，查看筛选是否保留。", boundary: "原型不复现上方盘口布局，使用独立演示记录。", href: "#bm-mobile-prototype", linkLabel: "操作分类与返回" },
     ],
   },
   "competitor-analysis": {

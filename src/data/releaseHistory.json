@@ -1,38 +1,73 @@
 {
   "current": {
-    "version": 49,
+    "version": 50,
     "date": "2026-10-30",
-    "title": "封面与案例说明定位修正",
-    "summary": "五张正文界面封面保留完整内容；BM与U8设计说明的直达链接在页面加载后定位，保留图片查看后的阅读位置。",
+    "title": "BM赛事列表的材料标注与布局说明",
+    "summary": "从现有截图的三处标注出发，使用相同演示内容比较两种布局，说明盘口选项关系、长队名与放大文字的空间取舍。",
     "articleSlugs": [],
     "changes": [
       {
-        "id": "practice-cover-correction",
-        "title": "五张封面展示完整界面",
-        "description": "活动、渠道、社群、界面动效与设备面板使用对应正文画面，保持16:10比例和可操作标签。",
-        "location": "知识图解 · 运营与设计资料卡片",
-        "href": "/design?object=digital&direction=motion",
-        "linkLabel": "查看界面动效封面",
+        "id": "bm-case-study",
+        "title": "BM赛事列表：从原材料读到布局取舍",
+        "description": "原截图与生成提案分别标注队名、时间或阶段、盘口；同内容示意保持球队、赛况和数值一致，直接展示分区与留白。",
+        "location": "案例 · BM优化",
+        "href": "/cases/bm-optimization#bm-design-rationale",
+        "linkLabel": "查看BM案例说明",
         "related": {
-          "href": "/updates#v48",
-          "label": "查看六项完整更新"
+          "href": "/cases/bm-optimization#bm-layout-study",
+          "label": "查看同内容布局示意"
         }
       },
       {
-        "id": "rationale-anchor-correction",
-        "title": "案例说明直达链接在加载后定位",
-        "description": "BM与U8设计取舍说明在分段加载后定位到标题，重复点击顶部入口也能返回对应位置。",
-        "location": "案例 · BM优化／竞品分析",
-        "href": "/cases/bm-optimization#bm-design-rationale",
-        "linkLabel": "查看BM设计说明",
+        "id": "bm-readable-layout",
+        "title": "长队名、大字号与独立交互原型",
+        "description": "同时切换长队名与18px文字，查看完整文字的换行及卡片高度；分类、状态与详情返回继续使用独立原型。资料卡封面改用本页标明来源的结构示意。",
+        "location": "BM案例 · 布局示意与手机原型",
+        "href": "/cases/bm-optimization#bm-layout-study",
+        "linkLabel": "查看文字与布局变化",
         "related": {
-          "href": "/cases/competitor-analysis#u8-design-rationale",
-          "label": "查看U8设计说明"
+          "href": "/cases/bm-optimization#bm-mobile-prototype",
+          "label": "操作分类与返回原型"
         }
       }
     ]
   },
   "history": [
+    {
+      "version": 49,
+      "date": "2026-10-30",
+      "title": "封面与案例说明定位修正",
+      "summary": "五张正文界面封面保留完整内容；BM与U8设计说明的直达链接在页面加载后定位，保留图片查看后的阅读位置。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "practice-cover-correction",
+          "title": "五张封面展示完整界面",
+          "description": "活动、渠道、社群、界面动效与设备面板使用对应正文画面，保持16:10比例和可操作标签。",
+          "location": "知识图解 · 运营与设计资料卡片",
+          "href": "/design?object=digital&direction=motion",
+          "linkLabel": "查看界面动效封面",
+          "related": {
+            "href": "/updates#v48",
+            "label": "查看六项完整更新"
+          }
+        },
+        {
+          "id": "rationale-anchor-correction",
+          "title": "案例说明直达链接在加载后定位",
+          "description": "BM与U8设计取舍说明在分段加载后定位到标题，重复点击顶部入口也能返回对应位置。",
+          "location": "案例 · BM优化／竞品分析",
+          "href": "/cases/bm-optimization#bm-design-rationale",
+          "linkLabel": "查看BM设计说明",
+          "related": {
+            "href": "/cases/competitor-analysis#u8-design-rationale",
+            "label": "查看U8设计说明"
+          }
+        }
+      ],
+      "publishedAt": "2026-10-30T08:35:25.301534+00:00",
+      "githubCommit": "7d44f35300953b1537e0e0a376b3fff35f2ea893"
+    },
     {
       "version": 48,
       "date": "2026-10-30",

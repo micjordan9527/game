@@ -30,7 +30,7 @@ export async function checkShowcase(page, base, prefix, width, rounds) {
       text: main.innerText,
       overflow: document.documentElement.scrollWidth > innerWidth + 1,
       visualTop: (() => {
-        const visual = main.querySelector("img, iframe")
+        const visual = main.querySelector('img, iframe, svg[role="img"]')
         return visual ? Math.round(visual.getBoundingClientRect().top) : null
       })(),
     }))

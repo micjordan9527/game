@@ -1,7 +1,7 @@
 import { ImageFocusExplorer } from "@/components/enrichment/ImageFocusExplorer"
 import { BmMobilePrototype } from "@/components/enrichment/MobileCasePrototypes"
 import { CaseReadingGuide } from "@/components/cases/CaseReadingGuide"
-import { CaseDesignRationale } from "@/components/cases/CaseDesignRationale"
+import { BmCaseStudy } from "@/components/cases/BmCaseStudy"
 import { bmFocus } from "@/data/caseEnhancements"
 import Link from "next/link"
 import { LongImageGallery } from "@/components/cases/LongImageGallery"
@@ -39,8 +39,8 @@ const versionedBmImages = bmImages.map((image) => ({
 }))
 
 export const metadata = {
-  title: "BM手机端优化",
-  description: "首页分类、状态层级与详情操作区三组局部对照，原界面和生成式方案可分别放大，并对照手机原型。",
+  title: "BM赛事列表：队名、赛况与盘口分组",
+  description: "从现有赛事截图的三处标注出发，用同一组演示内容比较赛事、赛况与盘口的布局，并查看长队名和放大文字的取舍。",
   alternates: { canonical: absoluteUrl("/cases/bm-optimization") },
 }
 export default function BmOptimizationCasePage() {
@@ -49,20 +49,22 @@ export default function BmOptimizationCasePage() {
       <Link href="/cases" className="text-sm font-semibold text-muted hover:text-brand-700">
         ← 案例
       </Link>
-      <nav aria-label="案例位置" className="flex flex-wrap gap-4"><a href="#case-focus" className="text-xs font-semibold text-brand-700">查看局部对照 ↓</a><a href="#bm-design-rationale" className="text-xs font-semibold text-brand-700">设计取舍说明 ↓</a><a href="#case-reading-guide" className="text-xs font-semibold text-brand-700">界面阅读说明 ↓</a></nav>
-      <a href="#bm-mobile-prototype" className="mt-2 inline-block text-sm font-semibold text-brand-700">打开手机交互原型 ↓</a>
-      <h1 className="mt-4 text-3xl font-semibold text-ink">BM 手机端优化</h1>
-      <p className="mt-2 text-sm leading-7 text-muted">首页与详情页，直接对照分类、信息层级和操作区。点击图片放大。</p>
-      <section id="case-materials" className="scroll-mt-24" aria-label="BM优化对照图">
+      <h1 className="mt-4 max-w-3xl text-2xl font-semibold leading-snug text-ink md:text-4xl">BM 赛事列表：队名、赛况与盘口分组</h1>
+      <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">用一张赛事卡，讲清信息分组与小屏取舍。</p>
+      <nav aria-label="案例位置" className="mt-5 flex flex-wrap gap-x-6 gap-y-3 border-b border-line pb-5 text-sm font-semibold text-brand-700"><a href="#bm-design-rationale">设计取舍说明 ↓</a><a href="#bm-layout-study">同内容布局示意 ↓</a><a href="#case-focus">查看局部对照 ↓</a><a href="#case-reading-guide">界面阅读说明 ↓</a></nav>
+      <BmCaseStudy />
+      <BmMobilePrototype />
+      <div className="mt-12 border-t border-line pt-7"><h2 className="text-xl font-semibold text-ink">其他页面局部</h2><p className="mt-2 text-sm leading-7 text-muted">继续对照首页分类与详情操作区；保留原有图片、局部定位与放大查看。</p></div>
+      <ImageFocusExplorer items={bmFocus} title="BM 局部对照" provenance="原材料局部：左侧嵌入的旧界面，右侧生成式方案。两侧内容不同，只比较结构。" />
+      <CaseReadingGuide slug="bm-optimization" />
+      <section id="case-materials" className="mt-10 scroll-mt-24 border-t border-line pt-7" aria-label="BM优化对照图">
+        <h2 className="text-xl font-semibold text-ink">完整来源材料</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-7 text-muted">两张早期分析图按原样保留。图内评价性文字不作为本页结论；原界面来源未独立核验，右侧视觉提案也不代表已经上线。</p>
         <LongImageGallery
           items={versionedBmImages.map((item) => ({ id: item.src, ...item, sourceHref: item.src }))}
           emptyMessage="对照图暂时无法显示，请稍后重试。"
         />
       </section>
-      <ImageFocusExplorer items={bmFocus} title="BM 局部对照" provenance="原材料局部放大：左侧原版截图，右侧生成式方案；并非上线效果证明。" />
-      <CaseDesignRationale kind="bm" />
-      <BmMobilePrototype />
-      <CaseReadingGuide slug="bm-optimization" />
       <KnowledgeLinks open resources={resourcesForResource("案例", "bm-optimization")} title="相关案例与图解" />
     </div>
   )

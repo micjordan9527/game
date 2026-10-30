@@ -17,12 +17,20 @@ type LongImageItem = {
   height: number
   sourceHref?: string
   crop?: { x: number; y: number; width: number; height: number }
+  annotations?: { x: number; y: number; width: number; height: number; label: string; color: string }[]
+  maxPreviewWidth?: number
+  annotationLegend?: string
 }
 
 function CroppedImage({ item, className, style }: { item: LongImageItem; className?: string; style?: CSSProperties }) {
   const crop = item.crop!
   return <svg data-gallery-image data-cropped-image role="img" aria-label={item.title} viewBox={`${crop.x} ${crop.y} ${crop.width} ${crop.height}`} width={crop.width} height={crop.height} className={className} style={style} overflow="hidden">
     <image href={assetPath(item.src)} width={item.width} height={item.height} />
+    {item.annotations?.map((mark, index) => <g key={index} aria-hidden="true">
+      <rect x={mark.x} y={mark.y} width={mark.width} height={mark.height} rx="3" fill={mark.color} fillOpacity="0.04" stroke={mark.color} strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <circle cx={mark.x + 8} cy={mark.y + 8} r="9" fill={mark.color} />
+      <text x={mark.x + 8} y={mark.y + 8} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="11" fontWeight="700">{mark.label}</text>
+    </g>)}
   </svg>
 }
 
@@ -152,7 +160,7 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
               }}
               type="button"
             >
-              {item.crop ? <div className="block overflow-hidden rounded-md"><CroppedImage item={item} className="mx-auto block h-auto w-full rounded-md bg-white shadow-sm" /></div> : <picture className="block max-h-80 overflow-hidden rounded-md sm:max-h-[28rem]">
+              {item.crop ? <div className="mx-auto block overflow-hidden rounded-md" style={item.maxPreviewWidth ? { maxWidth: item.maxPreviewWidth } : undefined}><CroppedImage item={item} className="mx-auto block h-auto w-full rounded-md bg-white shadow-sm" /></div> : <picture className="block max-h-80 overflow-hidden rounded-md sm:max-h-[28rem]">
                 {item.srcAvif ? <source srcSet={assetPath(item.srcAvif)} type="image/avif" /> : null}
                 {item.srcWebp ? <source srcSet={assetPath(item.srcWebp)} type="image/webp" /> : null}
                 <Image
@@ -171,6 +179,7 @@ export function LongImageGallery({ items, emptyMessage, label = "案例长图", 
                 {item.crop ? "放大这一局部" : "查看完整长图"}
               </span>
             </button>
+            {item.annotationLegend ? <p className="border-t border-line px-4 py-3 text-sm leading-7 text-muted">{item.annotationLegend}</p> : null}
             {item.sourceHref ? (
               <div className="px-3 pb-3 pt-2">
                 <Link

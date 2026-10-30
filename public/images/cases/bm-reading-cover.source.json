@@ -1,0 +1,11 @@
+{
+  "path": "images/cases/bm-reading-cover.jpg",
+  "width": 1600,
+  "height": 1000,
+  "sourcePage": "/cases/bm-optimization#bm-layout-study",
+  "sourceSelector": "[data-bm-study-cover]",
+  "type": "本页同内容结构示意的页面截图",
+  "record": "MATCH-DEMO-001",
+  "note": "封面为本页解释图；不属于原产品截图或已上线方案。",
+  "script": "scripts/capture-bm-case-cover.mjs"
+}

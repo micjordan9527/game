@@ -1,0 +1,31 @@
+.study { margin-top: 28px; min-width: 0; scroll-margin-top: 96px; }
+.intro { max-width: 760px; }
+.eyebrow { margin: 0; color: #7c542f; font-size: 12px; font-weight: 750; letter-spacing: .09em; }
+.intro h2, .decisions h2 { margin: 9px 0 10px; color: #172a40; font-size: 26px; font-weight: 700; line-height: 1.5; letter-spacing: -.035em; }
+.intro > p:last-child { color: #526174; font-size: 15px; line-height: 1.9; }
+.evidence { margin-top: 16px; }
+.evidence > section { margin-top: 0; }
+.evidence > section > article { box-shadow: none; }
+.evidence > section > article > button { min-height: 310px; display: flex; flex-direction: column; justify-content: center; background: #f6f7f7; }
+.evidence > section > article > button > span { width: 100%; max-width: 340px; align-self: center; }
+.sourceNote { margin-top: 12px; color: #647183; font-size: 13px; line-height: 1.8; }
+.findings { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; padding: 0; margin: 20px 0 0; list-style: none; }
+.findings li { display: flex; align-items: flex-start; gap: 10px; }
+.findings li > span { display: grid; place-items: center; width: 24px; height: 24px; flex: 0 0 24px; border-radius: 50%; color: white; font-size: 12px; font-weight: 750; }
+.findings h3 { margin: 0; font-size: 15px; color: #172a40; font-weight: 700; line-height: 1.65; }
+.findings p { margin: 6px 0 0; font-size: 14px; line-height: 1.9; color: #526174; }
+.decisions { margin-top: 40px; padding-top: 28px; border-top: 1px solid #dce3e9; scroll-margin-top: 96px; }
+.decisionRows { margin-top: 20px; }
+.decisionRows article { display: grid; grid-template-columns: 210px minmax(0,1fr); gap: 26px; padding: 20px 0; border-top: 1px solid #e4e8ec; }
+.rule { display: flex; align-items: center; color: #315b91; font-size: 15px; font-weight: 700; line-height: 1.7; }
+.decisionRows h3 { font-size: 16px; color: #172a40; font-weight: 700; line-height: 1.7; }
+.decisionRows p { margin-top: 6px; font-size: 14px; line-height: 1.9; color: #526174; }
+.conclusion { margin-top: 12px; padding: 16px 18px; background: #f7f4ef; border-left: 3px solid #b98449; color: #65543e; font-size: 14px; line-height: 1.9; }
+.next { display: grid; grid-template-columns: minmax(0,1fr) minmax(250px,.8fr); gap: 28px; padding: 24px; margin-top: 26px; border: 1px solid #dce3e9; border-radius: 12px; background: white; }
+.next h3 { color: #172a40; font-size: 16px; font-weight: 700; }
+.next p { margin-top: 8px; color: #526174; font-size: 14px; line-height: 1.9; }
+.next nav { display: flex; flex-direction: column; justify-content: center; gap: 10px; color: #17685e; font-size: 14px; font-weight: 650; line-height: 1.75; }
+.next a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.next a:focus-visible { outline: 2px solid #17685e; outline-offset: 4px; }
+@media(max-width: 900px) { .findings { grid-template-columns: 1fr; gap: 16px; } }
+@media(max-width: 640px) { .intro h2,.decisions h2 { font-size: 21px; } .decisionRows article,.next { grid-template-columns: 1fr; gap: 10px; } .next { padding: 18px; } .rule { font-size: 14px; } .evidence > section > article > button { min-height: 0; } }
