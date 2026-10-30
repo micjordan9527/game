@@ -1,50 +1,72 @@
 {
   "current": {
-    "version": 44,
+    "version": 45,
     "date": "2026-10-30",
-    "title": "设计资料按设计对象与工作方向浏览",
-    "summary": "按品牌与识别、数字产品、视觉传播、实体产品与设备选择资料，再按工作方向和资料类型查看；文章与演示保留分类及返回位置。",
+    "title": "设计目录直接预览设计结果",
+    "summary": "品牌视觉系统与UI设计系统卡片展示已有结果图，规范等短卡片按自身高度排列。",
     "articleSlugs": [],
     "changes": [
       {
-        "id": "design-object-directory",
-        "title": "设计目录按四类设计对象组织",
-        "description": "四类设计对象各有工作方向；现有图解、视频、案例、演示、规范和AI工作流分别标明类型。没有独立资料的方向显示实际数量，设备结构图解作为信息表达参考。",
-        "location": "知识图解 · 设计体验",
-        "href": "/design",
-        "linkLabel": "打开设计目录",
-        "related": {
-          "href": "/design?object=digital",
-          "label": "查看数字产品设计"
-        }
-      },
-      {
-        "id": "design-role-filters",
-        "title": "设计角色可按对象、方向与资料类型筛选",
-        "description": "设计角色使用同一目录；标签筛选只显示匹配图解，返回时保留标签、类型、展开状态与阅读位置。",
-        "location": "知识图解 · 设计角色",
-        "href": "/articles?role=design",
-        "linkLabel": "查看设计角色资料",
-        "related": {
-          "href": "/design?object=communication",
-          "label": "查看视觉传播设计"
-        }
-      },
-      {
-        "id": "design-reading-context",
-        "title": "交互图解沿同一方向连续阅读",
-        "description": "从目录打开图解时，面包屑、侧边目录和上下篇保留设计方向；相关参考单独显示。原有演示保留地址与定位，返回设计目录恢复原筛选和位置。",
-        "location": "设计图解 · 文章位置与连续阅读／设计演示",
-        "href": "/articles/admin-filter-list-states?design=digital&direction=interaction&returnTo=%2Fdesign%3Fobject%3Ddigital%26direction%3Dinteraction",
-        "linkLabel": "查看交互设计阅读路径",
+        "id": "design-result-previews",
+        "title": "设计结果图作为工作流预览",
+        "description": "品牌视觉系统与UI设计系统使用现有色彩、字体和界面结果图替换对话截图；短资料卡片按内容高度显示。",
+        "location": "知识图解 · 设计体验／设计角色 · 相关资料",
+        "href": "/design?object=brand",
+        "linkLabel": "查看品牌设计结果预览",
         "related": {
           "href": "/design?object=digital&direction=system",
-          "label": "查看设计系统资料"
+          "label": "查看UI设计系统预览"
         }
       }
     ]
   },
   "history": [
+    {
+      "version": 44,
+      "title": "设计资料按设计对象与工作方向浏览",
+      "summary": "按品牌与识别、数字产品、视觉传播、实体产品与设备选择资料，再按工作方向和资料类型查看；文章与演示保留分类及返回位置。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "design-object-directory",
+          "title": "设计目录按四类设计对象组织",
+          "description": "四类设计对象各有工作方向；现有图解、视频、案例、演示、规范和AI工作流分别标明类型。没有独立资料的方向显示实际数量，设备结构图解作为信息表达参考。",
+          "location": "知识图解 · 设计体验",
+          "href": "/design",
+          "linkLabel": "打开设计目录",
+          "related": {
+            "href": "/design?object=digital",
+            "label": "查看数字产品设计"
+          }
+        },
+        {
+          "id": "design-role-filters",
+          "title": "设计角色可按对象、方向与资料类型筛选",
+          "description": "设计角色使用同一目录；标签筛选只显示匹配图解，返回时保留标签、类型、展开状态与阅读位置。",
+          "location": "知识图解 · 设计角色",
+          "href": "/articles?role=design",
+          "linkLabel": "查看设计角色资料",
+          "related": {
+            "href": "/design?object=communication",
+            "label": "查看视觉传播设计"
+          }
+        },
+        {
+          "id": "design-reading-context",
+          "title": "交互图解沿同一方向连续阅读",
+          "description": "从目录打开图解时，面包屑、侧边目录和上下篇保留设计方向；相关参考单独显示。原有演示保留地址与定位，返回设计目录恢复原筛选和位置。",
+          "location": "设计图解 · 文章位置与连续阅读／设计演示",
+          "href": "/articles/admin-filter-list-states?design=digital&direction=interaction&returnTo=%2Fdesign%3Fobject%3Ddigital%26direction%3Dinteraction",
+          "linkLabel": "查看交互设计阅读路径",
+          "related": {
+            "href": "/design?object=digital&direction=system",
+            "label": "查看设计系统资料"
+          }
+        }
+      ],
+      "publishedAt": "2026-10-30T04:27:27.480572+00:00",
+      "githubCommit": "946e16f9d426bd3609b887c5525d2e8d1f4cb67c"
+    },
     {
       "version": 43,
       "title": "运营图解按五类工作组织",

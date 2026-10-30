@@ -63,7 +63,7 @@ export const designArticleEntries = [
 export type DesignResource = { id: string; object: string; direction: string; title: string; description: string; href: string; format: DesignFormat; image?: string }
 export const designResources: DesignResource[] = [
   { id: "brand-logo", object: "brand", direction: "identity", title: "品牌Logo使用规范", description: "查看首页、登录注册、浏览器与PWA的标志尺寸和使用位置。", href: "/design/material-standards?module=brand-logo", format: "standard" },
-  { id: "brand-system", object: "brand", direction: "language", title: "品牌视觉系统", description: "查看品牌色、字体、图形语言与多端应用的示意输出。", href: "/ai-workflows/brand-visual-system", format: "workflow", image: "/case-assets/ai-workflows/brand-visual-system/case-screenshot.webp" },
+  { id: "brand-system", object: "brand", direction: "language", title: "品牌视觉系统", description: "查看品牌色、字体、图形语言与多端应用的示意输出。", href: "/ai-workflows/brand-visual-system", format: "workflow", image: "/case-assets/ai-workflows/brand-visual-system/output-01-brand-overview.webp" },
   { id: "information", object: "digital", direction: "architecture", title: "信息层级演示", description: "切换页面结构、信息密度与阅读优先级。", href: "/design/information#hierarchy", format: "demo" },
   { id: "prototypes", object: "digital", direction: "interaction", title: "关键页面原型", description: "操作钱包、审核、详情与后台工作台示例。", href: "/design/prototypes", format: "demo" },
   { id: "states", object: "digital", direction: "interaction", title: "界面状态对照", description: "查看加载、空结果、失败和受限等状态。", href: "/design/states", format: "demo" },
@@ -71,7 +71,7 @@ export const designResources: DesignResource[] = [
   { id: "u8", object: "digital", direction: "interface", title: "U8界面对照", description: "查看首页入口、底部导航与个人中心材料。", href: "/cases/competitor-analysis", format: "case", image: "/case-assets/competitor-analysis/u8/u8-homepage-optimization.webp" },
   { id: "review", object: "digital", direction: "interface", title: "界面优化图解", description: "六组改前改后对照中的层级、操作和反馈。", href: "/design/review", format: "demo" },
   { id: "components", object: "digital", direction: "system", title: "业务组件演示", description: "查看表格、状态与业务组件的展示方式。", href: "/design/information#component", format: "demo" },
-  { id: "ui-system", object: "digital", direction: "system", title: "UI设计系统", description: "查看网页、手机界面和组件规范的示意输出。", href: "/ai-workflows/ui-design-system", format: "workflow", image: "/case-assets/ai-workflows/ui-design-system/case-screenshot.webp" },
+  { id: "ui-system", object: "digital", direction: "system", title: "UI设计系统", description: "查看网页、手机界面和组件规范的示意输出。", href: "/ai-workflows/ui-design-system", format: "workflow", image: "/case-assets/ai-workflows/ui-design-system/output-01-overview.webp" },
   { id: "banner", object: "communication", direction: "static", title: "首页Banner素材规范", description: "核对PC与H5的尺寸、格式和导出规格。", href: "/design/material-standards?module=banner", format: "standard" },
   { id: "activity", object: "communication", direction: "static", title: "活动图素材规范", description: "查看活动封面、详情图和实际使用位置。", href: "/design/material-standards?module=activity-list", format: "standard" },
 ]

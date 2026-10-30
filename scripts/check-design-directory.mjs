@@ -35,6 +35,7 @@ export async function checkDesignDirectory(page, base, prefix, width) {
 
   await page.goto(base + "/design", { waitUntil: "networkidle" })
   await directory().waitFor()
+  await page.screenshot({ path: `/tmp/design-objects-first-${width}.png` })
   assert.deepEqual(await directory().locator("[data-design-section]").evaluateAll((nodes) => nodes.map((node) => node.dataset.designSection)), designObjects.map((item) => item.slug), "Design taxonomy does not depend on existing article coverage")
   assert.equal(await directory().locator("article").count(), designArticleEntries.length)
   assert.equal(await directory().locator("[data-design-resource]").count(), designResources.length)
@@ -46,6 +47,9 @@ export async function checkDesignDirectory(page, base, prefix, width) {
   const brand = directory().locator('[data-design-section="brand"]')
   assert.equal(await brand.locator(`a[href="${prefix}/design/material-standards?module=brand-logo"]`).count(), 1)
   assert.equal(await brand.locator("[data-design-resource=brand-system]").count(), 1)
+  assert((await brand.locator("[data-design-resource=brand-system] img").getAttribute("src")).endsWith("/output-01-brand-overview.webp"), "Show the design result rather than its prompt screenshot")
+  assert((await directory().locator("[data-design-resource=ui-system] img").getAttribute("src")).endsWith("/output-01-overview.webp"))
+  assert((await brand.locator("[data-design-resource=brand-logo]").boundingBox()).height < 350, "Short resource cards do not stretch to the neighboring image card")
   const physical = directory().locator('[data-design-section="physical"]')
   assert.equal(await physical.locator("article, [data-design-resource]").count(), 0)
   assert((await physical.innerText()).includes("暂无独立设计案例"))
