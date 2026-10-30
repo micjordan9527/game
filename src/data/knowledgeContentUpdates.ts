@@ -1,6 +1,78 @@
 // Delivered content entries; slug identifies a release entry; articleSlug records repeat updates.
 export const knowledgeContentUpdates = [
   {
+    "slug": "interface-motion-feedback",
+    "articleSlug": "interface-motion-feedback",
+    "title": "界面动效：提交、筛选与弹层反馈",
+    "description": "三组可播放、暂停和逐步查看的界面变化。",
+    "kind": "新增",
+    "href": "/articles/interface-motion-feedback",
+    "detailHref": "/articles/interface-motion-feedback#interface-motion-demo",
+    "relatedHref": "/articles/form-validation-submit-feedback#form-demo",
+    "location": "设计体验 · 界面动效",
+    "visualType": "交互图解"
+  },
+  {
+    "slug": "device-controls-feedback",
+    "articleSlug": "device-controls-feedback",
+    "title": "设备控制面板与操作反馈",
+    "description": "通用设备的操作部位、禁用与缺纸反馈。",
+    "kind": "新增",
+    "href": "/articles/device-controls-feedback",
+    "detailHref": "/articles/device-controls-feedback#device-controls-demo",
+    "relatedHref": "/articles/electronic-gaming-machine#machine-view",
+    "location": "设计体验 · 设备人机操作",
+    "visualType": "交互图解"
+  },
+  {
+    "slug": "campaign-risk-review-v48",
+    "articleSlug": "campaign-risk-review",
+    "title": "活动规则风险评审怎么做？",
+    "description": "同一活动的配置、前台规则、审核和发放记录。",
+    "kind": "补充",
+    "href": "/articles/campaign-risk-review",
+    "detailHref": "/articles/campaign-risk-review#campaign-operations-case",
+    "relatedHref": "/articles/content-publication-versions#publication-demo",
+    "location": "运营场景 · 活动运营",
+    "visualType": "交互图解"
+  },
+  {
+    "slug": "channel-quality-review-v48",
+    "articleSlug": "channel-quality-review",
+    "title": "渠道质量评估清单怎么做？",
+    "description": "同一渠道的资料、异常、复核与归档。",
+    "kind": "补充",
+    "href": "/articles/channel-quality-review",
+    "detailHref": "/articles/channel-quality-review#channel-quality-case",
+    "relatedHref": "/articles/access-approval-audit#visual-guide",
+    "location": "运营场景 · 流量运营",
+    "visualType": "交互图解"
+  },
+  {
+    "slug": "community-operations-governance-v48",
+    "articleSlug": "community-operations-governance",
+    "title": "社群运营治理 SOP 怎么写？",
+    "description": "同一咨询的消息、工单、回复与关闭。",
+    "kind": "补充",
+    "href": "/articles/community-operations-governance",
+    "detailHref": "/articles/community-operations-governance#community-support-case",
+    "relatedHref": "/articles/notification-support-tickets#visual-guide",
+    "location": "运营场景 · 用户运营",
+    "visualType": "交互图解"
+  },
+  {
+    "slug": "electronic-gaming-machine-v48",
+    "articleSlug": "electronic-gaming-machine",
+    "title": "电子游艺机主要部件与工作过程",
+    "description": "进钞、退钞、出票连续动作及对应余额与票据。",
+    "kind": "补充",
+    "href": "/articles/electronic-gaming-machine",
+    "detailHref": "/articles/electronic-gaming-machine#machine-view",
+    "relatedHref": "/articles/device-controls-feedback#device-controls-demo",
+    "location": "行业入门 · 设备部件与过程",
+    "visualType": "交互图解"
+  },
+  {
     "slug": "member-agent-platform",
     "title": "会员、代理、平台三者是什么关系？",
     "description": "区分会员身份、代理身份、归属区间与钱包权限，补充换代理和跨期归属示例。",

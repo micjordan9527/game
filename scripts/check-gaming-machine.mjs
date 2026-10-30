@@ -56,6 +56,21 @@ export async function checkGamingMachine(page, base, prefix, width) {
   const balances = [0, 0, 100, 90, 90, 105, 0, 0]
   for (let step = 0; step < 8; step++) {
     await page.waitForFunction((n) => document.querySelector("#machine-demo")?.getAttribute("data-step") === String(n), step)
+    if (step === 1 || step === 2 || step === 7) {
+      await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-machine-motion") === "running")
+      const target = step === 7 ? "ticket" : "note"
+      const sheet = demo.locator(`[data-machine-moving="${target}"]`)
+      const start = await sheet.evaluate((node) => getComputedStyle(node).transform)
+      await page.waitForTimeout(280)
+      assert.notEqual(await sheet.evaluate((node) => getComputedStyle(node).transform), start, "Paper sheet physically moves in the existing SVG")
+      if (step === 2) assert.equal(await demo.locator("[data-machine-available]").innerText(), "0", "Accept confirmation follows the feed animation")
+      if (step === 7) {
+        assert.equal(await demo.locator("[data-machine-pending]").innerText(), "105")
+        assert.equal(await demo.locator("[data-machine-printed]").innerText(), "0", "Printed amount confirms after the same ticket emerges")
+      }
+      await demo.locator("[data-machine-panel]").screenshot({ path: `/tmp/machine-motion-${target}-step-${step}-${width}.png` })
+    }
+    await waitForMachineMotion(page)
     assert((await demo.locator("[data-machine-available]").innerText()).startsWith(String(balances[step])))
     if (step > 0) await checkMachinePanelVisible(page, width)
     if (step > 0) assert.equal(await demo.locator("[data-machine-readout]").getAttribute("data-reader-mode"), "step")
@@ -67,11 +82,22 @@ export async function checkGamingMachine(page, base, prefix, width) {
   assert.equal(await demo.locator(".machine-ticket").isVisible(), true)
   assert((await demo.locator("[data-machine-printed]").innerText()).startsWith("105"))
   assert.equal(await demo.getByRole("button", { name: "过程已结束", exact: true }).isDisabled(), true)
+  for (let replay = 0; replay < 2; replay++) {
+    await demo.locator("[data-machine-replay]").click()
+    await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-machine-motion") === "running")
+    assert.equal(await demo.locator("[data-machine-pending]").innerText(), "105")
+    await waitForMachineMotion(page)
+    assert.equal(await demo.locator("[data-machine-printed]").innerText(), "105", "Replaying does not issue another ticket")
+    assert.equal(await demo.locator("[data-machine-pending]").innerText(), "0")
+    assert((await demo.locator("[data-machine-ticket]").innerText()).includes("EGM-DEMO-T001"))
+  }
   await demo.getByRole("button", { name: "前一步", exact: true }).click()
   assert((await demo.locator("[data-machine-pending]").innerText()).startsWith("105"))
   await demo.getByRole("radio", { name: "纸币退回", exact: true }).check()
   await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-rejected") === "true")
-  assert((await demo.locator("[data-machine-available]").innerText()).startsWith("0")); assert.equal(await demo.locator(".machine-note").isVisible(), false)
+  assert((await demo.locator("[data-machine-available]").innerText()).startsWith("0")); assert.equal(await demo.locator(".machine-note").isVisible(), true)
+  await waitForMachineMotion(page)
+  assert((await demo.locator("[data-machine-paper-position]").innerText()).includes("入口外"))
   assert.equal(await demo.getByRole("button", { name: "本例止于退回", exact: true }).isDisabled(), true)
   await demo.getByRole("radio", { name: "出票缺纸", exact: true }).check()
   await demo.getByRole("alert").waitFor()
@@ -81,16 +107,47 @@ export async function checkGamingMachine(page, base, prefix, width) {
   const ticket = await demo.locator("[data-machine-ticket]").innerText()
   await demo.getByRole("button", { name: "补纸并重试原票据", exact: true }).click()
   await demo.getByRole("button", { name: "下一步：打印完成", exact: true }).click()
+  await waitForMachineMotion(page)
   assert((await demo.locator("[data-machine-ticket]").innerText()).includes("EGM-DEMO-T001")); assert(ticket.includes("EGM-DEMO-T001"))
   assert((await demo.locator("[data-machine-printed]").innerText()).startsWith("105")); assert((await demo.locator("[data-machine-available]").innerText()).startsWith("0"))
   await demo.getByRole("radio", { name: "正常过程", exact: true }).check()
   await demo.getByRole("button", { name: "自动播放", exact: true }).click()
   await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-step") === "1", null, { timeout: 6500 })
   await demo.getByRole("button", { name: "暂停播放", exact: true }).click()
+  await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-machine-motion") === "paused")
+  const pausedSheet = demo.locator('[data-machine-moving="note"]')
+  const pausedTransform = await pausedSheet.evaluate((node) => getComputedStyle(node).transform)
+  await page.waitForTimeout(250)
+  assert.equal(await pausedSheet.evaluate((node) => getComputedStyle(node).transform), pausedTransform, "Pause freezes the paper motion")
   const paused = await demo.getAttribute("data-step"); await page.waitForTimeout(4300); assert.equal(await demo.getAttribute("data-step"), paused)
+  await demo.locator("[data-machine-replay]").click()
+  await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-machine-motion") === "running")
+  await demo.locator("#machine-boundaries").scrollIntoViewIfNeeded()
+  await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-machine-motion") === "paused")
+  const offscreenTransform = await pausedSheet.evaluate((node) => getComputedStyle(node).transform)
+  await page.waitForTimeout(250)
+  assert.equal(await pausedSheet.evaluate((node) => getComputedStyle(node).transform), offscreenTransform, "Offscreen paper motion stops")
+  await demo.locator("[data-machine-panel]").scrollIntoViewIfNeeded()
+  await waitForMachineMotion(page)
+  await demo.getByRole("button", { name: "从头再看", exact: true }).click()
+  await demo.getByRole("button", { name: "自动播放", exact: true }).click()
+  await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-step") === "1", null, { timeout: 6500 })
+  if (width < 768) await demo.getByRole("combobox", { name: "选择主要部件" }).selectOption("printer")
+  else await demo.getByRole("button", { name: "票据打印机", exact: true }).click()
+  assert.equal(await demo.getByRole("button", { name: "自动播放", exact: true }).getAttribute("aria-pressed"), "false")
+  await page.waitForTimeout(4300)
+  assert.equal(await demo.getAttribute("data-step"), "1", "Part inspection pauses the automatic tour")
+  assert.equal(await demo.locator("[data-machine-readout]").getAttribute("data-reader-mode"), "part")
+  await demo.getByRole("button", { name: "从头再看", exact: true }).click()
+  for (let n = 0; n < 3; n++) await demo.getByRole("button", { name: /^下一步：/ }).click()
+  await page.waitForTimeout(2100)
+  assert.equal(await demo.getAttribute("data-step"), "3")
+  assert.equal(await demo.locator("[data-machine-available]").innerText(), "90", "Rapid step changes do not duplicate or overwrite credits")
   await demo.getByRole("button", { name: "从头再看", exact: true }).click()
   await page.emulateMedia({ reducedMotion: "reduce" })
   await demo.getByRole("button", { name: "下一步：识别纸币", exact: true }).click()
+  await waitForMachineMotion(page)
+  assert.equal(await demo.getByRole("button", { name: "自动播放", exact: true }).isDisabled(), true)
   // The shared reduced-motion rule uses 0.01ms, effectively still, rather than 0s.
   const moving = await demo.locator("[data-machine-art]").evaluate((svg) => [svg, ...svg.querySelectorAll("*")].filter((n) => getComputedStyle(n).animationName !== "none" || getComputedStyle(n).transitionDuration.split(",").some((v) => parseFloat(v) > 0.0001)).length)
   assert.equal(moving, 0)
@@ -131,7 +188,11 @@ export async function checkGamingMachine(page, base, prefix, width) {
     assert(recovery && recovery.y >= 64 && recovery.y + recovery.height <= page.viewportSize().height - 8, "Paper-out action stays on screen")
     await demo.locator("[data-machine-panel]").screenshot({ path: `/tmp/machine-panel-compact-${width}.png` })
   } finally { await page.setViewportSize(original) }
-  console.log(`PASS ${width}px machine: seven parts/zoom/keyboard, eight steps, two fault branches, original ticket, finite tour/pause, reduced motion, readable layout, search return and directory links`)
+  console.log(`PASS ${width}px machine: seven parts/zoom/keyboard, physical paper motion/replay, eight steps, two faults/original ticket, rapid steps, tour/inspection pause, offscreen freeze, reduced motion, viewport layout and search return`)
+}
+
+async function waitForMachineMotion(page) {
+  await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-machine-motion") === "idle", null, { timeout: 5000 })
 }
 
 async function checkMachinePanelVisible(page, width) {

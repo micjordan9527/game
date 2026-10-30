@@ -1,6 +1,7 @@
 import { ImageFocusExplorer } from "@/components/enrichment/ImageFocusExplorer"
 import { BmMobilePrototype } from "@/components/enrichment/MobileCasePrototypes"
 import { CaseReadingGuide } from "@/components/cases/CaseReadingGuide"
+import { CaseDesignRationale } from "@/components/cases/CaseDesignRationale"
 import { bmFocus } from "@/data/caseEnhancements"
 import Link from "next/link"
 import { LongImageGallery } from "@/components/cases/LongImageGallery"
@@ -48,7 +49,7 @@ export default function BmOptimizationCasePage() {
       <Link href="/cases" className="text-sm font-semibold text-muted hover:text-brand-700">
         ← 案例
       </Link>
-      <nav aria-label="案例位置" className="flex flex-wrap gap-4"><a href="#case-focus" className="text-xs font-semibold text-brand-700">查看局部对照 ↓</a><a href="#case-reading-guide" className="text-xs font-semibold text-brand-700">界面阅读说明 ↓</a></nav>
+      <nav aria-label="案例位置" className="flex flex-wrap gap-4"><a href="#case-focus" className="text-xs font-semibold text-brand-700">查看局部对照 ↓</a><a href="#bm-design-rationale" className="text-xs font-semibold text-brand-700">设计取舍说明 ↓</a><a href="#case-reading-guide" className="text-xs font-semibold text-brand-700">界面阅读说明 ↓</a></nav>
       <a href="#bm-mobile-prototype" className="mt-2 inline-block text-sm font-semibold text-brand-700">打开手机交互原型 ↓</a>
       <h1 className="mt-4 text-3xl font-semibold text-ink">BM 手机端优化</h1>
       <p className="mt-2 text-sm leading-7 text-muted">首页与详情页，直接对照分类、信息层级和操作区。点击图片放大。</p>
@@ -59,6 +60,7 @@ export default function BmOptimizationCasePage() {
         />
       </section>
       <ImageFocusExplorer items={bmFocus} title="BM 局部对照" provenance="原材料局部放大：左侧原版截图，右侧生成式方案；并非上线效果证明。" />
+      <CaseDesignRationale kind="bm" />
       <BmMobilePrototype />
       <CaseReadingGuide slug="bm-optimization" />
       <KnowledgeLinks open resources={resourcesForResource("案例", "bm-optimization")} title="相关案例与图解" />

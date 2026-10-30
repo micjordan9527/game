@@ -8,7 +8,7 @@
 .workbench { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: min(700px, calc(100dvh - 96px)); margin-top: 24px; overflow: hidden; border: 1px solid #d7e1df; border-radius: 12px; background: #fff; scroll-margin-top: 64px; }
 .panelHeader { border-bottom: 1px solid #d7e1df; }
 .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; padding: 16px; min-height: 0; }
-.visual { min-width: 0; min-height: 0; overflow: hidden; border-radius: 8px; background: #f5f4ef; }
+.visual { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-width: 0; min-height: 0; overflow: hidden; border-radius: 8px; background: #f5f4ef; }
 .figureBar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 14px; font-size: 14px; }
 .mobilePart { display: none; }
 .figureBar button { min-height: 44px; padding: 8px 12px; border: 1px solid #9ab4ad; border-radius: 6px; background: #fff; color: #245c51; }
@@ -35,8 +35,16 @@
 .art :global(.machine-note) { --face: #c4ddaa; --tone0: #8da876; --tone1: #a5bf8e; --tone2: #c4ddaa; --tone3: #cee3b6; --top: #dfedca; }
 .art :global(.machine-ticket) { --face: #fffef3; --tone0: #d6d5c7; --tone1: #e1dfcf; --tone2: #f2efdf; --tone3: #fffef3; --top: #fffef3; }
 .art :global(.machine-note), .art :global(.machine-ticket) { display: none; }
-.explorer[data-step="1"][data-rejected="false"] .art :global(.machine-note) { display: initial; }
+.explorer[data-step="1"] .art :global(.machine-note), .explorer[data-step="2"] .art :global(.machine-note) { display: initial; }
 .explorer[data-step="7"] .art :global(.machine-ticket) { display: initial; }
+.art [data-machine-moving] { transform-box: view-box; transform-origin: 0 0; }
+.explorer[data-step="1"][data-rejected="true"] .art [data-machine-moving="note"] { transform: translate(-28px, 15.7px); }
+.explorer[data-step="7"] .art [data-machine-moving="ticket"] { transform: translate(45px, -25.2px); }
+.physicalTrace { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 5px 9px; border-top: 1px solid #d7e1df; background: #fff; }
+.physicalTrace p { font-size: 14px; line-height: 1.45; color: #3d5f50; }
+.physicalTrace span { display: block; }
+.physicalTrace button { flex: 0 0 auto; min-height: 44px; padding: 6px 9px; border: 1px solid #a3bcb0; border-radius: 6px; font-size: 14px; background: #f6faf7; color: #245c51; }
+.physicalTrace button:disabled { opacity: .45; cursor: default; }
 .panelFooter { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-top: 1px solid #d7e1df; background: #fff; }
 .footerSummary { font-size: 14px; font-weight: 600; }
 .footerSummary span { display: block; margin-top: 3px; font-weight: 400; color: #61716c; }

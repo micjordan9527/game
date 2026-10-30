@@ -74,6 +74,19 @@ export async function checkContentExpansion(page, base, prefix, width) {
 
   for (const slug of subjects) {
     await page.goto(`${base}/articles/${slug}#scenario`, { waitUntil: "networkidle" })
+    if (slug === "campaign-risk-review") {
+      const campaign = page.locator("#campaign-operations-case")
+      await campaign.waitFor()
+      const tabs = campaign.getByRole("tab")
+      assert.equal(await tabs.count(), 4, "The complete activity case replaces the older state-only explorer")
+      await tabs.last().click()
+      assert((await campaign.getByRole("tabpanel").innerText()).includes("发放记录"))
+      await page.keyboard.press("Home")
+      assert.equal(await tabs.first().getAttribute("aria-selected"), "true")
+      assert.notEqual(await page.locator("#article-details").getAttribute("open"), null)
+      await noOverflow(page, slug + " complete case")
+      continue
+    }
     const scenario = page.getByRole("region", { name: "业务场景示例", exact: true })
     const tabs = scenario.getByRole("tab")
     assert((await tabs.count()) >= 3)
@@ -92,7 +105,7 @@ export async function checkContentExpansion(page, base, prefix, width) {
   }
   await page.goto(`${base}/articles/wallet-payment-reconciliation#scenario`, { waitUntil: "networkidle" })
   await page.screenshot({ path: `/tmp/content-wallet-${width}.png` })
-  console.log(`PASS ${width}px: 6 scenario explorers, state changes/tables/evidence images, GPT diagram and expanded article details`)
+  console.log(`PASS ${width}px: five state explorers plus complete activity case, state changes/tables/evidence images, GPT diagram and expanded article details`)
 
   await page.goto(`${base}/articles/wallet-payment-reconciliation#reconciliation-case`, { waitUntil: "networkidle" })
   const reconciliation = page.getByRole("region", { name: "充值与对账完整案例", exact: true })

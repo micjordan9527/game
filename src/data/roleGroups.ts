@@ -48,6 +48,7 @@ export const roleDirectories: RoleDirectoryDefinition[] = [
       "admin-information-hierarchy", "admin-filter-list-states", "admin-bulk-actions",
       "form-validation-submit-feedback", "mobile-page-layout", "api-idempotency-compensation",
       "requirements-release-acceptance", "launch-checklist", "monitoring-incident-recovery",
+      "interface-motion-feedback", "device-controls-feedback",
     ),
   },
   {
@@ -55,7 +56,7 @@ export const roleDirectories: RoleDirectoryDefinition[] = [
     groups: [
       { slug: "frontend", title: "前端界面", description: "页面层级、查询返回、表单反馈、批量操作与手机布局。", entries: entries(
         "admin-information-hierarchy", "admin-filter-list-states", "form-validation-submit-feedback",
-        "admin-bulk-actions", "mobile-page-layout",
+        "admin-bulk-actions", "mobile-page-layout", "interface-motion-feedback",
       ) },
       { slug: "services", title: "业务服务", description: "账号、权限、游戏、账务和内容服务中的状态与业务约束。", entries: entries(
         "admin-modules", "member-account-states", "access-approval-audit", "game-catalog-availability",
@@ -72,7 +73,7 @@ export const roleDirectories: RoleDirectoryDefinition[] = [
         "requirements-release-acceptance", "launch-checklist", "monitoring-incident-recovery", "backup-restore-verification",
       ) },
     ],
-    references: references("what-is-white-label", "how-gambling-platform-works", "electronic-gaming-machine"),
+    references: references("what-is-white-label", "how-gambling-platform-works", "electronic-gaming-machine", "device-controls-feedback"),
   },
   {
     id: "test", audience: "测试", title: "测试", description: "按检查方向查看操作结果、业务约束、接口异常、权限和发布依据。",
@@ -80,7 +81,7 @@ export const roleDirectories: RoleDirectoryDefinition[] = [
       { slug: "functional", title: "业务功能", description: "正常与异常流程、输入校验、结果状态及页面返回。", entries: entries(
         "member-account-states", "game-catalog-availability", "transaction-limits-fees", "agent-system-design",
         "content-publication-versions", "currency-timezone-reporting", "admin-filter-list-states",
-        "form-validation-submit-feedback", "admin-bulk-actions", "mobile-page-layout",
+        "form-validation-submit-feedback", "admin-bulk-actions", "mobile-page-layout", "interface-motion-feedback", "device-controls-feedback",
       ) },
       { slug: "integration", title: "接口联调", description: "支付与账务结果、重复通知、乱序事件和未知结果。", entries: entries(
         "wallet-payment-reconciliation", "api-idempotency-compensation",

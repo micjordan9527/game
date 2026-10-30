@@ -15,6 +15,7 @@ export type RelatedResource = {
 
 // Explicit editorial associations avoid speculative recommendations.
 const articleRelations: Record<string, { cases?: string[]; templates?: string[]; workflows?: string[] }> = {
+  "interface-motion-feedback": { cases: ["admin-optimization"], workflows: ["ui-design-system"] },
   "member-account-states": { cases: ["admin-optimization"], templates: ["member-account-review", "risk-rule-review"] },
   "wallet-payment-reconciliation": { cases: ["admin-optimization"], templates: ["wallet-reconciliation-checklist", "data-report-spec", "launch-checklist"] },
   "what-is-white-label": { cases: ["white-label-official"], templates: ["white-label-requirement-form"] },

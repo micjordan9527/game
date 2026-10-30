@@ -49,6 +49,8 @@ export const designFormats = [
 export type DesignFormat = (typeof designFormats)[number]["slug"]
 
 export const designArticleEntries = [
+  { slug: "interface-motion-feedback", object: "digital", direction: "motion", reference: false },
+  { slug: "device-controls-feedback", object: "physical", direction: "controls", reference: false },
   { slug: "admin-information-hierarchy", object: "digital", direction: "architecture", reference: false },
   { slug: "admin-filter-list-states", object: "digital", direction: "interaction", reference: false },
   { slug: "admin-bulk-actions", object: "digital", direction: "interaction", reference: false },

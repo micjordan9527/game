@@ -7,6 +7,10 @@ import { ReportCatalogGuide, hasReportCatalogGuide } from "@/components/article/
 import { GamingMachineArt } from "@/components/article/GamingMachineArt"
 import { GamingMachineExplorer } from "@/components/article/GamingMachineExplorer"
 import { TgPushGuide } from "@/components/article/TgPushGuide"
+import { CampaignOperationsCase } from "@/components/article/CampaignOperationsCase"
+import { OperationsPracticeGuide } from "@/components/article/OperationsPracticeGuide"
+import { InterfaceMotionGuide } from "@/components/article/InterfaceMotionGuide"
+import { DeviceControlsGuide } from "@/components/article/DeviceControlsGuide"
 import { machineGuides } from "@/data/gamingMachine"
 import machineGeometry from "@/data/gamingMachineGeometry.json"
 import { ResponsivePriorityDemo } from "@/components/design/ResponsivePriorityDemo"
@@ -137,6 +141,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const supportPermissionGuide = hasSupportPermissionGuide(article.slug)
   const reportCatalogGuide = hasReportCatalogGuide(article.slug)
   const machineGuide = machineGuides[article.slug]
+  const campaignGuide = slug === "campaign-risk-review"
+  const operationsGuide = slug === "channel-quality-review" || slug === "community-operations-governance"
+  const motionGuide = slug === "interface-motion-feedback"
+  const deviceGuide = slug === "device-controls-feedback"
   const navigation = articleData ? getArticleReadingNavigation(articleData) : undefined
   const excludedTermIds = article.slug === "wallet-payment-reconciliation" ? ["turnover"] : []
   const relatedTerms = articleData
@@ -153,7 +161,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <span id="tg-output-examples" aria-hidden="true" className="block scroll-mt-24" />
         <span id="tg-check-points" aria-hidden="true" className="block scroll-mt-24" />
         <span id="tg-case-details" aria-hidden="true" className="block scroll-mt-24" />
-      </TgPushGuide> : machineGuide ? <GamingMachineExplorer art={<GamingMachineArt key="machine-art" />} zoom={machineGeometry.zoom} /> : reportCatalogGuide ? <ReportCatalogGuide slug={article.slug} /> : supportPermissionGuide ? <SupportPermissionGuide slug={article.slug} /> : acceptanceGuide ? <AcceptanceVisualGuide /> : platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
+      </TgPushGuide> : campaignGuide ? <><span id="scenario" className="block scroll-mt-24" /><CampaignOperationsCase /></> : operationsGuide ? <OperationsPracticeGuide slug={slug} /> : motionGuide ? <InterfaceMotionGuide /> : deviceGuide ? <DeviceControlsGuide /> : machineGuide ? <GamingMachineExplorer art={<GamingMachineArt key="machine-art" />} zoom={machineGeometry.zoom} /> : reportCatalogGuide ? <ReportCatalogGuide slug={article.slug} /> : supportPermissionGuide ? <SupportPermissionGuide slug={article.slug} /> : acceptanceGuide ? <AcceptanceVisualGuide /> : platformGuide ? <PlatformVisualGuide slug={article.slug} /> : designGuide ? <DesignArticleGuide slug={article.slug} /> : <div className="container-shell max-w-6xl pb-8">
         {visuals.length ? (
           <ArticleVisualBrief imagePrompts={visuals} />
         ) : flow ? (
@@ -167,7 +175,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {slug === "export-masking-audit" ? <ExportTaskDemo /> : null}
       {slug === "admin-filter-list-states" ? <AdminListDemo /> : null}
       {slug === "form-validation-submit-feedback" ? <FormFeedbackDemo /> : null}
-      {topicScenarios[slug] ? <ScenarioExplorer scenario={topicScenarios[slug]} /> : null}
+      {topicScenarios[slug] && !campaignGuide ? <ScenarioExplorer scenario={topicScenarios[slug]} /> : null}
       {slug === "wallet-payment-reconciliation" ? <ReconciliationCase /> : null}
       {slug === "member-account-states" ? <AccountRecoveryCase /> : null}
       {slug === "agent-system-design" ? <LinkedCaseExplorer data={settlementCase} /> : null}

@@ -1,0 +1,61 @@
+[
+  {
+    "path": "/images/articles/campaign-risk-review-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/articles/campaign-risk-review",
+    "sourceSelector": "[data-campaign-screen]",
+    "sourceStates": [
+      "后台规则与草稿预览"
+    ],
+    "materialType": "本页可操作界面截图；示例数据"
+  },
+  {
+    "path": "/images/articles/channel-quality-review-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/articles/channel-quality-review",
+    "sourceSelector": "[data-operation-screen]",
+    "sourceStates": [
+      "渠道资料",
+      "异常复核"
+    ],
+    "materialType": "本页可操作界面截图；示例数据"
+  },
+  {
+    "path": "/images/articles/community-operations-governance-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/articles/community-operations-governance",
+    "sourceSelector": "[data-operation-screen]",
+    "sourceStates": [
+      "群内咨询",
+      "私密工单"
+    ],
+    "materialType": "本页可操作界面截图；示例数据"
+  },
+  {
+    "path": "/images/articles/interface-motion-feedback-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/articles/interface-motion-feedback",
+    "sourceSelector": "[data-motion-screen=submit]",
+    "sourceStates": [
+      "等待响应",
+      "明确已受理"
+    ],
+    "materialType": "本页可操作界面截图；示例数据"
+  },
+  {
+    "path": "/images/articles/device-controls-feedback-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/articles/device-controls-feedback",
+    "sourceSelector": "#device-controls-view",
+    "sourceStates": [
+      "操作区域",
+      "缺纸时保留原票据"
+    ],
+    "materialType": "本页可操作界面截图；示例数据；通用设备示意"
+  }
+]

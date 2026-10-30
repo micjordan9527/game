@@ -52,11 +52,16 @@ export function checkTopicStandards(root, errors) {
   const platformGuides = readRecords(root, "src/components/article/PlatformVisualGuide.tsx", "guides")
   const machineGuides = readRecords(root, "src/data/gamingMachine.ts", "machineGuides")
   const tgGuides = readRecords(root, "src/components/article/TgPushGuide.tsx", "tgArticleGuides")
+  const practiceGuides = readRecords(root, "src/data/practiceArticleGuides.ts", "practiceArticleGuides")
+  for (const guide of Object.values(practiceGuides)) {
+    const file = path.join(root, guide.source)
+    if (!fs.existsSync(file) || !fs.readFileSync(file, "utf8").includes(`id="${guide.demo}"`)) errors.push(`missing practice visual explanation: ${guide.demo}`)
+  }
   const showcase = readRecords(root, "src/data/showcase.ts", "showcaseItems")
   const sports = readRecords(root, "src/data/sports.ts", "sportsModules")
   const home = readRecords(root, "src/data/homeContent.ts", "homeContent")
   for (const article of articles) {
-    if (!visuals.some((image) => image.articleSlug === article.slug) && !flows[article.slug]?.steps?.length && !platformGuides[article.slug]?.demo && !machineGuides[article.slug]?.demo && !tgGuides[article.slug]?.demo)
+    if (!visuals.some((image) => image.articleSlug === article.slug) && !flows[article.slug]?.steps?.length && !platformGuides[article.slug]?.demo && !machineGuides[article.slug]?.demo && !tgGuides[article.slug]?.demo && !practiceGuides[article.slug]?.demo)
       errors.push(`article ${article.slug}: missing visual explanation`)
   }
   for (const image of [

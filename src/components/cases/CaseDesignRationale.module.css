@@ -1,0 +1,20 @@
+.section { margin-top: 24px; padding: 20px; border: 1px solid #dce3e9; border-radius: 12px; background: #fff; scroll-margin-top: 96px; min-width: 0; }
+.header { max-width: 840px; }
+.eyebrow { margin: 0; color: #17685e; font-size: 13px; font-weight: 700; }
+.header h2 { margin: 8px 0; color: #182234; font-size: 23px; line-height: 1.5; font-weight: 650; }
+.header > p:last-child { margin: 8px 0 0; color: #5d6a7f; font-size: 15px; line-height: 1.8; }
+.observations { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; margin: 24px 0 0; padding: 0; list-style: none; }
+.observations li { display: flex; align-items: flex-start; gap: 10px; min-width: 0; padding-top: 16px; border-top: 1px solid #dce3e9; }
+.number { display: grid; place-items: center; flex: 0 0 26px; height: 26px; border-radius: 50%; background: #edf5f2; color: #17685e; font-size: 13px; font-weight: 700; }
+.observations h3 { margin: 0; color: #182234; font-size: 16px; line-height: 1.65; font-weight: 650; }
+.observations p { margin: 7px 0 0; color: #435166; font-size: 14px; line-height: 1.85; overflow-wrap: anywhere; }
+.boundary { margin: 22px 0 0; padding: 12px 14px; background: #f5f7f9; border-left: 3px solid #7c9a8e; color: #5d6a7f; font-size: 13px; line-height: 1.8; }
+.links { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 18px; color: #17685e; font-size: 14px; line-height: 1.8; font-weight: 650; }
+.links a { text-underline-offset: 3px; }
+.links a:hover { text-decoration: underline; }
+.links a:focus-visible { outline: 2px solid #17685e; outline-offset: 4px; }
+@media (max-width: 640px) {
+  .section { padding: 16px; }
+  .header h2 { font-size: 20px; }
+  .observations { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}

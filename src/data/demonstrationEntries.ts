@@ -1,4 +1,10 @@
 export const demonstrationEntries = [
+  {"group": "business-process", "location": "运营场景 · 活动运营", "title": "活动配置与发放记录", "href": "/articles/campaign-risk-review#campaign-operations-case", "description": "同一活动的后台配置、前台规则、审核及发放记录，查看版本更正和重复保护。"},
+  {"group": "business-process", "location": "运营场景 · 流量运营", "title": "渠道资料与复核", "href": "/articles/channel-quality-review#channel-quality-case", "description": "沿同一渠道编号查看资料、异常、复核和归档。"},
+  {"group": "business-process", "location": "运营场景 · 用户运营", "title": "社群咨询与工单", "href": "/articles/community-operations-governance#community-support-case", "description": "同一条咨询连接消息、工单、客服回复与关闭记录。"},
+  {"group": "interface-design", "location": "设计体验 · 界面动效", "title": "提交、筛选与弹层动效", "href": "/articles/interface-motion-feedback#interface-motion-demo", "description": "播放、暂停或逐步查看界面变化，支持减少动态效果。"},
+  {"group": "interface-design", "location": "设计体验 · 设备人机操作", "title": "设备控制面板与反馈", "href": "/articles/device-controls-feedback#device-controls-demo", "description": "选择屏幕、按键与票据出口，对照正常、禁用、误触隔离和缺纸提示。"},
+
   { group: "interface-design", location: "运营场景 · TG推送", title: "TG视频与消息预览", href: "/articles/tg-message-media#tg-message-demo", description: "对照素材视频与TG消息预览，支持播放和放大。" },
   { group: "business-process", location: "行业入门 · 电子游艺机主要部件与工作过程", title: "电子游艺机部件与过程", href: "/articles/electronic-gaming-machine#machine-view", description: "选择七组部件并放大，逐步观察识钞、余额与票据；对照纸币退回和原票据缺纸恢复，数值均为固定虚构单位。" },
   { group: "business-process", location: "运维风控 · 上线前检查清单", title: "验收证据对照", href: "/articles/launch-checklist#acceptance-evidence", description: "切换缺少实测记录、已完成的v26历史工作流和只有截图的记录，分别查看预期、实际、证据与结论边界。" },
