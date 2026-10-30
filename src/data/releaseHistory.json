@@ -1,26 +1,72 @@
 {
   "current": {
-    "version": 45,
+    "version": 46,
     "date": "2026-10-30",
-    "title": "设计目录直接预览设计结果",
-    "summary": "品牌视觉系统与UI设计系统卡片展示已有结果图，规范等短卡片按自身高度排列。",
+    "title": "设计参考直接展示并补齐资料封面",
+    "summary": "相关参考与图解使用同一组卡片；三篇图解与八个演示、规范入口补齐实际界面封面。",
     "articleSlugs": [],
     "changes": [
       {
-        "id": "design-result-previews",
-        "title": "设计结果图作为工作流预览",
-        "description": "品牌视觉系统与UI设计系统使用现有色彩、字体和界面结果图替换对话截图；短资料卡片按内容高度显示。",
-        "location": "知识图解 · 设计体验／设计角色 · 相关资料",
-        "href": "/design?object=brand",
-        "linkLabel": "查看品牌设计结果预览",
+        "id": "design-reference-cards",
+        "title": "相关参考直接展示为图解卡片",
+        "description": "电子游艺机与TG推送并排展示，其他参考图解也直接显示；参考属性保留在卡片标签中，筛选和文章返回沿用原设计目录。",
+        "location": "知识图解 · 设计体验／设计角色",
+        "href": "/design?object=communication",
+        "linkLabel": "查看视觉传播卡片",
+        "related": {
+          "href": "/articles?role=design",
+          "label": "查看设计角色卡片"
+        }
+      },
+      {
+        "id": "design-article-covers",
+        "title": "三篇图解使用正文界面封面",
+        "description": "后台信息层级、数据导出与公告发布分别使用已有界面图和演示状态制作封面，保留实际字段、版本与任务状态。",
+        "location": "设计体验 · 数字产品设计",
+        "href": "/design?object=digital",
+        "linkLabel": "查看三篇图解封面",
+        "related": {
+          "href": "/articles/content-publication-versions#visual-guide",
+          "label": "查看公告发布正文界面"
+        }
+      },
+      {
+        "id": "design-resource-covers",
+        "title": "八个演示与规范入口补齐预览",
+        "description": "品牌Logo、信息层级、关键页面原型、界面状态、界面优化、业务组件、首页Banner和活动图入口使用对应页面与素材截图，统一封面比例。",
+        "location": "设计体验 · 相关资料卡片",
+        "href": "/design",
+        "linkLabel": "查看全部设计资料",
         "related": {
           "href": "/design?object=digital&direction=system",
-          "label": "查看UI设计系统预览"
+          "label": "查看业务组件预览"
         }
       }
     ]
   },
   "history": [
+    {
+      "version": 45,
+      "title": "设计目录直接预览设计结果",
+      "summary": "品牌视觉系统与UI设计系统卡片展示已有结果图，规范等短卡片按自身高度排列。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "design-result-previews",
+          "title": "设计结果图作为工作流预览",
+          "description": "品牌视觉系统与UI设计系统使用现有色彩、字体和界面结果图替换对话截图；短资料卡片按内容高度显示。",
+          "location": "知识图解 · 设计体验／设计角色 · 相关资料",
+          "href": "/design?object=brand",
+          "linkLabel": "查看品牌设计结果预览",
+          "related": {
+            "href": "/design?object=digital&direction=system",
+            "label": "查看UI设计系统预览"
+          }
+        }
+      ],
+      "publishedAt": "2026-10-30T04:33:49.164343+00:00",
+      "githubCommit": "a90e850d5d4c340406cb68e62a6530d7d0aa8d9f"
+    },
     {
       "version": 44,
       "title": "设计资料按设计对象与工作方向浏览",

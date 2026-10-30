@@ -277,6 +277,7 @@ export const articles: Article[] = [
   },
   {
     slug: "admin-information-hierarchy",
+    cover: "/images/articles/admin-information-hierarchy-cover.jpg",
     title: "复杂后台页面怎样安排信息层级？",
     description: "用同一笔示例订单对照信息堆叠与分层布局，标出列表、详情、操作与记录各放什么，并查看实际后台截图。",
     category: "design",
@@ -522,6 +523,7 @@ export const articles: Article[] = [
   },
   {
     slug: "export-masking-audit",
+    cover: "/images/articles/export-masking-audit-cover.jpg",
     title: "数据导出、脱敏与下载审计",
     description: "用可操作任务演示筛选快照、排队生成、失败与取消、脱敏文件下载、链接过期和权限变化，区分查看、创建与下载。",
     category: "devops-risk",
@@ -533,6 +535,7 @@ export const articles: Article[] = [
   },
   {
     slug: "content-publication-versions",
+    cover: "/images/articles/content-publication-versions-cover.jpg",
     title: "公告、帮助内容与发布版本",
     description: "用五幅界面图和可操作示例，区分草稿、审核、定时生效、前台版本、更正与撤回，并分别核对站点和语言。",
     category: "product",

@@ -1,0 +1,159 @@
+[
+  {
+    "path": "/images/articles/admin-information-hierarchy-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/articles/admin-information-hierarchy#visual-guide",
+    "capturedFrom": "/articles/admin-information-hierarchy#visual-guide",
+    "sourceSelector": "#visual-guide [data-guide-frame] > div",
+    "sourceFrames": [
+      1,
+      2
+    ],
+    "sourceStates": [
+      "信息堆叠",
+      "列表与详情分层"
+    ],
+    "materialType": "现有界面图与交互演示截图；示例数据"
+  },
+  {
+    "path": "/images/articles/content-publication-versions-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/articles/content-publication-versions#visual-guide",
+    "capturedFrom": "/articles/content-publication-versions#visual-guide",
+    "sourceSelector": "#visual-guide [data-guide-frame] > div",
+    "sourceFrames": [
+      1,
+      4
+    ],
+    "sourceStates": [
+      "固定站点、语言与版本",
+      "后台与前台版本对照"
+    ],
+    "materialType": "现有界面图与交互演示截图；示例数据"
+  },
+  {
+    "path": "/images/articles/export-masking-audit-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/articles/export-masking-audit#export-task-demo",
+    "capturedFrom": "/articles/export-masking-audit#export-task-demo",
+    "sourceSelector": "[data-export-state]",
+    "sourceStates": [
+      "生成后的任务与下载入口"
+    ],
+    "materialType": "现有界面图与交互演示截图；示例数据"
+  },
+  {
+    "path": "/images/design-directory/brand-logo-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/design/material-standards?module=brand-logo",
+    "capturedFrom": "/case-assets/material-standards/index.html#brand-logo",
+    "sourceSelector": ".brand-logo-asset / .brand-logo-screen",
+    "sourceStates": [
+      "标志规格",
+      "实际页面预览"
+    ],
+    "materialType": "现有素材规范与页面预览截图"
+  },
+  {
+    "path": "/images/design-directory/banner-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/design/material-standards?module=banner",
+    "capturedFrom": "/case-assets/material-standards/index.html#banner",
+    "sourceSelector": ".spec",
+    "sourceStates": [
+      "H5 · 347 × 110",
+      "PC · 1261 × 300"
+    ],
+    "materialType": "现有素材规范与页面预览截图"
+  },
+  {
+    "path": "/images/design-directory/activity-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/design/material-standards?module=activity-list",
+    "capturedFrom": "/case-assets/material-standards/index.html#activity-list",
+    "sourceSelector": ".spec / .preview",
+    "sourceStates": [
+      "活动图规格",
+      "页面预览"
+    ],
+    "materialType": "现有素材规范与页面预览截图"
+  },
+  {
+    "path": "/images/design-directory/information-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/design/information#hierarchy",
+    "capturedFrom": "/design/information#hierarchy",
+    "sourceSelector": "[role=\"tabpanel\"] section .mt-6.grid",
+    "sourceStates": [
+      "后台列表 · 三层信息展示"
+    ],
+    "materialType": "现有界面图与交互演示截图；示例数据"
+  },
+  {
+    "path": "/images/design-directory/prototypes-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/design/prototypes#wallet",
+    "capturedFrom": "/design/prototypes#wallet",
+    "sourceSelector": "#wallet-ledger-prototype .mt-6.grid > div",
+    "sourceFrames": [
+      1,
+      2
+    ],
+    "sourceStates": [
+      "钱包流水详情",
+      "摘要核对入口"
+    ],
+    "materialType": "现有界面图与交互演示截图；示例数据"
+  },
+  {
+    "path": "/images/design-directory/states-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/design/states#state-feedback",
+    "capturedFrom": "/design/states#state-feedback",
+    "sourceSelector": "#state-feedback .mt-6.grid > div",
+    "sourceStates": [
+      "已受理",
+      "未能提交"
+    ],
+    "materialType": "现有界面图与交互演示截图；示例数据"
+  },
+  {
+    "path": "/images/design-directory/review-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/design/review",
+    "capturedFrom": "/design/review",
+    "sourceSelector": "main .mt-6.grid > section",
+    "sourceFrames": [
+      1,
+      3
+    ],
+    "sourceStates": [
+      "列表先呈现当前任务",
+      "金额与记录保持相邻"
+    ],
+    "materialType": "现有界面图与交互演示截图；示例数据"
+  },
+  {
+    "path": "/images/design-directory/components-cover.jpg",
+    "width": 1600,
+    "height": 1000,
+    "source": "/design/information#component",
+    "capturedFrom": "/design/information#component",
+    "sourceSelector": "[role=\"tabpanel\"] section .mt-6.grid > div",
+    "sourceStates": [
+      "订单状态标签",
+      "钱包金额与余额"
+    ],
+    "materialType": "现有界面图与交互演示截图；示例数据"
+  }
+]

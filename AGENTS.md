@@ -69,3 +69,7 @@ Design browsing preference (2026-10-30):
 - Organize design by objects independently of the existing article set: 品牌与识别设计、数字产品设计、视觉传播设计、实体产品与设备设计. Digital product directions are 用户研究与体验定义、信息架构、交互设计、UI界面设计、界面动效、设计系统. Format, device and business scenario are separate axes; do not mix them as peer object categories.
 - Reuse existing articles, examples, demos and material resources, marking their formats. Show actual gaps without fabricating content. Device anatomy is an information-expression reference, not an industrial design case.
 - The design topic and design role view share object/direction/type filters. Keep article URLs, direct visits from other topics, independent agent materials, and existing design demos. Preserve filters, open sections and scroll on article/demo return; contextual article reading stays in its design direction.
+
+Design card presentation (2026-10-30):
+- Display design references as ordinary visible ArticleCards in the same grid as other articles. Keep reference labels and reference-specific reading behavior; do not hide them in a “相关参考 · N篇图解” disclosure.
+- Every existing design article and related-resource card needs a representative cover. Prefer captures from the corresponding existing UI, diagrams, materials or video; keep a consistent 16:10 preview and record sources. Do not use empty generic blocks or prompt screenshots as covers.
