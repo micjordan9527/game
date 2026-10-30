@@ -116,7 +116,7 @@ export async function checkGamingMachine(page, base, prefix, width) {
   await demo.getByRole("button", { name: "暂停播放", exact: true }).click()
   await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-machine-motion") === "paused")
   const pausedSheet = demo.locator('[data-machine-moving="note"]')
-  const pausedTransform = await pausedSheet.evaluate((node) => getComputedStyle(node).transform)
+  const pausedTransform = await settledPausedTransform(pausedSheet)
   await page.waitForTimeout(250)
   assert.equal(await pausedSheet.evaluate((node) => getComputedStyle(node).transform), pausedTransform, "Pause freezes the paper motion")
   const paused = await demo.getAttribute("data-step"); await page.waitForTimeout(4300); assert.equal(await demo.getAttribute("data-step"), paused)
@@ -124,7 +124,7 @@ export async function checkGamingMachine(page, base, prefix, width) {
   await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-machine-motion") === "running")
   await demo.locator("#machine-boundaries").scrollIntoViewIfNeeded()
   await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-machine-motion") === "paused")
-  const offscreenTransform = await pausedSheet.evaluate((node) => getComputedStyle(node).transform)
+  const offscreenTransform = await settledPausedTransform(pausedSheet)
   await page.waitForTimeout(250)
   assert.equal(await pausedSheet.evaluate((node) => getComputedStyle(node).transform), offscreenTransform, "Offscreen paper motion stops")
   await demo.locator("[data-machine-panel]").scrollIntoViewIfNeeded()
@@ -193,6 +193,19 @@ export async function checkGamingMachine(page, base, prefix, width) {
 
 async function waitForMachineMotion(page) {
   await page.waitForFunction(() => document.querySelector("#machine-demo")?.getAttribute("data-machine-motion") === "idle", null, { timeout: 5000 })
+}
+
+async function settledPausedTransform(sheet) {
+  return sheet.evaluate(async (node) => {
+    const animations = node.getAnimations()
+    // pause() is pending until the animation timeline acknowledges it.
+    await Promise.all(animations.map((animation) => animation.ready))
+    if (!animations.length || animations.some((animation) => animation.pending || animation.playState !== "paused")) {
+      throw new Error("The paper animation has not entered its paused state")
+    }
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+    return getComputedStyle(node).transform
+  })
 }
 
 async function checkMachinePanelVisible(page, width) {
