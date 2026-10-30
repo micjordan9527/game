@@ -26,6 +26,7 @@ import { getImagePromptsForArticle } from "@/data/imagePrompts"
 import { workRoles } from "@/data/workRoles"
 import { resourceAudiences } from "@/lib/work-audiences"
 import { operationGroups } from "@/data/operationGroups"
+import { designObjects } from "@/data/designObjects"
 
 export type SearchKind =
   | "文章"
@@ -64,6 +65,10 @@ export function buildSearchIndex(): SearchRecord[] {
   businessQuestions.forEach((item) => add({ id: `question:${item.id}`, kind: "知识栏目", title: item.title, description: item.summary, href: `/updates/demonstrations#question-${item.id}`, tags: [...item.keywords, "业务问题", "排查", "演示"] }, JSON.stringify(item)))
   add({ id: "design:states", kind: "设计专题", title: "界面状态对照", description: "加载、空结果、失败、受限、处理中与未知结果的界面反馈及实际演示入口。", href: "/design/states", tags: ["界面", "状态", "设计", "产品", "前端"] }, JSON.stringify(stateExamples))
   operationGroups.forEach((group) => add({ id: `operation:${group.slug}`, kind: "知识栏目", title: group.title, description: group.description, href: `/operation?group=${group.slug}`, tags: ["运营场景", "运营", group.title] }, JSON.stringify(group.entries)))
+  designObjects.forEach((object) => {
+    add({ id: `design-object:${object.slug}`, kind: "设计专题", title: object.title, description: object.description, href: `/design?object=${object.slug}`, tags: ["设计体验", "设计对象"] }, JSON.stringify(object.directions))
+    object.directions.forEach((direction) => add({ id: `design-direction:${object.slug}:${direction.slug}`, kind: "设计专题", title: `${object.title} · ${direction.title}`, description: direction.description, href: `/design?object=${object.slug}&direction=${direction.slug}`, tags: ["设计体验", "设计方向", object.title, direction.title] }))
+  })
 
   articles.forEach((article) => {
     const markdown = getMarkdownArticle(article.slug)
@@ -192,7 +197,7 @@ export function buildSearchIndex(): SearchRecord[] {
         href: `/design/${item.slug}`,
         tags: ["设计", "页面体验"],
       },
-      item.includes
+      item.description
     )
   )
 

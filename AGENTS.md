@@ -64,3 +64,8 @@ Operations browsing preference (2026-10-30):
 - Organize operations into 网站运营、用户运营、流量运营、活动运营、数据运营 with one primary group and a fixed article order. Reuse existing article URLs across topics; related foundations belong in 相关参考.
 - The operation topic and operations role view share the grouping and order. Preserve role/tag/group filters, disclosure state and reading position on browser return and the explicit return-to-directory link.
 - Articles opened from an operations directory keep its group in breadcrumbs, sidebar and previous/next links. Direct visits from other topics retain their original topic. Do not introduce courses, tasks or empty process steps.
+
+Design browsing preference (2026-10-30):
+- Organize design by objects independently of the existing article set: 品牌与识别设计、数字产品设计、视觉传播设计、实体产品与设备设计. Digital product directions are 用户研究与体验定义、信息架构、交互设计、UI界面设计、界面动效、设计系统. Format, device and business scenario are separate axes; do not mix them as peer object categories.
+- Reuse existing articles, examples, demos and material resources, marking their formats. Show actual gaps without fabricating content. Device anatomy is an information-expression reference, not an industrial design case.
+- The design topic and design role view share object/direction/type filters. Keep article URLs, direct visits from other topics, independent agent materials, and existing design demos. Preserve filters, open sections and scroll on article/demo return; contextual article reading stays in its design direction.

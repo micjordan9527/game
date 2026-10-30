@@ -3,7 +3,7 @@ import { Badge } from "@/components/common/Badge"
 import { Tag } from "@/components/common/Tag"
 import { Suspense } from "react"
 import { ArticleBreadcrumbs } from "./ArticleBreadcrumbs"
-import { OperationArticleBreadcrumbs } from "./OperationArticleNavigation"
+import { DesignArticleBreadcrumbs } from "./DesignArticleNavigation"
 
 type ArticleHeroProps = {
   articleSlug: string
@@ -36,7 +36,7 @@ export function ArticleHero({
     <header className="border-b border-line bg-white">
       <div className={`container-shell max-w-4xl ${compact ? "py-5" : "py-6 md:py-8"}`}>
         <Suspense fallback={<ArticleBreadcrumbs title={title} parents={[{ href: "/articles", label: "知识图解" }, ...(categoryInfo ? [{ href: "/" + categoryInfo.slug, label: categoryInfo.title }] : [])]} />}>
-          <OperationArticleBreadcrumbs articleSlug={articleSlug} title={title} category={categoryInfo} />
+          <DesignArticleBreadcrumbs articleSlug={articleSlug} title={title} category={categoryInfo} />
         </Suspense>
         {!compact ? <div className="flex flex-wrap gap-2">
           {categoryInfo ? <Badge tone="brand">{categoryInfo.title}</Badge> : null}

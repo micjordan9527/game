@@ -51,7 +51,7 @@ export const workRoles: WorkRole[] = [
     nextRole: "design", handoff: "向设计交付流程、页面状态、信息优先级、反馈文案与响应规则。",
   },
   {
-    slug: "design", title: "设计", summary: "用信息层级、组件与素材规范表达业务判断。",
+    slug: "design", title: "设计", summary: "按品牌、数字产品、视觉传播与实体产品对象查看设计资料。",
     goal: "将角色任务和状态要求落实为可阅读、可操作、可交付的界面方案。",
     steps: [
       { title: "确定信息优先级", description: "围绕列表、详情、状态与危险操作建立阅读顺序。", href: "/articles/admin-information-hierarchy", kind: "文章" },

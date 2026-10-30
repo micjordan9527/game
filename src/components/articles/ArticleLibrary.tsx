@@ -6,9 +6,11 @@ import { Filter, RotateCcw } from "lucide-react"
 import type { Article } from "@/data/articles"
 import { ArticleCard } from "@/components/common/ArticleCard"
 import { OperationDirectory } from "@/components/operation/OperationDirectory"
+import { DesignDirectory } from "@/components/design/DesignDirectory"
 import { resourceAudiences } from "@/lib/work-audiences"
 import { libraryAudience, libraryRoleParam } from "@/lib/article-library-filters"
 import { getOperationGroup } from "@/lib/operation-navigation"
+import { visibleDesignArticles } from "@/lib/design-navigation"
 
 const allOption = "全部"
 const allOptionLabel = "全部"
@@ -55,7 +57,7 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
   )
   const operationGroup = audience === "运营" ? getOperationGroup(searchParams.get("group")) : undefined
   const groupCount = operationGroup ? filteredArticles.filter((article) => operationGroup.entries.some((entry) => entry.slug === article.slug)).length : 0
-  const visibleCount = groupCount || filteredArticles.length
+  const visibleCount = audience === "设计" ? visibleDesignArticles(filteredArticles, searchParams).length : groupCount || filteredArticles.length
 
   function rememberPosition() {
     window.history.replaceState({ ...window.history.state, knowledgeArticleLibraryReturn: {
@@ -69,7 +71,9 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
     else params.set("role", libraryRoleParam(nextAudience))
     if (nextTag === allOption) params.delete("tag")
     else params.set("tag", nextTag)
-    if (nextAudience !== audience || nextTag !== tag || nextAudience === allOption) params.delete("group")
+    if (nextAudience !== audience || nextTag !== tag || nextAudience === allOption) {
+      for (const key of ["group", "object", "direction", "format"]) params.delete(key)
+    }
     params.delete("resume")
     const url = window.location.pathname + (params.size ? "?" + params : "")
     if (url === window.location.pathname + window.location.search) return
@@ -136,12 +140,12 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
           </p>
           <p className="text-xs text-muted">按主题与角色查找图解</p>
         </div>
-        {audience === "运营" ? <OperationDirectory articles={filteredArticles} source="library" /> : <div className="grid gap-4 md:grid-cols-2">
+        {audience === "运营" ? <OperationDirectory articles={filteredArticles} source="library" /> : audience === "设计" ? <DesignDirectory articles={filteredArticles} source="library" /> : <div className="grid gap-4 md:grid-cols-2">
           {filteredArticles.map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}
         </div>}
-        {filteredArticles.length === 0 && audience !== "运营" ? (
+        {filteredArticles.length === 0 && audience !== "运营" && audience !== "设计" ? (
           <div className="rounded-lg border border-line bg-white p-8 text-center text-sm text-muted">
             没有符合筛选条件的文章。
           </div>

@@ -1,46 +1,103 @@
 {
   "current": {
-    "version": 43,
+    "version": 44,
     "date": "2026-10-30",
-    "title": "运营图解按五类工作组织",
-    "summary": "网站、用户、流量、活动和数据运营各有固定查看顺序；运营角色同步分类，详情沿当前分类阅读并保留返回位置。",
+    "title": "设计资料按设计对象与工作方向浏览",
+    "summary": "按品牌与识别、数字产品、视觉传播、实体产品与设备选择资料，再按工作方向和资料类型查看；文章与演示保留分类及返回位置。",
     "articleSlugs": [],
     "changes": [
       {
-        "id": "operation-directory",
-        "title": "运营场景按五类查看图解",
-        "description": "按网站、用户、流量、活动和数据运营选择图解，序号与卡片使用同一顺序；支付基础作为相关参考，搜索可直达分类。",
-        "location": "知识图解 · 运营场景",
-        "href": "/operation",
-        "linkLabel": "打开运营目录",
-        "related": { "href": "/operation?group=website", "label": "查看网站运营" }
+        "id": "design-object-directory",
+        "title": "设计目录按四类设计对象组织",
+        "description": "四类设计对象各有工作方向；现有图解、视频、案例、演示、规范和AI工作流分别标明类型。没有独立资料的方向显示实际数量，设备结构图解作为信息表达参考。",
+        "location": "知识图解 · 设计体验",
+        "href": "/design",
+        "linkLabel": "打开设计目录",
+        "related": {
+          "href": "/design?object=digital",
+          "label": "查看数字产品设计"
+        }
       },
       {
-        "id": "operation-role-directory",
-        "title": "运营角色复用分类与查看顺序",
-        "description": "运营角色使用同一套分类，其他相关图解保留在参考区；标签筛选收起无匹配分类，返回保留筛选和位置。",
-        "location": "知识图解 · 运营角色",
-        "href": "/articles?role=operation",
-        "linkLabel": "查看运营角色图解",
-        "related": { "href": "/articles?role=operation&group=traffic", "label": "查看流量运营" }
+        "id": "design-role-filters",
+        "title": "设计角色可按对象、方向与资料类型筛选",
+        "description": "设计角色使用同一目录；标签筛选只显示匹配图解，返回时保留标签、类型、展开状态与阅读位置。",
+        "location": "知识图解 · 设计角色",
+        "href": "/articles?role=design",
+        "linkLabel": "查看设计角色资料",
+        "related": {
+          "href": "/design?object=communication",
+          "label": "查看视觉传播设计"
+        }
       },
       {
-        "id": "operation-reading-navigation",
-        "title": "从运营分类连续阅读与返回",
-        "description": "从运营目录进入时，面包屑、侧边目录与上下篇沿当前分类；返回目录恢复位置，其他主题的直接访问保留原分类。",
-        "location": "运营图解 · 文章位置与底部连续阅读",
-        "href": "/articles/content-publication-versions?operation=website&returnTo=%2Foperation%3Fgroup%3Dwebsite",
-        "linkLabel": "查看网站运营阅读路径",
-        "related": { "href": "/operation?group=website", "label": "返回网站运营目录" }
+        "id": "design-reading-context",
+        "title": "交互图解沿同一方向连续阅读",
+        "description": "从目录打开图解时，面包屑、侧边目录和上下篇保留设计方向；相关参考单独显示。原有演示保留地址与定位，返回设计目录恢复原筛选和位置。",
+        "location": "设计图解 · 文章位置与连续阅读／设计演示",
+        "href": "/articles/admin-filter-list-states?design=digital&direction=interaction&returnTo=%2Fdesign%3Fobject%3Ddigital%26direction%3Dinteraction",
+        "linkLabel": "查看交互设计阅读路径",
+        "related": {
+          "href": "/design?object=digital&direction=system",
+          "label": "查看设计系统资料"
+        }
       }
     ]
   },
   "history": [
     {
+      "version": 43,
+      "title": "运营图解按五类工作组织",
+      "summary": "网站、用户、流量、活动和数据运营各有固定查看顺序；运营角色同步分类，详情沿当前分类阅读并保留返回位置。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "operation-directory",
+          "title": "运营场景按五类查看图解",
+          "description": "按网站、用户、流量、活动和数据运营选择图解，序号与卡片使用同一顺序；支付基础作为相关参考，搜索可直达分类。",
+          "location": "知识图解 · 运营场景",
+          "href": "/operation",
+          "linkLabel": "打开运营目录",
+          "related": {
+            "href": "/operation?group=website",
+            "label": "查看网站运营"
+          }
+        },
+        {
+          "id": "operation-role-directory",
+          "title": "运营角色复用分类与查看顺序",
+          "description": "运营角色使用同一套分类，其他相关图解保留在参考区；标签筛选收起无匹配分类，返回保留筛选和位置。",
+          "location": "知识图解 · 运营角色",
+          "href": "/articles?role=operation",
+          "linkLabel": "查看运营角色图解",
+          "related": {
+            "href": "/articles?role=operation&group=traffic",
+            "label": "查看流量运营"
+          }
+        },
+        {
+          "id": "operation-reading-navigation",
+          "title": "从运营分类连续阅读与返回",
+          "description": "从运营目录进入时，面包屑、侧边目录与上下篇沿当前分类；返回目录恢复位置，其他主题的直接访问保留原分类。",
+          "location": "运营图解 · 文章位置与底部连续阅读",
+          "href": "/articles/content-publication-versions?operation=website&returnTo=%2Foperation%3Fgroup%3Dwebsite",
+          "linkLabel": "查看网站运营阅读路径",
+          "related": {
+            "href": "/operation?group=website",
+            "label": "返回网站运营目录"
+          }
+        }
+      ],
+      "publishedAt": "2026-10-30T03:48:34.784887+00:00",
+      "githubCommit": "a6dc4eee8ca62c2b38cc28fa22dff02f70e168f4"
+    },
+    {
       "version": 42,
       "title": "TG推送页面精简相关资料",
       "summary": "移除TG推送截图模块与下载按钮，只保留TG素材规范和后台公告发布演示入口。",
-      "articleSlugs": ["tg-message-media-v42"],
+      "articleSlugs": [
+        "tg-message-media-v42"
+      ],
       "changes": [],
       "publishedAt": "2026-10-30T03:07:51.600692+00:00",
       "githubCommit": "37ee063a39ac91e6c88cf3da219cf982311428d8"

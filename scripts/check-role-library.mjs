@@ -15,8 +15,8 @@ export async function checkRoleLibrary(page, base, prefix, width) {
     assert((await results.locator("[data-library-summary]").innerText()).includes("角色：" + role))
     const hrefs = await results.locator("article a").evaluateAll((links) => links.map((link) => link.getAttribute("href")))
     const expectedHrefs = matches.map((item) => prefix + "/articles/" + item.slug)
-    if (role === "运营") {
-      assert.deepEqual(hrefs.map((href) => new URL(href, base).pathname).sort(), expectedHrefs.sort(), "Operation groups and references retain the exact role article set")
+    if (role === "运营" || role === "设计") {
+      assert.deepEqual(hrefs.map((href) => new URL(href, base).pathname).sort(), expectedHrefs.sort(), "Grouped directories and references retain the exact role article set")
       assert.equal(new Set(hrefs.map((href) => new URL(href, base).pathname)).size, matches.length)
     } else assert.deepEqual(hrefs, expectedHrefs)
     assert.equal(await page.getByRole("group", { name: "角色筛选", exact: true }).locator(`button[data-filter-value="${role}"]`).getAttribute("aria-pressed"), "true")

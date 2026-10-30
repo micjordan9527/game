@@ -1,7 +1,9 @@
 import Link from "next/link"
+import { Suspense } from "react"
+import { DesignDirectoryReturnLink } from "@/components/article/DesignArticleNavigation"
 import { notFound } from "next/navigation"
 import { absoluteUrl } from "@/lib/seo"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { SectionHeader } from "@/components/common/SectionHeader"
 import { designTopics } from "@/components/design/DesignExperienceHub"
 import { PrototypeTabs } from "@/components/design/PrototypeTabs"
@@ -97,12 +99,7 @@ export default async function DesignTopicPage({ params }: { params: Promise<{ to
 
   return (
     <div className="container-shell py-12">
-      <Link
-        href="/design"
-        className="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-800"
-      >
-        <ArrowLeft className="h-4 w-4" /> 返回设计体验总览
-      </Link>
+      <Suspense fallback={<Link href="/design" className="text-sm font-semibold text-brand-700">← 返回设计目录</Link>}><DesignDirectoryReturnLink /></Suspense>
       <div className="mt-6 rounded-xl border border-line bg-white p-6 shadow-sm md:p-8">
         <SectionHeader as="h1" eyebrow="设计体验专题" title={item.title} description={item.description} />
       </div>

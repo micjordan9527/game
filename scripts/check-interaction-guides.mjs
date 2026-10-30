@@ -104,7 +104,7 @@ export async function checkInteractionGuides(page, base, prefix, width) {
   }
   for (const role of ["interaction", "design"]) {
     await page.goto(base + "/articles?role=" + role, { waitUntil: "networkidle" })
-    for (const path of [listPath, formPath]) await page.locator(`[aria-label="文章列表"] a[href="${prefix}${path}"]`).waitFor()
+    for (const path of [listPath, formPath]) await page.locator(`[aria-label="文章列表"] a[href="${prefix}${path}"], [aria-label="文章列表"] a[href^="${prefix}${path}?"]`).waitFor()
   }
   await page.goto(base + "/updates#v22", { waitUntil: "networkidle" })
   await page.locator("#v22[open]").waitFor()

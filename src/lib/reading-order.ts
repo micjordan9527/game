@@ -2,6 +2,8 @@ import { articles, type Article } from "@/data/articles"
 import { categories } from "@/data/categories"
 import { topicGuides } from "@/data/topicGuides"
 import { articleOperationGroup } from "@/lib/operation-navigation"
+import { designArticleEntry } from "@/lib/design-navigation"
+import { designArticleEntries } from "@/data/designObjects"
 
 export type ArticleReadingNavigation = {
   pathTitle: string
@@ -15,6 +17,14 @@ export type ArticleReadingNavigation = {
 // Use the published course module order, then the guide's reading order.
 // Other articles in the same category follow without jumping to unrelated topics.
 export function getArticleReadingNavigation(article: Article): ArticleReadingNavigation {
+  if (article.category === "design") {
+    const entry = designArticleEntry(article.slug)
+    if (entry) {
+      const ordered = designArticleEntries.filter((item) => item.object === entry.object && item.direction === entry.direction && !item.reference).map((item) => articles.find((article) => article.slug === item.slug)!)
+      const position = ordered.findIndex((item) => item.slug === article.slug)
+      return { pathTitle: "设计体验", pathHref: `/design?object=${entry.object}&direction=${entry.direction}`, position: position + 1, total: ordered.length, previous: ordered[position - 1], next: ordered[position + 1] }
+    }
+  }
   if (article.category === "operation") {
     const group = articleOperationGroup(article.slug)
     const ordered = group ? group.entries.map((entry) => articles.find((item) => item.slug === entry.slug)!) : [article]

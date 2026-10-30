@@ -36,7 +36,7 @@ export const categories: Category[] = [
   {
     slug: "design",
     title: "设计体验",
-    description: "让复杂页面变得更清楚、更容易操作。",
+    description: "按品牌、数字产品、视觉传播与实体产品对象，查看设计方向、图解、案例和规范。",
   },
   {
     slug: "development",

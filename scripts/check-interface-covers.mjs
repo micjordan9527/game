@@ -7,7 +7,7 @@ export async function checkInterfaceCovers(page, base, prefix, width) {
     { slug: "admin-filter-list-states", tag: "筛选" },
     { slug: "form-validation-submit-feedback", tag: "字段校验" },
   ]
-  const cardFor = (slug) => page.locator("main article").filter({ has: page.locator(`a[href="${prefix}/articles/${slug}"]`) })
+  const cardFor = (slug) => page.locator("main article").filter({ has: page.locator(`a[href="${prefix}/articles/${slug}"], a[href^="${prefix}/articles/${slug}?"]`) })
   const checkOverflow = async () => {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, page.url())
   }

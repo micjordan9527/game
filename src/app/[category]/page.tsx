@@ -38,7 +38,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
     <div className="container-shell py-8">
       <h1 className="text-3xl font-semibold text-ink">{category.title}</h1>
       <p className="mt-3 text-sm leading-7 text-muted">{category.description}</p>
-      {slug === "operation" ? <Suspense fallback={<p className="py-6 text-sm text-muted">正在读取运营目录…</p>}><OperationDirectory articles={operationTopicArticles()} /></Suspense> : <FeatureFlow
+      {slug === "operation" ? <Suspense fallback={<p className="py-6 text-sm text-muted">正在读取运营目录…</p>}><OperationDirectory articles={operationTopicArticles()} /></Suspense> : slug === "design" ? null : <FeatureFlow
         title={`${category.title}全景`}
         caption="选择下面的图解或原型查看具体内容。"
         steps={(maps[slug] ?? []).map((title, index) => ({
@@ -47,7 +47,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         }))}
       />}
       {slug === "design" ? <DesignExperienceHub /> : null}
-      {slug !== "operation" ? <section className="mt-6" aria-label="栏目图解">
+      {slug !== "operation" && slug !== "design" ? <section className="mt-6" aria-label="栏目图解">
         <h2 className="mb-5 text-xl font-semibold text-ink">本主题图解</h2>
         <div className="grid gap-5 md:grid-cols-2">
           {articles.map((article) => (
