@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { articles } from "@/data/articles"
 import { designArticleEntries } from "@/data/designObjects"
-import { designArticleContext, designArticleEntry, designArticleHref, getDesignDirection, getDesignObject, validDesignReturnTo } from "@/lib/design-navigation"
+import { designArticleContext, designArticleEntry, designArticleHref, getDesignDirection, getDesignObject, validDesignReturnTo, designEntriesFor } from "@/lib/design-navigation"
 import { resumeOperationReturnTo } from "@/lib/operation-navigation"
 import type { ArticleReadingNavigation } from "@/lib/reading-order"
 import { ArticleBreadcrumbs } from "./ArticleBreadcrumbs"
@@ -46,7 +46,7 @@ export function DesignArticlePager({ articleSlug, category, navigation }: { arti
   const pathHref = resumeOperationReturnTo(context.returnTo)
   const label = ["设计体验", context.object?.title, context.direction?.title].filter(Boolean).join(" · ")
   if (context.reference) return <nav aria-label="连续阅读" className="container-shell max-w-4xl border-t border-line py-8"><p className="text-sm text-muted">{label} · 相关参考</p><Link href={pathHref} className="mt-3 inline-flex min-h-11 items-center font-semibold text-brand-700">返回设计目录 →</Link></nav>
-  const ordered = designArticleEntries.filter((entry) => entry.object === context.object?.slug && entry.direction === context.direction?.slug && !entry.reference).map((entry) => articles.find((article) => article.slug === entry.slug)!)
+  const ordered = designEntriesFor(new URL(context.returnTo, "https://knowledge.invalid").searchParams).filter((entry) => entry.object === context.object?.slug && entry.direction === context.direction?.slug && !entry.reference).map((entry) => articles.find((article) => article.slug === entry.slug)!)
   const position = ordered.findIndex((article) => article.slug === articleSlug), previous = ordered[position - 1], next = ordered[position + 1]
   return <ArticlePager navigation={{ pathTitle: label, pathHref, position: position + 1, total: ordered.length, previous, next }} previousHref={previous ? designArticleHref(previous.slug, context.returnTo) : undefined} nextHref={next ? designArticleHref(next.slug, context.returnTo) : undefined} returnLabel="返回设计目录" />
 }

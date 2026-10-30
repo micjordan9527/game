@@ -1,3 +1,5 @@
+import { roleDirectories } from "@/data/roleGroups"
+import { roleIdentities } from "@/lib/role-identities"
 import { topicScenarios } from "@/data/topicScenarios"
 import { businessCaseEntries } from "@/data/caseLibrary"
 import { stateExamples } from "@/data/stateExamples"
@@ -69,6 +71,12 @@ export function buildSearchIndex(): SearchRecord[] {
     add({ id: `design-object:${object.slug}`, kind: "设计专题", title: object.title, description: object.description, href: `/design?object=${object.slug}`, tags: ["设计体验", "设计对象"] }, JSON.stringify(object.directions))
     object.directions.forEach((direction) => add({ id: `design-direction:${object.slug}:${direction.slug}`, kind: "设计专题", title: `${object.title} · ${direction.title}`, description: direction.description, href: `/design?object=${object.slug}&direction=${direction.slug}`, tags: ["设计体验", "设计方向", object.title, direction.title] }))
   })
+
+  roleDirectories.forEach((role) => {
+    add({ id: `role-directory:${role.id}`, kind: "知识栏目", title: `${role.title}图解目录`, description: role.description, href: `/articles?role=${role.id}`, tags: [role.audience, "角色", "工作分类"] })
+    role.groups.forEach((group) => add({ id: `role-group:${role.id}:${group.slug}`, kind: "知识栏目", title: `${role.title} · ${group.title}`, description: group.description, href: `/articles?role=${role.id}&group=${group.slug}`, tags: [role.audience, group.title] }))
+  })
+  roleIdentities.filter((role) => role.kind !== "occupation").forEach((role) => add({ id: `reading-entry:${role.slug}`, kind: "知识栏目", title: role.label, description: role.slug === "newcomer" ? "查看行业概念、平台关系与实际图解。" : "查看操作流程、状态反馈、异常返回与相关业务参考。", href: `/articles?role=${role.slug}`, tags: [role.title, ...role.aliases] }))
 
   articles.forEach((article) => {
     const markdown = getMarkdownArticle(article.slug)

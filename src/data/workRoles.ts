@@ -25,11 +25,11 @@ export const workRoles: WorkRole[] = [
     nextRole: "product", handoff: "向产品交付问题背景、受影响角色、证据、优先级与期望结果。",
   },
   {
-    slug: "product", title: "产品", summary: "把业务问题写成有状态、权限与验收标准的需求。",
+    slug: "product", title: "产品", summary: "按会员、游戏、资金、营销、代理、数据、风控和平台能力查看产品图解。",
     goal: "从业务概念进入状态、边界和异常，再形成可评审的需求资料。",
     steps: [
       { title: "梳理会员状态", description: "区分账号、验证、会话与权限，写清限制和恢复条件。", href: "/articles/member-account-states", kind: "文章" },
-      { title: "核对资金业务边界", description: "用教学示例区分订单、账本与对账，列出未决和失败场景。", href: "/articles/wallet-payment-reconciliation", kind: "文章" },
+      { title: "核对资金业务边界", description: "用示例区分订单、账本与对账，列出未决和失败场景。", href: "/articles/wallet-payment-reconciliation", kind: "文章" },
       { title: "观察后台如何承接任务", description: "对照角色看板，检查需求是否交代对象、状态和下一步。", href: "/cases/admin-optimization", kind: "案例" },
       { title: "整理项目需求", description: "记录目标、业务模块、支付、权限与上线范围。", href: "/templates/white-label-requirement-form", kind: "模板" },
       { title: "评审状态与异常", description: "用账号状态评审表补齐进入条件、审批、反馈和验收证据。", href: "/templates/member-account-review", kind: "模板" },
@@ -38,13 +38,13 @@ export const workRoles: WorkRole[] = [
     nextRole: "interaction", handoff: "向交互交付角色任务、状态转换、关键字段、限制条件和优先级。",
   },
   {
-    slug: "interaction", title: "交互", summary: "把状态变化、异常回退和用户反馈连成操作路径。",
-    goal: "明确进入、操作、等待、失败和返回的反馈，让流程可以被演练和验收。",
+    slug: "interaction", title: "交互", summary: "按设计中的交互方向查看流程、反馈与异常返回。",
+    goal: "对照会员、列表、表单与公告界面，查看操作、等待、失败和返回的反馈。",
     steps: [
       { title: "从状态拆出操作路径", description: "以资料变更和账号恢复为例，梳理允许动作与用户可见结果。", href: "/articles/member-account-states", kind: "文章" },
       { title: "演练移动端与状态反馈", description: "操作现有反馈与边界状态工具，检查等待、失败和下一步。", href: "/design/mobile", kind: "专题" },
       { title: "对照 BM 视觉提案", description: "区分图片可见变化与吸顶、遮挡、焦点等需要样机验证的问题。", href: "/cases/bm-optimization", kind: "案例" },
-      { title: "做一次体验评审", description: "使用评审练习和交付清单，把判断转成团队可核对的条件。", href: "/design/review", kind: "专题" },
+      { title: "查看界面优化对照", description: "对照改前改后的界面，核对信息层级、操作与状态反馈。", href: "/design/review", kind: "专题" },
       { title: "记录状态验收证据", description: "用账号评审表核对重复、失败、恢复和并发变更的反馈。", href: "/templates/member-account-review", kind: "模板" },
     ],
     outputs: ["正常与异常操作流程", "页面状态和提示文案", "可演练的交互验收步骤"],
@@ -64,7 +64,7 @@ export const workRoles: WorkRole[] = [
     nextRole: "development", handoff: "向开发交付布局、组件状态、响应规则、素材与验收说明。",
   },
   {
-    slug: "development", title: "开发", summary: "核对接口、状态、日志和上线前的关键路径。",
+    slug: "development", title: "开发", summary: "按界面、业务服务、接口集成、数据处理与工程交付查看开发资料。",
     goal: "把业务约定转为可核对的接口、异常处理和交付证据。",
     steps: [
       { title: "理解接口协作边界", description: "从登录、余额、注单和结算关系认识接口与日志需求。", href: "/articles/game-provider-api", kind: "文章" },

@@ -52,7 +52,10 @@ export async function checkContextNavigation(page, base, prefix, width) {
   if (width < 1280) await page.getByRole("dialog", { name: "知识库导航", exact: true }).waitFor({ state: "hidden" })
   menu = await contextMenu()
   await sectionActive("/articles")
-  await menu.locator(`a[href="${prefix}/articles/member-account-states"]`).click()
+  await closeMenu()
+  // The product topic now opens its grouped directory. Check the original-topic
+  // contract through a canonical article visit; role-context links have their own checks.
+  await page.goto(base + "/articles/member-account-states", { waitUntil: "networkidle" })
   await page.locator("#article-details[open]").waitFor()
   const breadcrumb = page.getByRole("navigation", { name: "文章位置", exact: true })
   assert.equal(await breadcrumb.locator(`a[href="${prefix}/articles"]`).count(), 1)

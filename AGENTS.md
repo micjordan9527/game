@@ -73,3 +73,8 @@ Design browsing preference (2026-10-30):
 Design card presentation (2026-10-30):
 - Display design references as ordinary visible ArticleCards in the same grid as other articles. Keep reference labels and reference-specific reading behavior; do not hide them in a “相关参考 · N篇图解” disclosure.
 - Every existing design article and related-resource card needs a representative cover. Prefer captures from the corresponding existing UI, diagrams, materials or video; keep a consistent 16:10 preview and record sources. Do not use empty generic blocks or prompt screenshots as covers.
+
+Role browsing preference (2026-10-30):
+- Product uses eight business domains; development and testing each use five work directions. Support, finance, project management and devops use shallow groups; short risk/business/management collections remain simple. Reuse canonical articles and preserve role memberships and old role URLs.
+- Merge 老板/管理者 as 经营管理, while project management stays independent. Newcomer is a reading entry and interaction is a design direction, both outside occupational-role filters. Keep the homepage five shortcuts and the original seven articles in each of the newcomer/interaction collections.
+- Role directory detail links retain the current role, group, tag and position in breadcrumbs, sidebar and continuous reading. Cross-professional references remain ordinary visible cards; do not force them into an unrelated sequence or duplicate articles.

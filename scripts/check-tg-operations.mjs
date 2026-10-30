@@ -235,7 +235,7 @@ export async function checkTgOperations(page, base, prefix, width) {
   assert.equal(returned.searchParams.get("role"), "operation")
   assert.equal(returned.searchParams.get("tag"), "TG推送")
   await page.locator(filtered).waitFor()
-  assert.equal(await page.getByRole("group", { name: "角色筛选", exact: true }).locator('button[data-filter-value="运营"]').getAttribute("aria-pressed"), "true")
+  assert.equal(await page.getByRole("group", { name: "角色筛选", exact: true, includeHidden: true }).locator('button[data-filter-value="运营"]').getAttribute("aria-pressed"), "true")
   try {
     await page.waitForFunction((top) => Math.abs(scrollY - top) < 8 && document.querySelector("details[data-article-tags]")?.open === true, returnTop)
   } catch (error) {

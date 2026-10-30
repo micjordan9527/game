@@ -1,12 +1,10 @@
-import { workRoles } from "@/data/workRoles"
-import { resourceAudiences } from "@/lib/work-audiences"
+import { getRoleIdentity, normalizeAudience } from "@/lib/role-identities"
 
 export function libraryAudience(value: string, allowed: string[]) {
-  const role = workRoles.find((item) => item.slug === value.toLowerCase())
-  const label = role?.title ?? resourceAudiences("", [value])[0]
+  const label = normalizeAudience(value)
   return allowed.includes(label) ? label : "全部"
 }
 
 export function libraryRoleParam(audience: string) {
-  return workRoles.find((item) => item.title === audience)?.slug ?? audience
+  return getRoleIdentity(audience)?.slug ?? audience
 }

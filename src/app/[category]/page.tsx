@@ -1,3 +1,5 @@
+import { RoleDirectory } from "@/components/articles/RoleDirectory"
+import { getRoleDirectory, roleDirectoryArticles } from "@/lib/role-navigation"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { categories } from "@/data/categories"
@@ -38,7 +40,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
     <div className="container-shell py-8">
       <h1 className="text-3xl font-semibold text-ink">{category.title}</h1>
       <p className="mt-3 text-sm leading-7 text-muted">{category.description}</p>
-      {slug === "operation" ? <Suspense fallback={<p className="py-6 text-sm text-muted">正在读取运营目录…</p>}><OperationDirectory articles={operationTopicArticles()} /></Suspense> : slug === "design" ? null : <FeatureFlow
+      {slug === "operation" ? <Suspense fallback={<p className="py-6 text-sm text-muted">正在读取运营目录…</p>}><OperationDirectory articles={operationTopicArticles()} /></Suspense> : slug === "design" || slug === "product" ? null : <FeatureFlow
         title={`${category.title}全景`}
         caption="选择下面的图解或原型查看具体内容。"
         steps={(maps[slug] ?? []).map((title, index) => ({
@@ -47,7 +49,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         }))}
       />}
       {slug === "design" ? <DesignExperienceHub /> : null}
-      {slug !== "operation" && slug !== "design" ? <section className="mt-6" aria-label="栏目图解">
+      {slug === "product" ? <Suspense fallback={<p className="py-6 text-sm text-muted">正在读取产品目录…</p>}><RoleDirectory definition={getRoleDirectory("product")!} articles={roleDirectoryArticles(getRoleDirectory("product")!)} source="topic" /></Suspense> : null}
+      {slug !== "operation" && slug !== "design" && slug !== "product" ? <section className="mt-6" aria-label="栏目图解">
         <h2 className="mb-5 text-xl font-semibold text-ink">本主题图解</h2>
         <div className="grid gap-5 md:grid-cols-2">
           {articles.map((article) => (

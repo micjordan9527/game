@@ -26,7 +26,7 @@ export const categories: Category[] = [
   {
     slug: "product",
     title: "产品设计",
-    description: "拆解会员、钱包、活动、代理、报表和后台系统。",
+    description: "按会员、游戏、钱包、营销、代理、数据、风控与平台能力查看产品规则和界面。",
   },
   {
     slug: "operation",

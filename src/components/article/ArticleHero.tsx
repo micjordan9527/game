@@ -3,7 +3,8 @@ import { Badge } from "@/components/common/Badge"
 import { Tag } from "@/components/common/Tag"
 import { Suspense } from "react"
 import { ArticleBreadcrumbs } from "./ArticleBreadcrumbs"
-import { DesignArticleBreadcrumbs } from "./DesignArticleNavigation"
+import { RoleArticleBreadcrumbs } from "./RoleArticleNavigation"
+import { normalizeAudience } from "@/lib/role-identities"
 
 type ArticleHeroProps = {
   articleSlug: string
@@ -31,16 +32,17 @@ export function ArticleHero({
   compact = false,
 }: ArticleHeroProps) {
   const categoryInfo = getCategory(category)
+  const readers = [...new Set(audience.map(normalizeAudience))]
 
   return (
     <header className="border-b border-line bg-white">
       <div className={`container-shell max-w-4xl ${compact ? "py-5" : "py-6 md:py-8"}`}>
         <Suspense fallback={<ArticleBreadcrumbs title={title} parents={[{ href: "/articles", label: "知识图解" }, ...(categoryInfo ? [{ href: "/" + categoryInfo.slug, label: categoryInfo.title }] : [])]} />}>
-          <DesignArticleBreadcrumbs articleSlug={articleSlug} title={title} category={categoryInfo} />
+          <RoleArticleBreadcrumbs articleSlug={articleSlug} title={title} category={categoryInfo} />
         </Suspense>
         {!compact ? <div className="flex flex-wrap gap-2">
           {categoryInfo ? <Badge tone="brand">{categoryInfo.title}</Badge> : null}
-          {audience.map((item) => (
+          {readers.map((item) => (
             <Badge key={item}>{item}</Badge>
           ))}
         </div> : null}
@@ -48,7 +50,7 @@ export function ArticleHero({
         <p className="mt-3 text-sm leading-7 text-muted">{description}</p>
         {compact ? (
           <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs leading-5 text-muted">
-            <span>适用角色：{audience.join("、")}</span>
+            <span>适用角色：{readers.join("、")}</span>
             {updatedAt || date ? <span>更新于 {updatedAt ?? date}</span> : null}
           </div>
         ) : (

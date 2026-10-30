@@ -108,7 +108,7 @@ export async function checkBulkExport(page, base, prefix, width) {
     assert.equal(new URL(page.url()).searchParams.get("q"), title)
   }
   await page.goto(base + "/articles?role=interaction", { waitUntil: "networkidle" })
-  for (const slug of ["admin-bulk-actions", "export-masking-audit"]) await page.locator(`[aria-label="文章列表"] a[href="${prefix}/articles/${slug}"]`).waitFor()
+  for (const slug of ["admin-bulk-actions", "export-masking-audit"]) await page.locator(`[aria-label="文章列表"] a[href="${prefix}/articles/${slug}"], [aria-label="文章列表"] a[href^="${prefix}/articles/${slug}?"]`).waitFor()
   await page.goto(base + "/updates#v24", { waitUntil: "networkidle" })
   await page.locator("#v24[open]").waitFor()
   const release = page.locator("#v24")

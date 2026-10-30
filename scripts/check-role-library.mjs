@@ -3,24 +3,36 @@ import fs from "node:fs"
 import ts from "typescript"
 
 export async function checkRoleLibrary(page, base, prefix, width) {
-  const source = ["src/data/articles.ts", "src/data/workRoles.ts", "src/lib/work-audiences.ts"].map((file) => fs.readFileSync(file, "utf8").replace(/^import .*$/gm, "")).join("\n")
+  const source = ["src/data/articles.ts", "src/data/workRoles.ts", "src/lib/role-identities.ts", "src/lib/work-audiences.ts"].map((file) => fs.readFileSync(file, "utf8").replace(/^import .*$/gm, "")).join("\n")
   const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
-  const { articles, workRoles, resourceAudiences } = await import("data:text/javascript;base64," + Buffer.from(js).toString("base64"))
+  const { articles, workRoles, resourceAudiences, getRoleIdentity } = await import("data:text/javascript;base64," + Buffer.from(js).toString("base64"))
   const expected = (role, tag = "全部") => articles.filter((item) => (role === "全部" || resourceAudiences("/articles/" + item.slug, item.audience).includes(role)) && (tag === "全部" || item.tags.includes(tag)))
   const verify = async (role, tag = "全部") => {
     const results = page.getByRole("region", { name: "文章列表", exact: true })
     await page.locator(`[aria-label="文章列表"][data-selected-role="${role}"][data-selected-tag="${tag}"]`).waitFor()
     const matches = expected(role, tag)
     assert.equal(await results.locator("article").count(), matches.length)
-    assert((await results.locator("[data-library-summary]").innerText()).includes("角色：" + role))
+    const identity = getRoleIdentity(role)
+    assert((await results.locator("[data-library-summary]").innerText()).includes(identity?.label ?? role))
     const hrefs = await results.locator("article a").evaluateAll((links) => links.map((link) => link.getAttribute("href")))
     const expectedHrefs = matches.map((item) => prefix + "/articles/" + item.slug)
-    if (role === "运营" || role === "设计") {
+    if (role !== "全部") {
       assert.deepEqual(hrefs.map((href) => new URL(href, base).pathname).sort(), expectedHrefs.sort(), "Grouped directories and references retain the exact role article set")
       assert.equal(new Set(hrefs.map((href) => new URL(href, base).pathname)).size, matches.length)
     } else assert.deepEqual(hrefs, expectedHrefs)
-    assert.equal(await page.getByRole("group", { name: "角色筛选", exact: true }).locator(`button[data-filter-value="${role}"]`).getAttribute("aria-pressed"), "true")
-    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false)
+    const selected = identity && identity.kind !== "occupation" ? page.locator(`[data-reading-entry="${role}"]`) : page.getByRole("group", { name: "角色筛选", exact: true, includeHidden: true }).locator(`button[data-filter-value="${role}"]`)
+    assert.equal(await selected.getAttribute("aria-pressed"), "true")
+    const overflow = await page.evaluate(() => {
+      const state = { viewport: innerWidth, documentWidth: document.documentElement.scrollWidth }
+      if (state.documentWidth <= state.viewport + 1) return state
+      return { ...state, elements: [...document.querySelectorAll("body *")].map((node) => {
+        const box = node.getBoundingClientRect()
+        return { node, box }
+      }).filter(({ box }) => box.width > 0 && (box.right > innerWidth + 1 || box.left < -1)).slice(0, 16).map(({ node, box }) => ({
+        tag: node.tagName, id: node.id, classes: typeof node.className === "string" ? node.className.slice(0, 160) : "", left: Math.round(box.left), right: Math.round(box.right), width: Math.round(box.width), minWidth: getComputedStyle(node).minWidth,
+      })) }
+    })
+    assert.equal(overflow.documentWidth > overflow.viewport + 1, false, `Horizontal overflow at ${page.url()} (${role}, ${tag}): ${JSON.stringify(overflow)}`)
     return results
   }
   for (const role of workRoles) {

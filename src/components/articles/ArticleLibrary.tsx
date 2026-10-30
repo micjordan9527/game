@@ -11,6 +11,9 @@ import { resourceAudiences } from "@/lib/work-audiences"
 import { libraryAudience, libraryRoleParam } from "@/lib/article-library-filters"
 import { getOperationGroup } from "@/lib/operation-navigation"
 import { visibleDesignArticles } from "@/lib/design-navigation"
+import { RoleDirectory } from "./RoleDirectory"
+import { getRoleDirectory, visibleRoleArticles } from "@/lib/role-navigation"
+import { getRoleIdentity, libraryShortcutIdentities } from "@/lib/role-identities"
 
 const allOption = "全部"
 const allOptionLabel = "全部"
@@ -34,6 +37,14 @@ function collectOptions(items: string[]) {
 export function ArticleLibrary({ articles }: { articles: Article[] }) {
   const searchParams = useSearchParams()
   const tagDetailsRef = useRef<HTMLDetailsElement>(null)
+  const roleDetailsRef = useRef<HTMLDetailsElement>(null)
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)")
+    if (desktop.matches && roleDetailsRef.current) roleDetailsRef.current.open = true
+    const sync = () => { if (roleDetailsRef.current) roleDetailsRef.current.open = desktop.matches }
+    desktop.addEventListener("change", sync)
+    return () => desktop.removeEventListener("change", sync)
+  }, [])
   const tags = useMemo(() => collectOptions(articles.flatMap((article) => article.tags)), [articles])
   const audiences = useMemo(
     () =>
@@ -41,6 +52,7 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
     [articles]
   )
   const audience = libraryAudience(searchParams.get("role") ?? "", audiences.map((item) => item.value))
+  const identity = getRoleIdentity(audience), roleDirectory = getRoleDirectory(audience)
   const requestedTag = searchParams.get("tag") ?? allOption
   const tag = tags.some((item) => item.value === requestedTag) ? requestedTag : allOption
   const filterKey = searchParams.toString()
@@ -57,11 +69,11 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
   )
   const operationGroup = audience === "运营" ? getOperationGroup(searchParams.get("group")) : undefined
   const groupCount = operationGroup ? filteredArticles.filter((article) => operationGroup.entries.some((entry) => entry.slug === article.slug)).length : 0
-  const visibleCount = audience === "设计" ? visibleDesignArticles(filteredArticles, searchParams).length : groupCount || filteredArticles.length
+  const visibleCount = roleDirectory ? visibleRoleArticles(roleDirectory, filteredArticles, searchParams).length : audience === "设计" || audience === "交互" ? visibleDesignArticles(filteredArticles, searchParams).length : groupCount || filteredArticles.length
 
   function rememberPosition() {
     window.history.replaceState({ ...window.history.state, knowledgeArticleLibraryReturn: {
-      url: window.location.pathname + window.location.search, top: window.scrollY, tagsOpen: tagDetailsRef.current?.open === true,
+      url: window.location.pathname + window.location.search, top: window.scrollY, tagsOpen: tagDetailsRef.current?.open === true, rolesOpen: roleDetailsRef.current?.open === true,
     } }, "")
   }
 
@@ -78,6 +90,7 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
     const url = window.location.pathname + (params.size ? "?" + params : "")
     if (url === window.location.pathname + window.location.search) return
     rememberPosition()
+    if (nextAudience !== audience && !window.matchMedia("(min-width: 1024px)").matches && roleDetailsRef.current) roleDetailsRef.current.open = false
     // Let Next synchronize its search parameters while retaining ordinary back/forward history.
     window.history.pushState(null, "", url)
   }
@@ -87,6 +100,7 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
     const saved = window.history.state?.knowledgeArticleLibraryReturn
     if (saved?.url === window.location.pathname + window.location.search && Number.isFinite(saved.top)) {
       if (tagDetailsRef.current) tagDetailsRef.current.open = saved.tagsOpen === true
+      if (roleDetailsRef.current && typeof saved.rolesOpen === "boolean") roleDetailsRef.current.open = saved.rolesOpen
       frame = window.requestAnimationFrame(() => {
         frame = window.requestAnimationFrame(() => {
           window.scrollTo({ top: saved.top, behavior: "instant" })
@@ -104,7 +118,7 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[17rem_1fr]" onClickCapture={rememberArticle}>
+    <div className="grid min-w-0 gap-6 lg:grid-cols-[17rem_1fr]" onClickCapture={rememberArticle}>
       <aside
         className="rounded-lg border border-line bg-white p-4 shadow-sm lg:sticky lg:top-24 lg:self-start"
         aria-label="文章筛选"
@@ -124,28 +138,31 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
           </button>
         </div>
 
-        <FilterGroup label="角色" options={audiences} active={audience} onChange={(value) => updateFilters(value, tag)} />
+        <details ref={roleDetailsRef} data-role-picker className="mt-4"><summary className="cursor-pointer text-sm font-semibold leading-7 text-brand-700 lg:hidden">{identity?.label ?? "全部角色"} · 更换角色或入口</summary>
+        <FilterGroup label="角色" options={audiences.filter((item) => item.value === allOption || getRoleIdentity(item.value)?.kind === "occupation")} active={audience} onChange={(value) => updateFilters(value, tag)} />
+        <div role="group" aria-label="阅读入口" className="mt-5 border-t border-line pt-4"><p className="text-sm font-semibold text-ink">阅读入口</p><div className="mt-3 flex flex-wrap gap-2">{libraryShortcutIdentities.map((item) => <button key={item.slug} type="button" data-reading-entry={item.title} aria-pressed={audience === item.title} onClick={() => updateFilters(item.title, tag)} className={`min-h-9 rounded-full px-3 py-2 text-xs font-medium ring-1 ${audience === item.title ? "bg-ink text-white ring-ink" : "bg-white text-muted ring-line hover:bg-paper"}`}>{item.label}</button>)}</div></div>
+        </details>
         <details ref={tagDetailsRef} data-article-tags className="mt-5 border-t border-line pt-4">
           <summary className="cursor-pointer text-sm font-semibold leading-7 text-ink">标签筛选 · {tag}</summary>
           <FilterGroup label="标签" options={tags} active={tag} onChange={(value) => updateFilters(audience, value)} />
         </details>
       </aside>
 
-      <section id="article-results" aria-label="文章列表" data-selected-role={audience} data-selected-tag={tag}>
+      <section id="article-results" aria-label="文章列表" data-selected-role={audience} data-selected-tag={tag} className="min-w-0">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <p role="status" data-library-summary className="text-sm leading-7 text-muted">
-            <span className="mr-3 font-semibold text-brand-700">角色：{audience}</span>
+            <span className="mr-3 font-semibold text-brand-700">{identity?.kind === "entry" ? "阅读入口：" : identity?.kind === "direction" ? "方向：" : "角色："}{identity?.label ?? audience}</span>
             {tag !== allOption ? <span className="mr-3">标签：{tag}</span> : null}
             共 <span className="font-semibold text-ink">{visibleCount}</span> 篇图解
           </p>
           <p className="text-xs text-muted">按主题与角色查找图解</p>
         </div>
-        {audience === "运营" ? <OperationDirectory articles={filteredArticles} source="library" /> : audience === "设计" ? <DesignDirectory articles={filteredArticles} source="library" /> : <div className="grid gap-4 md:grid-cols-2">
+        {roleDirectory ? <RoleDirectory definition={roleDirectory} articles={filteredArticles} /> : audience === "运营" ? <OperationDirectory articles={filteredArticles} source="library" /> : audience === "设计" || audience === "交互" ? <DesignDirectory articles={filteredArticles} source="library" /> : <div className="grid gap-4 md:grid-cols-2">
           {filteredArticles.map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}
         </div>}
-        {filteredArticles.length === 0 && audience !== "运营" && audience !== "设计" ? (
+        {filteredArticles.length === 0 && !roleDirectory && !["运营", "设计", "交互"].includes(audience) ? (
           <div className="rounded-lg border border-line bg-white p-8 text-center text-sm text-muted">
             没有符合筛选条件的文章。
           </div>
@@ -184,7 +201,7 @@ function FilterGroup({
                 : "bg-white text-muted ring-line hover:bg-paper hover:text-ink",
             ].join(" ")}
           >
-            {option.value}
+            {label === "角色" ? getRoleIdentity(option.value)?.label ?? option.value : option.value}
             {option.value !== allOptionLabel ? (
               <span
                 className={[

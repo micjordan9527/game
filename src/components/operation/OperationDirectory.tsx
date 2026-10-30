@@ -8,7 +8,7 @@ import { operationGroups } from "@/data/operationGroups"
 import { ArticleCard } from "@/components/common/ArticleCard"
 import { operationArticleHref, operationReturnTo } from "@/lib/operation-navigation"
 
-type SavedView = { url: string; top: number; tagsOpen: boolean; referencesOpen: boolean }
+type SavedView = { url: string; top: number; tagsOpen: boolean; rolesOpen?: boolean; referencesOpen: boolean }
 
 export function OperationDirectory({ articles, source = "topic" }: { articles: Article[]; source?: "topic" | "library" }) {
   const params = useSearchParams()
@@ -24,7 +24,7 @@ export function OperationDirectory({ articles, source = "topic" }: { articles: A
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
     const anchor = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[href]") : null
     if (!anchor || !new URL(anchor.href).pathname.includes("/articles/")) return
-    const view: SavedView = { url: returnTo, top: window.scrollY, tagsOpen: document.querySelector<HTMLDetailsElement>("details[data-article-tags]")?.open === true, referencesOpen: root.current?.querySelector<HTMLDetailsElement>("details[data-operation-references]")?.open === true }
+    const view: SavedView = { url: returnTo, top: window.scrollY, tagsOpen: document.querySelector<HTMLDetailsElement>("details[data-article-tags]")?.open === true, rolesOpen: document.querySelector<HTMLDetailsElement>("details[data-role-picker]")?.open === true, referencesOpen: root.current?.querySelector<HTMLDetailsElement>("details[data-operation-references]")?.open === true }
     window.history.replaceState({ ...window.history.state, operationDirectoryReturn: view }, "")
     try {
       sessionStorage.setItem("wg-operation-return:" + returnTo, JSON.stringify(view))
@@ -44,6 +44,7 @@ export function OperationDirectory({ articles, source = "topic" }: { articles: A
     if (saved?.url === returnTo && Number.isFinite(saved.top)) {
       const tags = document.querySelector<HTMLDetailsElement>("details[data-article-tags]")
       if (tags) tags.open = saved.tagsOpen
+      const roles = document.querySelector<HTMLDetailsElement>("details[data-role-picker]"); if (roles && typeof saved.rolesOpen === "boolean") roles.open = saved.rolesOpen
       const references = root.current?.querySelector<HTMLDetailsElement>("details[data-operation-references]")
       if (references) references.open = saved.referencesOpen === true
       frame = requestAnimationFrame(() => { frame = requestAnimationFrame(() => {

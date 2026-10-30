@@ -35,7 +35,7 @@ import { getImagePromptsForArticle } from "@/data/imagePrompts"
 import { resourceAudiences } from "@/lib/work-audiences"
 import { ArticleJsonLd } from "@/components/article/ArticleJsonLd"
 import { ArticlePager } from "@/components/article/ArticlePager"
-import { DesignArticlePager } from "@/components/article/DesignArticleNavigation"
+import { RoleArticlePager } from "@/components/article/RoleArticleNavigation"
 import { ArticleRelatedTerms } from "@/components/article/ArticleRelatedTerms"
 import { ArticleToc } from "@/components/article/ArticleToc"
 import { MermaidDiagram } from "@/components/article/MermaidDiagram"
@@ -266,7 +266,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           )}
         />
       </details>
-      {navigation ? <Suspense fallback={<ArticlePager navigation={navigation} />}><DesignArticlePager articleSlug={article.slug} category={article.meta.category} navigation={navigation} /></Suspense> : null}
+      {navigation ? <Suspense fallback={<ArticlePager navigation={navigation} />}><RoleArticlePager articleSlug={article.slug} category={article.meta.category} navigation={navigation} /></Suspense> : null}
     </>
   )
 }

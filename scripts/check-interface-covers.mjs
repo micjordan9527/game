@@ -59,7 +59,7 @@ export async function checkInterfaceCovers(page, base, prefix, width) {
     assert.equal(returned.searchParams.get("role"), "design")
     assert.equal(returned.searchParams.get("tag"), tag)
     await page.locator(selected).waitFor()
-    assert.equal(await page.getByRole("group", { name: "角色筛选", exact: true }).locator('button[data-filter-value="设计"]').getAttribute("aria-pressed"), "true")
+    assert.equal(await page.getByRole("group", { name: "角色筛选", exact: true, includeHidden: true }).locator('button[data-filter-value="设计"]').getAttribute("aria-pressed"), "true")
     assert.equal(await page.getByRole("group", { name: "标签筛选", exact: true }).locator(`button[data-filter-value="${tag}"]`).getAttribute("aria-pressed"), "true")
     await page.waitForFunction((top) => Math.abs(scrollY - top) < 8 && document.querySelector("details[data-article-tags]")?.open === true, top)
     await checkOverflow()

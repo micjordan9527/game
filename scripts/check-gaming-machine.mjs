@@ -110,7 +110,7 @@ export async function checkGamingMachine(page, base, prefix, width) {
   await page.goto(base + "/articles?role=product&tag=" + encodeURIComponent("电子游艺机"), { waitUntil: "networkidle" })
   assert.equal(await page.locator("#article-results").getAttribute("data-selected-role"), "产品")
   assert.equal(await page.locator("#article-results").getAttribute("data-selected-tag"), "电子游艺机")
-  await page.locator(`main a[href="${prefix}${href}"]`).first().waitFor()
+  await page.locator(`main a[href="${prefix}${href}"], main a[href^="${prefix}${href}?"]`).first().waitFor()
   await page.goto(base + "/updates#electronic-gaming-machine", { waitUntil: "networkidle" })
   const row = page.locator("#electronic-gaming-machine")
   await row.waitFor(); await row.locator(`a[href="${prefix}${href}#machine-demo"]`).click(); await demo.waitFor()

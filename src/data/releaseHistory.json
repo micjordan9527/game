@@ -1,50 +1,108 @@
 {
   "current": {
-    "version": 46,
+    "version": 47,
     "date": "2026-10-30",
-    "title": "设计参考直接展示并补齐资料封面",
-    "summary": "相关参考与图解使用同一组卡片；三篇图解与八个演示、规范入口补齐实际界面封面。",
+    "title": "产品与专业角色按工作分类浏览",
+    "summary": "产品按八类业务查看，开发和测试各有五个方向；其他角色采用浅分组，交互和新人保留独立入口，经营管理统一原有身份。",
     "articleSlugs": [],
     "changes": [
       {
-        "id": "design-reference-cards",
-        "title": "相关参考直接展示为图解卡片",
-        "description": "电子游艺机与TG推送并排展示，其他参考图解也直接显示；参考属性保留在卡片标签中，筛选和文章返回沿用原设计目录。",
-        "location": "知识图解 · 设计体验／设计角色",
-        "href": "/design?object=communication",
-        "linkLabel": "查看视觉传播卡片",
+        "id": "product-directory",
+        "title": "产品按八类业务查看图解",
+        "description": "会员、游戏、钱包、营销、代理、数据、风控和平台能力使用固定分类；产品主题与角色入口共用目录，相关参考直接显示为卡片。",
+        "location": "知识图解 · 产品设计／产品角色",
+        "href": "/articles?role=product",
+        "linkLabel": "查看产品目录",
         "related": {
-          "href": "/articles?role=design",
-          "label": "查看设计角色卡片"
+          "href": "/product",
+          "label": "打开产品主题"
         }
       },
       {
-        "id": "design-article-covers",
-        "title": "三篇图解使用正文界面封面",
-        "description": "后台信息层级、数据导出与公告发布分别使用已有界面图和演示状态制作封面，保留实际字段、版本与任务状态。",
-        "location": "设计体验 · 数字产品设计",
-        "href": "/design?object=digital",
-        "linkLabel": "查看三篇图解封面",
+        "id": "engineering-test-directories",
+        "title": "开发与测试各按五个方向浏览",
+        "description": "开发按界面、服务、集成、数据与交付组织；测试按功能、接口、安全、性能与回归组织，进入文章后保持分类与阅读位置。",
+        "location": "知识图解 · 开发／测试角色",
+        "href": "/articles?role=development",
+        "linkLabel": "查看开发目录",
         "related": {
-          "href": "/articles/content-publication-versions#visual-guide",
-          "label": "查看公告发布正文界面"
+          "href": "/articles?role=test",
+          "label": "查看测试目录"
         }
       },
       {
-        "id": "design-resource-covers",
-        "title": "八个演示与规范入口补齐预览",
-        "description": "品牌Logo、信息层级、关键页面原型、界面状态、界面优化、业务组件、首页Banner和活动图入口使用对应页面与素材截图，统一封面比例。",
-        "location": "设计体验 · 相关资料卡片",
-        "href": "/design",
-        "linkLabel": "查看全部设计资料",
+        "id": "specialist-role-directories",
+        "title": "客服、财务、项目管理与运维采用浅分组",
+        "description": "按账号问题、资金核对、交付阶段和运行维护等工作内容查看现有图解；风控与商务保留简短列表，原文章链接继续使用。",
+        "location": "知识图解 · 专业角色",
+        "href": "/articles?role=support",
+        "linkLabel": "查看客服图解",
         "related": {
-          "href": "/design?object=digital&direction=system",
-          "label": "查看业务组件预览"
+          "href": "/articles?role=project",
+          "label": "查看项目管理图解"
+        }
+      },
+      {
+        "id": "role-reading-entries",
+        "title": "整理角色身份与手机阅读入口",
+        "description": "交互与新人各保留七篇资料，经营管理统一原有身份；手机角色选择默认收起，返回保留展开状态，旧角色参数继续可访问。",
+        "location": "知识图解 · 角色筛选／阅读入口",
+        "href": "/articles?role=interaction",
+        "linkLabel": "查看交互资料",
+        "related": {
+          "href": "/articles?role=newcomer",
+          "label": "查看新人入门"
         }
       }
     ]
   },
   "history": [
+    {
+      "version": 46,
+      "title": "设计参考直接展示并补齐资料封面",
+      "summary": "相关参考与图解使用同一组卡片；三篇图解与八个演示、规范入口补齐实际界面封面。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "design-reference-cards",
+          "title": "相关参考直接展示为图解卡片",
+          "description": "电子游艺机与TG推送并排展示，其他参考图解也直接显示；参考属性保留在卡片标签中，筛选和文章返回沿用原设计目录。",
+          "location": "知识图解 · 设计体验／设计角色",
+          "href": "/design?object=communication",
+          "linkLabel": "查看视觉传播卡片",
+          "related": {
+            "href": "/articles?role=design",
+            "label": "查看设计角色卡片"
+          }
+        },
+        {
+          "id": "design-article-covers",
+          "title": "三篇图解使用正文界面封面",
+          "description": "后台信息层级、数据导出与公告发布分别使用已有界面图和演示状态制作封面，保留实际字段、版本与任务状态。",
+          "location": "设计体验 · 数字产品设计",
+          "href": "/design?object=digital",
+          "linkLabel": "查看三篇图解封面",
+          "related": {
+            "href": "/articles/content-publication-versions#visual-guide",
+            "label": "查看公告发布正文界面"
+          }
+        },
+        {
+          "id": "design-resource-covers",
+          "title": "八个演示与规范入口补齐预览",
+          "description": "品牌Logo、信息层级、关键页面原型、界面状态、界面优化、业务组件、首页Banner和活动图入口使用对应页面与素材截图，统一封面比例。",
+          "location": "设计体验 · 相关资料卡片",
+          "href": "/design",
+          "linkLabel": "查看全部设计资料",
+          "related": {
+            "href": "/design?object=digital&direction=system",
+            "label": "查看业务组件预览"
+          }
+        }
+      ],
+      "publishedAt": "2026-10-30T05:01:49.794963+00:00",
+      "githubCommit": "1312af453cfd4b45d7daae1cf8f3e30358229e8a"
+    },
     {
       "version": 45,
       "title": "设计目录直接预览设计结果",

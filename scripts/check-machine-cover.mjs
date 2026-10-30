@@ -4,7 +4,7 @@ export async function checkMachineCover(page, base, prefix, width) {
   const articlePath = "/articles/electronic-gaming-machine"
   const coverPath = `${prefix}/images/articles/electronic-gaming-machine.svg`
   const tag = "电子游艺机"
-  const cardFor = (slug) => page.locator(`main article`).filter({ has: page.locator(`a[href="${prefix}/articles/${slug}"]`) })
+  const cardFor = (slug) => page.locator(`main article`).filter({ has: page.locator(`a[href="${prefix}/articles/${slug}"], a[href^="${prefix}/articles/${slug}?"]`) })
   const machineCard = () => cardFor("electronic-gaming-machine")
   const checkImage = async (card, source, expectedSize) => {
     assert.equal(await card.count(), 1, "Expected one article card")
@@ -32,7 +32,9 @@ export async function checkMachineCover(page, base, prefix, width) {
   const card = await checkMachineCard()
   await card.screenshot({ path: `/tmp/machine-cover-library-${width}.png`, style: "body > header { visibility: hidden !important; }" })
 
-  await page.getByRole("group", { name: "角色筛选", exact: true }).locator('button[data-filter-value="产品"]').click()
+  const picker = page.locator("details[data-role-picker]")
+  if (width < 1024 && !await picker.evaluate((node) => node.open)) await picker.locator("summary").click()
+  await page.getByRole("group", { name: "角色筛选", exact: true, includeHidden: true }).locator('button[data-filter-value="产品"]').click()
   await page.waitForURL((url) => url.searchParams.get("role") === "product" && url.searchParams.get("tag") === tag)
   await page.locator('#article-results[data-selected-role="产品"][data-selected-tag="电子游艺机"]').waitFor()
   const details = page.locator("details[data-article-tags]")
@@ -52,7 +54,7 @@ export async function checkMachineCover(page, base, prefix, width) {
   assert.equal(returned.searchParams.get("role"), "product")
   assert.equal(returned.searchParams.get("tag"), tag)
   await page.locator('#article-results[data-selected-role="产品"][data-selected-tag="电子游艺机"]').waitFor()
-  assert.equal(await page.getByRole("group", { name: "角色筛选", exact: true }).locator('button[data-filter-value="产品"]').getAttribute("aria-pressed"), "true")
+  assert.equal(await page.getByRole("group", { name: "角色筛选", exact: true, includeHidden: true }).locator('button[data-filter-value="产品"]').getAttribute("aria-pressed"), "true")
   await page.waitForFunction((top) => Math.abs(scrollY - top) < 8 && document.querySelector("details[data-article-tags]")?.open === true, top)
 
   await page.goto(base + "/industry", { waitUntil: "networkidle" })

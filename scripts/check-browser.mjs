@@ -33,12 +33,13 @@ import { checkAgentMaterials } from "./check-agent-materials.mjs"
 import { checkFoundationGuides } from "./check-foundation-guides.mjs"
 import { checkInteractionGuides } from "./check-interaction-guides.mjs"
 import { checkRoleLibrary } from "./check-role-library.mjs"
+import { checkRoleDirectories } from "./check-role-directories.mjs"
 
 const root = path.resolve("out")
 const prefix = process.env.TEST_BASE_PATH ?? ""
 const rounds = Number(process.env.REFRESH_ROUNDS ?? 2)
 const scope = process.env.CHECK_SCOPE ?? "all"
-assert(["all", "home", "site-update", "content", "account", "business", "mobile", "completion", "knowledge", "updates", "case-reading", "navigation", "role-library", "interaction", "foundation", "bulk-export", "design-visual", "publication-mobile", "evidence-ai", "support-permissions", "report-catalog", "bm-u8-details", "gaming-machine", "usability-batch", "interface-covers", "tg-operations", "tg-case-details", "operation-directory", "design-directory"].includes(scope), "Unsupported CHECK_SCOPE")
+assert(["all", "home", "site-update", "content", "account", "business", "mobile", "completion", "knowledge", "updates", "case-reading", "navigation", "role-library", "interaction", "foundation", "bulk-export", "design-visual", "publication-mobile", "evidence-ai", "support-permissions", "report-catalog", "bm-u8-details", "gaming-machine", "usability-batch", "interface-covers", "tg-operations", "tg-case-details", "operation-directory", "design-directory", "role-directories", "role-browsing"].includes(scope), "Unsupported CHECK_SCOPE")
 assert(Number.isInteger(rounds) && rounds > 0 && rounds <= 50, "REFRESH_ROUNDS must be between 1 and 50")
 const contentTypes = {
   ".html": "text/html",
@@ -156,8 +157,8 @@ try {
     if (scope === "interface-covers" || scope === "all") await checkInterfaceCovers(page, base, prefix, width)
     if (scope === "tg-operations" || scope === "all") await checkTgOperations(page, base, prefix, width)
     if (scope === "tg-case-details" || scope === "all") await checkTgCaseDetails(page, base, prefix, width)
-    if (scope === "operation-directory" || scope === "all") await checkOperationDirectory(page, base, prefix, width)
-    if (scope === "design-directory" || scope === "all") await checkDesignDirectory(page, base, prefix, width)
+    if (scope === "operation-directory" || scope === "role-browsing" || scope === "all") await checkOperationDirectory(page, base, prefix, width)
+    if (scope === "design-directory" || scope === "role-browsing" || scope === "all") await checkDesignDirectory(page, base, prefix, width)
     if (scope === "usability-batch" || scope === "all") await checkAgentMaterials(page, base, prefix, width)
     if (scope === "bm-u8-details" || scope === "all") await checkBmU8Details(page, base, prefix, width)
     if (scope === "report-catalog" || scope === "all") await checkReportCatalog(page, base, prefix, width)
@@ -168,10 +169,11 @@ try {
     if (scope === "bulk-export" || scope === "design-visual" || scope === "all") await checkBulkExport(page, base, prefix, width)
     if (scope === "foundation" || scope === "all") await checkFoundationGuides(page, base, prefix, width)
     if (scope === "interaction" || scope === "design-visual" || scope === "all") await checkInteractionGuides(page, base, prefix, width)
-    if (scope === "role-library" || scope === "all") await checkRoleLibrary(page, base, prefix, width)
-    if (scope === "navigation" || scope === "usability-batch" || scope === "all") await checkContextNavigation(page, base, prefix, width)
+    if (scope === "role-library" || scope === "role-browsing" || scope === "all") await checkRoleLibrary(page, base, prefix, width)
+    if (scope === "role-directories" || scope === "role-browsing" || scope === "all") await checkRoleDirectories(page, base, prefix, width)
+    if (scope === "navigation" || scope === "usability-batch" || scope === "role-browsing" || scope === "all") await checkContextNavigation(page, base, prefix, width)
     if (scope === "case-reading" || scope === "bm-u8-details" || scope === "all") await checkCaseReading(page, base, prefix, width)
-    if (scope === "updates") await checkReleaseLog(page, base, prefix, width)
+    if (scope === "updates" || scope === "role-browsing") await checkReleaseLog(page, base, prefix, width)
     if (scope === "knowledge" || scope === "all") await checkKnowledgeContent(page, base, prefix, width)
     if (scope === "business" || scope === "all") await checkBusinessCases(page, base, prefix, width)
     if (scope === "mobile" || scope === "all") await checkMobileCases(page, base, prefix, width)

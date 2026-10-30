@@ -61,6 +61,15 @@ export const designArticleEntries = [
 ] as const
 
 export type DesignResource = { id: string; object: string; direction: string; title: string; description: string; href: string; format: DesignFormat; image: string }
+export const interactionDesignEntries = [
+  { slug: "admin-filter-list-states", object: "digital", direction: "interaction", reference: false },
+  { slug: "admin-bulk-actions", object: "digital", direction: "interaction", reference: false },
+  { slug: "form-validation-submit-feedback", object: "digital", direction: "interaction", reference: false },
+  { slug: "mobile-page-layout", object: "digital", direction: "interaction", reference: true },
+  { slug: "member-account-states", object: "digital", direction: "interaction", reference: true },
+  { slug: "export-masking-audit", object: "digital", direction: "interaction", reference: true },
+  { slug: "content-publication-versions", object: "digital", direction: "interaction", reference: true },
+] as const
 export const designResources: DesignResource[] = [
   { id: "brand-logo", object: "brand", direction: "identity", title: "品牌Logo使用规范", description: "查看首页、登录注册、浏览器与PWA的标志尺寸和使用位置。", href: "/design/material-standards?module=brand-logo", format: "standard", image: "/images/design-directory/brand-logo-cover.jpg" },
   { id: "brand-system", object: "brand", direction: "language", title: "品牌视觉系统", description: "查看品牌色、字体、图形语言与多端应用的示意输出。", href: "/ai-workflows/brand-visual-system", format: "workflow", image: "/case-assets/ai-workflows/brand-visual-system/output-01-brand-overview.webp" },
