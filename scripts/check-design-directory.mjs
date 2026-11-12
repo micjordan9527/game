@@ -3,7 +3,7 @@ import fs from "node:fs"
 import ts from "typescript"
 
 export async function checkDesignDirectory(page, base, prefix, width) {
-  const source = ["src/data/articles.ts", "src/data/designObjects.ts"].map((file) => fs.readFileSync(file, "utf8")).join("\n")
+  const source = ["src/data/articles.ts", "src/data/cases.ts", "src/data/designObjects.ts"].map((file) => fs.readFileSync(file, "utf8").replace(/^import .*$/gm, "")).join("\n")
   const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
   const { articles, designObjects, designArticleEntries, designResources } = await import("data:text/javascript;base64," + Buffer.from(js).toString("base64"))
   assert.equal(new Set(designArticleEntries.map((item) => item.slug)).size, designArticleEntries.length)
@@ -156,8 +156,26 @@ export async function checkDesignDirectory(page, base, prefix, width) {
   assert.equal(await breadcrumb().getByRole("link", { name: "数字产品设计", exact: true }).count(), 0)
   await page.goto(base + "/articles/content-publication-versions", { waitUntil: "networkidle" })
   await breadcrumb().getByRole("link", { name: "产品设计", exact: true }).waitFor()
+
+  for (const [format, expected, unit] of [["case", 2, "个案例"], ["standard", 3, "项规范"], ["demo", 5, "项演示"], ["workflow", 2, "个AI 工作流"], ["video", 1, "个视频"], ["article", null, "篇图解"]]) {
+    await page.goto(base + "/articles?role=design&format=" + format, { waitUntil: "networkidle" })
+    await page.locator(`[data-design-directory][data-selected-format="${format}"]`).waitFor()
+    const cards = await directory().locator("article, [data-design-resource]").count()
+    if (expected !== null) assert.equal(cards, expected, `The ${format} filter shows the existing materials of that type`)
+    const summary = (await page.locator("[data-library-summary]").innerText()).replace(/\s+/g, "")
+    assert(summary.includes(`共${cards}${unit.replace(/\s+/g, "")}`), `Summary count and unit agree with visible ${format} cards: ${summary}`)
+    for (const section of await directory().locator("[data-design-section]").all()) assert(await section.locator("article, [data-design-resource]").count() > 0, "Filtered pages do not put empty categories before useful materials")
+    await noOverflow()
+  }
+  await page.goto(base + "/articles?role=design&object=physical&format=case", { waitUntil: "networkidle" })
+  await page.locator('[data-design-directory][data-selected-object="physical"][data-selected-format="case"]').waitFor()
+  assert.equal(await directory().locator("[data-design-section], article, [data-design-resource]").count(), 0)
+  assert.equal(await directory().locator("[data-design-empty]").count(), 1, "An empty selection has one compact explanation")
+  assert((await page.locator("[data-library-summary]").innerText()).replace(/\s+/g, "").includes("共0个案例"))
+  assert.equal(await directory().locator('[data-design-object="all"]').innerText(), "全部2", "The all-objects count includes the results available after clearing the object selection")
+
   await page.goto(base + "/search?q=" + encodeURIComponent("信息架构"), { waitUntil: "networkidle" })
   await page.locator(`main a[href="${prefix}/design?object=digital&direction=architecture"]`).waitFor()
   await noOverflow()
-  console.log(`PASS design directory ${width}px: four independent objects, six digital directions, exact unique articles and typed existing resources, honest gaps and device-reference distinction, URL filters, contextual reading, role/tag/type/disclosure/scroll return, demo hash, independent materials, original topics and search`)
+  console.log(`PASS design directory ${width}px: four independent objects, six digital directions, exact article/resource counts and units, compact filtered gaps, honest device-reference distinction, URL filters, contextual reading, role/tag/type/disclosure/scroll return, demo hash, independent materials, original topics and search`)
 }

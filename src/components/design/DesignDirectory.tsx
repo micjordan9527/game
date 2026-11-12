@@ -5,28 +5,21 @@ import { useEffect, useRef, type MouseEvent } from "react"
 import { useSearchParams } from "next/navigation"
 import { FileText, ArrowUpRight } from "lucide-react"
 import type { Article } from "@/data/articles"
-import { designArticleEntries, designFormats, designObjects, designResources } from "@/data/designObjects"
+import { designFormats, designObjects } from "@/data/designObjects"
 import { ArticleCard } from "@/components/common/ArticleCard"
 import { assetPath } from "@/lib/assets"
-import { designArticleFormat, designArticleHref, designResourceHref, designReturnTo, getDesignDirection, getDesignFormat, getDesignObject, designEntriesFor, isInteractionDesign } from "@/lib/design-navigation"
+import { designArticleHref, designResourceHref, designReturnTo, getDesignDirection, getDesignFormat, getDesignDirectoryResults } from "@/lib/design-navigation"
 
 type SavedView = { url: string; top: number; tagsOpen: boolean; rolesOpen?: boolean; typesOpen: boolean }
 
 export function DesignDirectory({ articles, source = "topic" }: { articles: Article[]; source?: "topic" | "library" }) {
   const params = useSearchParams(), root = useRef<HTMLElement>(null)
   const returnTo = designReturnTo(source, params)
-  const interaction = isInteractionDesign(params)
-  const object = getDesignObject(interaction ? "digital" : params.get("object")), direction = getDesignDirection(object, interaction ? "interaction" : params.get("direction")), format = getDesignFormat(params.get("format"))
+  const { interaction, object, direction, format, visibleEntries, visibleResources, other, counts, total, allCount } = getDesignDirectoryResults(articles, params, source)
   const available = new Map(articles.map((article) => [article.slug, article]))
-  const entries = designEntriesFor(params).filter((entry) => available.has(entry.slug))
-  const resources = source === "topic" || !params.get("tag") ? designResources.filter((resource) => !interaction || resource.object === "digital" && resource.direction === "interaction") : []
-  const matches = (item: { object: string; direction: string }) => (!object || item.object === object.slug) && (!direction || item.direction === direction.slug)
-  const articleMatchesFormat = (slug: string) => !format || designArticleFormat(slug) === format.slug
-  const counts = (slug?: string, area?: string) => entries.filter((entry) => (!slug || entry.object === slug) && (!area || entry.direction === area) && articleMatchesFormat(entry.slug)).length + resources.filter((resource) => (!slug || resource.object === slug) && (!area || resource.direction === area) && (!format || resource.format === format.slug)).length
   const objects = source === "library" && params.get("tag") ? designObjects.filter((item) => counts(item.slug)) : designObjects
-  const shownObjects = object ? [object] : objects
-  const known = new Set<string>(designEntriesFor(params).map((entry) => entry.slug))
-  const other = !object && !direction ? articles.filter((article) => !known.has(article.slug) && articleMatchesFormat(article.slug)) : []
+  const hasSelection = !!(object || direction || format || source === "library" && params.get("tag"))
+  const shownObjects = (object ? [object] : objects).filter((item) => !hasSelection || visibleEntries.some((entry) => entry.object === item.slug) || visibleResources.some((resource) => resource.object === item.slug))
 
   function remember(event: MouseEvent<HTMLElement>) {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
@@ -72,7 +65,7 @@ export function DesignDirectory({ articles, source = "topic" }: { articles: Arti
 
   return <section ref={root} data-design-directory data-selected-object={object?.slug ?? "all"} data-selected-direction={direction?.slug ?? "all"} data-selected-format={format?.slug ?? "all"} aria-label="设计对象目录" className="scroll-mt-20" onClickCapture={remember}>
     {interaction ? <p className="my-4 text-sm leading-7 text-muted">交互设计 · 查看操作流程、状态反馈与异常返回，相关业务图解直接列为参考。</p> : <div role="group" aria-label="设计对象" className="sticky top-16 z-10 my-4 flex gap-2 overflow-x-auto border-b border-line bg-white/95 py-3 backdrop-blur">
-      <button type="button" data-design-object="all" aria-pressed={!object} onClick={() => select({ object: undefined, direction: undefined })} className={chip(!object)}>全部<span className="ml-2 text-xs opacity-70">{counts() + other.length}</span></button>
+      <button type="button" data-design-object="all" aria-pressed={!object} onClick={() => select({ object: undefined, direction: undefined })} className={chip(!object)}>全部<span className="ml-2 text-xs opacity-70">{allCount}</span></button>
       {objects.map((item) => <button key={item.slug} type="button" data-design-object={item.slug} aria-pressed={object?.slug === item.slug} onClick={() => select({ object: item.slug, direction: undefined })} className={chip(object?.slug === item.slug)}>{item.title}<span className="ml-2 text-xs opacity-70">{counts(item.slug)}</span></button>)}
     </div>}
     {object && !interaction ? <div role="group" aria-label="设计工作方向" className="mb-4 flex flex-wrap gap-2">
@@ -87,8 +80,8 @@ export function DesignDirectory({ articles, source = "topic" }: { articles: Arti
       </div>
     </details>
     {shownObjects.map((item) => {
-      const itemEntries = entries.filter((entry) => entry.object === item.slug && matches(entry) && articleMatchesFormat(entry.slug))
-      const related = resources.filter((resource) => resource.object === item.slug && matches(resource) && (!format || resource.format === format.slug))
+      const itemEntries = visibleEntries.filter((entry) => entry.object === item.slug)
+      const related = visibleResources.filter((resource) => resource.object === item.slug)
       return <section key={item.slug} data-design-section={item.slug} aria-labelledby={`design-${item.slug}-title`} className="mb-10">
         <h2 id={`design-${item.slug}-title`} className="text-xl font-semibold text-ink">{item.title}<span className="ml-3 text-sm font-normal text-muted">{itemEntries.length + related.length} 项资料</span></h2>
         <p className="mt-2 text-sm leading-7 text-muted">{direction ? direction.description : item.description}</p>
@@ -104,6 +97,6 @@ export function DesignDirectory({ articles, source = "topic" }: { articles: Arti
       </section>
     })}
     {other.length ? <section aria-label="其他相关参考" className="mb-6"><h2 className="font-semibold">其他相关参考 · {other.length} 篇</h2><div className="mt-4 grid gap-4 md:grid-cols-2">{other.map((article) => <ArticleCard key={article.slug} article={article} href={designArticleHref(article.slug, returnTo)} stepLabel="相关参考" />)}</div></section> : null}
-    {!shownObjects.length ? <p className="p-6 text-sm text-muted">没有符合当前筛选的设计资料。</p> : null}
+    {!total ? <p data-design-empty className="rounded-lg border border-line bg-paper p-4 text-sm leading-7 text-muted">{[object?.title, direction?.title, format?.title].filter(Boolean).join(" · ") || "当前筛选"}：没有符合筛选条件的设计资料。可调整上方条件继续查看。</p> : null}
   </section>
 }

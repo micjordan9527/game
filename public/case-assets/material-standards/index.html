@@ -139,6 +139,8 @@ button,input{font:inherit}button{cursor:pointer;border:0}
 /* V1.85：为全民代理原图保留稳定展示空间。 */
 .all-agent-asset{display:grid;grid-template-rows:300px auto;align-items:center}
 @media(max-width:800px){.all-agent-asset{grid-template-rows:200px auto}.all-agent-asset img{max-height:200px}}
+
+.spec-verification{background:#f6f8fa;border:1px solid #d7e0e8;color:#506074;overflow-wrap:anywhere}.spec-verification>b{display:block;font-size:12px;color:#65768b}.verification-status{display:block;margin-top:8px;color:#7d541c;font-size:14px;line-height:1.6}.spec-verification p{margin:8px 0 0}.spec-verification dl{margin:10px 0 0}.spec-verification dl>div{display:grid;grid-template-columns:78px minmax(0,1fr);gap:10px;border-top:1px solid #dce4eb;padding:8px 0}.spec-verification dt{font-weight:700}.spec-verification dd{margin:0}.spec-verification nav{display:flex;flex-wrap:wrap;gap:8px 15px;margin-top:10px}.spec-verification a{color:#1765ac;text-underline-offset:3px}.spec-verification a:hover{text-decoration:underline}
 </style>
 <style>
 /* V1.72: 目录和快速入口共用内容状态，沿用现有文字与卡片样式。 */
@@ -573,11 +575,12 @@ body {
 
 </head>
 <body><div class="shell"><aside class="sidebar"><div class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="brand"><span class="brand-u" aria-label="U.GAME" role="img"><span class="brand-u-ring-track" aria-hidden="true"></span><span class="brand-u-ring-light" aria-hidden="true"></span><span class="brand-u-letter">U</span></span><span class="brand-wordmark">U.GAME</span></div><nav class="nav"><div class="nav-group open" data-group="quick"><button type="button" class="nav-parent active" data-target="quick" title="快速开始"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.5 10.5 8.5-7 8.5 7v9a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5Z"></path><path d="M9 21v-7h6v7"></path></svg><span>快速开始</span></button><div class="nav-sub"><button type="button" data-target="quick-flow" title="使用流程"><span>使用流程</span></button><button type="button" data-target="quick-links" title="常用素材入口"><span>常用素材入口</span></button><button type="button" data-target="quick-updates" title="最近更新"><span>最近更新</span></button></div></div><div class="nav-group" data-group="brand"><button type="button" class="nav-parent" data-target="brand" title="品牌标识"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 8 4.5-8 4.5-8-4.5Z"></path><path d="m4 12 8 4.5 8-4.5M4 16.5l8 4.5 8-4.5"></path></svg><span>品牌标识</span></button><div class="nav-sub"><button type="button" data-target="brand-logo" title="品牌 Logo"><span>品牌 Logo</span></button><button type="button" data-target="terms-logo" title="服务条款 Logo"><span>服务条款 Logo</span></button></div></div><div class="nav-group" data-group="home"><button type="button" class="nav-parent" data-target="home" title="首页素材"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="8.5" cy="9" r="1.4"></circle><path d="m21 15-4.2-4.2L7 20"></path></svg><span>首页素材</span></button><div class="nav-sub"><button type="button" data-target="banner" title="首页 Banner"><span>首页 Banner</span></button><button type="button" data-target="home-popup" title="首页弹窗"><span>首页弹窗</span></button><button type="button" data-target="menu-icons" title="菜单图标"><span>菜单图标</span></button></div></div><div class="nav-group" data-group="account"><button type="button" class="nav-parent" data-target="account" title="账号素材"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20a6.5 6.5 0 0 1 13 0"></path></svg><span>账号素材</span></button><div class="nav-sub"><button type="button" data-target="login-visual" title="登录注册图"><span>登录注册图</span></button></div></div><div class="nav-group" data-group="operations"><button type="button" class="nav-parent" data-target="operations" title="运营活动"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h10l6-4v12l-6-4H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2Z"></path><path d="m7 14 1.2 5h3.2l-1-5"></path></svg><span>运营活动</span></button><div class="nav-sub"><button type="button" data-target="activity-list" title="活动图"><span>活动图</span></button><button type="button" data-target="red-packet" title="红包"><span>红包</span></button><button type="button" data-target="turntable" title="转盘"><span>转盘</span></button><button type="button" data-target="tg-assets" title="TG 宣传图"><span>TG 宣传图</span></button></div></div><div class="nav-group" data-group="games"><button type="button" class="nav-parent" data-target="games" title="游戏素材"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 8h11a4 4 0 0 1 3.7 5.5l-1.2 3a2.3 2.3 0 0 1-3.8.8l-1.7-1.6h-5l-1.7 1.6a2.3 2.3 0 0 1-3.8-.8l-1.2-3A4 4 0 0 1 6.5 8Z"></path><path d="M8 11v4m-2-2h4m7-1h.01M19 14h.01"></path></svg><span>游戏素材</span></button><div class="nav-sub"><button type="button" data-target="game-cover" title="游戏封面图"><span>游戏封面图</span></button><button type="button" data-target="venue-logo" title="场馆 Logo"><span>场馆 Logo</span></button></div></div><div class="nav-group" data-group="changelog"><button type="button" class="nav-parent" data-target="changelog" title="更新记录"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8a9 9 0 1 1-1 5"></path><path d="M4 3v5h5M12 7v5l3 2"></path></svg><span>更新记录</span></button></div></nav></aside>
-<main class="page"><header class="topbar"><div class="heading"><h1>代理素材规范中心</h1><p>供代理站点人员查阅、制作与核对素材</p></div><div class="search site-search" data-site-search-wrap=""><span aria-hidden="true">⌕</span><input type="search" data-site-search="" autocomplete="off" placeholder="搜索素材、尺寸、命名…" aria-label="搜索素材规范"><div class="search-results" data-search-results="" hidden=""></div></div><button class="version" type="button" data-target="changelog" title="查看更新记录">版本V.186</button></header><section class="intro"><div class="crumb">快速开始</div><h2>代理素材规范中心</h2><p>供代理站点人员查阅、制作与核对素材</p></section><section class="module-page"><div class="quick-purpose"><article class="card"><h3>规范用途</h3><p>供代理站点人员统一查阅素材规格、实际页面位置与 Figma 源稿，减少制作与上线时的版本偏差。</p></article><article class="card"><h3>使用原则</h3><ul class="quick-rule"><li>先进入对应素材页确认规格与使用位置。</li><li>实际页面预览仅作位置与比例核对，不裁切替换。</li><li>“内容已录入”表示资料已收录，不代表交付验收通过；“含待确认项”请查看模块说明。</li></ul></article></div><section class="quick-section" id="quick-flow"><div class="quick-section-head"><h3>使用流程</h3><p>从确认规格到页面核验</p></div><div class="quick-flow"><div class="flow-step"><b>01</b><span>选择素材类型</span></div><div class="flow-step"><b>02</b><span>查看规格与源稿</span></div><div class="flow-step"><b>03</b><span>对照实际页面</span></div><div class="flow-step"><b>04</b><span>按已确认规则导出</span></div><div class="flow-step"><b>05</b><span>完成页面核验</span></div></div></section><section class="quick-section" id="quick-links"><div class="quick-section-head"><h3>常用素材入口</h3><p>进入模块查看内容及待确认项</p></div><div class="module-grid"><article class="card module-card" data-module-card="banner"><h3>首页 Banner</h3><p>首页 PC / H5 Banner 规格与实际页面预览。</p><p class="module-content-status">内容已录入 · PC / H5 预览已提供。</p><button type="button" class="module-link" data-target="banner">进入模块 →</button></article><article class="card module-card" data-module-card="brand-logo"><h3>品牌 Logo</h3><p>首页、登录注册、浏览器与 PWA 的品牌 Logo 规格及源图。</p><p class="module-content-status">含待确认项 · 首页、浏览器及 PWA 预览已提供；待确认：浏览器 / PWA 的导出与压缩参数。</p><button type="button" class="module-link" data-target="brand-logo">进入模块 →</button></article><article class="card module-card" data-module-card="red-packet"><h3>红包</h3><p>红包入口、提示窗、标题栏、状态背景与关闭按钮。</p><p class="module-content-status">含待确认项 · PC / H5 预览已提供；待确认：中奖标题栏标注与示例图层尺寸不一致。</p><button type="button" class="module-link" data-target="red-packet">进入模块 →</button></article><article class="card module-card" data-module-card="game-cover"><h3>游戏封面图</h3><p>游戏封面图规格与 PC / H5 实际页面预览。</p><p class="module-content-status">内容已录入 · PC / H5 预览已提供。</p><button type="button" class="module-link" data-target="game-cover">进入模块 →</button></article><article class="card module-card" data-module-card="venue-logo"><h3>场馆 Logo</h3><p>场馆 Logo 分类浏览、单个文件与压缩包下载。</p><p class="module-content-status">内容已录入 · H5 预览已提供。</p><button type="button" class="module-link" data-target="venue-logo">进入模块 →</button></article></div></section><section class="quick-section" id="quick-updates"><div class="quick-section-head"><h3>最近更新</h3><button class="module-link" type="button" data-target="changelog">查看更新记录 →</button></div><article class="card recent"><div class="recent-item"><div><b>V1.74</b><span> · 2026.10.07<br>精修左侧菜单层级、图标、选中状态与收起交互。</span></div><button type="button" data-target="changelog">查看 →</button></div><div class="recent-item"><div><b>V1.73</b><span> · 2026.10.06<br>开启关键词搜索与预览图片大图查看。</span></div><button type="button" data-target="changelog">查看 →</button></div><div class="recent-item"><div><b>V1.72</b><span> · 2026.10.06<br>统一文件版本与素材内容状态；同步最近更新与更新记录。</span></div><button type="button" data-target="changelog">查看 →</button></div></article></section></section></main></div>
+<main class="page"><header class="topbar"><div class="heading"><h1>代理素材规范中心</h1><p>供代理站点人员查阅、制作与核对素材</p></div><div class="search site-search" data-site-search-wrap=""><span aria-hidden="true">⌕</span><input type="search" data-site-search="" autocomplete="off" placeholder="搜索素材、尺寸、命名…" aria-label="搜索素材规范"><div class="search-results" data-search-results="" hidden=""></div></div><button class="version" type="button" data-target="changelog" title="查看更新记录">版本V.187</button></header><section class="intro"><div class="crumb">快速开始</div><h2>代理素材规范中心</h2><p>供代理站点人员查阅、制作与核对素材</p></section><section class="module-page"><div class="quick-purpose"><article class="card"><h3>规范用途</h3><p>供代理站点人员统一查阅素材规格、实际页面位置与 Figma 源稿，减少制作与上线时的版本偏差。</p></article><article class="card"><h3>使用原则</h3><ul class="quick-rule"><li>先进入对应素材页确认规格与使用位置。</li><li>实际页面预览仅作位置与比例核对，不裁切替换。</li><li>“内容已录入”表示资料已收录，不代表交付验收通过；“含待确认项”请查看模块说明。</li></ul></article></div><section class="quick-section" id="quick-flow"><div class="quick-section-head"><h3>使用流程</h3><p>从确认规格到页面核验</p></div><div class="quick-flow"><div class="flow-step"><b>01</b><span>选择素材类型</span></div><div class="flow-step"><b>02</b><span>查看规格与源稿</span></div><div class="flow-step"><b>03</b><span>对照实际页面</span></div><div class="flow-step"><b>04</b><span>按已确认规则导出</span></div><div class="flow-step"><b>05</b><span>完成页面核验</span></div></div></section><section class="quick-section" id="quick-links"><div class="quick-section-head"><h3>常用素材入口</h3><p>进入模块查看内容及待确认项</p></div><div class="module-grid"><article class="card module-card" data-module-card="banner"><h3>首页 Banner</h3><p>首页 PC / H5 Banner 规格与实际页面预览。</p><p class="module-content-status">内容已录入 · PC / H5 预览已提供。</p><button type="button" class="module-link" data-target="banner">进入模块 →</button></article><article class="card module-card" data-module-card="brand-logo"><h3>品牌 Logo</h3><p>首页、登录注册、浏览器与 PWA 的品牌 Logo 规格及源图。</p><p class="module-content-status">含待确认项 · 首页、浏览器及 PWA 预览已提供；待确认：浏览器 / PWA 的导出与压缩参数。</p><button type="button" class="module-link" data-target="brand-logo">进入模块 →</button></article><article class="card module-card" data-module-card="red-packet"><h3>红包</h3><p>红包入口、提示窗、标题栏、状态背景与关闭按钮。</p><p class="module-content-status">含待确认项 · PC / H5 预览已提供；待确认：中奖标题栏标注与示例图层尺寸不一致。</p><button type="button" class="module-link" data-target="red-packet">进入模块 →</button></article><article class="card module-card" data-module-card="game-cover"><h3>游戏封面图</h3><p>游戏封面图规格与 PC / H5 实际页面预览。</p><p class="module-content-status">内容已录入 · PC / H5 预览已提供。</p><button type="button" class="module-link" data-target="game-cover">进入模块 →</button></article><article class="card module-card" data-module-card="venue-logo"><h3>场馆 Logo</h3><p>场馆 Logo 分类浏览、单个文件与压缩包下载。</p><p class="module-content-status">内容已录入 · H5 预览已提供。</p><button type="button" class="module-link" data-target="venue-logo">进入模块 →</button></article></div></section><section class="quick-section" id="quick-updates"><div class="quick-section-head"><h3>最近更新</h3><button class="module-link" type="button" data-target="changelog">查看更新记录 →</button></div><article class="card recent"><div class="recent-item"><div><b>V1.74</b><span> · 2026.10.07<br>精修左侧菜单层级、图标、选中状态与收起交互。</span></div><button type="button" data-target="changelog">查看 →</button></div><div class="recent-item"><div><b>V1.73</b><span> · 2026.10.06<br>开启关键词搜索与预览图片大图查看。</span></div><button type="button" data-target="changelog">查看 →</button></div><div class="recent-item"><div><b>V1.72</b><span> · 2026.10.06<br>统一文件版本与素材内容状态；同步最近更新与更新记录。</span></div><button type="button" data-target="changelog">查看 →</button></div></article></section></section></main></div>
 <script>
 (() => {
   // 文件版本和最近更新统一来自此记录；不代表各素材规格同时变更。
   const releaseHistory = [
+    ['V1.87','核对登录配图宽高、红包标题栏高度与分享海报位置，分列源稿证据和待确认交付值。','2026.11.12','login-visual'],
     ['V1.86','点击大图周围任意蒙版空白区域，与关闭按钮使用相同退场效果。','2026.10.23','all-agent'],
     ['V1.85','Tab 规格内容轻淡入，预览图加载完成后柔和切换，快速切换跟随最新选择。','2026.10.23','all-agent'],
     ['V1.84','素材页 Tab 选中背景平滑滑动，支持多行布局及减少动态效果设置。','2026.10.23','all-agent'],
@@ -627,7 +630,7 @@ body {
   const nav = document.querySelector('.nav');
   const initialVersion = page.querySelector('.version');
   if(initialVersion){
-    initialVersion.textContent = '版本V.186';
+    initialVersion.textContent = '版本V.187';
     initialVersion.title = '查看更新记录';
   }
   const brandMark = document.querySelector('.brand-mark');
@@ -698,25 +701,59 @@ body {
   }
 
   function chrome(crumb,title,description){
-    return '<header class="topbar"><div class="heading"><h1>'+escapeHtml(title)+'</h1><p>'+escapeHtml(description)+'</p></div><div class="search site-search" data-site-search-wrap><span aria-hidden="true">⌕</span><input type="search" data-site-search autocomplete="off" placeholder="搜索素材、尺寸、命名…" aria-label="搜索素材规范"><div class="search-results" data-search-results hidden></div></div><button class="version" type="button" data-target="changelog" title="查看更新记录">版本V.186</button></header><section class="intro"><div class="crumb">'+escapeHtml(crumb)+'</div><h2>'+escapeHtml(title)+'</h2><p>'+escapeHtml(description)+'</p></section>';
+    return '<header class="topbar"><div class="heading"><h1>'+escapeHtml(title)+'</h1><p>'+escapeHtml(description)+'</p></div><div class="search site-search" data-site-search-wrap><span aria-hidden="true">⌕</span><input type="search" data-site-search autocomplete="off" placeholder="搜索素材、尺寸、命名…" aria-label="搜索素材规范"><div class="search-results" data-search-results hidden></div></div><button class="version" type="button" data-target="changelog" title="查看更新记录">版本V.187</button></header><section class="intro"><div class="crumb">'+escapeHtml(crumb)+'</div><h2>'+escapeHtml(title)+'</h2><p>'+escapeHtml(description)+'</p></section>';
   }
 
   // 只描述当前文件实际收录的内容，不补写业务规格或推定验收通过。
   const moduleContent = {
-    'all-agent':{description:'全民代理顶部横幅、分享海报规格及 PC / H5 实际页面预览。',preview:'3 张素材与 PC / H5 预览已提供',pending:['分享海报的使用场景标注与展示页面不一致']},
+    'all-agent':{description:'全民代理顶部横幅、分享海报规格及 PC / H5 实际页面预览。',preview:'3 张素材与 PC / H5 预览已提供',pending:['分享海报源稿中的场景文字待同步；本站使用位置已按展示页核对']},
     'brand-logo':{description:'首页、登录注册、浏览器与 PWA 的品牌 Logo 规格及源图。',preview:'首页、浏览器及 PWA 预览已提供',pending:['浏览器 / PWA 的导出与压缩参数']},
     'terms-logo':{description:'服务条款 Logo 源图及 PC / H5 使用页面。',preview:'PC / H5 预览已提供',pending:['导出与压缩参数']},
     'banner':{description:'首页 PC / H5 Banner 尺寸、格式、命名与导出规格。',preview:'PC / H5 规格及 Figma 源稿',pending:[]},
     'home-popup':{description:'PC / H5 首页弹窗模板、源图与实际使用页面。',preview:'PC / H5 预览已提供',pending:['导出与压缩参数']},
     'menu-icons':{description:'PC / H5 菜单图标尺寸、格式与使用位置。',preview:'PC / H5 预览已提供',pending:['H5 导出与压缩参数']},
-    'login-visual':{description:'登录注册配图规格、源图与 PC / H5 使用页面。',preview:'PC / H5 预览已提供',pending:['PC 尺寸标注与图层宽高方向不一致']},
+    'login-visual':{description:'登录注册配图规格、源图与 PC / H5 使用页面。',preview:'PC / H5 预览已提供',pending:['PC 交付尺寸待确认：文字 655 × 482，图层 482 × 655']},
     'activity-list':{description:'活动封面与详情图规格，支持 PC / H5 切换。',preview:'封面 / 详情的 PC / H5 预览已提供',pending:[]},
-    'red-packet':{description:'红包入口、提示窗、标题栏、状态背景与关闭按钮。',preview:'PC / H5 预览已提供',pending:['中奖标题栏标注与示例图层尺寸不一致']},
+    'red-packet':{description:'红包入口、提示窗、标题栏、状态背景与关闭按钮。',preview:'PC / H5 预览已提供',pending:['中奖标题栏交付高度待确认：文字 180，图层 178']},
     'turntable':{description:'转盘主体、指针、奖励底图与奖励图标。',preview:'PC / H5 预览已提供',pending:['导出与压缩参数']},
     'tg-assets':{description:'TG 宣传图规格与单张完整素材预览。',preview:'单张素材预览已提供',pending:[]},
     'game-cover':{description:'游戏封面图规格与 PC / H5 实际页面预览。',preview:'PC / H5 预览已提供',pending:[]},
     'venue-logo':{description:'场馆 Logo 分类浏览、单个文件与压缩包下载。',preview:'H5 预览已提供',pending:[]}
   };
+
+  const specVerificationData = {
+    'login-visual':{
+      status:'PC 交付尺寸待确认',
+      summary:'当前源稿文字是 655 × 482，图层是 482 × 655。两者宽高相反，不能任选一组直接制作。',
+      rows:[['已核对','PC 图层为竖图；本页展示文件为 942 × 1280 px'],['确认后再做','统一源稿文字与图层，再按确认尺寸使用原稿导出倍率']],
+      links:[['源稿尺寸文字','127-31277'],['PC 配图图层','127-31288']]
+    },
+    'login-h5':{
+      status:'H5 源稿尺寸一致：375 × 262 px',
+      summary:'H5 源稿文字与配图图层的宽高一致。本页展示文件为 750 × 524 px，不能当作 3X 交付文件。',
+      rows:[['已核对','文字与图层均为 375 × 262 px'],['交付时核对','原稿标注 3X PNG；应另外核对最终导出文件的倍率与格式']],
+      links:[['H5 源稿文字','127-31299'],['H5 配图图层','127-31297']]
+    },
+    'red-packet':{
+      status:'标题栏交付高度待确认',
+      summary:'当前源稿文字是 292 × 180，标题栏图层是 292 × 178。宽度一致，高度相差 2 px；本页预览文件不能代替交付规格。',
+      rows:[['已核对','标题栏图层为 292 × 178 px；展示文件为 608 × 360 px'],['确认后再做','统一标题栏高度，再与弹窗背景和状态素材核对']],
+      links:[['源稿尺寸文字','126-27017'],['中奖标题栏图层','126-26871']]
+    },
+    'all-agent':{
+      status:'本站使用位置已核对；源稿文字待同步',
+      summary:'分享海报图层及 PC / H5 分享展示均对应海报上部宣传图。本站将其与顶部横幅分开标注。',
+      rows:[['已核对','图层与本页素材均为 300 × 368 px，不含邀请码、链接与二维码'],['源稿待同步','场景文字仍写“顶部横幅”；需要与分享海报展示保持一致']],
+      links:[['源稿场景文字','501-16864'],['分享海报图层','501-17735'],['H5 分享展示','501-16723'],['PC 分享展示','501-16951']]
+    }
+  };
+  function specVerification(id){
+    const item = specVerificationData[id];
+    if(!item) return '';
+    const source = 'https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/素材规范?node-id=';
+    return '<aside class="notice spec-verification" id="spec-check-'+id+'" data-spec-verification="'+id+'" aria-label="规格核对记录"><b>规格核对 · 2026-11-12</b><strong class="verification-status">'+escapeHtml(item.status)+'</strong><p>'+escapeHtml(item.summary)+'</p><dl>'+item.rows.map(([label,text]) => '<div><dt>'+escapeHtml(label)+'</dt><dd>'+escapeHtml(text)+'</dd></div>').join('')+'</dl><nav aria-label="规格核对依据">'+item.links.map(([label,node]) => '<a href="'+source+node+'" target="_blank" rel="noopener">'+escapeHtml(label)+' ↗</a>').join('')+'</nav></aside>';
+  }
+
   const moduleStatusLabel = id => moduleContent[id].pending.length ? '含待确认项' : '内容已录入';
   const moduleStatusText = id => {
     const item = moduleContent[id];
@@ -745,9 +782,9 @@ body {
     'banner':'347x110 1261x300 banner-h5 banner-pc 首页 头部',
     'home-popup':'首页弹窗 游戏弹窗 模板 PC H5',
     'menu-icons':'48x48 24x24 菜单图标 字体图标',
-    'login-visual':'655x482 375x262 登录 注册 登录注册图',
+    'login-visual':'655x482 482x655 375x262 942x1280 登录 注册 登录注册图 交付尺寸待确认 源稿图层',
     'activity-list':'407x186 375 活动封面 活动详情 列表',
-    'red-packet':'80x80 132x32 292x180 301x429 红包 提示窗 标题栏 关闭按钮',
+    'red-packet':'80x80 132x32 292x180 292x178 608x360 301x429 红包 提示窗 标题栏 关闭按钮 交付高度待确认',
     'turntable':'750x1276 160x160 517x517 64x64 转盘 指针 奖励',
     'tg-assets':'1448x1086 1920x1080 TG 宣传图 运营图',
     'game-cover':'600x800 游戏封面 JPG',
@@ -1086,7 +1123,7 @@ body {
 
   function loginVisual(){
     const variants = {
-      pc:[['使用场景','PC 登录注册图'],['尺寸','655 × 482（Figma 文字标注）'],['建议格式','WEBP / PNG'],['命名','登录注册图-PC'],['导出','3X PNG'],['压缩','默认参数']],
+      pc:[['使用场景','PC 登录注册图'],['交付尺寸','待确认（源稿文字与图层宽高相反）'],['源稿文字','655 × 482 px'],['源稿图层','482 × 655 px · 竖图'],['本页预览','942 × 1280 px · 展示文件，不作交付尺寸'],['建议格式','WEBP / PNG'],['命名','登录注册图-PC'],['导出','3X PNG（原稿标注；尺寸待确认）'],['压缩','默认参数（原稿标注）']],
       h5:[['使用场景','H5 登录注册图'],['尺寸','375 × 262'],['建议格式','WEBP / PNG'],['命名','登录注册图-H5'],['导出','3X PNG'],['压缩','默认参数']]
     };
     const rows = data => data.map(([key,value]) => '<div class="row"><b>'+key+'</b><span>'+value+'</span></div>').join('');
@@ -1097,13 +1134,13 @@ body {
       ['实际页面','已补充完整 PC / H5 页面图，交付前请逐项核对']
     ].map(([title,description],index) => '<article class="card check"><i class="check-icon">'+(checkIcons[index] || checkIcons[0] || '')+'</i><div><strong>'+title+'</strong><small>'+description+'</small></div></article>').join('');
     return chrome('账号素材','登录注册图','登录与注册页面的配图交付规范')+
-      '<section class="grid module-page"><article class="card spec"><div class="title"><i class="title-icon">'+contentIcons.spec+'</i>登录注册图规格</div><div class="tabs"><button class="active" type="button" data-login-visual-tab="pc">PC</button><button type="button" data-login-visual-tab="h5">H5</button></div><div class="rows" data-login-visual-rows>'+rows(variants.pc)+'</div><a class="figma" href="https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/%25E7%25B4%25A0%25E6%259D%2590%25E8%258C%2583?node-id=127-31276" target="_blank" rel="noopener">'+contentIcons.figma+'打开 Figma 源稿　→</a><div class="notice"><b>⚠ 登录注册图制作提醒</b><br>PC 规格的 Figma 文字标注为 655 × 482，但预览图层为 482 × 655；该项需以确认后的最终尺寸交付，不能自行判断宽高方向。</div></article>'+
+      '<section class="grid module-page"><article class="card spec"><div class="title"><i class="title-icon">'+contentIcons.spec+'</i>登录注册图规格</div><div class="tabs"><button class="active" type="button" data-login-visual-tab="pc">PC</button><button type="button" data-login-visual-tab="h5">H5</button></div><div class="rows" data-login-visual-rows>'+rows(variants.pc)+'</div><a class="figma" href="https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/%25E7%25B4%25A0%25E6%259D%2590%25E8%258C%2583?node-id=127-31276" target="_blank" rel="noopener">'+contentIcons.figma+'打开 Figma 源稿　→</a><div data-login-verification>'+specVerification('login-visual')+'</div></article>'+
       '<article class="card preview"><div class="preview-head"><div class="title"><i class="title-icon">'+contentIcons.preview+'</i>实际页面预览（Figma）</div><small>待提供完整 PC / H5 页面原图，不做裁切</small></div><div class="preview-canvas"><div class="frame pc pending-frame"><span class="tag">PC 登录注册页面</span><div class="pending-copy"><strong>待提供</strong><span>完整 PC 页面原图</span></div></div><div class="frame h5 pending-frame"><span class="tag">H5 登录注册页面</span><div class="pending-copy"><strong>待提供</strong><span>完整 H5 页面原图</span></div></div></div></article><section class="checklist">'+checks+'</section></section>';
   }
 
   function loginVisualV152(){
     const variants = {
-      pc:[['使用场景','PC 登录注册图'],['尺寸','655 × 482（Figma 文字标注）'],['建议格式','WEBP / PNG'],['命名','登录注册图-PC'],['导出','3X PNG'],['压缩','默认参数']],
+      pc:[['使用场景','PC 登录注册图'],['交付尺寸','待确认（源稿文字与图层宽高相反）'],['源稿文字','655 × 482 px'],['源稿图层','482 × 655 px · 竖图'],['本页预览','942 × 1280 px · 展示文件，不作交付尺寸'],['建议格式','WEBP / PNG'],['命名','登录注册图-PC'],['导出','3X PNG（原稿标注；尺寸待确认）'],['压缩','默认参数（原稿标注）']],
       h5:[['使用场景','H5 登录注册图'],['尺寸','375 × 262'],['建议格式','WEBP / PNG'],['命名','登录注册图-H5'],['导出','3X PNG'],['压缩','默认参数']]
     };
     const rows = data => data.map(([key,value]) => '<div class="row"><b>'+key+'</b><span>'+value+'</span></div>').join('');
@@ -1113,14 +1150,14 @@ body {
       ['导出文件','按 3X PNG 导出并使用默认压缩参数'],
       ['实际页面','已补充完整 PC / H5 页面图，交付前请逐项核对']
     ].map(([title,description],index) => '<article class="card check"><i class="check-icon">'+(checkIcons[index] || checkIcons[0] || '')+'</i><div><strong>'+title+'</strong><small>'+description+'</small></div></article>').join('');
-    const spec = '<article class="card spec"><div class="title"><i class="title-icon">'+contentIcons.spec+'</i>登录注册图规格</div><div class="tabs"><button class="active" type="button" data-login-visual-tab="pc">PC</button><button type="button" data-login-visual-tab="h5">H5</button></div><div class="rows" data-login-visual-rows>'+rows(variants.pc)+'</div><div class="login-asset"><div class="login-asset-copy"><b>对应素材图</b><small data-login-asset-label>PC 登录注册图</small></div><div class="login-asset-image"><img data-login-asset src="'+loginVisualImages.pcAsset+'" alt="PC 登录注册图素材"></div></div><a class="figma" href="https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/%25E7%25B4%25A0%25E6%259D%2590%25E8%25A7%2584%25E8%258C%2583?node-id=127-31276" target="_blank" rel="noopener">'+contentIcons.figma+'打开 Figma 源稿　→</a><div class="notice"><b>⚠ 登录注册图制作提醒</b><br>PC 规格的 Figma 文字标注为 655 × 482，但预览图层为 482 × 655；该项需以确认后的最终尺寸交付，不能自行判断宽高方向。</div></article>';
+    const spec = '<article class="card spec"><div class="title"><i class="title-icon">'+contentIcons.spec+'</i>登录注册图规格</div><div class="tabs"><button class="active" type="button" data-login-visual-tab="pc">PC</button><button type="button" data-login-visual-tab="h5">H5</button></div><div class="rows" data-login-visual-rows>'+rows(variants.pc)+'</div><div class="login-asset"><div class="login-asset-copy"><b>对应素材图</b><small data-login-asset-label>PC 登录注册图</small></div><div class="login-asset-image"><img data-login-asset src="'+loginVisualImages.pcAsset+'" alt="PC 登录注册图素材"></div></div><a class="figma" href="https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/%25E7%25B4%25A0%25E6%259D%2590%25E8%25A7%2584%25E8%258C%2583?node-id=127-31276" target="_blank" rel="noopener">'+contentIcons.figma+'打开 Figma 源稿　→</a><div data-login-verification>'+specVerification('login-visual')+'</div></article>';
     const preview = '<article class="card preview"><div class="preview-head"><div class="title"><i class="title-icon">'+contentIcons.preview+'</i>实际页面预览（Figma）</div><small>完整 PC / H5 页面原图，不做裁切</small></div><div class="preview-canvas login-preview-canvas"><div class="frame pc"><span class="tag">PC 登录注册页面</span><img src="'+loginVisualImages.pcPage+'" alt="PC 登录注册页面完整预览"></div><div class="frame h5"><span class="tag">H5 登录注册页面</span><img src="'+loginVisualImages.h5Page+'" alt="H5 登录注册页面完整预览"></div></div></article>';
     return chrome('账号素材','登录注册图','登录与注册页面的配图交付规范')+'<section class="grid module-page">'+spec+preview+'<section class="checklist">'+checks+'</section></section>';
   }
 
   function bindLoginVisualTabsV152(){
     const variants = {
-      pc:[['使用场景','PC 登录注册图'],['尺寸','655 × 482（Figma 文字标注）'],['建议格式','WEBP / PNG'],['命名','登录注册图-PC'],['导出','3X PNG'],['压缩','默认参数']],
+      pc:[['使用场景','PC 登录注册图'],['交付尺寸','待确认（源稿文字与图层宽高相反）'],['源稿文字','655 × 482 px'],['源稿图层','482 × 655 px · 竖图'],['本页预览','942 × 1280 px · 展示文件，不作交付尺寸'],['建议格式','WEBP / PNG'],['命名','登录注册图-PC'],['导出','3X PNG（原稿标注；尺寸待确认）'],['压缩','默认参数（原稿标注）']],
       h5:[['使用场景','H5 登录注册图'],['尺寸','375 × 262'],['建议格式','WEBP / PNG'],['命名','登录注册图-H5'],['导出','3X PNG'],['压缩','默认参数']]
     };
     const tabs = [...page.querySelectorAll('[data-login-visual-tab]')];
@@ -1133,12 +1170,14 @@ body {
       if(rows) rows.innerHTML = variants[type].map(([key,value]) => '<div class="row"><b>'+key+'</b><span>'+value+'</span></div>').join('');
       if(asset){ swapPreviewImage(asset,loginVisualImages[type+'Asset']); asset.alt = (type === 'pc' ? 'PC' : 'H5')+' 登录注册图素材'; }
       if(assetLabel) assetLabel.textContent = (type === 'pc' ? 'PC' : 'H5')+' 登录注册图';
+      const verification = page.querySelector('[data-login-verification]');
+      if(verification) verification.innerHTML = specVerification(type === 'pc' ? 'login-visual' : 'login-h5');
     }));
   }
 
   function bindLoginVisualTabs(){
     const variants = {
-      pc:[['使用场景','PC 登录注册图'],['尺寸','655 × 482（Figma 文字标注）'],['建议格式','WEBP / PNG'],['命名','登录注册图-PC'],['导出','3X PNG'],['压缩','默认参数']],
+      pc:[['使用场景','PC 登录注册图'],['交付尺寸','待确认（源稿文字与图层宽高相反）'],['源稿文字','655 × 482 px'],['源稿图层','482 × 655 px · 竖图'],['本页预览','942 × 1280 px · 展示文件，不作交付尺寸'],['建议格式','WEBP / PNG'],['命名','登录注册图-PC'],['导出','3X PNG（原稿标注；尺寸待确认）'],['压缩','默认参数（原稿标注）']],
       h5:[['使用场景','H5 登录注册图'],['尺寸','375 × 262'],['建议格式','WEBP / PNG'],['命名','登录注册图-H5'],['导出','3X PNG'],['压缩','默认参数']]
     };
     const tabs = [...page.querySelectorAll('[data-login-visual-tab]')];
@@ -1146,6 +1185,8 @@ body {
     tabs.forEach(tab => tab.addEventListener('click', () => {
       tabs.forEach(button => button.classList.toggle('active',button === tab));
       rows.innerHTML = variants[tab.dataset.loginVisualTab].map(([key,value]) => '<div class="row"><b>'+key+'</b><span>'+value+'</span></div>').join('');
+      const verification = page.querySelector('[data-login-verification]');
+      if(verification) verification.innerHTML = specVerification(tab.dataset.loginVisualTab === 'pc' ? 'login-visual' : 'login-h5');
     }));
   }
 
@@ -1265,7 +1306,7 @@ body {
     const variants = {
       entry:[['使用场景','首页入口'],['尺寸','80 × 80 px'],['建议格式','WEBP / PNG'],['命名','红包-入口图'],['导出','3X PNG'],['压缩','默认参数']],
       prompt:[['使用场景','红包'],['尺寸','132 × 32 px'],['建议格式','WEBP / PNG'],['命名','红包-提示窗'],['导出','3X PNG'],['压缩','默认参数']],
-      title:[['使用场景','红包'],['尺寸','292 × 180 px（Figma 文字标注）'],['建议格式','WEBP / PNG'],['命名','中奖标题栏'],['导出','3X PNG'],['压缩','默认参数']],
+      title:[['使用场景','红包中奖标题栏'],['交付尺寸','待确认（源稿文字与图层高度不同）'],['源稿文字','292 × 180 px'],['源稿图层','292 × 178 px'],['本页预览','608 × 360 px · 展示文件，不反推交付尺寸'],['建议格式','WEBP / PNG'],['命名','中奖标题栏'],['导出','3X PNG（原稿标注；尺寸待确认）'],['压缩','默认参数（原稿标注）']],
       unmet:[['使用场景','红包'],['尺寸','301 × 429 px'],['建议格式','WEBP / PNG'],['命名','未满足条件背景'],['导出','3X PNG'],['压缩','默认参数']],
       met:[['使用场景','红包'],['尺寸','301 × 429 px'],['建议格式','WEBP / PNG'],['命名','满足条件背景'],['导出','3X PNG'],['压缩','默认参数']],
       opened:[['使用场景','红包'],['尺寸','301 × 429 px'],['建议格式','WEBP / PNG'],['命名','开红包背景'],['导出','3X PNG'],['压缩','默认参数']],
@@ -1280,7 +1321,7 @@ body {
       ['实际页面','已提供完整 PC / H5 页面图，交付前请完成核对']
     ].map(([title,description],index) => '<article class="card check"><i class="check-icon">'+(checkIcons[index] || checkIcons[0] || '')+'</i><div><strong>'+title+'</strong><small>'+description+'</small></div></article>').join('');
     return chrome('运营活动','红包','红包入口与弹窗状态素材的交付规范')+
-      '<section class="grid module-page"><article class="card spec"><div class="title"><i class="title-icon">'+contentIcons.spec+'</i>红包素材规格</div><div class="tabs red-packet-tabs">'+tabs.map(([id,label],index) => '<button class="'+(index === 0 ? 'active' : '')+'" type="button" data-red-packet-tab="'+id+'">'+label+'</button>').join('')+'</div><div class="rows" data-red-packet-rows>'+rows(variants.entry)+'</div><div class="red-packet-asset" data-red-packet-kind="entry"><img data-red-packet-asset alt="首页入口素材切片"></div><a class="figma" href="https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/%25E7%25B4%25A0%25E6%259D%2590%25E8%258C%2583?node-id=107-19389" target="_blank" rel="noopener">'+contentIcons.figma+'打开 Figma 源稿　→</a><div class="notice"><b>⚠ 红包素材制作提醒</b><br>红包由入口、提示窗、标题栏、三种状态背景与关闭按钮组成，请按选中部件制作。中奖标题栏的 Figma 文字标注为 292 × 180，示例图层为 292 × 178，交付前需确认最终尺寸。</div></article>'+
+      '<section class="grid module-page"><article class="card spec"><div class="title"><i class="title-icon">'+contentIcons.spec+'</i>红包素材规格</div><div class="tabs red-packet-tabs">'+tabs.map(([id,label],index) => '<button class="'+(index === 0 ? 'active' : '')+'" type="button" data-red-packet-tab="'+id+'">'+label+'</button>').join('')+'</div><div class="rows" data-red-packet-rows>'+rows(variants.entry)+'</div><div class="red-packet-asset" data-red-packet-kind="entry"><img data-red-packet-asset alt="首页入口素材切片"></div><a class="figma" href="https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/%25E7%25B4%25A0%25E6%259D%2590%25E8%258C%2583?node-id=107-19389" target="_blank" rel="noopener">'+contentIcons.figma+'打开 Figma 源稿　→</a>'+specVerification('red-packet')+'</article>'+
       '<article class="card preview"><div class="preview-head"><div class="title"><i class="title-icon">'+contentIcons.preview+'</i>实际页面预览（Figma）</div><small>完整 PC / H5 页面原图，不做裁切</small></div><div class="preview-canvas red-packet-preview-canvas"><div class="frame pc"><span class="tag" data-red-packet-pc-tag>PC 首页入口</span><img data-red-packet-pc alt="PC 首页入口完整预览"></div><div class="frame h5"><span class="tag" data-red-packet-h5-tag>H5 首页入口</span><img data-red-packet-h5 alt="H5 首页入口完整预览"></div></div></article><section class="checklist">'+checks+'</section></section>';
   }
 
@@ -1288,7 +1329,7 @@ body {
     const variants = {
       entry:[['使用场景','首页入口'],['尺寸','80 × 80 px'],['建议格式','WEBP / PNG'],['命名','红包-入口图'],['导出','3X PNG'],['压缩','默认参数']],
       prompt:[['使用场景','红包'],['尺寸','132 × 32 px'],['建议格式','WEBP / PNG'],['命名','红包-提示窗'],['导出','3X PNG'],['压缩','默认参数']],
-      title:[['使用场景','红包'],['尺寸','292 × 180 px（Figma 文字标注）'],['建议格式','WEBP / PNG'],['命名','中奖标题栏'],['导出','3X PNG'],['压缩','默认参数']],
+      title:[['使用场景','红包中奖标题栏'],['交付尺寸','待确认（源稿文字与图层高度不同）'],['源稿文字','292 × 180 px'],['源稿图层','292 × 178 px'],['本页预览','608 × 360 px · 展示文件，不反推交付尺寸'],['建议格式','WEBP / PNG'],['命名','中奖标题栏'],['导出','3X PNG（原稿标注；尺寸待确认）'],['压缩','默认参数（原稿标注）']],
       unmet:[['使用场景','红包'],['尺寸','301 × 429 px'],['建议格式','WEBP / PNG'],['命名','未满足条件背景'],['导出','3X PNG'],['压缩','默认参数']],
       met:[['使用场景','红包'],['尺寸','301 × 429 px'],['建议格式','WEBP / PNG'],['命名','满足条件背景'],['导出','3X PNG'],['压缩','默认参数']],
       opened:[['使用场景','红包'],['尺寸','301 × 429 px'],['建议格式','WEBP / PNG'],['命名','开红包背景'],['导出','3X PNG'],['压缩','默认参数']],
@@ -1537,10 +1578,10 @@ body {
   const allAgentVariants = {
     h5:{label:'H5 顶部横幅',size:'347 × 140',scene:'顶部横幅',name:'横幅名称',asset:'h5-banner',pc:'pc-banner-page',h5:'h5-banner-page',pcRatio:'1578 / 809',note:'按 H5 规格制作，核对文字与主体在页面中的完整显示。'},
     pc:{label:'PC 顶部横幅',size:'600 × 232',scene:'顶部横幅',name:'横幅名称',asset:'pc-banner',pc:'pc-banner-page',h5:'h5-banner-page',pcRatio:'1578 / 809',note:'按 PC 规格制作，不以 H5 横幅拉伸替代。'},
-    poster:{label:'分享海报',size:'300 × 368',scene:'分享海报（原稿标注为“顶部横幅”）',name:'分享海报名称',asset:'poster',pc:'pc-poster-page',h5:'h5-poster-page',pcRatio:'1920 / 1080',note:'300 × 368 仅指上部宣传图，不包含下方邀请码、链接与二维码区域。原稿使用场景标注为“顶部横幅”，与分享展示页不一致，制作前请核对。'}
+    poster:{label:'分享海报',size:'300 × 368',scene:'推广分享页 · 海报上部宣传图',name:'分享海报名称',asset:'poster',pc:'pc-poster-page',h5:'h5-poster-page',pcRatio:'1920 / 1080',note:'已按 PC / H5 分享展示核对使用位置：300 × 368 px 是分享海报上部宣传图，不含下方邀请码、链接与二维码。原稿文字仍写“顶部横幅”，该文字待同步；本站按分享海报使用。'}
   };
   function allAgentRows(item){
-    return sharedRows([['使用场景',item.scene],['尺寸',item.size+' px'],['建议格式','PNG / WEBP'],['命名',item.name],['导出','3X'],['压缩','默认参数']]);
+    return sharedRows([['使用场景',item.scene],['尺寸',item.size+' px'],...(item.asset === 'poster' ? [['尺寸范围','仅上部宣传图，不含邀请码、链接与二维码'],['源稿场景文字','顶部横幅（待同步为分享海报）']] : []),['建议格式','PNG / WEBP'],['命名',item.name],['导出','3X（原稿标注）'],['压缩','默认参数（原稿标注）']]);
   }
   function allAgent(){
     const item = allAgentVariants.h5;
@@ -1552,7 +1593,7 @@ body {
       ['实际页面','对照 PC / H5 页面核对位置与比例']
     ].map(([title,description],index) => '<article class="card check"><i class="check-icon">'+checkIcons[index]+'</i><div><strong>'+title+'</strong><small>'+description+'</small></div></article>').join('');
     return chrome('运营活动','全民代理','全民代理顶部横幅与分享海报的制作规格')+
-      '<section class="grid module-page"><article class="card spec"><div class="title"><i class="title-icon">'+contentIcons.spec+'</i>全民代理规格</div><div class="tabs">'+tabs+'</div><div class="rows" data-all-agent-rows>'+allAgentRows(item)+'</div><a class="figma" href="https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/素材规范?node-id=501-15863" target="_blank" rel="noopener">'+contentIcons.figma+'打开 Figma 源稿　→</a><div class="all-agent-asset"><img data-all-agent-asset src="'+allAgentImages[item.asset]+'" alt="'+item.label+' 素材原图"><small data-all-agent-caption>'+item.label+' · '+item.size+' px</small></div><div class="notice"><b>制作与使用</b><br><span data-all-agent-note>'+item.note+'</span></div></article>'+
+      '<section class="grid module-page"><article class="card spec"><div class="title"><i class="title-icon">'+contentIcons.spec+'</i>全民代理规格</div><div class="tabs">'+tabs+'</div><div class="rows" data-all-agent-rows>'+allAgentRows(item)+'</div><a class="figma" href="https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/素材规范?node-id=501-15863" target="_blank" rel="noopener">'+contentIcons.figma+'打开 Figma 源稿　→</a><div class="all-agent-asset"><img data-all-agent-asset src="'+allAgentImages[item.asset]+'" alt="'+item.label+' 素材原图"><small data-all-agent-caption>'+item.label+' · '+item.size+' px</small></div><div class="notice"><b>制作与使用</b><br><span data-all-agent-note>'+item.note+'</span></div><div data-all-agent-verification hidden></div></article>'+
       '<article class="card preview all-agent-preview"><div class="preview-head"><div class="title"><i class="title-icon">'+contentIcons.preview+'</i>实际页面预览（Figma）</div><small>完整 PC / H5 页面，点击查看大图</small></div><div class="preview-canvas"><div class="frame pc" data-all-agent-pc-frame><span class="tag">PC 页面</span><img data-all-agent-pc src="'+allAgentImages[item.pc]+'" alt="全民代理顶部横幅 PC 实际页面完整预览"></div><div class="frame h5"><span class="tag">H5 页面</span><img data-all-agent-h5 src="'+allAgentImages[item.h5]+'" alt="全民代理顶部横幅 H5 实际页面完整预览"></div></div></article><section class="checklist">'+checks+'</section></section>';
   }
   function bindAllAgentTabs(){
@@ -1570,6 +1611,8 @@ body {
       asset.setAttribute('aria-label',asset.alt+'，点击查看大图');
       page.querySelector('[data-all-agent-caption]').textContent = item.label+' · '+item.size+' px';
       page.querySelector('[data-all-agent-note]').textContent = item.note;
+      const verification = page.querySelector('[data-all-agent-verification]');
+      if(verification){ verification.hidden = item.asset !== 'poster'; verification.innerHTML = item.asset === 'poster' ? specVerification('all-agent') : ''; }
       page.querySelector('[data-all-agent-pc-frame]').style.aspectRatio = item.pcRatio;
       ['pc','h5'].forEach(device => {
         const image = page.querySelector('[data-all-agent-'+device+']');

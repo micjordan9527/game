@@ -5,6 +5,7 @@ export type CaseItem = {
   status: "已接入" | "待补充"
   href: string
   previewSrc?: string
+  presentationKind?: string
   coverSrc?: string
   coverSrcWebp?: string
   coverSrcAvif?: string
@@ -26,6 +27,11 @@ export const caseItems: CaseItem[] = [
     status: "已接入",
     href: "/cases/white-label-official",
     previewSrc: "/case-assets/white-label-official/index.html",
+    presentationKind: "网站预览",
+    coverSrc: "/images/showcase/official-home.jpg",
+    coverAlt: "包网官网服务与页面布局预览",
+    coverWidth: 1440,
+    coverHeight: 960,
     tags: ["官网", "落地页", "静态 HTML"],
     learningGoal: "理解官网如何组织服务能力说明、咨询路径和交付可信度。",
     estimatedMinutes: 12,
@@ -39,6 +45,11 @@ export const caseItems: CaseItem[] = [
     status: "已接入",
     href: "/cases/admin-optimization",
     previewSrc: "/case-assets/admin-optimization/index.html",
+    presentationKind: "交互演示",
+    coverSrc: "/images/showcase/admin-overview.jpg",
+    coverAlt: "后台角色看板的本地演示界面",
+    coverWidth: 1440,
+    coverHeight: 960,
     tags: ["后台", "原型", "优化方案"],
     learningGoal: "依据本地新版原型复盘角色任务、口径与异常路径，并用证据清单设计同条件对照测试。",
     estimatedMinutes: 25,
@@ -47,10 +58,11 @@ export const caseItems: CaseItem[] = [
   },
   {
     slug: "bm-optimization",
-    title: "BM优化",
-    description: "用原材料标注与同内容布局示意，理解赛事、赛况与盘口分组，查看长队名和大字号的取舍。",
+    title: "BM 手机端界面对照",
+    description: "先看首页与详情页整体，再看赛事列表标注、同内容布局和小屏取舍。",
     status: "已接入",
     href: "/cases/bm-optimization",
+    presentationKind: "界面对照",
     coverSrc: "/images/cases/bm-reading-cover.jpg",
     coverAlt: "BM赛事列表结构示意：赛事身份、赛况和盘口分组",
     coverWidth: 1600,
@@ -67,6 +79,7 @@ export const caseItems: CaseItem[] = [
     description: "查看U8首页入口、底部导航与个人中心三组局部，分别放大材料中的原界面与改版示意。",
     status: "已接入",
     href: "/cases/competitor-analysis",
+    presentationKind: "分析图与视觉提案",
     coverSrc: "/case-assets/competitor-analysis/u8/u8-homepage-optimization.jpg",
     coverSrcWebp: "/case-assets/competitor-analysis/u8/u8-homepage-optimization.webp",
     coverSrcAvif: "/case-assets/competitor-analysis/u8/u8-homepage-optimization.avif",
@@ -83,4 +96,11 @@ export const caseItems: CaseItem[] = [
 
 export function getCaseItem(slug: string) {
   return caseItems.find((item) => item.slug === slug)
+}
+
+export function getCasePresentation(slug: string) {
+  const item = getCaseItem(slug)
+  const cover = item?.coverSrcAvif ?? item?.coverSrcWebp ?? item?.coverSrc
+  if (!item || !cover) throw new Error(`Case presentation missing: ${slug}`)
+  return { slug: item.slug, title: item.title, description: item.description, href: item.href, cover, kind: item.presentationKind ?? "案例" }
 }

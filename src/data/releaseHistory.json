@@ -1,34 +1,93 @@
 {
   "current": {
-    "version": 51,
-    "date": "2026-10-30",
-    "title": "BM案例先展示首页与详情页整体",
-    "summary": "标题下先看两张界面总览，手机通过首页／详情页切换，再继续阅读局部标注和布局取舍。",
+    "version": 52,
+    "date": "2026-11-12",
+    "title": "会员示例、素材核对与资料目录校正",
+    "summary": "会员列表、筛选与详情使用一致字段；三处素材规格分列源稿证据与待确认项；设计目录按实际资料计数，案例入口共用展示信息。",
     "articleSlugs": [],
     "changes": [
       {
-        "id": "bm-overview-first",
-        "title": "首页与详情页总览移到案例头部",
-        "description": "桌面并排展示两页；手机默认首页并支持切换。每张卡保留一个放大入口，继续支持适应屏幕、原尺寸、上下张及阅读位置恢复。",
-        "location": "案例 · BM手机端界面对照 · 头部",
-        "href": "/cases/bm-optimization#case-materials",
-        "linkLabel": "查看整体界面",
+        "id": "member-demo-correction",
+        "title": "会员示例的字段、筛选与详情一致",
+        "description": "会员查询使用账号、代理与独立的账号及验证状态；筛选和详情沿同一会员记录展示，并更新对应客服导览截图。",
+        "location": "案例 · 后台优化 · 客服会员列表",
+        "href": "/cases/admin-optimization#admin-role-tour",
+        "linkLabel": "查看会员列表与详情"
+      },
+      {
+        "id": "material-source-verification",
+        "title": "三处素材规格展示核对依据",
+        "description": "登录配图与红包标题栏分列源稿标注、图层尺寸和待确认交付值；全民代理海报说明推广分享页位置，并保留源稿记录。",
+        "location": "代理素材 · 登录注册／红包／全民代理",
+        "href": "/design/material-standards?module=login-visual",
+        "linkLabel": "查看登录配图核对",
         "related": {
-          "href": "/cases/bm-optimization#bm-design-rationale",
-          "label": "继续看局部拆解"
+          "href": "/design/material-standards?module=red-packet",
+          "label": "查看红包标题栏核对"
         }
       },
       {
-        "id": "bm-overview-copy",
-        "title": "整体预览使用中性图注",
-        "description": "保留既有界面局部，重新编排首页入口、赛事区、详情分类与底栏的位置说明；原始来源文件保留在页面底部。",
-        "location": "BM案例 · 首页与详情页对照",
-        "href": "/cases/bm-optimization",
-        "linkLabel": "查看BM案例"
+        "id": "design-result-counts",
+        "title": "设计目录数量与实际资料一致",
+        "description": "案例、图解、视频、规范、演示与AI工作流使用同一结果统计；筛选后零结果分类不再占正文大块。",
+        "location": "知识图解 · 设计角色",
+        "href": "/articles?role=design&format=case",
+        "linkLabel": "查看设计案例筛选"
+      },
+      {
+        "id": "shared-case-presentation",
+        "title": "案例入口共用封面与说明",
+        "description": "首页、案例页、设计目录与搜索复用案例展示信息，BM使用现有结构示意封面。",
+        "location": "首页／案例／设计目录／搜索",
+        "href": "/cases",
+        "linkLabel": "查看案例入口",
+        "related": {
+          "href": "/search?q=BM&type=%E6%A1%88%E4%BE%8B",
+          "label": "查看BM搜索结果"
+        }
+      },
+      {
+        "id": "home-navigation-current",
+        "title": "首页当前位置与最近更新准确展示",
+        "description": "首页目录按已选章节显示当前位置，最近更新直接采用已发布版本记录。",
+        "location": "首页 · 目录与最近更新",
+        "href": "/",
+        "linkLabel": "查看首页"
       }
     ]
   },
   "history": [
+    {
+      "version": 51,
+      "date": "2026-10-30",
+      "title": "BM案例先展示首页与详情页整体",
+      "summary": "标题下先看两张界面总览，手机通过首页／详情页切换，再继续阅读局部标注和布局取舍。",
+      "articleSlugs": [],
+      "changes": [
+        {
+          "id": "bm-overview-first",
+          "title": "首页与详情页总览移到案例头部",
+          "description": "桌面并排展示两页；手机默认首页并支持切换。每张卡保留一个放大入口，继续支持适应屏幕、原尺寸、上下张及阅读位置恢复。",
+          "location": "案例 · BM手机端界面对照 · 头部",
+          "href": "/cases/bm-optimization#case-materials",
+          "linkLabel": "查看整体界面",
+          "related": {
+            "href": "/cases/bm-optimization#bm-design-rationale",
+            "label": "继续看局部拆解"
+          }
+        },
+        {
+          "id": "bm-overview-copy",
+          "title": "整体预览使用中性图注",
+          "description": "保留既有界面局部，重新编排首页入口、赛事区、详情分类与底栏的位置说明；原始来源文件保留在页面底部。",
+          "location": "BM案例 · 首页与详情页对照",
+          "href": "/cases/bm-optimization",
+          "linkLabel": "查看BM案例"
+        }
+      ],
+      "publishedAt": "2026-10-30T10:42:18.695533+00:00",
+      "githubCommit": "dbeb3fd0e8dc0be18d73c3f6c562c154a387afce"
+    },
     {
       "version": 50,
       "date": "2026-10-30",

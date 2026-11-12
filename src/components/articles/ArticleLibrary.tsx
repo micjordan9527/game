@@ -10,7 +10,7 @@ import { DesignDirectory } from "@/components/design/DesignDirectory"
 import { resourceAudiences } from "@/lib/work-audiences"
 import { libraryAudience, libraryRoleParam } from "@/lib/article-library-filters"
 import { getOperationGroup } from "@/lib/operation-navigation"
-import { visibleDesignArticles } from "@/lib/design-navigation"
+import { getDesignDirectoryResults } from "@/lib/design-navigation"
 import { RoleDirectory } from "./RoleDirectory"
 import { getRoleDirectory, visibleRoleArticles } from "@/lib/role-navigation"
 import { getRoleIdentity, libraryShortcutIdentities } from "@/lib/role-identities"
@@ -69,7 +69,8 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
   )
   const operationGroup = audience === "运营" ? getOperationGroup(searchParams.get("group")) : undefined
   const groupCount = operationGroup ? filteredArticles.filter((article) => operationGroup.entries.some((entry) => entry.slug === article.slug)).length : 0
-  const visibleCount = roleDirectory ? visibleRoleArticles(roleDirectory, filteredArticles, searchParams).length : audience === "设计" || audience === "交互" ? visibleDesignArticles(filteredArticles, searchParams).length : groupCount || filteredArticles.length
+  const designResults = audience === "设计" || audience === "交互" ? getDesignDirectoryResults(filteredArticles, searchParams, "library") : undefined
+  const visibleCount = roleDirectory ? visibleRoleArticles(roleDirectory, filteredArticles, searchParams).length : designResults ? designResults.total : groupCount || filteredArticles.length
 
   function rememberPosition() {
     window.history.replaceState({ ...window.history.state, knowledgeArticleLibraryReturn: {
@@ -153,9 +154,9 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
           <p role="status" data-library-summary className="text-sm leading-7 text-muted">
             <span className="mr-3 font-semibold text-brand-700">{identity?.kind === "entry" ? "阅读入口：" : identity?.kind === "direction" ? "方向：" : "角色："}{identity?.label ?? audience}</span>
             {tag !== allOption ? <span className="mr-3">标签：{tag}</span> : null}
-            共 <span className="font-semibold text-ink">{visibleCount}</span> 篇图解
+            共 <span className="font-semibold text-ink">{visibleCount}</span> {designResults?.unit ?? "篇图解"}
           </p>
-          <p className="text-xs text-muted">按主题与角色查找图解</p>
+          <p className="text-xs text-muted">{designResults ? "按设计对象、方向与类型查找资料" : "按主题与角色查找图解"}</p>
         </div>
         {roleDirectory ? <RoleDirectory definition={roleDirectory} articles={filteredArticles} /> : audience === "运营" ? <OperationDirectory articles={filteredArticles} source="library" /> : audience === "设计" || audience === "交互" ? <DesignDirectory articles={filteredArticles} source="library" /> : <div className="grid gap-4 md:grid-cols-2">
           {filteredArticles.map((article) => (

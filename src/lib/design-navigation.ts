@@ -1,5 +1,5 @@
 import { articles, type Article } from "@/data/articles"
-import { designArticleEntries, interactionDesignEntries, designFormats, designObjects, type DesignFormat } from "@/data/designObjects"
+import { designArticleEntries, interactionDesignEntries, designFormats, designObjects, designResources, type DesignFormat } from "@/data/designObjects"
 import { getRoleIdentity } from "@/lib/role-identities"
 import { resourceAudiences } from "@/lib/work-audiences"
 
@@ -64,6 +64,29 @@ export function visibleDesignArticles(items: Article[], params: Pick<URLSearchPa
     const entry = designEntriesFor(params).find((entry) => entry.slug === article.slug)
     return (!object || entry?.object === object.slug) && (!direction || entry?.direction === direction.slug) && (!format || designArticleFormat(article.slug) === format.slug)
   })
+}
+
+export function getDesignDirectoryResults(items: Article[], params: Pick<URLSearchParams, "get">, source: "topic" | "library") {
+  const interaction = isInteractionDesign(params)
+  const object = getDesignObject(interaction ? "digital" : params.get("object"))
+  const direction = getDesignDirection(object, interaction ? "interaction" : params.get("direction"))
+  const format = getDesignFormat(params.get("format"))
+  const available = new Set(items.map((article) => article.slug))
+  const entries = designEntriesFor(params).filter((entry) => available.has(entry.slug))
+  const resources = source === "topic" || !params.get("tag")
+    ? designResources.filter((resource) => !interaction || resource.object === "digital" && resource.direction === "interaction")
+    : []
+  const matches = (item: { object: string; direction: string }) => (!object || item.object === object.slug) && (!direction || item.direction === direction.slug)
+  const articleMatchesFormat = (slug: string) => !format || designArticleFormat(slug) === format.slug
+  const visibleEntries = entries.filter((entry) => matches(entry) && articleMatchesFormat(entry.slug))
+  const visibleResources = resources.filter((resource) => matches(resource) && (!format || resource.format === format.slug))
+  const known = new Set<string>(designEntriesFor(params).map((entry) => entry.slug))
+  const unassigned = items.filter((article) => !known.has(article.slug) && articleMatchesFormat(article.slug))
+  const other = !object && !direction ? unassigned : []
+  const counts = (slug?: string, area?: string) => entries.filter((entry) => (!slug || entry.object === slug) && (!area || entry.direction === area) && articleMatchesFormat(entry.slug)).length
+    + resources.filter((resource) => (!slug || resource.object === slug) && (!area || resource.direction === area) && (!format || resource.format === format.slug)).length
+  const unit = format ? { article: "篇图解", video: "个视频", case: "个案例", demo: "项演示", standard: "项规范", workflow: "个AI 工作流" }[format.slug] : "项资料"
+  return { interaction, object, direction, format, visibleEntries, visibleResources, other, counts, unit, allCount: counts() + unassigned.length, total: visibleEntries.length + visibleResources.length + other.length }
 }
 
 export function designResourceHref(href: string, object: string, direction: string, returnTo: string) {

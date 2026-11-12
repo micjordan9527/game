@@ -1,0 +1,91 @@
+[
+  {
+    "id": "login-visual",
+    "checkedAt": "2026-11-12",
+    "result": "交付尺寸待确认",
+    "sourceText": {
+      "nodeId": "127:31277",
+      "width": 655,
+      "height": 482,
+      "href": "https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/素材规范?node-id=127-31277"
+    },
+    "sourceLayer": {
+      "nodeId": "127:31288",
+      "width": 482,
+      "height": 655,
+      "href": "https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/素材规范?node-id=127-31288"
+    },
+    "preview": {
+      "width": 942,
+      "height": 1280,
+      "sha256": "e0f1a2ecb83d80ae0c9d968781c0e00aa7de86a5b12606eaa5e28cfe4f6297f9",
+      "role": "本站展示文件，不代表最终交付文件"
+    },
+    "decision": "本站主规格不再将任一冲突数值当作最终制作尺寸；等待源稿文字与图层统一。",
+    "sourceMethod": "Figma get_metadata只读核对"
+  },
+  {
+    "id": "red-packet",
+    "part": "中奖标题栏",
+    "checkedAt": "2026-11-12",
+    "result": "交付高度待确认",
+    "sourceText": {
+      "nodeId": "126:27017",
+      "width": 292,
+      "height": 180,
+      "href": "https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/素材规范?node-id=126-27017"
+    },
+    "sourceLayer": {
+      "nodeId": "126:26871",
+      "width": 292,
+      "height": 178,
+      "href": "https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/素材规范?node-id=126-26871"
+    },
+    "preview": {
+      "width": 608,
+      "height": 360,
+      "sha256": "33f2763f735647122694623ca8210318f55736cf00a21f600b1abb967879bd11",
+      "role": "本站展示文件，不代表最终交付文件"
+    },
+    "decision": "本站分别列出文字标注、图层尺寸和展示像素，不从预览反推交付值。",
+    "sourceMethod": "Figma get_metadata只读核对"
+  },
+  {
+    "id": "all-agent",
+    "part": "分享海报",
+    "checkedAt": "2026-11-12",
+    "result": "本站场景已统一；源稿文字待同步",
+    "sourceText": {
+      "nodeId": "501:16864",
+      "scene": "顶部横幅",
+      "href": "https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/素材规范?node-id=501-16864"
+    },
+    "sourceLayer": {
+      "nodeId": "501:17735",
+      "width": 300,
+      "height": 368,
+      "name": "分享海报",
+      "href": "https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/素材规范?node-id=501-17735"
+    },
+    "usage": [
+      {
+        "nodeId": "501:16723",
+        "name": "H5-全民代理-分享海报-展示",
+        "href": "https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/素材规范?node-id=501-16723"
+      },
+      {
+        "nodeId": "501:16951",
+        "name": "PC-全民代理-分享海报-展示",
+        "href": "https://www.figma.com/design/t3nQAwCBbfqPbNFJjClZne/素材规范?node-id=501-16951"
+      }
+    ],
+    "preview": {
+      "width": 300,
+      "height": 368,
+      "sha256": "2f54d97febe08025017025bd428bfac8ec78ca72c87c354cedd5684b3ad2069c",
+      "role": "本站展示文件，不代表最终交付文件"
+    },
+    "decision": "本站使用场景统一为推广分享页的海报上部宣传图；不把下方邀请码、链接与二维码计算进300×368。",
+    "sourceMethod": "Figma get_metadata与本站现有展示图交叉核对"
+  }
+]

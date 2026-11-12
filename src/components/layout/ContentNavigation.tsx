@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Suspense, type ReactNode } from "react"
+import { Suspense, useEffect, useState, type ReactNode } from "react"
 import { useSearchParams } from "next/navigation"
 import { getContentNavigation, knowledgeCategory, type ContentNavItem, type DesignNavContext, type RoleNavContext } from "@/lib/content-navigation"
 import { articles } from "@/data/articles"
@@ -46,13 +46,22 @@ function ContentNavigationWithContext({ pathname, onNavigate }: { pathname: stri
 }
 
 function ContentNavigationView({ pathname, operation, design, work, onNavigate }: { pathname: string; operation?: { group?: OperationGroup; returnTo: string }; design?: DesignNavContext; work?: RoleNavContext; onNavigate?: () => void }) {
+  const [homeFragment, setHomeFragment] = useState("")
+  useEffect(() => {
+    if (pathname !== "/") return
+    const sync = () => setHomeFragment(window.location.hash)
+    sync()
+    window.addEventListener("hashchange", sync)
+    window.addEventListener("popstate", sync)
+    return () => { window.removeEventListener("hashchange", sync); window.removeEventListener("popstate", sync) }
+  }, [pathname])
   const category = design ? "design" : operation ? "operation" : knowledgeCategory(pathname)
   const entry = (item: ContentNavItem, nested = false): ReactNode => {
     const target = new URL(item.href, "https://knowledge.invalid")
-    const current = pathname === target.pathname && (!work || target.pathname.startsWith("/articles/") || (target.searchParams.has("group") ? target.searchParams.get("group") === work.group?.slug : item.href !== "/articles" && !work.group))
+    const current = pathname === target.pathname && (pathname !== "/" || target.hash === homeFragment) && (!work || target.pathname.startsWith("/articles/") || (target.searchParams.has("group") ? target.searchParams.get("group") === work.group?.slug : item.href !== "/articles" && !work.group))
     const parent = !current && (item.href === "/" + category || !!work && target.pathname === new URL(work.returnTo, "https://knowledge.invalid").pathname && !target.searchParams.has("group") && item.href !== "/articles")
     return <li key={item.href}>
-      <Link href={item.href} onClick={onNavigate} aria-current={current ? "page" : parent ? "location" : undefined}
+      <Link href={item.href} onClick={() => { if (pathname === "/") setHomeFragment(target.hash); onNavigate?.() }} aria-current={current ? target.hash ? "location" : "page" : parent ? "location" : undefined}
         className={`flex min-h-10 min-w-0 items-center justify-between gap-2 rounded-md px-3 py-2 leading-6 transition ${nested ? "text-xs" : "text-sm"} ${current ? "bg-ink font-medium text-white" : parent ? "bg-brand-50 font-semibold text-brand-700" : "text-muted hover:bg-paper hover:text-ink"}`}>
         <span className="min-w-0">{item.label}</span>{item.meta ? <span className="shrink-0 text-xs opacity-70">{item.meta}</span> : null}
       </Link>

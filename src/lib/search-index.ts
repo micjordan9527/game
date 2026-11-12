@@ -15,7 +15,7 @@ import "server-only"
 import { articles } from "@/data/articles"
 import { glossary } from "@/data/glossary"
 import { templates } from "@/data/templates"
-import { caseItems } from "@/data/cases"
+import { caseItems, getCasePresentation } from "@/data/cases"
 import { aiWorkflows } from "@/data/aiWorkflowLibrary"
 import { sportsModules } from "@/data/sports"
 import { sportsGuides } from "@/data/sportsGuides"
@@ -23,7 +23,6 @@ import { categories } from "@/data/categories"
 import { materialStandards } from "@/data/materialStandards"
 import { designTopics } from "@/components/design/DesignExperienceHub"
 import { getMarkdownArticle } from "@/lib/articles"
-import { showcaseItems } from "@/data/showcase"
 import { getImagePromptsForArticle } from "@/data/imagePrompts"
 import { workRoles } from "@/data/workRoles"
 import { resourceAudiences } from "@/lib/work-audiences"
@@ -144,7 +143,7 @@ export function buildSearchIndex(): SearchRecord[] {
         title: item.title,
         description: item.description,
         href: item.href,
-        previewImage: showcaseItems.find((work) => work.slug === item.slug)?.cover,
+        previewImage: getCasePresentation(item.slug).cover,
         tags: [...item.tags, ...(item.audience ?? []), ...(caseReadingGuides[item.slug] ? ["界面阅读说明"] : [])],
       },
       item.slug === "admin-optimization"

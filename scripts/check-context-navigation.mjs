@@ -27,6 +27,10 @@ export async function checkContextNavigation(page, base, prefix, width) {
     const target = document.getElementById("home-diagrams-title").getBoundingClientRect()
     return target.top >= 64 && target.top < innerHeight - 30
   })
+  if (width >= 1280) {
+    assert.equal(await homeMenu.locator("a[aria-current]").count(), 1, "Only the selected homepage section is current")
+    assert.equal(await homeMenu.locator('a[href$="#home-diagrams-title"]').getAttribute("aria-current"), "location")
+  }
   for (const [path, title, root] of [
     ["/cases/bm-optimization", "案例目录", "/cases"],
     ["/ai-workflows/brand-visual-system", "工作流目录", "/ai-workflows"],
@@ -91,7 +95,7 @@ export async function checkContextNavigation(page, base, prefix, width) {
   await sectionActive("/design/material-standards")
   await closeMenu()
   await page.locator("[data-material-workspace]").waitFor()
-  const materialFrame = page.frameLocator('iframe[title="代理素材规范 V1.86"]')
+  const materialFrame = page.frameLocator('iframe[title^="代理素材规范 V"]')
   await materialFrame.locator("#material-workspace-style").waitFor({ state: "attached" })
   if (width <= 800) {
     await materialFrame.getByRole("button", { name: "素材目录", exact: true }).click()

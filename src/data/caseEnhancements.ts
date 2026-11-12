@@ -11,8 +11,8 @@ export const adminTours = [
   ] },
   { id: "support", role: "客服", title: "从会员概览查询一条账号记录", steps: [
     { title: "查看客服看板", page: "dataCenter-overview", image: "/images/enrichment/admin-support-01.jpg", action: "选择客服角色，查看与会员查询相关的入口和提示。", observation: "先确定查询目标和时间范围，避免把资金状态与账号状态混为一谈。" },
-    { title: "进入会员列表", page: "management-index", image: "/images/enrichment/admin-support-02.jpg", action: "通过页面选择器进入会员列表，定位演示会员。", observation: "列表先呈现识别信息与状态；敏感资料只在授权范围内展示。" },
-    { title: "查看会员详情", page: "management-index", image: "/images/enrichment/admin-support-03.jpg", action: "打开第一条会员详情，查看分组信息与状态。", observation: "查询、资料变更与解除限制是不同操作，查看详情不意味着获得审核权限。" },
+    { title: "进入会员列表", page: "management-index", image: "/images/enrichment/admin-support-02.jpg?v=20261112-member-fields", action: "通过页面选择器进入会员列表，定位演示会员。", observation: "列表先呈现识别信息与状态；敏感资料只在授权范围内展示。" },
+    { title: "查看会员详情", page: "management-index", image: "/images/enrichment/admin-support-03.jpg?v=20261112-member-fields", action: "打开第一条会员详情，查看分组信息与状态。", observation: "查询、资料变更与解除限制是不同操作，查看详情不意味着获得审核权限。" },
   ] },
 ]
 

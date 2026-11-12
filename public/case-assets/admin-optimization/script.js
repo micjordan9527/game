@@ -149,6 +149,10 @@ function isDashboardPage() {
   return selectedPage?.kind === "dashboard";
 }
 
+function isMemberListPage(page = selectedPage) {
+  return page?.key === "management-index";
+}
+
 function isImageManagementPage(page = selectedPage) {
   return hasImageColumns(page) && /图片|图标|角标|LOGO|Logo|logo/.test(`${page.title} ${page.fullTitle}`);
 }
@@ -225,6 +229,18 @@ function pageProfile() {
       primaryAction: "查看报表",
       detailAction: "详情",
       hint: "保留老版指标口径，增强对比和导出复核"
+    };
+  }
+  if (isMemberListPage()) {
+    const members = selectedPage.rows;
+    return {
+      desc: "4条虚构测试会员记录：账号状态与资料验证分别展示。仅用于查看字段关系，不作为原系统字段字典。",
+      insights: [["演示会员", String(members.length), "仅统计本页虚构记录"], ...["正常", "受限", "停用"].map((status) => [`账号${status}`, String(members.filter((row) => row["账号状态"] === status).length), "账号状态；与资料验证分开"])],
+      actions: [],
+      tabs: ["全部", "正常", "受限", "停用"],
+      primaryAction: "查看会员",
+      detailAction: "详情",
+      hint: "身份、账号状态、验证状态和代理归属分别查看"
     };
   }
   if (module === "会员") {
@@ -1005,6 +1021,7 @@ function renderDashboard() {
 }
 
 function inferredFilters() {
+  if (isMemberListPage()) return selectedPage.filters;
   if (isImageManagementPage()) return ["场馆名称", "游戏名称", "游戏ID"];
 
   const cleanFilter = (filter) => filter
@@ -1053,6 +1070,13 @@ function renderFilters() {
     ]
     : [];
   optimizedFilters.innerHTML = contextFilters.concat(filters.map((filter, index) => {
+    if (isMemberListPage()) {
+      if (["账号状态", "验证状态"].includes(filter)) {
+        const values = [...new Set(selectedPage.rows.map((row) => row[filter]))];
+        return `<label>${escapeHtml(filter)}<select data-member-filter="${escapeHtml(filter)}" data-filter="${index}"><option value="">全部</option>${values.map((value) => `<option>${escapeHtml(value)}</option>`).join("")}</select></label>`;
+      }
+      return `<label>${escapeHtml(filter)}<input data-member-filter="${escapeHtml(filter)}" data-filter="${index}" placeholder="输入${escapeHtml(filter)}" /></label>`;
+    }
     const lower = filter.toLowerCase();
     if (filter === "站点") {
       return `<label>${escapeHtml(filter)}<select data-filter="${index}"><option>包网</option></select></label>`;
@@ -1097,7 +1121,7 @@ function renderTabs() {
   }
   statusTabs.hidden = false;
   statusTabs.innerHTML = [`<button class="tab active" data-tab="">全部 ${selectedPage.rows.length}</button>`]
-    .concat(tabs.map((tab, index) => `<button class="tab" data-tab="${escapeHtml(tab)}">${escapeHtml(tab)} ${index === 0 ? selectedPage.rows.length : Math.max(1, selectedPage.rows.length - index)}</button>`))
+    .concat(tabs.map((tab, index) => `<button class="tab" data-tab="${escapeHtml(tab)}">${escapeHtml(tab)} ${isMemberListPage() ? selectedPage.rows.filter((row) => row["账号状态"] === tab).length : index === 0 ? selectedPage.rows.length : Math.max(1, selectedPage.rows.length - index)}</button>`))
     .join("");
   statusTabs.querySelectorAll(".tab").forEach((button) => {
     button.addEventListener("click", () => {
@@ -1109,12 +1133,14 @@ function renderTabs() {
 }
 
 function rowStatus(row) {
+  if (isMemberListPage()) return row["账号状态"];
   const keys = Object.keys(row);
   const statusKey = keys.find((key) => /状态|审核|结果|是否|开关/.test(key));
   return row[statusKey] || (activeTab && activeTab !== "全部" ? activeTab : "待处理");
 }
 
 function primaryColumns() {
+  if (isMemberListPage()) return selectedPage.columns.slice(0, 8);
   const columns = selectedPage.columns.length ? selectedPage.columns : Object.keys(selectedPage.rows[0] || {});
   const cleanColumns = columns.filter((column) => !/最后一次更新时间|当前汇率/.test(column));
   const preferred = cleanColumns.filter((column) => /业务|模块|会员|代理|订单|账号|ID|名称|标题|活动|渠道|金额|状态|时间|备注|操作|指标|数值|今日|昨日|环比|同比|趋势|异常|人数|笔数|访问量|注册量|首充|ROI|留存率|PC图|H5图|图片|图标|角标|封面|LOGO|Logo|logo/.test(column));
@@ -1122,6 +1148,14 @@ function primaryColumns() {
 }
 
 function filteredRows() {
+  if (isMemberListPage()) {
+    const controls = [...optimizedFilters.querySelectorAll("[data-member-filter]")];
+    return selectedPage.rows.filter((row) => (!activeTab || row["账号状态"] === activeTab) && controls.every((control) => {
+      const query = control.value.trim().toLowerCase();
+      const value = String(row[control.dataset.memberFilter] ?? "").toLowerCase();
+      return !query || (control.tagName === "SELECT" ? value === query : value.includes(query));
+    }));
+  }
   const keyword = document.querySelector("#optimizedFilters input[placeholder]")?.value.trim() || "";
   return selectedPage.rows.filter((row) => {
     const matchKeyword = !keyword || Object.values(row).some((value) => String(value).includes(keyword));
@@ -1145,14 +1179,14 @@ function renderTable() {
         return `<td>${renderImageCell(column, row, index)}</td>`;
       }
       if (/状态|审核|结果|是否|开关/.test(column)) {
-        return `<td><span class="status ${statusClass(value)}">${escapeHtml(value)}</span></td>`;
+        return `<td><span class="status ${isMemberListPage() && value === "受限" ? "reject" : statusClass(value)}">${escapeHtml(value)}</span></td>`;
       }
       if (columnIndex === 0) {
         return `<td><strong>${escapeHtml(value)}</strong><br /><span class="muted">${escapeHtml(selectedPage.fullTitle)}</span></td>`;
       }
       return `<td>${escapeHtml(value)}</td>`;
     }).join("");
-    return `<tr>${cells}<td class="row-actions"><button class="btn ghost" data-detail="${index}" type="button">${escapeHtml(profile.detailAction)}</button><button class="btn primary" data-action="${index}" type="button">${escapeHtml(profile.primaryAction)}</button></td></tr>`;
+    return `<tr>${cells}<td class="row-actions"><button class="btn ghost" data-detail="${index}" type="button">${escapeHtml(profile.detailAction)}</button>${isMemberListPage() ? "" : `<button class="btn primary" data-action="${index}" type="button">${escapeHtml(profile.primaryAction)}</button>`}</td></tr>`;
   }).join("");
 
   tableBody.querySelectorAll("[data-detail]").forEach((button) => {
@@ -1219,6 +1253,8 @@ function renderPage() {
 function openDrawer(index) {
   document.querySelector("#detailDrawer header small").textContent = selectedPage.title + "详情";
   const row = filteredRows()[index] || selectedPage.rows[index] || {};
+  drawerBody.style.maxHeight = isMemberListPage() ? "calc(100vh - 74px)" : "";
+  drawerBody.style.overflowY = isMemberListPage() ? "auto" : "";
   drawerTitle.textContent = row[primaryColumns()[0]] || selectedPage.title;
   drawerBody.innerHTML = `
     <div class="detail-grid">
@@ -1227,15 +1263,12 @@ function openDrawer(index) {
       `).join("")}
     </div>
     <section class="timeline">
-      <strong>新版处理建议</strong>
+      <strong>${isMemberListPage() ? "账号与资料验证" : "新版处理建议"}</strong>
       <div>页面业务：${escapeHtml(selectedPage.fullTitle)}</div>
-      <div>当前状态：${escapeHtml(rowStatus(row))}</div>
-      <div>建议：先确认关键状态和异常原因，再进入${escapeHtml(currentKind().action)}。</div>
-      <div>反馈：操作完成后在当前列表内展示结果，减少反复跳转。</div>
+      ${isMemberListPage() ? `<div>账号状态：${escapeHtml(row["账号状态"])}</div><div>验证状态：${escapeHtml(row["验证状态"])}</div><div>资料验证通过不代表解除账号限制；查看本记录不会变更账号或余额。</div><div>本页为虚构示例，不查询真实会员。</div>` : `<div>当前状态：${escapeHtml(rowStatus(row))}</div><div>建议：先确认关键状态和异常原因，再进入${escapeHtml(currentKind().action)}。</div><div>反馈：操作完成后在当前列表内展示结果，减少反复跳转。</div>`}
     </section>
     <div class="drawer-actions">
-      <button class="btn primary" data-drawer-action="记录处理进展" type="button">记录处理进展</button>
-      <button class="btn ghost" data-drawer-action="复制关键编号" type="button">复制关键编号</button>
+      ${isMemberListPage() ? "" : `<button class="btn primary" data-drawer-action="记录处理进展" type="button">记录处理进展</button><button class="btn ghost" data-drawer-action="复制关键编号" type="button">复制关键编号</button>`}
       <button class="btn" id="drawerCancel" type="button">关闭</button>
     </div>
   `;

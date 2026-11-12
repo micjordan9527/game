@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { ExternalLink } from "lucide-react"
-import { materialStandards, searchMaterialStandards } from "@/data/materialStandards"
+import { materialStandards, materialStandardsVersion, searchMaterialStandards } from "@/data/materialStandards"
 import { assetPath } from "@/lib/assets"
 import styles from "./MaterialStandardsViewer.module.css"
 
@@ -203,7 +203,7 @@ function prepareEmbeddedWorkspace(previewDocument: Document) {
 export function MaterialStandardsViewer() {
   const searchParams = useSearchParams()
   const selectedModule = materialStandards.find((item) => item.slug === searchParams.get("module"))
-  const previewSrc = assetPath(`/case-assets/material-standards/index.html${selectedModule ? `#${selectedModule.slug}` : ""}`)
+  const previewSrc = assetPath(`/case-assets/material-standards/index.html?v=${encodeURIComponent(materialStandardsVersion)}${selectedModule ? `#${selectedModule.slug}` : ""}`)
   const newWindowHref = selectedModule?.slug === "tg-assets" ? assetPath("/design/material-standards?module=tg-assets") : previewSrc
   const [previewState, setPreviewState] = useState<"loading" | "ready" | "fallback">("loading")
   const loadTimer = useRef<number | undefined>(undefined)
@@ -233,7 +233,7 @@ export function MaterialStandardsViewer() {
       <header className={styles.toolbar}>
         <div className={styles.heading}>
           <h1 className="text-base font-semibold text-ink md:text-lg">代理素材规范</h1>
-          <span className="text-xs text-muted">V1.86</span>
+          <span className="text-xs text-muted">{materialStandardsVersion}</span>
         </div>
         <a href={newWindowHref} target="_blank" rel="noopener" className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-md border border-line bg-white px-3 text-xs font-semibold text-brand-700 hover:bg-brand-50 sm:text-sm">
           新窗口打开 <ExternalLink className="h-4 w-4" aria-hidden="true" />
@@ -252,7 +252,7 @@ export function MaterialStandardsViewer() {
           key={selectedModule?.slug ?? "quick"}
           ref={frameRef}
           src={previewSrc}
-          title="代理素材规范 V1.86"
+          title={`代理素材规范 ${materialStandardsVersion}`}
           className={`${styles.frame} ${previewState !== "ready" ? styles.pending : ""}`}
           loading="eager"
           onLoad={(event) => finishLoading(event.currentTarget)}

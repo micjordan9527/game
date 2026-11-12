@@ -1,3 +1,5 @@
+export const materialStandardsVersion = 'V1.87'
+
 export const materialStandards = [
   {
     slug: "all-agent",
@@ -46,7 +48,7 @@ export const materialStandards = [
     title: "登录注册图",
     category: "账号素材",
     description: "登录注册配图规格、源图与 PC / H5 使用页面。",
-    keywords: "655x482 375x262 登录 注册 登录注册图",
+    keywords: "655x482 482x655 375x262 942x1280 登录 注册 登录注册图 交付尺寸待确认 源稿图层",
   },
   {
     slug: "activity-list",
@@ -60,7 +62,7 @@ export const materialStandards = [
     title: "红包",
     category: "运营活动",
     description: "红包入口、提示窗、标题栏、状态背景与关闭按钮。",
-    keywords: "80x80 132x32 292x180 301x429 红包 提示窗 标题栏 关闭按钮",
+    keywords: "80x80 132x32 292x180 292x178 608x360 301x429 红包 提示窗 标题栏 关闭按钮 交付高度待确认",
   },
   {
     slug: "turntable",

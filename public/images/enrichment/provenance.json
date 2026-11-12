@@ -81,22 +81,24 @@
     "role": "客服",
     "pageKey": "management-index",
     "title": "会员列表",
-    "materialType": "现有交互演示截图；示例数据",
+    "materialType": "本地会员界面演示截图；4条虚构测试会员记录",
     "width": 1440,
     "height": 900,
     "source": "/case-assets/admin-optimization/index.html#version=optimized&page=management-index",
-    "action": "在页面选择器选择会员列表，定位账号和当前状态。"
+    "action": "查看会员身份、账号状态、验证状态和代理归属；条件筛选使用对应字段。",
+    "recordId": "MEM-DEMO-001"
   },
   {
     "path": "/images/enrichment/admin-support-03.jpg",
     "role": "客服",
     "pageKey": "management-index",
     "title": "会员列表详情",
-    "materialType": "现有交互演示截图；示例数据",
+    "materialType": "本地会员界面演示截图；4条虚构测试会员记录",
     "width": 1440,
     "height": 900,
     "source": "/case-assets/admin-optimization/index.html#version=optimized&page=management-index",
-    "action": "打开会员详情，核对账号字段、钱包余额、上级代理和账号状态。"
+    "action": "打开MEM-DEMO-001详情，与列表核对同一账号、余额、代理归属及两种独立状态。",
+    "recordId": "MEM-DEMO-001"
   },
   {
     "path": "/images/enrichment/official-services.jpg",

@@ -1,3 +1,8 @@
+import { getCasePresentation } from "./cases"
+
+const bmCase = getCasePresentation("bm-optimization")
+const u8Case = getCasePresentation("competitor-analysis")
+
 export const designObjects = [
   {
     slug: "brand", title: "品牌与识别设计",
@@ -78,8 +83,8 @@ export const designResources: DesignResource[] = [
   { id: "information", object: "digital", direction: "architecture", title: "信息层级演示", description: "切换页面结构、信息密度与阅读优先级。", href: "/design/information#hierarchy", format: "demo", image: "/images/design-directory/information-cover.jpg" },
   { id: "prototypes", object: "digital", direction: "interaction", title: "关键页面原型", description: "操作钱包、审核、详情与后台工作台示例。", href: "/design/prototypes", format: "demo", image: "/images/design-directory/prototypes-cover.jpg" },
   { id: "states", object: "digital", direction: "interaction", title: "界面状态对照", description: "查看加载、空结果、失败和受限等状态。", href: "/design/states", format: "demo", image: "/images/design-directory/states-cover.jpg" },
-  { id: "bm", object: "digital", direction: "interface", title: "BM赛事列表分组", description: "看原图标注与同内容示意，区分赛事、赛况与盘口。", href: "/cases/bm-optimization", format: "case", image: "/images/cases/bm-reading-cover.jpg" },
-  { id: "u8", object: "digital", direction: "interface", title: "U8界面对照", description: "查看首页入口、底部导航与个人中心材料。", href: "/cases/competitor-analysis", format: "case", image: "/case-assets/competitor-analysis/u8/u8-homepage-optimization.webp" },
+  { id: "bm", object: "digital", direction: "interface", title: bmCase.title, description: bmCase.description, href: bmCase.href, format: "case", image: bmCase.cover },
+  { id: "u8", object: "digital", direction: "interface", title: u8Case.title, description: u8Case.description, href: u8Case.href, format: "case", image: u8Case.cover },
   { id: "review", object: "digital", direction: "interface", title: "界面优化图解", description: "六组改前改后对照中的层级、操作和反馈。", href: "/design/review", format: "demo", image: "/images/design-directory/review-cover.jpg" },
   { id: "components", object: "digital", direction: "system", title: "业务组件演示", description: "查看表格、状态与业务组件的展示方式。", href: "/design/information#component", format: "demo", image: "/images/design-directory/components-cover.jpg" },
   { id: "ui-system", object: "digital", direction: "system", title: "UI设计系统", description: "查看网页、手机界面和组件规范的示意输出。", href: "/ai-workflows/ui-design-system", format: "workflow", image: "/case-assets/ai-workflows/ui-design-system/output-01-overview.webp" },

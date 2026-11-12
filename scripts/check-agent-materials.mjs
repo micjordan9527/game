@@ -1,8 +1,11 @@
 import assert from "node:assert/strict"
+import fs from "node:fs"
 
 export async function checkAgentMaterials(page, base, prefix, width) {
   const materialUrl = base.replace(/\/$/, "") + "/design/material-standards?module=banner"
   const assetPath = `${prefix}/case-assets/material-standards/index.html`
+  const materialVersion = fs.readFileSync("src/data/materialStandards.ts", "utf8").match(/materialStandardsVersion\s*=\s*["']([^"']+)["']/)[1]
+  const versionedAssetPath = `${assetPath}?v=${encodeURIComponent(materialVersion)}`
   const workspace = page.locator("[data-material-workspace]")
   const iframe = workspace.locator("iframe")
   const frame = workspace.frameLocator("iframe")
@@ -29,10 +32,10 @@ export async function checkAgentMaterials(page, base, prefix, width) {
   await ready()
   await workspace.getByRole("heading", { name: "代理素材规范", exact: true }).waitFor()
   assert.equal(await page.locator("aside [data-context-navigation]").count(), 0, "No duplicate knowledge sidebar beside the material center")
-  assert.equal(await iframe.getAttribute("src"), assetPath + "#banner", "Legacy module query maps to the iframe hash")
+  assert.equal(await iframe.getAttribute("src"), versionedAssetPath + "#banner", "Legacy module query maps to the current material version and hash")
   assert.equal(await currentModule(), "#banner")
   const completeLink = workspace.getByRole("link", { name: "新窗口打开", exact: true })
-  assert.equal(await completeLink.getAttribute("href"), assetPath + "#banner")
+  assert.equal(await completeLink.getAttribute("href"), versionedAssetPath + "#banner")
   assert.equal(await completeLink.getAttribute("target"), "_blank")
   await assertFits()
   const bounds = await iframe.boundingBox()
@@ -99,7 +102,7 @@ export async function checkAgentMaterials(page, base, prefix, width) {
     const fallback = workspace.getByRole("status")
     await fallback.getByText("素材中心暂时无法显示，可以在新窗口打开完整规范。", { exact: true }).waitFor()
     const fallbackLink = fallback.getByRole("link", { name: "打开完整规范", exact: true })
-    assert.equal(await fallbackLink.getAttribute("href"), assetPath + "#banner")
+    assert.equal(await fallbackLink.getAttribute("href"), versionedAssetPath + "#banner")
     assert.equal(await fallbackLink.getAttribute("target"), "_blank")
   } finally {
     await page.unroute(interceptAsset, unavailable)
